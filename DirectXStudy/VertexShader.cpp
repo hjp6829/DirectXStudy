@@ -7,6 +7,7 @@ VertexShader::VertexShader(DirectXMain& dxdMain, ID3DBlob* shaderBlob)
 
 void VertexShader::Bind(DirectXMain& dxdMain)
 {
+	
 	GetContext(dxdMain)->VSSetShader(vs.Get(), 0, 0);
 }
 
