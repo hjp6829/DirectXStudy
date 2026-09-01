@@ -19,6 +19,7 @@ void AssimpConverter::ReadAssetFile(std::wstring path, DirectXMain* dxd)
 	dxdMain = dxd;
 
 	auto p = std::filesystem::path(path);
+	curretnPath = p.string();
 	assert(std::filesystem::exists(p));
 
 	auto start = std::chrono::high_resolution_clock::now();

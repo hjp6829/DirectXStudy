@@ -18,7 +18,8 @@ using namespace DirectX;
 
 class Object;
 class AssimpConverter;
-class ModelContainer;
+class ModelCreater;
+class SceneModel;
 
 class DirectXMain {
 	friend class Bindable;//친구 클래스는 private에 접근이 가능함
@@ -38,7 +39,7 @@ public:
 	Light* GetLight() { return light; }
 	AssimpConverter* GetAssimp(){return assimp; }
 	void ReadModelByAssimp(std::wstring path);
-	std::vector<ModelContainer*>& GetSceneModels(){return models;}
+	std::vector<SceneModel*>& GetSceneModels(){return models;}
 private:
 	ComPtr<IDXGISwapChain> pSwap;
 	ComPtr<ID3D11Device> pDevice;
@@ -59,10 +60,11 @@ private:
 	};
 private:
 	float totalTime;
-	std::vector<ModelContainer*> models;
+	std::vector<SceneModel*> models;
 	Mouse* currentMouse;
 	Camera* cam;
 	Light* light;
 	GlobalBuffer globalBuffer = {};
 	AssimpConverter* assimp;
+	std::unordered_map<std::string,ModelAsset*> modelAssets;
 };

@@ -7,6 +7,7 @@
 
 class Mesh;
 class DirectXMain;
+class ModelNode;
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -15,9 +16,8 @@ class SceneModel
 {
 public:
 	SceneModel() {};
-	std::vector<Mesh*> currentMeshs;
+	ModelNode* currentModelNode;
 	std::vector<SceneModel*> childNodes;
-	std::string modelName;
 	XMFLOAT3 modelPos = { 0.0f, 0.0f, 4.0f };
 	XMFLOAT3 modelRot;
 	XMFLOAT3 modelScale = { 1.0f, 1.0f, 1.0f };

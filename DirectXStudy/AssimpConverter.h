@@ -21,6 +21,7 @@ public:
 	asMesh* GetMeshData(unsigned int idx) { return &meshs[idx]; }
 	asMaterial* GetMaterial(unsigned int idx) { return &materials[idx]; }
 	std::function<void(AssimpConverter*)> LoadComplite;
+	std::string GetCurrentPath() { return curretnPath; }
 private:
 	Assimp::Importer* importer;
 	const aiScene* scene;
@@ -29,6 +30,7 @@ private:
 	std::vector<ModelLoadData*> models;
 	DirectXMain* dxdMain;
 	int modelIDX = 0;
+	std::string curretnPath;
 private:
 	void ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform);
 	void ReadModel();

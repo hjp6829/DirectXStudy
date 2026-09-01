@@ -40,6 +40,12 @@
     <Filter Include="헤더 파일\UI">
       <UniqueIdentifier>{5ad41ed4-6eab-45ac-9e0e-7826690ea29d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Model">
+      <UniqueIdentifier>{221b218b-b982-4511-bb16-f5e28eadee21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Model">
+      <UniqueIdentifier>{60610e57-02b9-4419-b8b0-74b6f205ae98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -117,9 +123,6 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="ModelContainer.cpp">
-      <Filter>소스 파일\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="AssimpConverter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -146,6 +149,9 @@
     </ClCompile>
     <ClCompile Include="SceneModel.cpp">
       <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelCreater.cpp">
+      <Filter>소스 파일\Model</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +251,6 @@
     <ClInclude Include="Log.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="ModelContainer.h">
-      <Filter>헤더 파일\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
@@ -266,14 +269,23 @@
     <ClInclude Include="UIManager.h">
       <Filter>헤더 파일\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ModelBrowserUI.h">
-      <Filter>헤더 파일\UI</Filter>
-    </ClInclude>
     <ClInclude Include="Insfector.h">
       <Filter>헤더 파일\UI</Filter>
     </ClInclude>
     <ClInclude Include="SceneModel.h">
       <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelBrowserUI.h">
+      <Filter>헤더 파일\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelCreater.h">
+      <Filter>헤더 파일\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelAsset.h">
+      <Filter>헤더 파일\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelNode.h">
+      <Filter>헤더 파일\Model</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

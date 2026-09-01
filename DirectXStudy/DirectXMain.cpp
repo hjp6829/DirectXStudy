@@ -1,18 +1,21 @@
 #include "DirectXMain.h"
 #include "Object.h"
-#include "ModelContainer.h"
+#include "ModelCreater.h"
 #include "LightObject.h"
 #include "imgui_impl_dx11.h"
 #include "AssimpConverter.h"
+#include "SceneModel.h"
+#include "ModelAsset.h"
+#include "ModelNode.h"
 
 DirectXMain::DirectXMain(HWND hWnd, AssimpConverter* assimp)
 {
-	this->assimp=assimp;
-	DXGI_SWAP_CHAIN_DESC sd ={};//스왑체인 설계도 설정
+	this->assimp = assimp;
+	DXGI_SWAP_CHAIN_DESC sd = {};//스왑체인 설계도 설정
 	sd.BufferDesc.Width = 1280;
 	sd.BufferDesc.Height = 960;
 	sd.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
-	sd.SampleDesc.Count =1;//msaa사용안하면 최소1
+	sd.SampleDesc.Count = 1;//msaa사용안하면 최소1
 	sd.SampleDesc.Quality = 0;
 	sd.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;//화면에 핸더링
 	sd.BufferCount = 1;//백버퍼
@@ -21,26 +24,26 @@ DirectXMain::DirectXMain(HWND hWnd, AssimpConverter* assimp)
 	sd.SwapEffect = DXGI_SWAP_EFFECT_DISCARD;
 
 	D3D11CreateDeviceAndSwapChain(
-	NULL, 
-	D3D_DRIVER_TYPE_HARDWARE,
-	NULL, 
-	0,
-	NULL,
-	0,
-	D3D11_SDK_VERSION,
-	&sd,
-	&pSwap,
-	&pDevice,
-	NULL,
-	&pContext);
+		NULL,
+		D3D_DRIVER_TYPE_HARDWARE,
+		NULL,
+		0,
+		NULL,
+		0,
+		D3D11_SDK_VERSION,
+		&sd,
+		&pSwap,
+		&pDevice,
+		NULL,
+		&pContext);
 
 	ImGui_ImplDX11_Init(pDevice.Get(), pContext.Get());
 
-	ID3D11Texture2D* backBuffer=NULL;
+	ID3D11Texture2D* backBuffer = NULL;
 
-	HRESULT result = pSwap->GetBuffer(0,__uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer));
+	HRESULT result = pSwap->GetBuffer(0, __uuidof(ID3D11Texture2D), reinterpret_cast<void**>(&backBuffer));
 
-	pDevice->CreateRenderTargetView(backBuffer,NULL,&pRenderTarget);
+	pDevice->CreateRenderTargetView(backBuffer, NULL, &pRenderTarget);
 	backBuffer->Release();
 
 	ID3D11Texture2D* pDepthStencil = NULL;
@@ -82,9 +85,10 @@ DirectXMain::DirectXMain(HWND hWnd, AssimpConverter* assimp)
 
 void DirectXMain::Start()
 {
-	assimp->LoadComplite = [this](AssimpConverter* Assimp) {
-		ModelContainer* model=new ModelContainer(this, Assimp);
-		models.push_back(model);
+	ModelCreater* model = new ModelCreater(this, assimp);
+	assimp->LoadComplite = [this, model](AssimpConverter* Assimp) {
+		ModelAsset* modelAssetTemp = model->CreateModelAsset();
+		modelAssets.emplace(Assimp->GetCurrentPath(), modelAssetTemp);
 		};
 	globalBuffer.lightColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	globalBuffer.lightPos = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
@@ -107,7 +111,7 @@ void DirectXMain::Update(float deltaTime)
 	totalTime += deltaTime;
 	for (int i = 0; i < models.size(); i++)
 	{
-		models[i]->Update();
+		models[i]->UpdateMeshs();
 	}
 }
 
@@ -123,7 +127,7 @@ void DirectXMain::Render()
 	globalBuffer.specularStrength = light->GetSpecularStrength();
 	globalBuffer.shininess = light->GetShininess();
 	globalBuffer.maxLightDistance = light->GetMaxLightDistance();
-	
+
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
 	pContext->Map(lightConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
 	memcpy(mapped.pData, &globalBuffer, sizeof(globalBuffer));
@@ -132,7 +136,7 @@ void DirectXMain::Render()
 
 	for (int i = 0; i < models.size(); i++)
 	{
-		models[i]->RenderObjests();
+		models[i]->RenderMeshs(this);
 	}
 }
 
@@ -143,7 +147,7 @@ void DirectXMain::Shutdown()
 void DirectXMain::Draw(UINT indexCount)
 {
 	//pContext->Draw(3,0);
-	pContext->DrawIndexed(indexCount,0,0); 
+	pContext->DrawIndexed(indexCount, 0, 0);
 }
 
 void DirectXMain::EndDraw()
@@ -153,5 +157,26 @@ void DirectXMain::EndDraw()
 
 void DirectXMain::ReadModelByAssimp(std::wstring path)
 {
-	assimp->ReadAssetFile(path,this);
+	if (modelAssets.find(std::filesystem::path(path).string()) == modelAssets.end())
+	{
+		assimp->ReadAssetFile(path, this);
+	}
+}
+
+void CreateSceneModel(ModelNode* modelNode, SceneModel* parentSceneModel)
+{
+	if (modelNode->childNodes.size() == 0)
+	{
+		parentSceneModel->currentModelNode = modelNode;
+	}
+	else
+	{
+
+		for (int i = 0; i < modelNode->childNodes.size(); i++)
+		{
+			SceneModel* sceneModel = new SceneModel();
+			sceneModel->currentModelNode = modelNode->childNodes[i];
+			parentSceneModel->childNodes.push_back(sceneModel);
+			CreateSceneModel(modelNode->childNodes[i], sceneModel);
+		}
 }

@@ -37,6 +37,10 @@ void SceneModel::RenderMeshs(DirectXMain* dxdMain)
 	{
 		currentMeshs[i]->Render(dxdMain);
 	}
+	for (int i = 0; i < childNodes.size(); i++)
+	{
+		childNodes[i]->RenderMeshs(dxdMain);
+	}
 }
 
 void SceneModel::UpdateMeshs()
@@ -51,6 +55,10 @@ void SceneModel::UpdateMeshs()
 	for (int j = 0; j < currentMeshs.size(); j++)
 	{
 		currentMeshs[j]->Update(worldMatrix);
+	}
+	for (int i = 0; i < childNodes.size(); i++)
+	{
+		childNodes[i]->UpdateMeshs();
 	}
 }
 

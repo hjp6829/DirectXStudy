@@ -1,10 +1,8 @@
 #include "Hierarchy.h"
 #include "imgui_impl_win32.h"
-#include "ModelContainer.h"
-#include "Log.h"
 #include "SceneModel.h"
 
-Hierarchy::Hierarchy(std::vector<ModelContainer*>& modelContainer)
+Hierarchy::Hierarchy(std::vector<SceneModel*>& modelContainer)
 	: modelContainer(modelContainer)
 {
 }
@@ -18,9 +16,11 @@ void Hierarchy::UpdateUI()
 			ImGui::End();
 			return;
 		}
-		SceneModel* sceneModel = modelContainer[0]->GetSceneModel();
-		if (sceneModel != NULL)
-			ModelTraversal(sceneModel);
+		for (int i = 0; i < modelContainer.size(); i++)
+		{
+			if (modelContainer[i] != NULL)
+				ModelTraversal(modelContainer[i]);
+		}
 	}
 	ImGui::End();
 }
@@ -34,7 +34,6 @@ void Hierarchy::ModelTraversal(SceneModel* sceneModel)
 		if (ImGui::IsItemClicked())
 		{
 			OnHierarchyClick(sceneModel);
-			Log::PrintLog("Click : " + sceneModel->modelName);
 		}
 		return;
 	}
@@ -42,7 +41,6 @@ void Hierarchy::ModelTraversal(SceneModel* sceneModel)
 	if (ImGui::IsItemClicked())
 	{
 		OnHierarchyClick(sceneModel);
-		Log::PrintLog("Click : " + sceneModel->modelName);
 	}
 	if (open)
 	{
