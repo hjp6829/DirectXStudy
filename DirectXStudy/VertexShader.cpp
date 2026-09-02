@@ -1,14 +1,13 @@
 #include "VertexShader.h"
 
-VertexShader::VertexShader(DirectXMain& dxdMain, ID3DBlob* shaderBlob)
+VertexShader::VertexShader(ID3D11Device* device, ID3DBlob* shaderBlob)
 {
-	GetDevice(dxdMain)->CreateVertexShader(shaderBlob->GetBufferPointer(), shaderBlob->GetBufferSize(), NULL, vs.GetAddressOf());
+	device->CreateVertexShader(shaderBlob->GetBufferPointer(), shaderBlob->GetBufferSize(), NULL, vs.GetAddressOf());
 }
 
-void VertexShader::Bind(DirectXMain& dxdMain)
+void VertexShader::Bind(ID3D11DeviceContext* context)
 {
-	
-	GetContext(dxdMain)->VSSetShader(vs.Get(), 0, 0);
+	context->VSSetShader(vs.Get(), 0, 0);
 }
 
 

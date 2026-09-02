@@ -1,8 +1,8 @@
 #include "IndexBuffer.h"
 
-void IndexBuffer::Bind(DirectXMain& dxdMain)
+void IndexBuffer::Bind(ID3D11DeviceContext* context)
 {
-	GetContext(dxdMain)->IASetIndexBuffer(indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	context->IASetIndexBuffer(indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 }
 
 UINT IndexBuffer::GetIndexCount()

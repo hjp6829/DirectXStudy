@@ -1,6 +1,6 @@
 #include "Sampler.h"
 
-Sampler::Sampler(DirectXMain& dxdMain, int idx)
+Sampler::Sampler(ID3D11Device* device, int idx)
 {
 	this->index=idx;
 	D3D11_SAMPLER_DESC sDc = {};
@@ -14,10 +14,10 @@ Sampler::Sampler(DirectXMain& dxdMain, int idx)
 	sDc.BorderColor[2] = 0.0f;
 	sDc.BorderColor[3] = 1.0f;
 
-	GetDevice(dxdMain)->CreateSamplerState(&sDc, samplerState.GetAddressOf());
+	device->CreateSamplerState(&sDc, samplerState.GetAddressOf());
 }
 
-void Sampler::Bind(DirectXMain& dxdMain)
+void Sampler::Bind(ID3D11DeviceContext* context)
 {
-	GetContext(dxdMain)->PSSetSamplers(index,1,samplerState.GetAddressOf());
+	context->PSSetSamplers(index,1,samplerState.GetAddressOf());
 }

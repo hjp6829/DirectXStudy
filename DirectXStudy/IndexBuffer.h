@@ -8,7 +8,7 @@
 class IndexBuffer : public Bindable {
 public:
 	template<class V>
-	IndexBuffer(DirectXMain& dxdMain, const std::vector<V>& indexs) : indexCount(indexs.size()){
+	IndexBuffer(ID3D11Device* device, const std::vector<V>& indexs) : indexCount(indexs.size()){
 		D3D11_BUFFER_DESC iDes = {};
 		iDes.ByteWidth = (UINT)(indexs.size() * sizeof(V));;
 		iDes.Usage = D3D11_USAGE_DEFAULT;
@@ -21,7 +21,7 @@ public:
 
 		GetDevice(dxdMain)->CreateBuffer(&iDes, &id, &indexBuffer);
 	}
-	void Bind(DirectXMain& dxdMain) override;
+	void Bind(ID3D11DeviceContext* context) override;
 	UINT GetIndexCount();
 private:
 	ComPtr<ID3D11Buffer> indexBuffer;

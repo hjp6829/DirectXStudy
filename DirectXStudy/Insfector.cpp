@@ -6,9 +6,8 @@
 #include "Mesh.h"
 
 
-Insfector::Insfector(Hierarchy* hierarchy, AssimpConverter* assimp)
+Insfector::Insfector(Hierarchy* hierarchy)
 {
-	this->assimp = assimp;
 	hierarchy->OnHierarchyClick = [this](SceneModel* model) {
 		SetSceneModelData(model);
 		};
@@ -51,22 +50,22 @@ void Insfector::UpdateUI()
 		currentSceneModel->SetRotaion(tempRot);
 		currentSceneModel->SetScale(tempScale);
 
-		if (currentSceneModel->currentMeshs.size() != 0)
-		{
-			ImGui::Text("Material");
-			for (int i = 0; i < currentSceneModel->currentMeshs.size(); i++)
-			{
-				Mesh* meshTemp = currentSceneModel->currentMeshs[i];
-				meshMaterials.push_back(meshTemp->GetMaterialIDX());
-			}
-			for (int i = 0; i < meshMaterials.size(); i++)
-			{
-				int temp = meshMaterials[i];
-				ImGui::InputInt("MaterialIDX", &temp);
-				if(meshMaterials[i] != temp)
-					currentSceneModel->currentMeshs[i]->SetMaterialIDX(assimp->GetMaterial(temp), temp);
-			}
-		}
+		//if (currentSceneModel->currentMeshs.size() != 0)
+		//{
+		//	ImGui::Text("Material");
+		//	for (int i = 0; i < currentSceneModel->currentMeshs.size(); i++)
+		//	{
+		//		Mesh* meshTemp = currentSceneModel->currentMeshs[i];
+		//		meshMaterials.push_back(meshTemp->GetMaterialIDX());
+		//	}
+		//	for (int i = 0; i < meshMaterials.size(); i++)
+		//	{
+		//		int temp = meshMaterials[i];
+		//		ImGui::InputInt("MaterialIDX", &temp);
+		//		if(meshMaterials[i] != temp)
+		//			currentSceneModel->currentMeshs[i]->SetMaterialIDX(assimp->GetMaterial(temp), temp);
+		//	}
+		//}
 		meshMaterials.clear();
 	}
 	ImGui::End();

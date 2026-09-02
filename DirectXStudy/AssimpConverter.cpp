@@ -14,10 +14,8 @@ AssimpConverter::~AssimpConverter()
 {
 }
 
-void AssimpConverter::ReadAssetFile(std::wstring path, DirectXMain* dxd)
+void AssimpConverter::ReadAssetFile(std::wstring path)
 {
-	dxdMain = dxd;
-
 	auto p = std::filesystem::path(path);
 	curretnPath = p.string();
 	assert(std::filesystem::exists(p));
@@ -151,8 +149,8 @@ void AssimpConverter::ReadMaterial(std::filesystem::path modelPath)
 			ts.SysMemPitch = surface.GetWidth() * sizeof(Surface::Color);
 
 			ComPtr<ID3D11Texture2D> pTexture2D;
-			dxdMain->pDevice->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
-			dxdMain->pDevice->CreateShaderResourceView(pTexture2D.Get(), NULL, material.textureView.GetAddressOf());
+			pDevice->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
+			pDevice->CreateShaderResourceView(pTexture2D.Get(), NULL, material.textureView.GetAddressOf());
 
 		}
 		if (mat->GetTexture(aiTextureType_NORMALS, 0, &texturePath, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)
@@ -177,8 +175,8 @@ void AssimpConverter::ReadMaterial(std::filesystem::path modelPath)
 			ts.SysMemPitch = surface.GetWidth() * sizeof(Surface::Color);
 
 			ComPtr<ID3D11Texture2D> pTexture2D;
-			dxdMain->pDevice->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
-			dxdMain->pDevice->CreateShaderResourceView(pTexture2D.Get(), NULL, material.normalView.GetAddressOf());
+			pDevice->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
+			pDevice->CreateShaderResourceView(pTexture2D.Get(), NULL, material.normalView.GetAddressOf());
 
 		}
 		materials.push_back(std::move(material));

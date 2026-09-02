@@ -121,14 +121,14 @@ LightObject::LightObject(DirectXMain* dxdMain, ModelLoadData* modelLoadData, Ass
 	//bindable.push_back(std::make_unique<VertexConstantBufferContainer<ConstantBuffer>>(*dxdMain, sb, *this));
 }
 
-void LightObject::Update(XMMATRIX worldMatrix)
+void LightObject::Update()
 {
 	DirectX::XMFLOAT4 lightPos = dxdMain->GetLight()->GetLightPos();
 	SetPosition(lightPos.x, lightPos.y, lightPos.z);
-	Object::Update(worldMatrix);
+	Object::Update();
 }
 
-void LightObject::Render(DirectXMain* dxdMain)
+void LightObject::Render(DirectXMain* dxdMain, XMMATRIX worldMatrix)
 {
 	//for (int i = 0; i < bindable.size(); i++)
 	//{

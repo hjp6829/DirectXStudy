@@ -4,8 +4,8 @@
 
 class Texture : public Bindable {
 public:
-	Texture(DirectXMain& dxdMain, ComPtr<ID3D11ShaderResourceView> View,int idx);
-	void Bind(DirectXMain& dxdMain) override;
+	Texture(ID3D11Device* device, ComPtr<ID3D11ShaderResourceView> View,int idx);
+	void Bind(ID3D11DeviceContext* context) override;
 	void ChangeNewTextureView(ComPtr<ID3D11ShaderResourceView> View);
 	private:
 	ComPtr<ID3D11ShaderResourceView> textureView;

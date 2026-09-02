@@ -29,9 +29,9 @@ void Texture::ChangeNewTextureView(ComPtr<ID3D11ShaderResourceView> View)
 	textureView = View;
 }
 
-void Texture::Bind(DirectXMain& dxdMain)
+void Texture::Bind(ID3D11DeviceContext* context)
 {
-	GetContext(dxdMain)->PSSetShaderResources(index,1, textureView.GetAddressOf());//2�� �Ű������� �󸶳� ���� view�� �ѹ��� �ѱ������ ���Ѱ�
+	context->PSSetShaderResources(index,1, textureView.GetAddressOf());//2�� �Ű������� �󸶳� ���� view�� �ѹ��� �ѱ������ ���Ѱ�
 	//���� ��������� �迭�� �ѱ�
 }
 

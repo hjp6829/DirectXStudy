@@ -8,8 +8,8 @@
 class InputLayout : public Bindable
 {
 public:
-	InputLayout(DirectXMain& dxdMain, ID3DBlob* shaderBlob);
-	void Bind(DirectXMain& dxdMain) override;
+	InputLayout(ID3D11Device* device, ID3DBlob* shaderBlob);
+	void Bind(ID3D11DeviceContext* context) override;
 	private:
 		ComPtr<ID3D11InputLayout> pInputLayout;
 };

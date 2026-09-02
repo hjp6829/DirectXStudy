@@ -1,11 +1,11 @@
 #include "PixelShader.h"
 
-PixelShader::PixelShader(DirectXMain& dxdMain, ID3DBlob* shaderBlob)
+PixelShader::PixelShader(ID3D11Device* device, ID3DBlob* shaderBlob)
 {
-	GetDevice(dxdMain)->CreatePixelShader(shaderBlob->GetBufferPointer(), shaderBlob->GetBufferSize(), NULL, ps.GetAddressOf());
+	device->CreatePixelShader(shaderBlob->GetBufferPointer(), shaderBlob->GetBufferSize(), NULL, ps.GetAddressOf());
 }
 
-void PixelShader::Bind(DirectXMain& dxdMain)
+void PixelShader::Bind(ID3D11DeviceContext* context)
 {
-	GetContext(dxdMain)->PSSetShader(ps.Get(), 0, 0);
+	context->PSSetShader(ps.Get(), 0, 0);
 }

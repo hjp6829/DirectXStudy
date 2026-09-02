@@ -1,17 +1,17 @@
 #pragma once
+#include <functional>	
 
-class DirectXMain;
 class Hierarchy;
 class ModelBrowserUI;
 class Insfector;
 
 class UIManager {
 public:
-	UIManager(DirectXMain* dxd);
+	UIManager(std::vector<SceneModel*>& sceneModels);
 	void UpdateUI();
+	std::function<void(std::string)> OnModelSelected;
 private:
 	Hierarchy* hierarchy;
-	DirectXMain* dxdmain;
 	ModelBrowserUI* modelBrowserUI;
 	Insfector* insfector;
 };

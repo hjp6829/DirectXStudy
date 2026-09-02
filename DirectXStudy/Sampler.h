@@ -3,8 +3,8 @@
 class Sampler : public Bindable
 {
 	public:
-	Sampler(DirectXMain& dxdMain,int idx);
-	void Bind(DirectXMain& dxdMain) override;
+	Sampler(ID3D11Device* device,int idx);
+	void Bind(ID3D11DeviceContext* context) override;
 	private:
 	ComPtr<ID3D11SamplerState> samplerState;
 	int index;

@@ -5,10 +5,12 @@
 #include "SceneModel.h"
 #include "ModelAsset.h"
 #include "ModelNode.h"
-ModelCreater::ModelCreater(DirectXMain* dxdMain, AssimpConverter* assimp)
+#include "AssimpConverter.h"
+
+ModelCreater::ModelCreater(ID3D11Device* device)
 {
-	dxd = dxdMain;
-	this->assimp = assimp;
+	assimp = new AssimpConverter();
+	this->device = device;
 }
 
 ModelAsset* ModelCreater::CreateModelAsset()
@@ -27,7 +29,7 @@ void ModelCreater::CreateChildSceneModel(ModelLoadData* modelLoadData, ModelNode
 		for (int j = 0; j < modelLoadData->meshIDX.size(); j++)
 		{
 			asMesh* temp = assimp->GetMeshData(modelLoadData->meshIDX[j]);
-			Mesh* mesh = new Mesh(dxd, modelLoadData, assimp, temp);
+			Mesh* mesh = new Mesh(device, modelLoadData, assimp, temp);
 			modelNode->currentMeshs.push_back(mesh);
 		}
 		modelNode->modelName = modelLoadData->modelName;
@@ -36,7 +38,7 @@ void ModelCreater::CreateChildSceneModel(ModelLoadData* modelLoadData, ModelNode
 	for (int j = 0; j < modelLoadData->meshIDX.size(); j++)
 	{
 		asMesh* temp = assimp->GetMeshData(modelLoadData->meshIDX[j]);
-		Mesh* mesh = new Mesh(dxd, modelLoadData, assimp, temp);
+		Mesh* mesh = new Mesh(device, modelLoadData, assimp, temp);
 		modelNode->currentMeshs.push_back(mesh);
 	}
 	modelNode->modelName = modelLoadData->modelName;
@@ -45,5 +47,34 @@ void ModelCreater::CreateChildSceneModel(ModelLoadData* modelLoadData, ModelNode
 		ModelNode* childModelNode = new ModelNode();
 		modelNode->childNodes.push_back(childModelNode);
 		CreateChildSceneModel(modelLoadData->childNodes[i], childModelNode);
+	}
+}
+
+
+SceneModel* ModelCreater::CreateSceneModel(ModelAsset* modelAsset)
+{
+	SceneModel* sceneModel = new SceneModel();
+	BuildSceneModelTree(modelAsset->currentNode, sceneModel);
+	return sceneModel;
+}
+
+void ModelCreater::BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentSceneModel)
+{
+	if (modelNode->childNodes.size() == 0)
+	{
+		parentSceneModel->currentModelNode = modelNode;
+		parentSceneModel->modelName = modelNode->modelName;
+	}
+	else
+	{
+		parentSceneModel->currentModelNode = modelNode;
+		parentSceneModel->modelName = modelNode->modelName;
+		for (int i = 0; i < modelNode->childNodes.size(); i++)
+		{
+			SceneModel* sceneModel = new SceneModel();
+			sceneModel->currentModelNode = modelNode->childNodes[i];
+			parentSceneModel->childNodes.push_back(sceneModel);
+			BuildSceneModelTree(modelNode->childNodes[i], sceneModel);
+		}
 	}
 }

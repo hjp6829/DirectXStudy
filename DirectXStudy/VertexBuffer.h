@@ -8,7 +8,7 @@
 class VertexBuffer : public Bindable {
 public:
 	template<class V>
-	VertexBuffer(DirectXMain& dxdMain, const std::vector<V>& vertices) : stride(sizeof(V)){
+	VertexBuffer(ID3D11Device* device, const std::vector<V>& vertices) : stride(sizeof(V)){
 		D3D11_BUFFER_DESC vDes = {};
 		vDes.ByteWidth = UINT(sizeof(V) * vertices.size());
 		vDes.Usage = D3D11_USAGE_DEFAULT;
@@ -19,9 +19,9 @@ public:
 		D3D11_SUBRESOURCE_DATA vd = {};
 		vd.pSysMem = vertices.data();
 
-		GetDevice(dxdMain)->CreateBuffer(&vDes, &vd, &vertexBuffer);
+		device->CreateBuffer(&vDes, &vd, &vertexBuffer);
 	}
-	void Bind(DirectXMain& dxdMain) override;
+	void Bind(ID3D11DeviceContext* context) override;
 private:
 	ComPtr<ID3D11Buffer> vertexBuffer;
 	UINT stride;

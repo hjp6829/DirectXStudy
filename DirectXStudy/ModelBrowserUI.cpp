@@ -2,9 +2,8 @@
 #include "imgui_impl_win32.h"
 #include "DirectXMain.h"
 
-ModelBrowserUI::ModelBrowserUI(DirectXMain* dxd)
+ModelBrowserUI::ModelBrowserUI()
 {
-	dxdMain = dxd;
 	std::filesystem::path modelFolderPath = "DirectXModel";
 	std::filesystem::path path = std::filesystem::current_path();
 	std::filesystem::path parent2 = path.parent_path().parent_path();
@@ -28,14 +27,9 @@ void ModelBrowserUI::UpdateUI()
 		{
 			if (ImGui::Button(files[i].filename().string().c_str()))
 			{
-				LoadModel(files[i]);
+				OnModelSelected(files[i].string());
 			}
 		}
 	}
 	ImGui::End();
-}
-
-void ModelBrowserUI::LoadModel(std::wstring path)
-{
-	dxdMain->ReadModelByAssimp(path);
 }

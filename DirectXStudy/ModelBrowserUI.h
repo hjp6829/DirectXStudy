@@ -1,5 +1,6 @@
 #pragma once
 #include <filesystem>
+#include <functional>
 
 namespace fs = std::filesystem;
 
@@ -8,11 +9,9 @@ class DirectXMain;
 class ModelBrowserUI
 {
 public:
-	ModelBrowserUI(DirectXMain* dxd);
+	ModelBrowserUI();
 	void UpdateUI();
+	std::function<void(std::string)> OnModelSelected;
 private:
 	std::vector<fs::path> files;
-	DirectXMain* dxdMain;
-private:
-	void LoadModel(std::wstring path);
 };

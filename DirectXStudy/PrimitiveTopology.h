@@ -8,7 +8,7 @@
 class PrimitiveTopology :public Bindable {
 	public:
 		PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY TopologyType);
-		void Bind(DirectXMain& dxdMain) override;
+		void Bind(ID3D11DeviceContext* context) override;
 	private:
 		D3D_PRIMITIVE_TOPOLOGY type;
 };

@@ -12,14 +12,14 @@ using namespace DirectX;
 template <typename T>
 class ConstantBuffer :public Bindable{
 	public:
-		void Update(DirectXMain& dxdMain, const T consts)
+		void Update(ID3D11DeviceContext* context, const T consts)
 		{
 			D3D11_MAPPED_SUBRESOURCE mapped = {};
-			GetContext(dxdMain)->Map(constantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+			context->Map(constantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
 			memcpy(mapped.pData, &consts, sizeof(consts));
-			GetContext(dxdMain)->Unmap(constantBuffer.Get(), 0);
+			context->Unmap(constantBuffer.Get(), 0);
 		}
-		ConstantBuffer(DirectXMain& dxdMain, const T consts) {
+		ConstantBuffer(ID3D11Device* device, const T consts) {
 			D3D11_BUFFER_DESC sDes = {};
 			sDes.ByteWidth = sizeof(consts);
 			sDes.Usage = D3D11_USAGE_DYNAMIC;
@@ -30,7 +30,7 @@ class ConstantBuffer :public Bindable{
 			D3D11_SUBRESOURCE_DATA sd = {};
 			sd.pSysMem = &consts;
 
-			GetDevice(dxdMain)->CreateBuffer(&sDes, &sd, constantBuffer.GetAddressOf());
+			device->CreateBuffer(&sDes, &sd, constantBuffer.GetAddressOf());
 		}
 	protected:
 		ComPtr<ID3D11Buffer> constantBuffer;

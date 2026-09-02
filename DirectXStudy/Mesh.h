@@ -5,10 +5,10 @@ class AssimpConverter;
 
 class Mesh : public Object {
 public:
-	Mesh(DirectXMain* dxdMain, ModelLoadData* modelLoadData, AssimpConverter* assimp, asMesh* meshData);
+	Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* assimp, asMesh* meshData);
 	~Mesh();
-	void Update(XMMATRIX worldMatrix) override;
-	void Render(DirectXMain* dxdMain) override;
+	void Update() override;
+	void Render(ID3D11DeviceContext* context, XMMATRIX worldMatrix) override;
 	int GetMaterialIDX(){return materialIDX; }
 	void SetMaterialIDX(asMaterial* material, int idx);
 private:

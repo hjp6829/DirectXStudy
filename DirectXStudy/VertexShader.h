@@ -10,8 +10,8 @@ using namespace DirectX;
 
 class VertexShader : public Bindable {
 public:
-	VertexShader(DirectXMain& dxdMain, ID3DBlob* shaderBlob);
-	void Bind(DirectXMain& dxdMain) override;
+	VertexShader(ID3D11Device* device, ID3DBlob* shaderBlob);
+	void Bind(ID3D11DeviceContext* context) override;
 private:
 	ComPtr<ID3D11VertexShader> vs;
 };

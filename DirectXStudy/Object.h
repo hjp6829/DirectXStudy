@@ -33,8 +33,8 @@ public:
 	}
 	~Object() {}
 
-	virtual void Update(XMMATRIX worldMatrix) {}
-	virtual void Render(DirectXMain* dxdMain){}
+	virtual void Update() {}
+	virtual void Render(DirectXMain* dxdMain, XMMATRIX worldMatrix){}
 	void SetPosition(float x, float y, float z) { position.x = x, position.y = y, position.z = z; }
 	void SetRotation(float x, float y, float z) { rotation.x = x, rotation.y = y, rotation.z = z; }
 	void SetScale(float x, float y, float z) { scale.x = x, scale.y = y, scale.z = z; }

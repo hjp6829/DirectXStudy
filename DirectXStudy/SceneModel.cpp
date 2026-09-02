@@ -1,7 +1,7 @@
 #include "SceneModel.h"
 #include "DirectXMain.h"
-#include "Mesh.h"
-
+#include "ModelNode.h"
+#include "Log.h"
 void SceneModel::SetPosition(XMFLOAT3 position)
 {
 	modelPos = position;
@@ -29,21 +29,18 @@ void SceneModel::SetScale(XMFLOAT3 scale)
 	}
 }
 
-void SceneModel::RenderMeshs(DirectXMain* dxdMain)
+void SceneModel::RenderModel(DirectXMain* dxdMain)
 {
 	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
 
-	for (int i = 0; i < currentMeshs.size(); i++)
-	{
-		currentMeshs[i]->Render(dxdMain);
-	}
+	currentModelNode->RenderMeshs(dxdMain, worldMatrix);
 	for (int i = 0; i < childNodes.size(); i++)
 	{
-		childNodes[i]->RenderMeshs(dxdMain);
+		childNodes[i]->RenderModel(dxdMain);
 	}
 }
 
-void SceneModel::UpdateMeshs()
+void SceneModel::UpdateModel()
 {
 	worldMatrix = XMMatrixScaling(modelScale.x, modelScale.y, modelScale.z) *
 		XMMatrixRotationRollPitchYaw(
@@ -52,13 +49,10 @@ void SceneModel::UpdateMeshs()
 			XMConvertToRadians(modelRot.z)
 		) *
 		XMMatrixTranslation(modelPos.x, modelPos.y, modelPos.z);
-	for (int j = 0; j < currentMeshs.size(); j++)
-	{
-		currentMeshs[j]->Update(worldMatrix);
-	}
+	currentModelNode->UpdateMeshs();
 	for (int i = 0; i < childNodes.size(); i++)
 	{
-		childNodes[i]->UpdateMeshs();
+		childNodes[i]->UpdateModel();
 	}
 }
 
@@ -70,10 +64,7 @@ void SceneModel::SetMaterialIDX(int meshIDX, int MaterialIDX)
 void SceneModel::ToggleMeshEnable(bool value)
 {
 	meshEnable = value;
-	for (int i = 0; i < currentMeshs.size(); i++)
-	{
-		currentMeshs[i]->enable = value;
-	}
+	currentModelNode->ToggleMeshEnable(meshEnable);
 	for (int i = 0; i < childNodes.size(); i++)
 	{
 		childNodes[i]->ToggleMeshEnable(value);

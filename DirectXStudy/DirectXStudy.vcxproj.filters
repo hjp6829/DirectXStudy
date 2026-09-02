@@ -63,9 +63,6 @@
     <ClCompile Include="VertexShader.cpp">
       <Filter>소스 파일\Bindable</Filter>
     </ClCompile>
-    <ClCompile Include="Bindable.cpp">
-      <Filter>소스 파일\Bindable</Filter>
-    </ClCompile>
     <ClCompile Include="InputLayout.cpp">
       <Filter>소스 파일\Bindable</Filter>
     </ClCompile>
@@ -151,6 +148,9 @@
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
     <ClCompile Include="ModelCreater.cpp">
+      <Filter>소스 파일\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="ModelNode.cpp">
       <Filter>소스 파일\Model</Filter>
     </ClCompile>
   </ItemGroup>

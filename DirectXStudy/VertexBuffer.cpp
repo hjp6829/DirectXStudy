@@ -1,6 +1,6 @@
 #include "VertexBuffer.h"
-void VertexBuffer::Bind(DirectXMain& dxdMain)
+void VertexBuffer::Bind(ID3D11DeviceContext* context)
 {
 	const UINT offset = 0;
-	GetContext(dxdMain)->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
+	context->IASetVertexBuffers(0, 1, vertexBuffer.GetAddressOf(), &stride, &offset);
 }

@@ -8,9 +8,9 @@
 #include "ModelAsset.h"
 #include "ModelNode.h"
 
-DirectXMain::DirectXMain(HWND hWnd, AssimpConverter* assimp)
+DirectXMain::DirectXMain(HWND hWnd,std::vector<SceneModel*>& sceneModels)
 {
-	this->assimp = assimp;
+	models = sceneModels;
 	DXGI_SWAP_CHAIN_DESC sd = {};//스왑체인 설계도 설정
 	sd.BufferDesc.Width = 1280;
 	sd.BufferDesc.Height = 960;
@@ -85,11 +85,6 @@ DirectXMain::DirectXMain(HWND hWnd, AssimpConverter* assimp)
 
 void DirectXMain::Start()
 {
-	ModelCreater* model = new ModelCreater(this, assimp);
-	assimp->LoadComplite = [this, model](AssimpConverter* Assimp) {
-		ModelAsset* modelAssetTemp = model->CreateModelAsset();
-		modelAssets.emplace(Assimp->GetCurrentPath(), modelAssetTemp);
-		};
 	globalBuffer.lightColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
 	globalBuffer.lightPos = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 
@@ -111,7 +106,7 @@ void DirectXMain::Update(float deltaTime)
 	totalTime += deltaTime;
 	for (int i = 0; i < models.size(); i++)
 	{
-		models[i]->UpdateMeshs();
+		models[i]->UpdateModel();
 	}
 }
 
@@ -136,7 +131,7 @@ void DirectXMain::Render()
 
 	for (int i = 0; i < models.size(); i++)
 	{
-		models[i]->RenderMeshs(this);
+		models[i]->RenderModel(this);
 	}
 }
 
@@ -155,28 +150,4 @@ void DirectXMain::EndDraw()
 	pSwap->Present(1, 0);
 }
 
-void DirectXMain::ReadModelByAssimp(std::wstring path)
-{
-	if (modelAssets.find(std::filesystem::path(path).string()) == modelAssets.end())
-	{
-		assimp->ReadAssetFile(path, this);
-	}
-}
 
-void CreateSceneModel(ModelNode* modelNode, SceneModel* parentSceneModel)
-{
-	if (modelNode->childNodes.size() == 0)
-	{
-		parentSceneModel->currentModelNode = modelNode;
-	}
-	else
-	{
-
-		for (int i = 0; i < modelNode->childNodes.size(); i++)
-		{
-			SceneModel* sceneModel = new SceneModel();
-			sceneModel->currentModelNode = modelNode->childNodes[i];
-			parentSceneModel->childNodes.push_back(sceneModel);
-			CreateSceneModel(modelNode->childNodes[i], sceneModel);
-		}
-}

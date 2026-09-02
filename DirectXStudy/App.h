@@ -5,10 +5,12 @@
 #include "Camera.h"
 #include "Light.h"
 #include "Log.h"
+#include <vector>
 
-class AssimpConverter;
+class ModelCreater;
 class Mouse;
 class UIManager;
+class SceneModel;
 
 class App {
 	public:
@@ -19,8 +21,11 @@ class App {
 		Window* window;
 		Camera* cam;
 		Light* light;
-		AssimpConverter* assimp;
 		Mouse* mouse;
 		Keyboard* keyboard;
 		UIManager* uimanager;
+		std::vector<SceneModel*> models;
+		ModelCreater* modelCreater;
+	private:
+		void ModelSelected(std::string modelName);
 };

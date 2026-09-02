@@ -10,8 +10,8 @@ using namespace DirectX;
 
 class PixelShader :public Bindable {
 public:
-	PixelShader(DirectXMain& dxdMain, ID3DBlob* shaderBlob);
-	void Bind(DirectXMain& dxdMain) override;
+	PixelShader(ID3D11Device* device, ID3DBlob* shaderBlob);
+	void Bind(ID3D11DeviceContext* context) override;
 	private:
 		ComPtr<ID3D11PixelShader> ps;
 };

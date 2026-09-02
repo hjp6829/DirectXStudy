@@ -4,12 +4,15 @@
 #include "ModelBrowserUI.h"
 #include "Insfector.h"
 
-UIManager::UIManager(DirectXMain* dxd)
+UIManager::UIManager(std::vector<SceneModel*>& sceneModels)
 {
-	dxdmain = dxd;
-	hierarchy = new Hierarchy(dxdmain->GetSceneModels());
-	modelBrowserUI = new ModelBrowserUI(dxd);
-	insfector = new Insfector(hierarchy, dxdmain->GetAssimp());
+	hierarchy = new Hierarchy(sceneModels);
+	modelBrowserUI = new ModelBrowserUI();
+	insfector = new Insfector(hierarchy);
+
+	modelBrowserUI->OnModelSelected = [this](std::string modelName) {
+		OnModelSelected(modelName);
+		};
 }
 
 void UIManager::UpdateUI()

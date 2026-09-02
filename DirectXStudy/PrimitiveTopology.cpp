@@ -5,7 +5,7 @@ PrimitiveTopology::PrimitiveTopology(D3D_PRIMITIVE_TOPOLOGY TopologyType)
 	type = TopologyType;
 }
 
-void PrimitiveTopology::Bind(DirectXMain& dxdMain)
+void PrimitiveTopology::Bind(ID3D11DeviceContext* context)
 {
-	GetContext(dxdMain)->IASetPrimitiveTopology(type);
+	context->IASetPrimitiveTopology(type);
 }

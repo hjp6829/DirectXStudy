@@ -5,6 +5,7 @@
 #include "Mouse.h"
 #include "Keyboard.h"
 #include "UIManager.h"
+#include "ModelCreater.h"
 
 App::App()
 {
@@ -13,21 +14,23 @@ App::App()
 	ImGui::CreateContext();
 	ImGui::StyleColorsDark();
 
-	assimp = new AssimpConverter();
 	mouse = new Mouse();
 	keyboard = new Keyboard();
 
 	window = new Window(mouse, keyboard);
-	dxdMain = new DirectXMain(window->GetHwnd(), assimp);
-	uimanager = new UIManager(dxdMain);
+	dxdMain = new DirectXMain(window->GetHwnd(), models);
+	modelCreater = new ModelCreater(dxdMain->GetDevice());
+	uimanager = new UIManager(models);
+
 	cam = new Camera(keyboard);
 	light = new Light();
-	//assimp->ReadAssetFile(
-	//	LR"(C:\Users\박현진\Desktop\Project\DirectXStudy\DirectXStudy\Model\Leopard 2A4\Leopard 2A4.FBX)", dxdMain
-	//);
 
 	dxdMain->SetCamera(cam);
 	dxdMain->SetLight(light);
+
+	uimanager->OnModelSelected = [this](std::string modelName) {
+		ModelSelected(modelName);
+		};
 }
 
 void App::Run()
@@ -67,4 +70,9 @@ void App::Run()
 		dxdMain->EndDraw();
 		previousTime = currentTime;
 	}
+}
+
+void App::ModelSelected(std::string modelName)
+{
+	// 모델 선택 시 처리할 로직을 여기에 작성합니다.
 }
