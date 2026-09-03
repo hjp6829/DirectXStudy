@@ -35,12 +35,42 @@ void Hierarchy::ModelTraversal(SceneModel* sceneModel)
 		{
 			OnHierarchyClick(sceneModel);
 		}
+		if (ImGui::BeginPopupContextItem())
+		{
+			OnHierarchyClick(sceneModel); // 우클릭한 노드도 선택
+
+			if (ImGui::MenuItem("Delete"))
+			{
+				OnHierarchyDeleteClick(sceneModel);
+			}
+
+			if (ImGui::MenuItem("Rename"))
+			{
+			}
+
+			ImGui::EndPopup();
+		}
 		return;
 	}
 	bool open = ImGui::TreeNodeEx((void*)(intptr_t)sceneModel, ImGuiTreeNodeFlags_OpenOnArrow, "%s", sceneModel->modelName.c_str());
 	if (ImGui::IsItemClicked())
 	{
 		OnHierarchyClick(sceneModel);
+	}
+	if (ImGui::BeginPopupContextItem())
+	{
+		OnHierarchyClick(sceneModel); // 우클릭한 노드도 선택
+
+		if (ImGui::MenuItem("Delete"))
+		{
+			OnHierarchyDeleteClick(sceneModel);
+		}
+
+		if (ImGui::MenuItem("Rename"))
+		{
+		}
+
+		ImGui::EndPopup();
 	}
 	if (open)
 	{

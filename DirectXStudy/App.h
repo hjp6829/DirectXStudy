@@ -28,4 +28,6 @@ class App {
 		ModelCreater* modelCreater;
 	private:
 		void ModelSelected(std::string modelName);
+		void DeleteModel(SceneModel* model);
+		void DeleteChiledModels(SceneModel* model);
 };

@@ -14,6 +14,9 @@ UIManager::UIManager(std::vector<SceneModel*>& sceneModels)
 	modelBrowserUI->OnModelSelected = [this](std::string path) {
 		OnModelSelected(path);
 		};
+	hierarchy->OnHierarchyDeleteClick = [this](SceneModel* model) {
+		OnModelDelete(model);
+		};
 }
 
 void UIManager::UpdateUI()

@@ -71,3 +71,35 @@ void SceneModel::ToggleMeshEnable(bool value)
 		childNodes[i]->ToggleMeshEnable(value);
 	}
 }
+
+void SceneModel::RemoveModelData()
+{
+	if (parentModel)
+	{
+		parentModel->RemoveChildModel(this);
+		parentModel=nullptr;
+	}
+	currentModelNode = nullptr;
+	RemoveAllChileModel(this);
+}
+
+void SceneModel::RemoveChildModel(SceneModel* childModel)
+{
+	for (auto it = childNodes.begin(); it != childNodes.end(); ++it)
+	{
+		if (*it == childModel)
+		{
+			childNodes.erase(it);
+			break;
+		}
+	}
+}
+
+void SceneModel::RemoveAllChileModel(SceneModel* model)
+{
+	for (int i = 0; i < model->childNodes.size(); i++)
+	{
+		RemoveAllChileModel(model->childNodes[i]);
+		model->childNodes[i]->currentModelNode = nullptr;
+	}
+}

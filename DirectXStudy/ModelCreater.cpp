@@ -73,6 +73,7 @@ void ModelCreater::BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentS
 		{
 			SceneModel* sceneModel = new SceneModel();
 			sceneModel->currentModelNode = modelNode->childNodes[i];
+			sceneModel->parentModel = parentSceneModel;
 			parentSceneModel->childNodes.push_back(sceneModel);
 			BuildSceneModelTree(modelNode->childNodes[i], sceneModel);
 		}

@@ -6,6 +6,7 @@
 #include "Keyboard.h"
 #include "UIManager.h"
 #include "ModelCreater.h"
+#include "SceneModel.h";
 
 App::App()
 {
@@ -30,6 +31,9 @@ App::App()
 
 	uimanager->OnModelSelected = [this](std::string path) {
 		ModelSelected(path);
+		};
+	uimanager->OnModelDelete = [this](SceneModel* model) {
+		DeleteModel(model);
 		};
 }
 
@@ -76,4 +80,26 @@ void App::ModelSelected(std::string path)
 {
 	SceneModel* sceneModel = modelCreater->LoadModelFromFile(path);
 	models.push_back(sceneModel);
+}
+
+void App::DeleteModel(SceneModel* model)
+{
+	if (model->IsRootModel())
+	{
+		models.erase(std::remove(models.begin(), models.end(), model), models.end());
+	}
+	model->RemoveModelData();
+	DeleteChiledModels(model);
+	model->childNodes.clear();
+	delete model;
+}
+
+void App::DeleteChiledModels(SceneModel* model)
+{
+	for (int i = 0; i < model->childNodes.size(); i++)
+	{
+		DeleteChiledModels(model->childNodes[i]);
+		delete model->childNodes[i];
+	}
+	model->childNodes.clear();
 }

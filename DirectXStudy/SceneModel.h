@@ -16,6 +16,7 @@ class SceneModel
 {
 public:
 	SceneModel() {};
+	SceneModel* parentModel;
 	ModelNode* currentModelNode;
 	std::vector<SceneModel*> childNodes;
 	std::string modelName;
@@ -31,6 +32,10 @@ public:
 	void SetMaterialIDX(int meshIDX,int MaterialIDX);
 	void ToggleMeshEnable(bool value);
 	bool meshEnable = true;
+	bool IsRootModel() { return parentModel == nullptr; }
+	void RemoveModelData();
+	void RemoveChildModel(SceneModel* childModel);
+	void RemoveAllChileModel(SceneModel* childModel);
 private:
 
 };
