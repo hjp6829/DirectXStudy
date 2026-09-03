@@ -1,16 +1,14 @@
 #include "DirectXMain.h"
 #include "Object.h"
 #include "ModelCreater.h"
-#include "LightObject.h"
 #include "imgui_impl_dx11.h"
 #include "AssimpConverter.h"
 #include "SceneModel.h"
 #include "ModelAsset.h"
 #include "ModelNode.h"
 
-DirectXMain::DirectXMain(HWND hWnd,std::vector<SceneModel*>& sceneModels)
+DirectXMain::DirectXMain(HWND hWnd, std::vector<SceneModel*>& sceneModels) : models(sceneModels)
 {
-	models = sceneModels;
 	DXGI_SWAP_CHAIN_DESC sd = {};//스왑체인 설계도 설정
 	sd.BufferDesc.Width = 1280;
 	sd.BufferDesc.Height = 960;
@@ -137,12 +135,6 @@ void DirectXMain::Render()
 
 void DirectXMain::Shutdown()
 {
-}
-
-void DirectXMain::Draw(UINT indexCount)
-{
-	//pContext->Draw(3,0);
-	pContext->DrawIndexed(indexCount, 0, 0);
 }
 
 void DirectXMain::EndDraw()

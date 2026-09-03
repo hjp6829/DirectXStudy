@@ -1,10 +1,11 @@
 #include "ModelNode.h"
 #include "Mesh.h"
-void ModelNode::RenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix)
+
+void ModelNode::RenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix)
 {
 	for (int i = 0; i < currentMeshs.size(); i++)
 	{
-		currentMeshs[i]->Render(context, worldMatrix);
+		currentMeshs[i]->Render(context, worldMatrix, viewMatrix, projectionMatrix);
 	}
 }
 

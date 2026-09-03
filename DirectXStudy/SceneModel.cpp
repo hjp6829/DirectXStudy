@@ -32,8 +32,9 @@ void SceneModel::SetScale(XMFLOAT3 scale)
 void SceneModel::RenderModel(DirectXMain* dxdMain)
 {
 	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
+	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
-	currentModelNode->RenderMeshs(dxdMain, worldMatrix);
+	currentModelNode->RenderMeshs(dxdMain->GetContext(), worldMatrix, ViewMatrix, ProjectionMatrix);
 	for (int i = 0; i < childNodes.size(); i++)
 	{
 		childNodes[i]->RenderModel(dxdMain);

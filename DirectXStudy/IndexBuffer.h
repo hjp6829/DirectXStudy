@@ -1,8 +1,6 @@
 #pragma once
 #include "Bindable.h"
-#include <d3d11.h>
 #include <wrl.h>
-#include <d3dcompiler.h>
 #include <DirectXMath.h>
 
 class IndexBuffer : public Bindable {
@@ -19,7 +17,7 @@ public:
 		D3D11_SUBRESOURCE_DATA id = {};
 		id.pSysMem = indexs.data();
 
-		GetDevice(dxdMain)->CreateBuffer(&iDes, &id, &indexBuffer);
+		device->CreateBuffer(&iDes, &id, indexBuffer.GetAddressOf());
 	}
 	void Bind(ID3D11DeviceContext* context) override;
 	UINT GetIndexCount();

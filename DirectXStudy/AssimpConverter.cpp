@@ -3,18 +3,18 @@
 #include "Surface.h"
 #include "DirectXMain.h"
 
-AssimpConverter::AssimpConverter()
+AssimpConverter::AssimpConverter(ID3D11Device* device)
 {
 	importer = new Assimp::Importer;
 	scene = NULL;
-
+	this->device = device;
 }
 
 AssimpConverter::~AssimpConverter()
 {
 }
 
-void AssimpConverter::ReadAssetFile(std::wstring path)
+ModelLoadData* AssimpConverter::ReadAssetFile(std::string path)
 {
 	auto p = std::filesystem::path(path);
 	curretnPath = p.string();
@@ -40,7 +40,7 @@ void AssimpConverter::ReadAssetFile(std::wstring path)
 	ModelLoadData* model = new ModelLoadData();
 	model->currentNode = scene->mRootNode;
 	ParseNode(model, transform);
-	LoadComplite(this);
+	return model;
 }
 
 void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform)
@@ -149,8 +149,8 @@ void AssimpConverter::ReadMaterial(std::filesystem::path modelPath)
 			ts.SysMemPitch = surface.GetWidth() * sizeof(Surface::Color);
 
 			ComPtr<ID3D11Texture2D> pTexture2D;
-			pDevice->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
-			pDevice->CreateShaderResourceView(pTexture2D.Get(), NULL, material.textureView.GetAddressOf());
+			device->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
+			device->CreateShaderResourceView(pTexture2D.Get(), NULL, material.textureView.GetAddressOf());
 
 		}
 		if (mat->GetTexture(aiTextureType_NORMALS, 0, &texturePath, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)
@@ -175,8 +175,8 @@ void AssimpConverter::ReadMaterial(std::filesystem::path modelPath)
 			ts.SysMemPitch = surface.GetWidth() * sizeof(Surface::Color);
 
 			ComPtr<ID3D11Texture2D> pTexture2D;
-			pDevice->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
-			pDevice->CreateShaderResourceView(pTexture2D.Get(), NULL, material.normalView.GetAddressOf());
+			device->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
+			device->CreateShaderResourceView(pTexture2D.Get(), NULL, material.normalView.GetAddressOf());
 
 		}
 		materials.push_back(std::move(material));

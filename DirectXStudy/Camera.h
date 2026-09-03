@@ -11,6 +11,7 @@ public:
 	void ViewCameraWindow();
 	void CameraUpdate(Mouse* mouse);
 	DirectX::XMMATRIX GetViewMatrix();
+	DirectX::XMMATRIX GetProjectionMatrix();
 	DirectX::XMFLOAT3 GetWorldPos();
 	DirectX::XMFLOAT4 GetCameraPos() 
 	{ 

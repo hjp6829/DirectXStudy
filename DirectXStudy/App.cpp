@@ -28,8 +28,8 @@ App::App()
 	dxdMain->SetCamera(cam);
 	dxdMain->SetLight(light);
 
-	uimanager->OnModelSelected = [this](std::string modelName) {
-		ModelSelected(modelName);
+	uimanager->OnModelSelected = [this](std::string path) {
+		ModelSelected(path);
 		};
 }
 
@@ -72,7 +72,8 @@ void App::Run()
 	}
 }
 
-void App::ModelSelected(std::string modelName)
+void App::ModelSelected(std::string path)
 {
-	// 모델 선택 시 처리할 로직을 여기에 작성합니다.
+	SceneModel* sceneModel = modelCreater->LoadModelFromFile(path);
+	models.push_back(sceneModel);
 }

@@ -60,6 +60,11 @@ DirectX::XMMATRIX Camera::GetViewMatrix()
 	return DirectX::XMMatrixInverse(NULL, DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationY), DirectX::XMConvertToRadians(rotationX), DirectX::XMConvertToRadians(rotationZ)) * DirectX::XMMatrixTranslationFromVector(Position));
 }
 
+DirectX::XMMATRIX Camera::GetProjectionMatrix()
+{
+	return DirectX::XMMatrixPerspectiveLH(1.0f,4.0f/3.0f,0.5f,1000.0f);
+}
+
 DirectX::XMFLOAT3 Camera::GetWorldPos()
 {
 	DirectX::XMFLOAT3 pos;

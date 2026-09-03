@@ -32,7 +32,6 @@ public:
 	void Update(float deltaTime);
 	void Render();
 	void Shutdown();
-	void Draw(UINT indexCount);
 	void EndDraw();
 	void SetMouse(Mouse* mouse) { currentMouse = mouse; }
 	Camera* GetCamera() { return cam; }

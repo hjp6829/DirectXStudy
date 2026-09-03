@@ -4,21 +4,14 @@
 #include <d3dcompiler.h>
 #include <DirectXMath.h>
 #include <vector>
-#include "Bindable.h"
 #include <memory>
-#include "VertexShader.h"
-#include "PixelShader.h"
-#include "InputLayout.h"
-#include "VertexBuffer.h"
-#include "PrimitiveTopology.h"
-#include "VertexConstantBufferContainer.h"
-#include "PSContantBuffer.h"
-#include "IndexBuffer.h"
-#include "VertexConstantBuffer.h"
-#include "Surface.h"
-#include "Texture.h"
-#include "Sampler.h"
 #include "Datas.h"
+#include "Bindable.h"
+
+class Bindable;
+class AssimpConverter;
+class ID3D11Device;
+class ID3D11DeviceContext;
 
 using namespace Microsoft::WRL;
 using namespace DirectX;
@@ -28,13 +21,13 @@ protected:
 	ComPtr<ID3D11Buffer> colorConstantBuffer;
 	UINT IndexCount;
 public:
-	Object(DirectXMain* dxdMain, ModelLoadData* modelLoadData, AssimpConverter* assimp, asMesh* meshData) {
+	Object(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* assimp, asMesh* meshData) {
 
 	}
 	~Object() {}
 
 	virtual void Update() {}
-	virtual void Render(DirectXMain* dxdMain, XMMATRIX worldMatrix){}
+	virtual void Render(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix){}
 	void SetPosition(float x, float y, float z) { position.x = x, position.y = y, position.z = z; }
 	void SetRotation(float x, float y, float z) { rotation.x = x, rotation.y = y, rotation.z = z; }
 	void SetScale(float x, float y, float z) { scale.x = x, scale.y = y, scale.z = z; }

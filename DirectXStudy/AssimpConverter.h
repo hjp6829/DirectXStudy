@@ -14,9 +14,9 @@ class DirectXMain;
 
 class AssimpConverter {
 public:
-	AssimpConverter();
+	AssimpConverter(ID3D11Device* device);
 	~AssimpConverter();
-	void ReadAssetFile(std::wstring path);
+	ModelLoadData* ReadAssetFile(std::string path);
 	std::vector<ModelLoadData*>& GetModelData() { return models; }
 	asMesh* GetMeshData(unsigned int idx) { return &meshs[idx]; }
 	asMaterial* GetMaterial(unsigned int idx) { return &materials[idx]; }
@@ -30,7 +30,7 @@ private:
 	std::vector<ModelLoadData*> models;
 	int modelIDX = 0;
 	std::string curretnPath;
-	ComPtr<ID3D11Device> pDevice;
+	ID3D11Device* device;
 private:
 	void ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform);
 	void ReadModel();

@@ -3,6 +3,7 @@
 #include "DirectXMain.h"
 #include "ModelBrowserUI.h"
 #include "Insfector.h"
+#include "SceneModel.h"
 
 UIManager::UIManager(std::vector<SceneModel*>& sceneModels)
 {
@@ -10,8 +11,8 @@ UIManager::UIManager(std::vector<SceneModel*>& sceneModels)
 	modelBrowserUI = new ModelBrowserUI();
 	insfector = new Insfector(hierarchy);
 
-	modelBrowserUI->OnModelSelected = [this](std::string modelName) {
-		OnModelSelected(modelName);
+	modelBrowserUI->OnModelSelected = [this](std::string path) {
+		OnModelSelected(path);
 		};
 }
 

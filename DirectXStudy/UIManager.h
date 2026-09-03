@@ -1,9 +1,12 @@
 #pragma once
 #include <functional>	
+#include <string>
+#include <vector>
 
 class Hierarchy;
 class ModelBrowserUI;
 class Insfector;
+class SceneModel;
 
 class UIManager {
 public:

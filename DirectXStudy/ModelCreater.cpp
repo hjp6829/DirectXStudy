@@ -6,19 +6,19 @@
 #include "ModelAsset.h"
 #include "ModelNode.h"
 #include "AssimpConverter.h"
+#include "Datas.h"
 
 ModelCreater::ModelCreater(ID3D11Device* device)
 {
-	assimp = new AssimpConverter();
+	assimp = new AssimpConverter(device);
 	this->device = device;
 }
 
-ModelAsset* ModelCreater::CreateModelAsset()
+ModelAsset* ModelCreater::CreateModelAsset(ModelLoadData* modelData)
 {
-	std::vector<ModelLoadData*> modelDatas = assimp->GetModelData();
-	currentModelAsset = new ModelAsset();
+	ModelAsset* currentModelAsset = new ModelAsset();
 	currentModelAsset->currentNode = new ModelNode();
-	CreateChildSceneModel(modelDatas[0]->childNodes[0], currentModelAsset->currentNode);
+	CreateChildSceneModel(modelData->childNodes[0], currentModelAsset->currentNode);
 	return currentModelAsset;
 }
 
@@ -77,4 +77,16 @@ void ModelCreater::BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentS
 			BuildSceneModelTree(modelNode->childNodes[i], sceneModel);
 		}
 	}
+}
+
+SceneModel* ModelCreater::LoadModelFromFile(std::string path)
+{
+	if(modelAssets.find(path) != modelAssets.end())
+	{
+		return CreateSceneModel(modelAssets[path]);
+	}
+	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
+	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData);
+	modelAssets.insert({path, modelAssetTemp });
+	return CreateSceneModel(modelAssetTemp);
 }

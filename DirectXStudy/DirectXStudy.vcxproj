@@ -130,7 +130,6 @@
     <ClCompile Include="Hierarchy.cpp" />
     <ClCompile Include="Insfector.cpp" />
     <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="LightObject.cpp" />
     <ClCompile Include="DirectXMain.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="imgui_demo.cpp" />
@@ -171,7 +170,6 @@
     <ClInclude Include="Hierarchy.h" />
     <ClInclude Include="Insfector.h" />
     <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="LightObject.h" />
     <ClInclude Include="Light.h" />
     <ClInclude Include="LightConstantBuffer.h" />
     <ClInclude Include="Log.h" />

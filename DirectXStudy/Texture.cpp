@@ -1,6 +1,6 @@
 #include "Texture.h"
 
-Texture::Texture(DirectXMain& dxdMain,ComPtr<ID3D11ShaderResourceView> View,int idx)
+Texture::Texture(ComPtr<ID3D11ShaderResourceView> View,int idx)
 {
 	this->index=idx;
 	/*D3D11_TEXTURE2D_DESC tDc ={};
