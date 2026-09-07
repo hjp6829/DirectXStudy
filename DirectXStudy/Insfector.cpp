@@ -30,7 +30,7 @@ void Insfector::UpdateUI()
 	}
 	if (ImGui::Begin("Insfector"))
 	{
-		XMFLOAT3 tempPos = currentSceneModel->modelPos;
+		XMFLOAT3 tempPos = currentSceneModel->GetModelPosition();
 		XMFLOAT3 tempRot = currentSceneModel->modelRot;
 		XMFLOAT3 tempScale = currentSceneModel->modelScale;
 
@@ -38,17 +38,16 @@ void Insfector::UpdateUI()
 		ImGui::Checkbox("Enable",&enableValue);
 		if(enableValue != currentSceneModel->meshEnable)
 			currentSceneModel->ToggleMeshEnable(enableValue);
-		ImGui::Text(currentSceneModel->modelName.c_str());
+		//ImGui::Text(currentSceneModel->modelName.c_str());
 		ImGui::Text("Psotion");
-		ImGui::InputFloat3("Position", &tempPos.x);
+		if(ImGui::InputFloat3("Position", &tempPos.x))
+			currentSceneModel->SetPosition(tempPos);
 		ImGui::Text("Rotation");
-		ImGui::InputFloat3("Rotation", &tempRot.x);
+		if(ImGui::InputFloat3("Rotation", &tempRot.x))
+			currentSceneModel->SetRotaion(tempRot);
 		ImGui::Text("Scale");
-		ImGui::InputFloat3("Scale", &tempScale.x);
-
-		currentSceneModel->SetPosition(tempPos);
-		currentSceneModel->SetRotaion(tempRot);
-		currentSceneModel->SetScale(tempScale);
+		if(ImGui::InputFloat3("Scale", &tempScale.x))
+			currentSceneModel->SetScale(tempScale);
 
 		//if (currentSceneModel->currentMeshs.size() != 0)
 		//{

@@ -2,31 +2,34 @@
 #include "DirectXMain.h"
 #include "ModelNode.h"
 #include "Log.h"
+XMFLOAT3 SceneModel::GetModelPosition()
+{
+	XMFLOAT3 localPos;
+	if(!test)
+	{
+		Log::PrintLog(modelName+std::to_string(positionOffset.x) + std::to_string(positionOffset.y) + std::to_string(positionOffset.z));
+		test=true;
+	}
+	localPos.x = positionOffset.x + importedLocalPosition.x;
+	localPos.y = positionOffset.y + importedLocalPosition.y;
+	localPos.z = positionOffset.z + importedLocalPosition.z;
+	return localPos;
+}
 void SceneModel::SetPosition(XMFLOAT3 position)
 {
-	modelPos = position;
-	for (int i = 0; i < childNodes.size(); i++)
-	{
-		childNodes[i]->SetPosition(position);
-	}
+	positionOffset.x = position.x - importedLocalPosition.x;
+	positionOffset.y = position.y - importedLocalPosition.y;
+	positionOffset.z = position.z - importedLocalPosition.z;
 }
 
 void SceneModel::SetRotaion(XMFLOAT3 rotation)
 {
 	modelRot = rotation;
-	for (int i = 0; i < childNodes.size(); i++)
-	{
-		childNodes[i]->SetRotaion(rotation);
-	}
 }
 
 void SceneModel::SetScale(XMFLOAT3 scale)
 {
 	modelScale = scale;
-	for (int i = 0; i < childNodes.size(); i++)
-	{
-		childNodes[i]->SetScale(scale);
-	}
 }
 
 void SceneModel::RenderModel(DirectXMain* dxdMain)
@@ -49,7 +52,10 @@ void SceneModel::UpdateModel()
 			XMConvertToRadians(modelRot.y),
 			XMConvertToRadians(modelRot.z)
 		) *
-		XMMatrixTranslation(modelPos.x, modelPos.y, modelPos.z);
+		XMMatrixTranslation(positionOffset.x, positionOffset.y, positionOffset.z);
+	if(parentModel != nullptr)
+		worldMatrix = worldMatrix * parentModel->worldMatrix;
+
 	currentModelNode->UpdateMeshs();
 	for (int i = 0; i < childNodes.size(); i++)
 	{

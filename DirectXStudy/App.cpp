@@ -35,6 +35,15 @@ App::App()
 	uimanager->OnModelDelete = [this](SceneModel* model) {
 		DeleteModel(model);
 		};
+	uimanager->OnHierarchySaveClick = [this](SceneModel* model) {
+		SaveModel(model);
+		};
+	uimanager->OnHierarchyMoveClick = [this](SceneModel* model) {
+		MoveModel(model);
+		};
+	uimanager->OnHierarchyRenameClick = [this](SceneModel* model) {
+		RenameModel(model);
+		};
 }
 
 void App::Run()
@@ -102,4 +111,22 @@ void App::DeleteChiledModels(SceneModel* model)
 		delete model->childNodes[i];
 	}
 	model->childNodes.clear();
+}
+
+void App::SaveModel(SceneModel* model)
+{
+	testSaveModel = model;
+}
+
+void App::MoveModel(SceneModel* model)
+{
+	testSaveModel->parentModel->RemoveChildModel(testSaveModel);
+	testSaveModel->parentModel = nullptr;
+	model->childNodes.push_back(testSaveModel);
+	testSaveModel = nullptr;
+
+}
+
+void App::RenameModel(SceneModel* model)
+{
 }

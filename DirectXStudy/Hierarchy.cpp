@@ -37,15 +37,24 @@ void Hierarchy::ModelTraversal(SceneModel* sceneModel)
 		}
 		if (ImGui::BeginPopupContextItem())
 		{
-			OnHierarchyClick(sceneModel); // ¿ìÅ¬¸¯ÇÑ ³ëµåµµ ¼±ÅÃ
+			OnHierarchyClick(sceneModel); 
 
 			if (ImGui::MenuItem("Delete"))
 			{
 				OnHierarchyDeleteClick(sceneModel);
 			}
+			if (ImGui::MenuItem("Save"))
+			{
+				OnHierarchySaveClick(sceneModel);
+			}
+			if (ImGui::MenuItem("Move"))
+			{
+				OnHierarchyMoveClick(sceneModel);
+			}
 
 			if (ImGui::MenuItem("Rename"))
 			{
+				OnHierarchyRenameClick(sceneModel);
 			}
 
 			ImGui::EndPopup();
@@ -59,15 +68,25 @@ void Hierarchy::ModelTraversal(SceneModel* sceneModel)
 	}
 	if (ImGui::BeginPopupContextItem())
 	{
-		OnHierarchyClick(sceneModel); // ¿ìÅ¬¸¯ÇÑ ³ëµåµµ ¼±ÅÃ
+		OnHierarchyClick(sceneModel); // ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½åµµ ï¿½ï¿½ï¿½ï¿½
 
 		if (ImGui::MenuItem("Delete"))
 		{
 			OnHierarchyDeleteClick(sceneModel);
 		}
 
+		if (ImGui::MenuItem("Save"))
+		{
+			OnHierarchySaveClick(sceneModel);
+		}
+		if (ImGui::MenuItem("Move"))
+		{
+			OnHierarchyMoveClick(sceneModel);
+		}
+
 		if (ImGui::MenuItem("Rename"))
 		{
+			OnHierarchyRenameClick(sceneModel);
 		}
 
 		ImGui::EndPopup();

@@ -87,3 +87,12 @@ void Mesh::SetMaterialIDX(asMaterial* material,int idx)
 	normalTexture->ChangeNewTextureView(material->textureView);
 	normalTexture->ChangeNewTextureView(material->normalView);
 }
+
+XMFLOAT3 Mesh::GetLocalPos()
+{
+	DirectX::XMVECTOR positionVec = localMatrix.r[3];
+
+	DirectX::XMFLOAT3 position;
+	DirectX::XMStoreFloat3(&position, positionVec);
+	return position;
+}

@@ -19,6 +19,7 @@ ModelAsset* ModelCreater::CreateModelAsset(ModelLoadData* modelData)
 	ModelAsset* currentModelAsset = new ModelAsset();
 	currentModelAsset->currentNode = new ModelNode();
 	CreateChildSceneModel(modelData->childNodes[0], currentModelAsset->currentNode);
+	currentModelAsset->currentNode->modelLocalPos = XMFLOAT3(0,0,0);
 	return currentModelAsset;
 }
 
@@ -26,13 +27,16 @@ void ModelCreater::CreateChildSceneModel(ModelLoadData* modelLoadData, ModelNode
 {
 	if (modelLoadData->childNodes.size() == 0)
 	{
-		for (int j = 0; j < modelLoadData->meshIDX.size(); j++)
+		int meshSize = modelLoadData->meshIDX.size();
+		for (int j = 0; j < meshSize; j++)
 		{
 			asMesh* temp = assimp->GetMeshData(modelLoadData->meshIDX[j]);
 			Mesh* mesh = new Mesh(device, modelLoadData, assimp, temp);
+			XMFLOAT3 localPosTemp = mesh->GetLocalPos();
 			modelNode->currentMeshs.push_back(mesh);
 		}
 		modelNode->modelName = modelLoadData->modelName;
+		modelNode->modelLocalPos = modelLoadData->localPos;
 		return;
 	}
 	for (int j = 0; j < modelLoadData->meshIDX.size(); j++)
@@ -42,12 +46,14 @@ void ModelCreater::CreateChildSceneModel(ModelLoadData* modelLoadData, ModelNode
 		modelNode->currentMeshs.push_back(mesh);
 	}
 	modelNode->modelName = modelLoadData->modelName;
-	for (int i = 0; i < modelLoadData->childNodes.size(); i++)
+	int modelChildSize = modelLoadData->childNodes.size();
+	for (int i = 0; i < modelChildSize; i++)
 	{
 		ModelNode* childModelNode = new ModelNode();
 		modelNode->childNodes.push_back(childModelNode);
 		CreateChildSceneModel(modelLoadData->childNodes[i], childModelNode);
 	}
+	modelNode->modelLocalPos = modelLoadData->localPos;
 }
 
 
@@ -64,11 +70,13 @@ void ModelCreater::BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentS
 	{
 		parentSceneModel->currentModelNode = modelNode;
 		parentSceneModel->modelName = modelNode->modelName;
+		parentSceneModel->importedLocalPosition = modelNode->modelLocalPos;
 	}
 	else
 	{
 		parentSceneModel->currentModelNode = modelNode;
 		parentSceneModel->modelName = modelNode->modelName;
+		parentSceneModel->importedLocalPosition = modelNode->modelLocalPos;
 		for (int i = 0; i < modelNode->childNodes.size(); i++)
 		{
 			SceneModel* sceneModel = new SceneModel();

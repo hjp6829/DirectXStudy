@@ -56,9 +56,15 @@ void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& par
 		worldTransform.c1, worldTransform.c2, worldTransform.c3, worldTransform.c4,
 		worldTransform.d1, worldTransform.d2, worldTransform.d3, worldTransform.d4
 	));
+	aiVector3D scale;
+	aiQuaternion rotation;
+	aiVector3D position;
+
+	currentNode->mTransformation.Decompose(scale, rotation, position);
 
 	std::string nodeName = modelData->currentNode->mName.C_Str();
 	modelData->modelName = nodeName;
+	modelData->localPos = XMFLOAT3(position.x, position.y, position.z);
 
 	for (int i = 0; i < modelData->currentNode->mNumMeshes; i++)
 	{

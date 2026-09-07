@@ -26,8 +26,12 @@ class App {
 		UIManager* uimanager;
 		std::vector<SceneModel*> models;
 		ModelCreater* modelCreater;
+		SceneModel* testSaveModel;
 	private:
 		void ModelSelected(std::string modelName);
 		void DeleteModel(SceneModel* model);
 		void DeleteChiledModels(SceneModel* model);
+		void SaveModel(SceneModel* model);
+		void MoveModel(SceneModel* model);
+		void RenameModel(SceneModel* model);
 };

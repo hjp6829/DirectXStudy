@@ -17,6 +17,15 @@ UIManager::UIManager(std::vector<SceneModel*>& sceneModels)
 	hierarchy->OnHierarchyDeleteClick = [this](SceneModel* model) {
 		OnModelDelete(model);
 		};
+	hierarchy->OnHierarchySaveClick = [this](SceneModel* model) {
+		OnHierarchySaveClick(model);
+		};
+	hierarchy->OnHierarchyMoveClick = [this](SceneModel* model) {
+		OnHierarchyMoveClick(model);
+		};
+	hierarchy->OnHierarchyRenameClick = [this](SceneModel* model) {
+		OnHierarchyRenameClick(model);
+		};
 }
 
 void UIManager::UpdateUI()

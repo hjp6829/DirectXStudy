@@ -20,6 +20,7 @@ public:
 	void Render(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix) override;
 	int GetMaterialIDX(){return materialIDX; }
 	void SetMaterialIDX(asMaterial* material, int idx);
+	XMFLOAT3 GetLocalPos();
 private:
 	Texture* meshTexture;
 	Texture* normalTexture;

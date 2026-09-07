@@ -10,6 +10,8 @@ public:
 	std::vector<Mesh*> currentMeshs;
 	std::vector<ModelNode*> childNodes;
 	std::string modelName;
+	DirectX::XMFLOAT3 modelLocalPos;
+public:
 	void RenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix);
 	void UpdateMeshs();
 	void ToggleMeshEnable(bool value);
