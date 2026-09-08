@@ -65,6 +65,8 @@ void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& par
 	std::string nodeName = modelData->currentNode->mName.C_Str();
 	modelData->modelName = nodeName;
 	modelData->localPos = XMFLOAT3(position.x, position.y, position.z);
+	modelData->localRot = XMFLOAT3(rotation.x, rotation.y, rotation.z);
+	modelData->localScale = XMFLOAT3(scale.x, scale.y, scale.z);
 
 	for (int i = 0; i < modelData->currentNode->mNumMeshes; i++)
 	{

@@ -15,7 +15,7 @@ class ModelCreater
 public:
 	ModelCreater(ID3D11Device* device);
 	ModelAsset* CreateModelAsset(ModelLoadData* modelData);
-	void CreateChildSceneModel(ModelLoadData* modelLoadData, ModelNode* modelNode);
+	void CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode);
 	SceneModel* CreateSceneModel(ModelAsset* modelAsset);
 	void BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentSceneModel);
 	SceneModel* LoadModelFromFile(std::string path);

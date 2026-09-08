@@ -31,8 +31,8 @@ void Insfector::UpdateUI()
 	if (ImGui::Begin("Insfector"))
 	{
 		XMFLOAT3 tempPos = currentSceneModel->GetModelPosition();
-		XMFLOAT3 tempRot = currentSceneModel->modelRot;
-		XMFLOAT3 tempScale = currentSceneModel->modelScale;
+		XMFLOAT3 tempRot = currentSceneModel->GetModelRotation();
+		XMFLOAT3 tempScale = currentSceneModel->GetModelScale();
 
 		bool enableValue = currentSceneModel->meshEnable;
 		ImGui::Checkbox("Enable",&enableValue);

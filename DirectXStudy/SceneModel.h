@@ -23,8 +23,12 @@ public:
 	XMFLOAT3 modelRot;
 	XMFLOAT3 modelScale = { 1.0f, 1.0f, 1.0f };
 	XMFLOAT3 importedLocalPosition;
+	XMFLOAT3 importedLocalRotation;
+	XMFLOAT3 importedLocalScale;
 	XMMATRIX worldMatrix;
 	XMFLOAT3 GetModelPosition();
+	XMFLOAT3 GetModelRotation();
+	XMFLOAT3 GetModelScale();
 	void SetPosition(XMFLOAT3 position);
 	void SetRotaion(XMFLOAT3 rotation);
 	void SetScale(XMFLOAT3 scale);
@@ -37,7 +41,8 @@ public:
 	void RemoveModelData();
 	void RemoveChildModel(SceneModel* childModel);
 	void RemoveAllChileModel(SceneModel* childModel);
-	bool test;
 private:
 	XMFLOAT3 positionOffset = { 0.0f, 0.0f, 4.0f };
+	XMFLOAT3 rotationOffset = { 0.0f, 0.0f, 0.0f };
+	XMFLOAT3 scaleOffset = { 1.0f, 1.0f, 1.0f };
 };

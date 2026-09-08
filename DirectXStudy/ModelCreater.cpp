@@ -18,12 +18,12 @@ ModelAsset* ModelCreater::CreateModelAsset(ModelLoadData* modelData)
 {
 	ModelAsset* currentModelAsset = new ModelAsset();
 	currentModelAsset->currentNode = new ModelNode();
-	CreateChildSceneModel(modelData->childNodes[0], currentModelAsset->currentNode);
+	CreateChildModelNode(modelData->childNodes[0], currentModelAsset->currentNode);
 	currentModelAsset->currentNode->modelLocalPos = XMFLOAT3(0,0,0);
 	return currentModelAsset;
 }
 
-void ModelCreater::CreateChildSceneModel(ModelLoadData* modelLoadData, ModelNode* modelNode)
+void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode)
 {
 	if (modelLoadData->childNodes.size() == 0)
 	{
@@ -37,6 +37,8 @@ void ModelCreater::CreateChildSceneModel(ModelLoadData* modelLoadData, ModelNode
 		}
 		modelNode->modelName = modelLoadData->modelName;
 		modelNode->modelLocalPos = modelLoadData->localPos;
+		modelNode->modelLocalRot = modelLoadData->localRot;
+		modelNode->modelLocalScale = modelLoadData->localScale;
 		return;
 	}
 	for (int j = 0; j < modelLoadData->meshIDX.size(); j++)
@@ -51,9 +53,11 @@ void ModelCreater::CreateChildSceneModel(ModelLoadData* modelLoadData, ModelNode
 	{
 		ModelNode* childModelNode = new ModelNode();
 		modelNode->childNodes.push_back(childModelNode);
-		CreateChildSceneModel(modelLoadData->childNodes[i], childModelNode);
+		CreateChildModelNode(modelLoadData->childNodes[i], childModelNode);
 	}
 	modelNode->modelLocalPos = modelLoadData->localPos;
+	modelNode->modelLocalRot = modelLoadData->localRot;
+	modelNode->modelLocalScale = modelLoadData->localScale;
 }
 
 
@@ -71,12 +75,16 @@ void ModelCreater::BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentS
 		parentSceneModel->currentModelNode = modelNode;
 		parentSceneModel->modelName = modelNode->modelName;
 		parentSceneModel->importedLocalPosition = modelNode->modelLocalPos;
+		parentSceneModel->importedLocalRotation = modelNode->modelLocalRot;
+		parentSceneModel->importedLocalScale = modelNode->modelLocalScale;
 	}
 	else
 	{
 		parentSceneModel->currentModelNode = modelNode;
 		parentSceneModel->modelName = modelNode->modelName;
 		parentSceneModel->importedLocalPosition = modelNode->modelLocalPos;
+		parentSceneModel->importedLocalRotation = modelNode->modelLocalRot;
+		parentSceneModel->importedLocalScale = modelNode->modelLocalScale;
 		for (int i = 0; i < modelNode->childNodes.size(); i++)
 		{
 			SceneModel* sceneModel = new SceneModel();

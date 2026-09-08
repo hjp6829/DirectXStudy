@@ -5,15 +5,26 @@
 XMFLOAT3 SceneModel::GetModelPosition()
 {
 	XMFLOAT3 localPos;
-	if(!test)
-	{
-		Log::PrintLog(modelName+std::to_string(positionOffset.x) + std::to_string(positionOffset.y) + std::to_string(positionOffset.z));
-		test=true;
-	}
 	localPos.x = positionOffset.x + importedLocalPosition.x;
 	localPos.y = positionOffset.y + importedLocalPosition.y;
 	localPos.z = positionOffset.z + importedLocalPosition.z;
 	return localPos;
+}
+XMFLOAT3 SceneModel::GetModelRotation()
+{
+	XMFLOAT3 localRot;
+	localRot.x = rotationOffset.x * importedLocalRotation.x;
+	localRot.y = rotationOffset.y * importedLocalRotation.y;
+	localRot.z = rotationOffset.z * importedLocalRotation.z;
+	return localRot;
+}
+XMFLOAT3 SceneModel::GetModelScale()
+{
+	XMFLOAT3 localScale;
+	localScale.x = scaleOffset.x * importedLocalScale.x;
+	localScale.y = scaleOffset.y * importedLocalScale.y;
+	localScale.z = scaleOffset.z * importedLocalScale.z;
+	return localScale;
 }
 void SceneModel::SetPosition(XMFLOAT3 position)
 {
@@ -24,12 +35,16 @@ void SceneModel::SetPosition(XMFLOAT3 position)
 
 void SceneModel::SetRotaion(XMFLOAT3 rotation)
 {
-	modelRot = rotation;
+	rotationOffset.x = rotation.x - importedLocalRotation.x;
+	rotationOffset.y = rotation.y - importedLocalRotation.y;
+	rotationOffset.z = rotation.z - importedLocalRotation.z;
 }
 
 void SceneModel::SetScale(XMFLOAT3 scale)
 {
-	modelScale = scale;
+	scaleOffset.x = scale.x / importedLocalScale.x;
+	scaleOffset.y = scale.y / importedLocalScale.y;
+	scaleOffset.z = scale.z / importedLocalScale.z;
 }
 
 void SceneModel::RenderModel(DirectXMain* dxdMain)
@@ -46,11 +61,11 @@ void SceneModel::RenderModel(DirectXMain* dxdMain)
 
 void SceneModel::UpdateModel()
 {
-	worldMatrix = XMMatrixScaling(modelScale.x, modelScale.y, modelScale.z) *
+	worldMatrix = XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z) *
 		XMMatrixRotationRollPitchYaw(
-			XMConvertToRadians(modelRot.x),
-			XMConvertToRadians(modelRot.y),
-			XMConvertToRadians(modelRot.z)
+			XMConvertToRadians(rotationOffset.x),
+			XMConvertToRadians(rotationOffset.y),
+			XMConvertToRadians(rotationOffset.z)
 		) *
 		XMMatrixTranslation(positionOffset.x, positionOffset.y, positionOffset.z);
 	if(parentModel != nullptr)

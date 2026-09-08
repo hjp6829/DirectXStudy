@@ -37,7 +37,7 @@ public:
 	aiNode* currentNode;
 	std::vector<ModelLoadData*> childNodes;
 	XMFLOAT3 localPos;
-	XMFLOAT3 localRat;
+	XMFLOAT3 localRot;
 	XMFLOAT3 localScale;
 	//Model* currentModel;
 	int idx;
