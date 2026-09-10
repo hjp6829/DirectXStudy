@@ -13,6 +13,7 @@ public:
 	DirectX::XMFLOAT3 modelLocalPos;
 	DirectX::XMFLOAT3 modelLocalRot;
 	DirectX::XMFLOAT3 modelLocalScale;
+	uint64_t modelHeshCode;
 public:
 	void RenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix);
 	void UpdateMeshs();

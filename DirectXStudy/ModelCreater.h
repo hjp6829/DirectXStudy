@@ -14,13 +14,14 @@ class ModelCreater
 {
 public:
 	ModelCreater(ID3D11Device* device);
-	ModelAsset* CreateModelAsset(ModelLoadData* modelData);
-	void CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode);
+	ModelAsset* CreateModelAsset(ModelLoadData* modelData, std::string modelName);
+	void CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode, ModelAsset* modelAsset);
 	SceneModel* CreateSceneModel(ModelAsset* modelAsset);
 	void BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentSceneModel);
 	SceneModel* LoadModelFromFile(std::string path);
 private:
 	AssimpConverter* assimp;
 	std::unordered_map<std::string, ModelAsset*> modelAssets;
-	ID3D11Device* device;
+	ID3D11Device* device; 
+	uint64_t FNV1a(const std::string& str);
 };

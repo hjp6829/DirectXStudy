@@ -7,6 +7,12 @@
 #include "UIManager.h"
 #include "ModelCreater.h"
 #include "SceneModel.h";
+#include "ModelNode.h"
+#include "Datas.h"
+#include <fstream>
+#include <nlohmann/json.hpp>
+
+void to_json(nlohmann::json& j, const JsonSceneModelData& data);
 
 App::App()
 {
@@ -43,6 +49,10 @@ App::App()
 		};
 	uimanager->OnHierarchyRenameClick = [this](SceneModel* model) {
 		RenameModel(model);
+		};
+	keyboard->OnKeyHold = [this](int key)
+		{
+			this->SaveScene(key);
 		};
 }
 
@@ -129,4 +139,59 @@ void App::MoveModel(SceneModel* model)
 
 void App::RenameModel(SceneModel* model)
 {
+}
+
+void App::SaveScene(int key)
+{
+	if ((char)key == 'Q')
+	{
+		std::vector<JsonSceneModelData> jsonSceneModelDatas;
+		for (int i = 0; i < models.size(); i++)
+		{
+			SceneModel* model = models[i];
+			JsonSceneModelData jsonData;
+			jsonData.parentModelHeshCode = 0;
+			jsonData.SetTransformData(model);
+			jsonSceneModelDatas.push_back(jsonData);
+			SaveSceneModelData(model, jsonSceneModelDatas);
+		}
+		std::filesystem::path savePath = "C:/Users/박현진/Desktop/Project/DirectX/DirectXStudy/SaveScene/Scene.json";
+		std::ofstream file(savePath);
+
+		nlohmann::json jsonfile = jsonSceneModelDatas;
+		file << jsonfile.dump(4);
+		file.close();
+	}
+}
+void to_json(nlohmann::json& j, const JsonSceneModelData& data)
+{
+	j = nlohmann::json{
+		{"modelHeshCode", data.modelHeshCode},
+		{"parentModelHeshCode", data.parentModelHeshCode},
+		{"posX", data.localPosx},
+		{"posY", data.localPosy},
+		{"posZ", data.localPosz},
+		{ "rotx", data.localRotx },
+		{"roty", data.localRoty},
+		{"rotz", data.localRotz},
+		{ "scalex", data.localScalex },
+		{"scaley", data.localScaley},
+		{"scalez", data.localScalez}
+	};
+}
+
+void App::SaveSceneModelData(SceneModel* parentModel, std::vector<JsonSceneModelData>& jsonSceneModelDatas)
+{
+	if (parentModel->childNodes.size() == 0)
+	{
+		return;
+	}
+	for (int i = 0; i < parentModel->childNodes.size(); i++)
+	{
+		JsonSceneModelData jsonData;
+		jsonData.parentModelHeshCode = parentModel->currentModelNode->modelHeshCode;
+		jsonData.SetTransformData(parentModel->childNodes[i]);
+		jsonSceneModelDatas.push_back(jsonData);
+		SaveSceneModelData(parentModel->childNodes[i], jsonSceneModelDatas);
+	}
 }

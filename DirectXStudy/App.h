@@ -11,6 +11,7 @@ class ModelCreater;
 class Mouse;
 class UIManager;
 class SceneModel;
+struct JsonSceneModelData;
 
 class App {
 	public:
@@ -34,4 +35,7 @@ class App {
 		void SaveModel(SceneModel* model);
 		void MoveModel(SceneModel* model);
 		void RenameModel(SceneModel* model);
+		void SaveScene(int key);
+		void SaveSceneModelData(SceneModel* parentModel, std::vector<JsonSceneModelData>& jsonSceneModelDatas);
+
 };

@@ -6,6 +6,8 @@
 #include <wrl/client.h>
 #include <d3d11.h>
 #include <memory>
+#include "SceneModel.h"
+#include "ModelNode.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -59,4 +61,31 @@ struct asMaterial
 	std::string name;
 	ComPtr<ID3D11ShaderResourceView> textureView;
 	ComPtr<ID3D11ShaderResourceView> normalView;
+};
+struct JsonSceneModelData
+{
+	float localPosx, localPosy, localPosz;
+	float localRotx, localRoty, localRotz;
+	float localScalex, localScaley, localScalez;
+	uint64_t modelHeshCode;
+	uint64_t parentModelHeshCode;
+	void SetTransformData(SceneModel* sceneModel)
+	{
+		XMFLOAT3 positionOffset = sceneModel->GetPostionOffset();
+		localPosx = positionOffset.x;
+		localPosy = positionOffset.y;
+		localPosz = positionOffset.z;
+
+		XMFLOAT3 rotationOffset = sceneModel->GetRotationOffset();
+		localRotx = rotationOffset.x;
+		localRoty = rotationOffset.y;
+		localRotz = rotationOffset.z;
+
+		XMFLOAT3 scaleOffset = sceneModel->GetScaleOffset();
+		localScalex = scaleOffset.x;
+		localScaley = scaleOffset.y;
+		localScalez = scaleOffset.z;
+
+		modelHeshCode = sceneModel->currentModelNode->modelHeshCode;
+	}
 };

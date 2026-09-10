@@ -14,16 +14,18 @@ ModelCreater::ModelCreater(ID3D11Device* device)
 	this->device = device;
 }
 
-ModelAsset* ModelCreater::CreateModelAsset(ModelLoadData* modelData)
+ModelAsset* ModelCreater::CreateModelAsset(ModelLoadData* modelData, std::string modelName)
 {
 	ModelAsset* currentModelAsset = new ModelAsset();
 	currentModelAsset->currentNode = new ModelNode();
-	CreateChildModelNode(modelData->childNodes[0], currentModelAsset->currentNode);
+	currentModelAsset->currentNode->modelHeshCode = FNV1a(modelName);
+	currentModelAsset->modelNodesDic.insert({ currentModelAsset->currentNode->modelHeshCode, currentModelAsset->currentNode });
+	CreateChildModelNode(modelData->childNodes[0], currentModelAsset->currentNode, currentModelAsset);
 	currentModelAsset->currentNode->modelLocalPos = XMFLOAT3(0,0,0);
 	return currentModelAsset;
 }
 
-void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode)
+void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode, ModelAsset* modelAsset)
 {
 	if (modelLoadData->childNodes.size() == 0)
 	{
@@ -53,7 +55,9 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 	{
 		ModelNode* childModelNode = new ModelNode();
 		modelNode->childNodes.push_back(childModelNode);
-		CreateChildModelNode(modelLoadData->childNodes[i], childModelNode);
+		childModelNode->modelHeshCode = modelNode->modelHeshCode++;
+		modelAsset->modelNodesDic.insert({childModelNode->modelHeshCode, childModelNode});
+		CreateChildModelNode(modelLoadData->childNodes[i], childModelNode, modelAsset);
 	}
 	modelNode->modelLocalPos = modelLoadData->localPos;
 	modelNode->modelLocalRot = modelLoadData->localRot;
@@ -98,12 +102,26 @@ void ModelCreater::BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentS
 
 SceneModel* ModelCreater::LoadModelFromFile(std::string path)
 {
+	std::filesystem::path pathtemp = path;
+	std::string modelName =	pathtemp.stem().string();
 	if(modelAssets.find(path) != modelAssets.end())
 	{
 		return CreateSceneModel(modelAssets[path]);
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
-	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData);
+	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, modelName);
 	modelAssets.insert({path, modelAssetTemp });
 	return CreateSceneModel(modelAssetTemp);
+}
+uint64_t ModelCreater::FNV1a(const std::string& str)
+{
+	uint64_t hash = 14695981039346656037ULL;
+
+	for (unsigned char c : str)
+	{
+		hash ^= c;
+		hash *= 1099511628211ULL;
+	}
+
+	return hash;
 }

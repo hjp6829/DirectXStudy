@@ -41,6 +41,9 @@ public:
 	void RemoveModelData();
 	void RemoveChildModel(SceneModel* childModel);
 	void RemoveAllChileModel(SceneModel* childModel);
+	XMFLOAT3 GetPostionOffset(){return positionOffset;}
+	XMFLOAT3 GetRotationOffset() { return rotationOffset; }
+	XMFLOAT3 GetScaleOffset() { return scaleOffset; }
 private:
 	XMFLOAT3 positionOffset = { 0.0f, 0.0f, 4.0f };
 	XMFLOAT3 rotationOffset = { 0.0f, 0.0f, 0.0f };
