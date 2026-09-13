@@ -14,15 +14,14 @@ AssimpConverter::~AssimpConverter()
 {
 }
 
-ModelLoadData* AssimpConverter::ReadAssetFile(std::string path)
+ModelLoadData* AssimpConverter::ReadAssetFile(std::filesystem::path path)
 {
-	auto p = std::filesystem::path(path);
-	curretnPath = p.string();
-	assert(std::filesystem::exists(p));
+	curretnPath = path.string();
+	assert(std::filesystem::exists(path));
 
 	auto start = std::chrono::high_resolution_clock::now();
 
-	scene = importer->ReadFile(p.string(), 0);
+	scene = importer->ReadFile(path.string(), 0);
 
 	auto readEnd = std::chrono::high_resolution_clock::now();
 
@@ -35,7 +34,7 @@ ModelLoadData* AssimpConverter::ReadAssetFile(std::string path)
 
 	auto processEnd = std::chrono::high_resolution_clock::now();
 	ReadModel();
-	ReadMaterial(p);
+	ReadMaterial(path);
 	aiMatrix4x4 transform;
 	ModelLoadData* model = new ModelLoadData();
 	model->currentNode = scene->mRootNode;

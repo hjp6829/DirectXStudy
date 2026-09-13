@@ -10,6 +10,7 @@ public:
 	std::vector<Mesh*> currentMeshs;
 	std::vector<ModelNode*> childNodes;
 	std::string modelName;
+	std::string sourceModelPath;
 	DirectX::XMFLOAT3 modelLocalPos;
 	DirectX::XMFLOAT3 modelLocalRot;
 	DirectX::XMFLOAT3 modelLocalScale;

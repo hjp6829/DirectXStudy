@@ -35,7 +35,7 @@ class App {
 		void SaveModel(SceneModel* model);
 		void MoveModel(SceneModel* model);
 		void RenameModel(SceneModel* model);
-		void SaveScene(int key);
+		void SaveScene(int key, bool value);
 		void SaveSceneModelData(SceneModel* parentModel, std::vector<JsonSceneModelData>& jsonSceneModelDatas);
-
+		void LoadSaveSceneFile(int key, bool value);
 };

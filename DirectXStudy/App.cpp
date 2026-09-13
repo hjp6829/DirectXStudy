@@ -50,9 +50,10 @@ App::App()
 	uimanager->OnHierarchyRenameClick = [this](SceneModel* model) {
 		RenameModel(model);
 		};
-	keyboard->OnKeyHold = [this](int key)
+	keyboard->OnKeyPressed = [this](int key, bool value)
 		{
-			this->SaveScene(key);
+			this->SaveScene(key, value);
+			this->LoadSaveSceneFile(key, value);
 		};
 }
 
@@ -141,18 +142,15 @@ void App::RenameModel(SceneModel* model)
 {
 }
 
-void App::SaveScene(int key)
+void App::SaveScene(int key,bool value)
 {
-	if ((char)key == 'Q')
+	if ((char)key == 'Q'&& value)
 	{
+		Log::PrintLog("Scene Save");
 		std::vector<JsonSceneModelData> jsonSceneModelDatas;
 		for (int i = 0; i < models.size(); i++)
 		{
 			SceneModel* model = models[i];
-			JsonSceneModelData jsonData;
-			jsonData.parentModelHeshCode = 0;
-			jsonData.SetTransformData(model);
-			jsonSceneModelDatas.push_back(jsonData);
 			SaveSceneModelData(model, jsonSceneModelDatas);
 		}
 		std::filesystem::path savePath = "C:/Users/박현진/Desktop/Project/DirectX/DirectXStudy/SaveScene/Scene.json";
@@ -176,22 +174,91 @@ void to_json(nlohmann::json& j, const JsonSceneModelData& data)
 		{"rotz", data.localRotz},
 		{ "scalex", data.localScalex },
 		{"scaley", data.localScaley},
-		{"scalez", data.localScalez}
+		{"scalez", data.localScalez},
+		{"ModelNamePath", data.origModelName}
 	};
 }
 
-void App::SaveSceneModelData(SceneModel* parentModel, std::vector<JsonSceneModelData>& jsonSceneModelDatas)
+void App::SaveSceneModelData(SceneModel* Model, std::vector<JsonSceneModelData>& jsonSceneModelDatas)
 {
-	if (parentModel->childNodes.size() == 0)
+	JsonSceneModelData jsonData;
+	if (Model->childNodes.size() == 0)
 	{
+		if (Model->parentModel == nullptr)
+			jsonData.parentModelHeshCode = 0;
+		else
+			jsonData.parentModelHeshCode = Model->parentModel->currentModelNode->modelHeshCode;
+		jsonData.origModelName = Model->currentModelNode->sourceModelPath;
+		jsonData.modelHeshCode = Model->currentModelNode->modelHeshCode;
+		jsonData.SetTransformData(Model);
+		jsonSceneModelDatas.push_back(jsonData);
 		return;
 	}
-	for (int i = 0; i < parentModel->childNodes.size(); i++)
+
+	if(Model->parentModel == nullptr)
+		jsonData.parentModelHeshCode = 0;
+	else
+		jsonData.parentModelHeshCode = Model->parentModel->currentModelNode->modelHeshCode;
+	jsonData.origModelName = Model->currentModelNode->sourceModelPath;
+	jsonData.modelHeshCode = Model->currentModelNode->modelHeshCode;
+	jsonData.SetTransformData(Model);
+	jsonSceneModelDatas.push_back(jsonData);
+	for (int i = 0; i < Model->childNodes.size(); i++)
 	{
-		JsonSceneModelData jsonData;
-		jsonData.parentModelHeshCode = parentModel->currentModelNode->modelHeshCode;
-		jsonData.SetTransformData(parentModel->childNodes[i]);
-		jsonSceneModelDatas.push_back(jsonData);
-		SaveSceneModelData(parentModel->childNodes[i], jsonSceneModelDatas);
+		SaveSceneModelData(Model->childNodes[i], jsonSceneModelDatas);
+	}
+}
+
+void from_json(const nlohmann::json& j, JsonSceneModelData& data)
+{
+	j.at("modelHeshCode").get_to(data.modelHeshCode);
+	j.at("parentModelHeshCode").get_to(data.parentModelHeshCode);
+
+	j.at("posX").get_to(data.localPosx);
+	j.at("posY").get_to(data.localPosy);
+	j.at("posZ").get_to(data.localPosz);
+
+	j.at("rotx").get_to(data.localRotx);
+	j.at("roty").get_to(data.localRoty);
+	j.at("rotz").get_to(data.localRotz);
+
+	j.at("scalex").get_to(data.localScalex);
+	j.at("scaley").get_to(data.localScaley);
+	j.at("scalez").get_to(data.localScalez);
+
+	j.at("ModelNamePath").get_to(data.origModelName);
+}
+
+void App::LoadSaveSceneFile(int key, bool value)
+{
+	if ((char)key == 'E' && value)
+	{
+		using json = nlohmann::json;
+		std::filesystem::path path = std::filesystem::current_path();
+		std::filesystem::path parent1 = path.parent_path();
+		std::filesystem::path parent2 = path.parent_path().parent_path();
+		std::filesystem::path saveFolderPath = "SaveScene/Scene.json";
+
+		std::filesystem::path savePath = parent1/ saveFolderPath;
+		std::ifstream file(savePath);
+		if (!file.is_open())
+		{
+			Log::PrintLog("path errer");
+		}
+		json sceneJson;
+		file >> sceneJson;
+
+		std::filesystem::path modelFolderPath = "DirectXModel";
+		
+
+		for (const auto& item : sceneJson)
+		{
+			JsonSceneModelData data = item.get<JsonSceneModelData>();
+			std::filesystem::path modelName = data.origModelName;
+			std::filesystem::path modelPath = parent2 / modelFolderPath / modelName;
+			SceneModel* sceneModel = modelCreater->CreateSceneModelFromJsonData(modelPath, data);
+			Log::PrintLog(sceneModel->modelName);
+			models.push_back(sceneModel);
+		}
 	}
 }

@@ -20,6 +20,7 @@ public:
 	ModelNode* currentModelNode;
 	std::vector<SceneModel*> childNodes;
 	std::string modelName;
+	std::string modelNamePath;
 	XMFLOAT3 modelRot;
 	XMFLOAT3 modelScale = { 1.0f, 1.0f, 1.0f };
 	XMFLOAT3 importedLocalPosition;

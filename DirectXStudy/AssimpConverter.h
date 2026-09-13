@@ -16,7 +16,7 @@ class AssimpConverter {
 public:
 	AssimpConverter(ID3D11Device* device);
 	~AssimpConverter();
-	ModelLoadData* ReadAssetFile(std::string path);
+	ModelLoadData* ReadAssetFile(std::filesystem::path path);
 	std::vector<ModelLoadData*>& GetModelData() { return models; }
 	asMesh* GetMeshData(unsigned int idx) { return &meshs[idx]; }
 	asMaterial* GetMaterial(unsigned int idx) { return &materials[idx]; }
