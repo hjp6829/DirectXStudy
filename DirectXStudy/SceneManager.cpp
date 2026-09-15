@@ -29,7 +29,20 @@ void SceneManager::SetKeyInput(int key, bool value)
 void SceneManager::ModelSelected(std::string path)
 {
 	SceneModel* sceneModel = modelCreater->LoadModelFromFile(path);
+	RegisterModelHierarchy(sceneModel);
 	models.push_back(sceneModel);
+}
+void SceneManager::RegisterModelHierarchy(SceneModel* model)
+{
+	if (model->childModels.size() == 0)
+	{
+		modelIDs.push_back(objectID);
+		model->modelID = objectID++;
+		return;
+	}
+	modelIDs.push_back(objectID);
+	model->modelID = objectID++;
+	RegisterModelHierarchy(model);
 }
 void SceneManager::DeleteModel(SceneModel* model)
 {
@@ -51,6 +64,7 @@ void SceneManager::DeleteChiledModels(SceneModel* model)
 	}
 	model->childModels.clear();
 }
+
 void SceneManager::SaveScene()
 {
 	Log::PrintLog("Scene Save");

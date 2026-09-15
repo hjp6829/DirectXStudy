@@ -16,10 +16,13 @@ public:
 	void DeleteModel(SceneModel* model);
 private:
 	std::vector<SceneModel*> models;
+	std::vector<uint64_t> modelIDs;
 	ModelCreater* modelCreater;
 private:
 	void SaveScene();
 	void LoadSaveSceneFile();
 	void SaveSceneModelData(SceneModel* Model, std::vector<JsonSceneModelData>& jsonSceneModelDatas);
 	void DeleteChiledModels(SceneModel* model);
+	void RegisterModelHierarchy(SceneModel* model);
+	uint64_t objectID = 0;
 };

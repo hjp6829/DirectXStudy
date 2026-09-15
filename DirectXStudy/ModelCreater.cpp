@@ -103,9 +103,10 @@ void ModelCreater::BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentS
 
 SceneModel* ModelCreater::LoadModelFromFile(std::string path)
 {
-	if(modelAssets.find(path) != modelAssets.end())
+	auto it = modelAssets.find(path);
+	if(it != modelAssets.end())
 	{
-		return CreateSceneModel(modelAssets[path]);
+		return CreateSceneModel(it->second);
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);

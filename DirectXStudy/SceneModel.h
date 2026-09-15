@@ -21,6 +21,7 @@ public:
 	std::vector<SceneModel*> childModels;
 	std::string modelName;
 	std::string modelNamePath;
+	uint64_t modelID;
 	uint64_t parentModelHeshCode;
 	void RenderModel(DirectXMain* dxdMain);
 	void UpdateModel();
