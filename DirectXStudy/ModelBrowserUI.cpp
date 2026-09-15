@@ -4,10 +4,9 @@
 
 ModelBrowserUI::ModelBrowserUI()
 {
-	std::filesystem::path modelFolderPath = "DirectXModel";
+	std::filesystem::path modelFolderPath = "Assets/DirectXModel";
 	std::filesystem::path path = std::filesystem::current_path();
-	std::filesystem::path parent2 = path.parent_path().parent_path();
-	for (const auto& entry : fs::recursive_directory_iterator(parent2 / modelFolderPath))
+	for (const auto& entry : fs::recursive_directory_iterator(path / modelFolderPath))
 	{
 		if (!entry.is_regular_file())
 			continue;

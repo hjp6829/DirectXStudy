@@ -124,12 +124,8 @@ void SceneManager::LoadSaveSceneFile()
 {
 	using json = nlohmann::json;
 	std::filesystem::path path = std::filesystem::current_path();
-	std::filesystem::path parent1 = path.parent_path();
-	std::filesystem::path parent2 = path.parent_path().parent_path();
-	std::filesystem::path saveFolderPath = "C:/Users/Admin/Desktop/DirectXStrudy/Directx/DirectXStudy/SaveScene/Scene.json";
-
-	//std::filesystem::path savePath = parent1/ saveFolderPath;
-	std::ifstream file(saveFolderPath);
+	std::filesystem::path saveFilePath = path / "SaveScene"/ "Scene.json";
+	std::ifstream file(saveFilePath);
 	if (!file.is_open())
 	{
 		Log::PrintLog("path errer");
@@ -137,14 +133,14 @@ void SceneManager::LoadSaveSceneFile()
 	json sceneJson;
 	file >> sceneJson;
 
-	std::filesystem::path modelFolderPath = "DirectXModel";
+	std::filesystem::path modelFolderPath = "Assets/DirectXModel";
 
 	std::unordered_map<uint64_t, SceneModel*>loadSceneModels;
 	for (const auto& item : sceneJson)
 	{
 		JsonSceneModelData data = item.get<JsonSceneModelData>();
 		std::filesystem::path origModelPath = data.origModelPath;
-		std::filesystem::path modelPath = parent2 / modelFolderPath / origModelPath;
+		std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
 		SceneModel* sceneModel = modelCreater->CreateSceneModelFromJsonData(modelPath, data);
 		sceneModel->parentModelHeshCode = data.parentModelHeshCode;
 		sceneModel->SetPostionOffset(XMFLOAT3(data.localPosx, data.localPosy, data.localPosz));
