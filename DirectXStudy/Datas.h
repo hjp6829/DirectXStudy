@@ -69,7 +69,8 @@ struct JsonSceneModelData
 	float localScalex, localScaley, localScalez;
 	uint64_t modelHeshCode;
 	uint64_t parentModelHeshCode;
-	std::string origModelName;
+	std::string origModelPath;
+	std::string testModelName;
 	void SetTransformData(SceneModel* sceneModel)
 	{
 		XMFLOAT3 positionOffset = sceneModel->GetPostionOffset();

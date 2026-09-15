@@ -27,7 +27,7 @@ void Hierarchy::UpdateUI()
 
 void Hierarchy::ModelTraversal(SceneModel* sceneModel)
 {
-	if (sceneModel->childNodes.size() == 0)
+	if (sceneModel->childModels.size() == 0)
 	{
 		ImGui::TreeNodeEx((void*)(intptr_t)sceneModel, ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen, "%s", sceneModel->modelName.c_str());
 
@@ -93,9 +93,9 @@ void Hierarchy::ModelTraversal(SceneModel* sceneModel)
 	}
 	if (open)
 	{
-		for (int i = 0; i < sceneModel->childNodes.size(); i++)
+		for (int i = 0; i < sceneModel->childModels.size(); i++)
 		{
-			ModelTraversal(sceneModel->childNodes[i]);
+			ModelTraversal(sceneModel->childModels[i]);
 		}
 		ImGui::TreePop();
 	}

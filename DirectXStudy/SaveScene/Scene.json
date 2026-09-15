@@ -1,7 +1,8 @@
 [
     {
-        "ModelNamePath": "Leopard_2A4",
-        "modelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "Leopard_2A4",
+        "modelHeshCode": 8021923539437501734,
         "parentModelHeshCode": 0,
         "posX": 0.0,
         "posY": 0.0,
@@ -9,14 +10,15 @@
         "rotx": 0.0,
         "roty": 0.0,
         "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "scalex": 0.009999999776482582,
+        "scaley": 0.009999999776482582,
+        "scalez": 0.009999999776482582
     },
     {
-        "ModelNamePath": "aaa_LOW",
-        "modelHeshCode": 11409533743566706825,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "aaa_LOW",
+        "modelHeshCode": 5611827442737709043,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -28,9 +30,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "BB_LOW",
-        "modelHeshCode": 11409533743566706826,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "BB_LOW",
+        "modelHeshCode": 4419431720432958872,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -42,9 +45,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "BX_LOW",
-        "modelHeshCode": 11409533743566706827,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "BX_LOW",
+        "modelHeshCode": 7995716663994079566,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -56,9 +60,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "BZ_LOW",
-        "modelHeshCode": 11409533743566706828,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "BZ_LOW",
+        "modelHeshCode": 5799488117831964464,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -70,9 +75,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "CB_LOW",
-        "modelHeshCode": 11409533743566706829,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "CB_LOW",
+        "modelHeshCode": 14128105283016305437,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -84,9 +90,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "CC_LOW",
-        "modelHeshCode": 11409533743566706830,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "CC_LOW",
+        "modelHeshCode": 9688024269842911626,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -98,9 +105,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "CM_LOW",
-        "modelHeshCode": 11409533743566706831,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "CM_LOW",
+        "modelHeshCode": 1444374500172197592,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -112,9 +120,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "CN_LOW",
-        "modelHeshCode": 11409533743566706832,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "CN_LOW",
+        "modelHeshCode": 12729731305790327433,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -126,9 +135,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "CS_LOW",
-        "modelHeshCode": 11409533743566706833,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "CS_LOW",
+        "modelHeshCode": 13368151778190284826,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -140,9 +150,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "CV_LOW",
-        "modelHeshCode": 11409533743566706834,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "CV_LOW",
+        "modelHeshCode": 15291283503716913665,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -154,9 +165,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "CX_LOW",
-        "modelHeshCode": 11409533743566706835,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "CX_LOW",
+        "modelHeshCode": 4363657513412308615,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -168,9 +180,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "CZ_LOW",
-        "modelHeshCode": 11409533743566706836,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "CZ_LOW",
+        "modelHeshCode": 684403403160125605,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -182,9 +195,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "ddd_LOW",
-        "modelHeshCode": 11409533743566706837,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "ddd_LOW",
+        "modelHeshCode": 14479896970655707674,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -196,9 +210,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "E_LOW",
-        "modelHeshCode": 11409533743566706880,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "E_LOW",
+        "modelHeshCode": 13949567666794153933,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -210,9 +225,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "A_LOW",
-        "modelHeshCode": 11409533743566706838,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "A_LOW",
+        "modelHeshCode": 5352761163275776481,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -224,9 +240,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "AA_LOW",
-        "modelHeshCode": 11409533743566706839,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "AA_LOW",
+        "modelHeshCode": 11831399736540545182,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -238,9 +255,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "ASS_LOW",
-        "modelHeshCode": 11409533743566706840,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "ASS_LOW",
+        "modelHeshCode": 9937422445263972379,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -252,9 +270,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "B_LOW",
-        "modelHeshCode": 11409533743566706841,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "B_LOW",
+        "modelHeshCode": 4400078462535086544,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -266,9 +285,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "C_LOW",
-        "modelHeshCode": 11409533743566706842,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "C_LOW",
+        "modelHeshCode": 9070889421474948931,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -280,9 +300,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "D_LOW",
-        "modelHeshCode": 11409533743566706843,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "D_LOW",
+        "modelHeshCode": 9535806855557811578,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -294,9 +315,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "DD_LOW",
-        "modelHeshCode": 11409533743566706844,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "DD_LOW",
+        "modelHeshCode": 6100787482411157560,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -308,9 +330,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "F_LOW",
-        "modelHeshCode": 11409533743566706845,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "F_LOW",
+        "modelHeshCode": 7147757695948320092,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -322,9 +345,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "FF_LOW",
-        "modelHeshCode": 11409533743566706846,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "FF_LOW",
+        "modelHeshCode": 5239750109935218272,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -336,9 +360,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "G_LOW",
-        "modelHeshCode": 11409533743566706847,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "G_LOW",
+        "modelHeshCode": 9965454416690065231,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -350,9 +375,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "GG_LOW",
-        "modelHeshCode": 11409533743566706848,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "GG_LOW",
+        "modelHeshCode": 15522391232028040250,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -364,9 +390,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "H_LOW",
-        "modelHeshCode": 11409533743566706849,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "H_LOW",
+        "modelHeshCode": 9594527865485773830,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -378,9 +405,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "HH_LOW",
-        "modelHeshCode": 11409533743566706850,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "HH_LOW",
+        "modelHeshCode": 7100860783774874784,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -392,9 +420,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "I_LOW",
-        "modelHeshCode": 11409533743566706851,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "I_LOW",
+        "modelHeshCode": 12550982583335559417,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -406,9 +435,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "J_LOW",
-        "modelHeshCode": 11409533743566706852,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "J_LOW",
+        "modelHeshCode": 7398334503695761480,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -420,9 +450,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "JJ_LOW",
-        "modelHeshCode": 11409533743566706853,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "JJ_LOW",
+        "modelHeshCode": 11343628006191248696,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -434,9 +465,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "K_LOW",
-        "modelHeshCode": 11409533743566706854,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "K_LOW",
+        "modelHeshCode": 4056931927777917755,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -448,9 +480,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "KK_LOW",
-        "modelHeshCode": 11409533743566706860,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "KK_LOW",
+        "modelHeshCode": 375876413505249178,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -462,9 +495,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "II_LOW",
-        "modelHeshCode": 11409533743566706855,
-        "parentModelHeshCode": 11409533743566706860,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "II_LOW",
+        "modelHeshCode": 8407007007650296814,
+        "parentModelHeshCode": 375876413505249178,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -476,9 +510,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "LL_LOW",
-        "modelHeshCode": 11409533743566706856,
-        "parentModelHeshCode": 11409533743566706860,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "LL_LOW",
+        "modelHeshCode": 13289166798917018968,
+        "parentModelHeshCode": 375876413505249178,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -490,9 +525,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "M_LOW",
-        "modelHeshCode": 11409533743566706857,
-        "parentModelHeshCode": 11409533743566706860,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "M_LOW",
+        "modelHeshCode": 14915020589854040197,
+        "parentModelHeshCode": 375876413505249178,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -504,9 +540,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "TTT_LOW_001",
-        "modelHeshCode": 11409533743566706858,
-        "parentModelHeshCode": 11409533743566706860,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "TTT_LOW_001",
+        "modelHeshCode": 10423807800222883554,
+        "parentModelHeshCode": 375876413505249178,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -518,9 +555,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "V_LOW",
-        "modelHeshCode": 11409533743566706859,
-        "parentModelHeshCode": 11409533743566706860,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "V_LOW",
+        "modelHeshCode": 3206149100622728268,
+        "parentModelHeshCode": 375876413505249178,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -532,9 +570,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "L_LOW",
-        "modelHeshCode": 11409533743566706856,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "L_LOW",
+        "modelHeshCode": 32250846721458738,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -546,9 +585,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "N_LOW",
-        "modelHeshCode": 11409533743566706858,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "N_LOW",
+        "modelHeshCode": 14468596652761972948,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -560,9 +600,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "ggg_LOW_001",
-        "modelHeshCode": 11409533743566706857,
-        "parentModelHeshCode": 11409533743566706858,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "ggg_LOW_001",
+        "modelHeshCode": 13349127494873809529,
+        "parentModelHeshCode": 14468596652761972948,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -574,9 +615,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "O_LOW",
-        "modelHeshCode": 11409533743566706858,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "O_LOW",
+        "modelHeshCode": 12557617018339990503,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -588,9 +630,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "OO_LOW",
-        "modelHeshCode": 11409533743566706859,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "OO_LOW",
+        "modelHeshCode": 6306012944925654986,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -602,9 +645,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "P_LOW",
-        "modelHeshCode": 11409533743566706860,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "P_LOW",
+        "modelHeshCode": 15666989060059342366,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -616,9 +660,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "PP_LOW",
-        "modelHeshCode": 11409533743566706861,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "PP_LOW",
+        "modelHeshCode": 3799619446884267504,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -630,9 +675,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "Q_LOW",
-        "modelHeshCode": 11409533743566706862,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "Q_LOW",
+        "modelHeshCode": 7517470723247259601,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -644,9 +690,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "QQ_LOW",
-        "modelHeshCode": 11409533743566706863,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "QQ_LOW",
+        "modelHeshCode": 16165568207985945566,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -658,9 +705,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "QWE_LOW",
-        "modelHeshCode": 11409533743566706864,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "QWE_LOW",
+        "modelHeshCode": 2066843901884881537,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -672,9 +720,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "R_LOW",
-        "modelHeshCode": 11409533743566706865,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "R_LOW",
+        "modelHeshCode": 13060517610088601024,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -686,9 +735,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "RR_LOW",
-        "modelHeshCode": 11409533743566706866,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "RR_LOW",
+        "modelHeshCode": 3015113936601261528,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -700,9 +750,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "S_LOW",
-        "modelHeshCode": 11409533743566706867,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "S_LOW",
+        "modelHeshCode": 5129280826149357107,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -714,9 +765,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "SS_LOW",
-        "modelHeshCode": 11409533743566706868,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "SS_LOW",
+        "modelHeshCode": 14267075971075024330,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -728,9 +780,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "T_LOW",
-        "modelHeshCode": 11409533743566706869,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "T_LOW",
+        "modelHeshCode": 5594338997720630762,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -742,9 +795,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "TT_LOW",
-        "modelHeshCode": 11409533743566706870,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "TT_LOW",
+        "modelHeshCode": 17053267893820356472,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -756,9 +810,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "TTT_LOW",
-        "modelHeshCode": 11409533743566706871,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "TTT_LOW",
+        "modelHeshCode": 6977990443918703210,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -770,9 +825,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "U_LOW",
-        "modelHeshCode": 11409533743566706872,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "U_LOW",
+        "modelHeshCode": 16401937778192496125,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -784,9 +840,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "W_LOW",
-        "modelHeshCode": 11409533743566706873,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "W_LOW",
+        "modelHeshCode": 6381166846322174719,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -798,9 +855,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "WASS_LOW",
-        "modelHeshCode": 11409533743566706874,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "WASS_LOW",
+        "modelHeshCode": 11146387635030778930,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -812,9 +870,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "WW_LOW",
-        "modelHeshCode": 11409533743566706875,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "WW_LOW",
+        "modelHeshCode": 2882470730630102554,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -826,9 +885,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "X_LOW",
-        "modelHeshCode": 11409533743566706876,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "X_LOW",
+        "modelHeshCode": 5914470725882606134,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -840,9 +900,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "Y_LOW",
-        "modelHeshCode": 11409533743566706877,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "Y_LOW",
+        "modelHeshCode": 8705565769710477801,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -854,9 +915,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "YY_LOW",
-        "modelHeshCode": 11409533743566706878,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "YY_LOW",
+        "modelHeshCode": 14597668438958809806,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -868,9 +930,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "Z_LOW",
-        "modelHeshCode": 11409533743566706879,
-        "parentModelHeshCode": 11409533743566706880,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "Z_LOW",
+        "modelHeshCode": 3334425030965224504,
+        "parentModelHeshCode": 13949567666794153933,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -882,9 +945,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "FD_LOW",
-        "modelHeshCode": 11409533743566706839,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "FD_LOW",
+        "modelHeshCode": 13952539715203034558,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -896,9 +960,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "fff_LOW",
-        "modelHeshCode": 11409533743566706840,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "fff_LOW",
+        "modelHeshCode": 5228228591217050740,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -910,9 +975,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "FS_LOW",
-        "modelHeshCode": 11409533743566706841,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "FS_LOW",
+        "modelHeshCode": 8442966422769544815,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -924,9 +990,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "ggg_LOW",
-        "modelHeshCode": 11409533743566706842,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "ggg_LOW",
+        "modelHeshCode": 10431322651928098057,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -938,9 +1005,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "IE_LOW",
-        "modelHeshCode": 11409533743566706843,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "IE_LOW",
+        "modelHeshCode": 1651130232227177522,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -952,9 +1020,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "IQ_LOW",
-        "modelHeshCode": 11409533743566706844,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "IQ_LOW",
+        "modelHeshCode": 7533350111388324918,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -966,9 +1035,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "IR_LOW",
-        "modelHeshCode": 11409533743566706845,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "IR_LOW",
+        "modelHeshCode": 8128322162170389739,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -980,9 +1050,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "IT_LOW",
-        "modelHeshCode": 11409533743566706846,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "IT_LOW",
+        "modelHeshCode": 609116117835186293,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -994,9 +1065,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "IW_LOW",
-        "modelHeshCode": 11409533743566706847,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "IW_LOW",
+        "modelHeshCode": 6205190436643760900,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1008,9 +1080,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "JA_LOW",
-        "modelHeshCode": 11409533743566706848,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "JA_LOW",
+        "modelHeshCode": 15526673698473283793,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1022,9 +1095,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "JD_LOW",
-        "modelHeshCode": 11409533743566706849,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "JD_LOW",
+        "modelHeshCode": 13603541972946654954,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1036,9 +1110,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "JF_LOW",
-        "modelHeshCode": 11409533743566706850,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "JF_LOW",
+        "modelHeshCode": 11215352075848752460,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1050,9 +1125,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "JG_LOW",
-        "modelHeshCode": 11409533743566706851,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "JG_LOW",
+        "modelHeshCode": 14390369821548198911,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1064,9 +1140,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "JH_LOW",
-        "modelHeshCode": 11409533743566706852,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "JH_LOW",
+        "modelHeshCode": 13923673701108630326,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1078,9 +1155,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "JS_LOW",
-        "modelHeshCode": 11409533743566706853,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "JS_LOW",
+        "modelHeshCode": 17080092396700973123,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1092,9 +1170,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "KA_LOW",
-        "modelHeshCode": 11409533743566706854,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "KA_LOW",
+        "modelHeshCode": 5500346086668375924,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1106,9 +1185,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "KD_LOW",
-        "modelHeshCode": 11409533743566706855,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "KD_LOW",
+        "modelHeshCode": 13657867050287228507,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1120,9 +1200,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "KG_LOW",
-        "modelHeshCode": 11409533743566706856,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "KG_LOW",
+        "modelHeshCode": 503976421987231654,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1134,9 +1215,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "KJ_LOW",
-        "modelHeshCode": 11409533743566706857,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "KJ_LOW",
+        "modelHeshCode": 5103899453082324077,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1148,9 +1230,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "KL_LOW",
-        "modelHeshCode": 11409533743566706858,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "KL_LOW",
+        "modelHeshCode": 102779592869762915,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1162,9 +1245,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "KS_LOW",
-        "modelHeshCode": 11409533743566706859,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "KS_LOW",
+        "modelHeshCode": 17787612643740380546,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1176,9 +1260,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "LA_LOW",
-        "modelHeshCode": 11409533743566706860,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "LA_LOW",
+        "modelHeshCode": 3681079730032348959,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1190,9 +1275,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "LD_LOW",
-        "modelHeshCode": 11409533743566706861,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "LD_LOW",
+        "modelHeshCode": 10482590633715309408,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1204,9 +1290,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "LF_LOW",
-        "modelHeshCode": 11409533743566706862,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "LF_LOW",
+        "modelHeshCode": 748636165273574078,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1218,9 +1305,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "LG_LOW",
-        "modelHeshCode": 11409533743566706863,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "LG_LOW",
+        "modelHeshCode": 5131645835298166385,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1232,9 +1320,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "LH_LOW",
-        "modelHeshCode": 11409533743566706864,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "LH_LOW",
+        "modelHeshCode": 7922740879126038052,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1246,9 +1335,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "LJ_LOW",
-        "modelHeshCode": 11409533743566706865,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "LJ_LOW",
+        "modelHeshCode": 5731192159751134338,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1260,9 +1350,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "LK_LOW",
-        "modelHeshCode": 11409533743566706866,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "LK_LOW",
+        "modelHeshCode": 8875458764238830741,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1274,9 +1365,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "LS_LOW",
-        "modelHeshCode": 11409533743566706867,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "LS_LOW",
+        "modelHeshCode": 11494223042802629485,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1288,9 +1380,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "MM_LOW",
-        "modelHeshCode": 11409533743566706868,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "MM_LOW",
+        "modelHeshCode": 8750355927226806214,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1302,9 +1395,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "NB_LOW",
-        "modelHeshCode": 11409533743566706869,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "NB_LOW",
+        "modelHeshCode": 12102297861633106164,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1316,9 +1410,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "NN_LOW",
-        "modelHeshCode": 11409533743566706870,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "NN_LOW",
+        "modelHeshCode": 14496928679688874608,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1330,9 +1425,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "OI_LOW",
-        "modelHeshCode": 11409533743566706871,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "OI_LOW",
+        "modelHeshCode": 13702812558739605024,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1344,9 +1440,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "OQ_LOW",
-        "modelHeshCode": 11409533743566706872,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "OQ_LOW",
+        "modelHeshCode": 2003971770580532776,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1358,9 +1455,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "OR_LOW",
-        "modelHeshCode": 11409533743566706873,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "OR_LOW",
+        "modelHeshCode": 7156760587708741721,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1372,9 +1470,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "OT_LOW",
-        "modelHeshCode": 11409533743566706874,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "OT_LOW",
+        "modelHeshCode": 7355074898672138183,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1386,9 +1485,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "OU_LOW",
-        "modelHeshCode": 11409533743566706875,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "OU_LOW",
+        "modelHeshCode": 2653653536008936756,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1400,9 +1500,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "OW_LOW",
-        "modelHeshCode": 11409533743566706876,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "OW_LOW",
+        "modelHeshCode": 12892670836379994258,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1414,9 +1515,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "PE_LOW",
-        "modelHeshCode": 11409533743566706877,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "PE_LOW",
+        "modelHeshCode": 11642142756181718303,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1428,9 +1530,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "PI_LOW",
-        "modelHeshCode": 11409533743566706878,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "PI_LOW",
+        "modelHeshCode": 11700758212993372299,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1442,9 +1545,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "PO_LOW",
-        "modelHeshCode": 11409533743566706879,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "PO_LOW",
+        "modelHeshCode": 16836521790388200085,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1456,9 +1560,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "PR_LOW",
-        "modelHeshCode": 11409533743566706880,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "PR_LOW",
+        "modelHeshCode": 6379489219941135374,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1470,9 +1575,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "PT_LOW",
-        "modelHeshCode": 11409533743566706881,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "PT_LOW",
+        "modelHeshCode": 12531034483212808828,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1484,9 +1590,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "PU_LOW",
-        "modelHeshCode": 11409533743566706882,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "PU_LOW",
+        "modelHeshCode": 3200125898989453679,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1498,9 +1605,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "PW_LOW",
-        "modelHeshCode": 11409533743566706883,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "PW_LOW",
+        "modelHeshCode": 1008541995242447213,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1512,9 +1620,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "PY_LOW",
-        "modelHeshCode": 11409533743566706884,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "PY_LOW",
+        "modelHeshCode": 9562509592447351643,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1526,9 +1635,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "sss_LOW",
-        "modelHeshCode": 11409533743566706885,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "sss_LOW",
+        "modelHeshCode": 13751698233650019893,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1540,9 +1650,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "VB_LOW",
-        "modelHeshCode": 11409533743566706886,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "VB_LOW",
+        "modelHeshCode": 3906464109492283068,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1554,9 +1665,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "VC_LOW",
-        "modelHeshCode": 11409533743566706887,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "VC_LOW",
+        "modelHeshCode": 564780058597617327,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1568,9 +1680,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "VM_LOW",
-        "modelHeshCode": 11409533743566706888,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "VM_LOW",
+        "modelHeshCode": 3273031315113289689,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1582,9 +1695,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "VN_LOW",
-        "modelHeshCode": 11409533743566706889,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "VN_LOW",
+        "modelHeshCode": 16566986571694632360,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1596,9 +1710,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "VV_LOW",
-        "modelHeshCode": 11409533743566706890,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "VV_LOW",
+        "modelHeshCode": 9819083286144152992,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1610,9 +1725,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "VX_LOW",
-        "modelHeshCode": 11409533743566706891,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "VX_LOW",
+        "modelHeshCode": 5206442809288018370,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1624,9 +1740,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "VZ_LOW",
-        "modelHeshCode": 11409533743566706892,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "VZ_LOW",
+        "modelHeshCode": 13632380766755145828,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1638,9 +1755,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "XC_LOW",
-        "modelHeshCode": 11409533743566706893,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "XC_LOW",
+        "modelHeshCode": 17213030925773468953,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1652,9 +1770,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "XM_LOW",
-        "modelHeshCode": 11409533743566706894,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "XM_LOW",
+        "modelHeshCode": 8654594608013969647,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1666,9 +1785,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "XN_LOW",
-        "modelHeshCode": 11409533743566706895,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "XN_LOW",
+        "modelHeshCode": 1734987664689888282,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1680,9 +1800,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "XV_LOW",
-        "modelHeshCode": 11409533743566706896,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "XV_LOW",
+        "modelHeshCode": 699979821215468034,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1694,9 +1815,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "XX_LOW",
-        "modelHeshCode": 11409533743566706897,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "XX_LOW",
+        "modelHeshCode": 5451378295179643104,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1708,9 +1830,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "XXX_LOW",
-        "modelHeshCode": 11409533743566706898,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "XXX_LOW",
+        "modelHeshCode": 2167342992851712414,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1722,9 +1845,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "XZ_LOW",
-        "modelHeshCode": 11409533743566706899,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "XZ_LOW",
+        "modelHeshCode": 14164167900447459390,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1736,9 +1860,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "YE_LOW",
-        "modelHeshCode": 11409533743566706900,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "YE_LOW",
+        "modelHeshCode": 3847331558103379266,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1750,9 +1875,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "YQ_LOW",
-        "modelHeshCode": 11409533743566706901,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "YQ_LOW",
+        "modelHeshCode": 11489711877938718054,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1764,9 +1890,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "YR_LOW",
-        "modelHeshCode": 11409533743566706902,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "YR_LOW",
+        "modelHeshCode": 17780688811465026075,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1778,9 +1905,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "YT_LOW",
-        "modelHeshCode": 11409533743566706903,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "YT_LOW",
+        "modelHeshCode": 10506295628172329445,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1792,9 +1920,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "ZB_LOW",
-        "modelHeshCode": 11409533743566706904,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "ZB_LOW",
+        "modelHeshCode": 5159901005247470352,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1806,9 +1935,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "ZC_LOW",
-        "modelHeshCode": 11409533743566706905,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "ZC_LOW",
+        "modelHeshCode": 9447070737292579971,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1820,9 +1950,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "ZM_LOW",
-        "modelHeshCode": 11409533743566706906,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "ZM_LOW",
+        "modelHeshCode": 9440453894474200261,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1834,9 +1965,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "ZN_LOW",
-        "modelHeshCode": 11409533743566706907,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "ZN_LOW",
+        "modelHeshCode": 14599613263816069652,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,
@@ -1848,9 +1980,10 @@
         "scalez": 1.0
     },
     {
-        "ModelNamePath": "ZX_LOW",
-        "modelHeshCode": 11409533743566706908,
-        "parentModelHeshCode": 11409533743566706909,
+        "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
+        "TestModelNamePath": "ZX_LOW",
+        "modelHeshCode": 6045487336936702838,
+        "parentModelHeshCode": 8021923539437501734,
         "posX": 0.0,
         "posY": 0.0,
         "posZ": 4.0,

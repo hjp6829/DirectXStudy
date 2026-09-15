@@ -110,18 +110,18 @@ void App::DeleteModel(SceneModel* model)
 	}
 	model->RemoveModelData();
 	DeleteChiledModels(model);
-	model->childNodes.clear();
+	model->childModels.clear();
 	delete model;
 }
 
 void App::DeleteChiledModels(SceneModel* model)
 {
-	for (int i = 0; i < model->childNodes.size(); i++)
+	for (int i = 0; i < model->childModels.size(); i++)
 	{
-		DeleteChiledModels(model->childNodes[i]);
-		delete model->childNodes[i];
+		DeleteChiledModels(model->childModels[i]);
+		delete model->childModels[i];
 	}
-	model->childNodes.clear();
+	model->childModels.clear();
 }
 
 void App::SaveModel(SceneModel* model)
@@ -133,7 +133,7 @@ void App::MoveModel(SceneModel* model)
 {
 	testSaveModel->parentModel->RemoveChildModel(testSaveModel);
 	testSaveModel->parentModel = nullptr;
-	model->childNodes.push_back(testSaveModel);
+	model->childModels.push_back(testSaveModel);
 	testSaveModel = nullptr;
 
 }
@@ -153,7 +153,7 @@ void App::SaveScene(int key,bool value)
 			SceneModel* model = models[i];
 			SaveSceneModelData(model, jsonSceneModelDatas);
 		}
-		std::filesystem::path savePath = "C:/Users/박현진/Desktop/Project/DirectX/DirectXStudy/SaveScene/Scene.json";
+		std::filesystem::path savePath = "C:/Users/Admin/Desktop/DirectXStrudy/Directx/DirectXStudy/SaveScene/Scene.json";
 		std::ofstream file(savePath);
 
 		nlohmann::json jsonfile = jsonSceneModelDatas;
@@ -175,21 +175,23 @@ void to_json(nlohmann::json& j, const JsonSceneModelData& data)
 		{ "scalex", data.localScalex },
 		{"scaley", data.localScaley},
 		{"scalez", data.localScalez},
-		{"ModelNamePath", data.origModelName}
+		{"ModelNamePath", data.origModelPath},
+		{ "TestModelNamePath", data.testModelName }
 	};
 }
 
 void App::SaveSceneModelData(SceneModel* Model, std::vector<JsonSceneModelData>& jsonSceneModelDatas)
 {
 	JsonSceneModelData jsonData;
-	if (Model->childNodes.size() == 0)
+	if (Model->childModels.size() == 0)
 	{
 		if (Model->parentModel == nullptr)
 			jsonData.parentModelHeshCode = 0;
 		else
 			jsonData.parentModelHeshCode = Model->parentModel->currentModelNode->modelHeshCode;
-		jsonData.origModelName = Model->currentModelNode->sourceModelPath;
+		jsonData.origModelPath = Model->currentModelNode->sourceModelPath;
 		jsonData.modelHeshCode = Model->currentModelNode->modelHeshCode;
+		jsonData.testModelName = Model->currentModelNode->modelName;
 		jsonData.SetTransformData(Model);
 		jsonSceneModelDatas.push_back(jsonData);
 		return;
@@ -199,13 +201,14 @@ void App::SaveSceneModelData(SceneModel* Model, std::vector<JsonSceneModelData>&
 		jsonData.parentModelHeshCode = 0;
 	else
 		jsonData.parentModelHeshCode = Model->parentModel->currentModelNode->modelHeshCode;
-	jsonData.origModelName = Model->currentModelNode->sourceModelPath;
+	jsonData.origModelPath = Model->currentModelNode->sourceModelPath;
 	jsonData.modelHeshCode = Model->currentModelNode->modelHeshCode;
+	jsonData.testModelName = Model->currentModelNode->modelName;
 	jsonData.SetTransformData(Model);
 	jsonSceneModelDatas.push_back(jsonData);
-	for (int i = 0; i < Model->childNodes.size(); i++)
+	for (int i = 0; i < Model->childModels.size(); i++)
 	{
-		SaveSceneModelData(Model->childNodes[i], jsonSceneModelDatas);
+		SaveSceneModelData(Model->childModels[i], jsonSceneModelDatas);
 	}
 }
 
@@ -226,7 +229,8 @@ void from_json(const nlohmann::json& j, JsonSceneModelData& data)
 	j.at("scaley").get_to(data.localScaley);
 	j.at("scalez").get_to(data.localScalez);
 
-	j.at("ModelNamePath").get_to(data.origModelName);
+	j.at("ModelNamePath").get_to(data.origModelPath);
+	j.at("TestModelNamePath").get_to(data.testModelName);
 }
 
 void App::LoadSaveSceneFile(int key, bool value)
@@ -237,10 +241,10 @@ void App::LoadSaveSceneFile(int key, bool value)
 		std::filesystem::path path = std::filesystem::current_path();
 		std::filesystem::path parent1 = path.parent_path();
 		std::filesystem::path parent2 = path.parent_path().parent_path();
-		std::filesystem::path saveFolderPath = "SaveScene/Scene.json";
+		std::filesystem::path saveFolderPath = "C:/Users/Admin/Desktop/DirectXStrudy/Directx/DirectXStudy/SaveScene/Scene.json";
 
-		std::filesystem::path savePath = parent1/ saveFolderPath;
-		std::ifstream file(savePath);
+		//std::filesystem::path savePath = parent1/ saveFolderPath;
+		std::ifstream file(saveFolderPath);
 		if (!file.is_open())
 		{
 			Log::PrintLog("path errer");
@@ -249,16 +253,33 @@ void App::LoadSaveSceneFile(int key, bool value)
 		file >> sceneJson;
 
 		std::filesystem::path modelFolderPath = "DirectXModel";
-		
 
+		std::unordered_map<uint64_t, SceneModel*>loadSceneModels;
 		for (const auto& item : sceneJson)
 		{
 			JsonSceneModelData data = item.get<JsonSceneModelData>();
-			std::filesystem::path modelName = data.origModelName;
-			std::filesystem::path modelPath = parent2 / modelFolderPath / modelName;
+			std::filesystem::path origModelPath = data.origModelPath;
+			std::filesystem::path modelPath = parent2 / modelFolderPath / origModelPath;
 			SceneModel* sceneModel = modelCreater->CreateSceneModelFromJsonData(modelPath, data);
-			Log::PrintLog(sceneModel->modelName);
-			models.push_back(sceneModel);
+			sceneModel->parentModelHeshCode = data.parentModelHeshCode;
+			sceneModel->SetPostionOffset(XMFLOAT3(data.localPosx, data.localPosy, data.localPosz));
+			sceneModel->SetRotationOffset(XMFLOAT3(data.localRotx, data.localRoty, data.localRotz));
+			sceneModel->SetScaleOffset(XMFLOAT3(data.localScalex, data.localScaley, data.localScalez));
+            loadSceneModels.insert({sceneModel->currentModelNode->modelHeshCode, sceneModel});
+			if(sceneModel->parentModelHeshCode == 0)
+				models.push_back(sceneModel);
 		}
+
+		for (auto& [hashCode, model] : loadSceneModels)
+		{
+			if(model->parentModelHeshCode == 0)
+			{
+				Log::PrintLog("parentModelHeshCode == 0 : "+ model->modelName);
+				continue;
+			}
+			SceneModel* parentModel = loadSceneModels.at(model->parentModelHeshCode);
+			parentModel->InsertChildSceneModel(model);
+		}
+		loadSceneModels.clear();
 	}
 }

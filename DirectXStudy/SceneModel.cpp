@@ -26,6 +26,12 @@ XMFLOAT3 SceneModel::GetModelScale()
 	localScale.z = scaleOffset.z * importedLocalScale.z;
 	return localScale;
 }
+void SceneModel::SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale)
+{
+	importedLocalPosition = localPos;
+	importedLocalRotation = localRot;
+	importedLocalScale = localScale;
+}
 void SceneModel::SetPosition(XMFLOAT3 position)
 {
 	positionOffset.x = position.x - importedLocalPosition.x;
@@ -53,9 +59,9 @@ void SceneModel::RenderModel(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	currentModelNode->RenderMeshs(dxdMain->GetContext(), worldMatrix, ViewMatrix, ProjectionMatrix);
-	for (int i = 0; i < childNodes.size(); i++)
+	for (int i = 0; i < childModels.size(); i++)
 	{
-		childNodes[i]->RenderModel(dxdMain);
+		childModels[i]->RenderModel(dxdMain);
 	}
 }
 
@@ -72,9 +78,9 @@ void SceneModel::UpdateModel()
 		worldMatrix = worldMatrix * parentModel->worldMatrix;
 
 	currentModelNode->UpdateMeshs();
-	for (int i = 0; i < childNodes.size(); i++)
+	for (int i = 0; i < childModels.size(); i++)
 	{
-		childNodes[i]->UpdateModel();
+		childModels[i]->UpdateModel();
 	}
 }
 
@@ -87,9 +93,9 @@ void SceneModel::ToggleMeshEnable(bool value)
 {
 	meshEnable = value;
 	currentModelNode->ToggleMeshEnable(meshEnable);
-	for (int i = 0; i < childNodes.size(); i++)
+	for (int i = 0; i < childModels.size(); i++)
 	{
-		childNodes[i]->ToggleMeshEnable(value);
+		childModels[i]->ToggleMeshEnable(value);
 	}
 }
 
@@ -106,11 +112,11 @@ void SceneModel::RemoveModelData()
 
 void SceneModel::RemoveChildModel(SceneModel* childModel)
 {
-	for (auto it = childNodes.begin(); it != childNodes.end(); ++it)
+	for (auto it = childModels.begin(); it != childModels.end(); ++it)
 	{
 		if (*it == childModel)
 		{
-			childNodes.erase(it);
+			childModels.erase(it);
 			break;
 		}
 	}
@@ -118,9 +124,15 @@ void SceneModel::RemoveChildModel(SceneModel* childModel)
 
 void SceneModel::RemoveAllChileModel(SceneModel* model)
 {
-	for (int i = 0; i < model->childNodes.size(); i++)
+	for (int i = 0; i < model->childModels.size(); i++)
 	{
-		RemoveAllChileModel(model->childNodes[i]);
-		model->childNodes[i]->currentModelNode = nullptr;
+		RemoveAllChileModel(model->childModels[i]);
+		model->childModels[i]->currentModelNode = nullptr;
 	}
+}
+
+void SceneModel::InsertChildSceneModel(SceneModel* childModel)
+{
+	childModel->parentModel = this;
+	childModels.push_back(childModel);
 }
