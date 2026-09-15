@@ -9,9 +9,8 @@
 class ModelCreater;
 class Mouse;
 class UIManager;
-class SceneModel;
 class SceneManager;
-struct JsonSceneModelData;
+struct JsonSceneObjectData;
 
 class App {
 	public:
@@ -26,6 +25,5 @@ private:
 		Keyboard* keyboard;
 		UIManager* uimanager;
 		SceneManager* sceneManager;
-		SceneModel* testSaveModel;
 private:
 };

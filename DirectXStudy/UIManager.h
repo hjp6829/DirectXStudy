@@ -6,17 +6,17 @@
 class Hierarchy;
 class ModelBrowserUI;
 class Insfector;
-class SceneModel;
+class SceneObject;
 
 class UIManager {
 public:
-	UIManager(std::vector<SceneModel*>* sceneModels);
+	UIManager(std::vector<SceneObject*>* SceneObjects);
 	void UpdateUI();
 	std::function<void(std::string)> OnModelSelected;
-	std::function<void(SceneModel*)> OnModelDelete;
-	std::function<void(SceneModel*)> OnHierarchySaveClick;
-	std::function<void(SceneModel*)> OnHierarchyMoveClick;
-	std::function<void(SceneModel*)> OnHierarchyRenameClick;
+	std::function<void(SceneObject*)> OnModelDelete;
+	std::function<void(SceneObject*)> OnHierarchySaveClick;
+	std::function<void(SceneObject*)> OnHierarchyMoveClick;
+	std::function<void(SceneObject*)> OnHierarchyRenameClick;
 private:
 	Hierarchy* hierarchy;
 	ModelBrowserUI* modelBrowserUI;

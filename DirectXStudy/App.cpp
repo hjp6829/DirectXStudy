@@ -6,7 +6,7 @@
 #include "Keyboard.h"
 #include "UIManager.h"
 #include "ModelCreater.h"
-#include "SceneModel.h";
+#include "SceneObject.h"
 #include "ModelNode.h"
 #include "Datas.h"
 #include <fstream>
@@ -26,8 +26,8 @@ App::App()
 	window = new Window(mouse, keyboard);
 	dxdMain = new DirectXMain(window->GetHwnd());
 	sceneManager = new SceneManager(dxdMain->GetDevice());
-	dxdMain->SetSceneModels(sceneManager->GetSceneModels());
-	uimanager = new UIManager(sceneManager->GetSceneModels());
+	dxdMain->SetSceneObjects(sceneManager->GetSceneObjects());
+	uimanager = new UIManager(sceneManager->GetSceneObjects());
 
 	cam = new Camera(keyboard);
 	light = new Light();
@@ -38,16 +38,16 @@ App::App()
 	uimanager->OnModelSelected = [this](std::string path) {
 		sceneManager->ModelSelected(path);
 		};
-	uimanager->OnModelDelete = [this](SceneModel* model) {
+	uimanager->OnModelDelete = [this](SceneObject* model) {
 		sceneManager->DeleteModel(model);
 		};
-	//uimanager->OnHierarchySaveClick = [this](SceneModel* model) {
+	//uimanager->OnHierarchySaveClick = [this](SceneObject* model) {
 	//	sceneManager->SaveModel(model);
 	//	};
-	//uimanager->OnHierarchyMoveClick = [this](SceneModel* model) {
+	//uimanager->OnHierarchyMoveClick = [this](SceneObject* model) {
 	//	MoveModel(model);
 	//	};
-	//uimanager->OnHierarchyRenameClick = [this](SceneModel* model) {
+	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
 	//	RenameModel(model);
 	//	};
 	keyboard->OnKeyPressed = [this](int key, bool value)
@@ -97,12 +97,12 @@ void App::Run()
 
 
 
-//void App::SaveModel(SceneModel* model)
+//void App::SaveModel(SceneObject* model)
 //{
 //	testSaveModel = model;
 //}
 //
-//void App::MoveModel(SceneModel* model)
+//void App::MoveModel(SceneObject* model)
 //{
 //	testSaveModel->parentModel->RemoveChildModel(testSaveModel);
 //	testSaveModel->parentModel = nullptr;
@@ -111,7 +111,7 @@ void App::Run()
 //
 //}
 //
-//void App::RenameModel(SceneModel* model)
+//void App::RenameModel(SceneObject* model)
 //{
 //}
 

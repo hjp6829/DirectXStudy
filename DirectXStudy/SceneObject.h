@@ -12,27 +12,28 @@ class ModelNode;
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
 
-class SceneModel
+class SceneObject
 {
 public:
-	SceneModel() {};
-	SceneModel* parentModel;
+	SceneObject() {};
+	SceneObject* parentModel;
 	ModelNode* currentModelNode;
-	std::vector<SceneModel*> childModels;
+	std::vector<SceneObject*> childModels;
 	std::string modelName;
 	std::string modelNamePath;
 	uint64_t modelID;
-	uint64_t parentModelHeshCode;
+	uint64_t parentModelID;
 	void RenderModel(DirectXMain* dxdMain);
 	void UpdateModel();
 	void SetMaterialIDX(int meshIDX,int MaterialIDX);
 	void ToggleMeshEnable(bool value);
 	bool meshEnable = true;
-	bool IsRootModel() { return parentModel == nullptr; }
+	bool IsRootModel() { return isRootNode; }
+	void SetRootNodeCheck(bool value) { isRootNode  = value; }
 	void RemoveModelData();
-	void RemoveChildModel(SceneModel* childModel);
-	void RemoveAllChileModel(SceneModel* childModel);
-	void InsertChildSceneModel(SceneModel* childModel);
+	void RemoveChildModel(SceneObject* childModel);
+	void RemoveAllChileModel(SceneObject* childModel);
+	void InsertChildSceneObject(SceneObject* childModel);
 public:
 	void SetPostionOffset(XMFLOAT3 position){ positionOffset = position;}
 	void SetRotationOffset(XMFLOAT3 rotation) { rotationOffset = rotation; }
@@ -55,4 +56,5 @@ private:
 	XMFLOAT3 importedLocalPosition;
 	XMFLOAT3 importedLocalRotation;
 	XMFLOAT3 importedLocalScale;
+	bool isRootNode;
 };

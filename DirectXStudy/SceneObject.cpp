@@ -1,8 +1,8 @@
-#include "SceneModel.h"
+#include "SceneObject.h"
 #include "DirectXMain.h"
 #include "ModelNode.h"
 #include "Log.h"
-XMFLOAT3 SceneModel::GetModelPosition()
+XMFLOAT3 SceneObject::GetModelPosition()
 {
 	XMFLOAT3 localPos;
 	localPos.x = positionOffset.x + importedLocalPosition.x;
@@ -10,7 +10,7 @@ XMFLOAT3 SceneModel::GetModelPosition()
 	localPos.z = positionOffset.z + importedLocalPosition.z;
 	return localPos;
 }
-XMFLOAT3 SceneModel::GetModelRotation()
+XMFLOAT3 SceneObject::GetModelRotation()
 {
 	XMFLOAT3 localRot;
 	localRot.x = rotationOffset.x * importedLocalRotation.x;
@@ -18,7 +18,7 @@ XMFLOAT3 SceneModel::GetModelRotation()
 	localRot.z = rotationOffset.z * importedLocalRotation.z;
 	return localRot;
 }
-XMFLOAT3 SceneModel::GetModelScale()
+XMFLOAT3 SceneObject::GetModelScale()
 {
 	XMFLOAT3 localScale;
 	localScale.x = scaleOffset.x * importedLocalScale.x;
@@ -26,34 +26,34 @@ XMFLOAT3 SceneModel::GetModelScale()
 	localScale.z = scaleOffset.z * importedLocalScale.z;
 	return localScale;
 }
-void SceneModel::SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale)
+void SceneObject::SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale)
 {
 	importedLocalPosition = localPos;
 	importedLocalRotation = localRot;
 	importedLocalScale = localScale;
 }
-void SceneModel::SetPosition(XMFLOAT3 position)
+void SceneObject::SetPosition(XMFLOAT3 position)
 {
 	positionOffset.x = position.x - importedLocalPosition.x;
 	positionOffset.y = position.y - importedLocalPosition.y;
 	positionOffset.z = position.z - importedLocalPosition.z;
 }
 
-void SceneModel::SetRotaion(XMFLOAT3 rotation)
+void SceneObject::SetRotaion(XMFLOAT3 rotation)
 {
 	rotationOffset.x = rotation.x - importedLocalRotation.x;
 	rotationOffset.y = rotation.y - importedLocalRotation.y;
 	rotationOffset.z = rotation.z - importedLocalRotation.z;
 }
 
-void SceneModel::SetScale(XMFLOAT3 scale)
+void SceneObject::SetScale(XMFLOAT3 scale)
 {
 	scaleOffset.x = scale.x / importedLocalScale.x;
 	scaleOffset.y = scale.y / importedLocalScale.y;
 	scaleOffset.z = scale.z / importedLocalScale.z;
 }
 
-void SceneModel::RenderModel(DirectXMain* dxdMain)
+void SceneObject::RenderModel(DirectXMain* dxdMain)
 {
 	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
@@ -65,7 +65,7 @@ void SceneModel::RenderModel(DirectXMain* dxdMain)
 	}
 }
 
-void SceneModel::UpdateModel()
+void SceneObject::UpdateModel()
 {
 	worldMatrix = XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z) *
 		XMMatrixRotationRollPitchYaw(
@@ -84,12 +84,12 @@ void SceneModel::UpdateModel()
 	}
 }
 
-void SceneModel::SetMaterialIDX(int meshIDX, int MaterialIDX)
+void SceneObject::SetMaterialIDX(int meshIDX, int MaterialIDX)
 {
 	//currentMeshs[meshIDX]->SetMaterialIDX(MaterialIDX);
 }
 
-void SceneModel::ToggleMeshEnable(bool value)
+void SceneObject::ToggleMeshEnable(bool value)
 {
 	meshEnable = value;
 	currentModelNode->ToggleMeshEnable(meshEnable);
@@ -99,7 +99,7 @@ void SceneModel::ToggleMeshEnable(bool value)
 	}
 }
 
-void SceneModel::RemoveModelData()
+void SceneObject::RemoveModelData()
 {
 	if (parentModel)
 	{
@@ -110,7 +110,7 @@ void SceneModel::RemoveModelData()
 	RemoveAllChileModel(this);
 }
 
-void SceneModel::RemoveChildModel(SceneModel* childModel)
+void SceneObject::RemoveChildModel(SceneObject* childModel)
 {
 	for (auto it = childModels.begin(); it != childModels.end(); ++it)
 	{
@@ -122,7 +122,7 @@ void SceneModel::RemoveChildModel(SceneModel* childModel)
 	}
 }
 
-void SceneModel::RemoveAllChileModel(SceneModel* model)
+void SceneObject::RemoveAllChileModel(SceneObject* model)
 {
 	for (int i = 0; i < model->childModels.size(); i++)
 	{
@@ -131,7 +131,7 @@ void SceneModel::RemoveAllChileModel(SceneModel* model)
 	}
 }
 
-void SceneModel::InsertChildSceneModel(SceneModel* childModel)
+void SceneObject::InsertChildSceneObject(SceneObject* childModel)
 {
 	childModel->parentModel = this;
 	childModels.push_back(childModel);

@@ -6,7 +6,7 @@
 #include <wrl/client.h>
 #include <d3d11.h>
 #include <memory>
-#include "SceneModel.h"
+#include "SceneObject.h"
 #include "ModelNode.h"
 
 using Microsoft::WRL::ComPtr;
@@ -62,32 +62,34 @@ struct asMaterial
 	ComPtr<ID3D11ShaderResourceView> textureView;
 	ComPtr<ID3D11ShaderResourceView> normalView;
 };
-struct JsonSceneModelData
+struct JsonSceneObjectData
 {
 	float localPosx, localPosy, localPosz;
 	float localRotx, localRoty, localRotz;
 	float localScalex, localScaley, localScalez;
 	uint64_t modelHeshCode;
-	uint64_t parentModelHeshCode;
+	uint64_t parentObjectID;
+	uint64_t objectID;
+	int isRootObject;
 	std::string origModelPath;
 	std::string testModelName;
-	void SetTransformData(SceneModel* sceneModel)
+	void SetTransformData(SceneObject* SceneObject)
 	{
-		XMFLOAT3 positionOffset = sceneModel->GetPostionOffset();
+		XMFLOAT3 positionOffset = SceneObject->GetPostionOffset();
 		localPosx = positionOffset.x;
 		localPosy = positionOffset.y;
 		localPosz = positionOffset.z;
 
-		XMFLOAT3 rotationOffset = sceneModel->GetRotationOffset();
+		XMFLOAT3 rotationOffset = SceneObject->GetRotationOffset();
 		localRotx = rotationOffset.x;
 		localRoty = rotationOffset.y;
 		localRotz = rotationOffset.z;
 
-		XMFLOAT3 scaleOffset = sceneModel->GetScaleOffset();
+		XMFLOAT3 scaleOffset = SceneObject->GetScaleOffset();
 		localScalex = scaleOffset.x;
 		localScaley = scaleOffset.y;
 		localScalez = scaleOffset.z;
 
-		modelHeshCode = sceneModel->currentModelNode->modelHeshCode;
+		modelHeshCode = SceneObject->currentModelNode->modelHeshCode;
 	}
 };

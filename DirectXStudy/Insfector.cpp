@@ -1,26 +1,26 @@
 #include "Insfector.h"
 #include "imgui_impl_win32.h"
 #include "ModelCreater.h"
-#include "SceneModel.h"
+#include "SceneObject.h"
 #include "Hierarchy.h"
 #include "Mesh.h"
 
 
 Insfector::Insfector(Hierarchy* hierarchy)
 {
-	hierarchy->OnHierarchyClick = [this](SceneModel* model) {
-		SetSceneModelData(model);
+	hierarchy->OnHierarchyClick = [this](SceneObject* model) {
+		SetSceneObjectData(model);
 		};
 }
 
-void Insfector::SetSceneModelData(SceneModel* sceneModel)
+void Insfector::SetSceneObjectData(SceneObject* SceneObject)
 {
-	currentSceneModel = sceneModel;
+	currentSceneObject = SceneObject;
 }
 
 void Insfector::UpdateUI()
 {
-	if (currentSceneModel == NULL)
+	if (currentSceneObject == NULL)
 	{
 		if (ImGui::Begin("Insfector"))
 		{
@@ -30,31 +30,31 @@ void Insfector::UpdateUI()
 	}
 	if (ImGui::Begin("Insfector"))
 	{
-		XMFLOAT3 tempPos = currentSceneModel->GetModelPosition();
-		XMFLOAT3 tempRot = currentSceneModel->GetModelRotation();
-		XMFLOAT3 tempScale = currentSceneModel->GetModelScale();
+		XMFLOAT3 tempPos = currentSceneObject->GetModelPosition();
+		XMFLOAT3 tempRot = currentSceneObject->GetModelRotation();
+		XMFLOAT3 tempScale = currentSceneObject->GetModelScale();
 
-		bool enableValue = currentSceneModel->meshEnable;
+		bool enableValue = currentSceneObject->meshEnable;
 		ImGui::Checkbox("Enable",&enableValue);
-		if(enableValue != currentSceneModel->meshEnable)
-			currentSceneModel->ToggleMeshEnable(enableValue);
-		//ImGui::Text(currentSceneModel->modelName.c_str());
+		if(enableValue != currentSceneObject->meshEnable)
+			currentSceneObject->ToggleMeshEnable(enableValue);
+		//ImGui::Text(currentSceneObject->modelName.c_str());
 		ImGui::Text("Psotion");
 		if(ImGui::InputFloat3("Position", &tempPos.x))
-			currentSceneModel->SetPosition(tempPos);
+			currentSceneObject->SetPosition(tempPos);
 		ImGui::Text("Rotation");
 		if(ImGui::InputFloat3("Rotation", &tempRot.x))
-			currentSceneModel->SetRotaion(tempRot);
+			currentSceneObject->SetRotaion(tempRot);
 		ImGui::Text("Scale");
 		if(ImGui::InputFloat3("Scale", &tempScale.x))
-			currentSceneModel->SetScale(tempScale);
+			currentSceneObject->SetScale(tempScale);
 
-		//if (currentSceneModel->currentMeshs.size() != 0)
+		//if (currentSceneObject->currentMeshs.size() != 0)
 		//{
 		//	ImGui::Text("Material");
-		//	for (int i = 0; i < currentSceneModel->currentMeshs.size(); i++)
+		//	for (int i = 0; i < currentSceneObject->currentMeshs.size(); i++)
 		//	{
-		//		Mesh* meshTemp = currentSceneModel->currentMeshs[i];
+		//		Mesh* meshTemp = currentSceneObject->currentMeshs[i];
 		//		meshMaterials.push_back(meshTemp->GetMaterialIDX());
 		//	}
 		//	for (int i = 0; i < meshMaterials.size(); i++)
@@ -62,7 +62,7 @@ void Insfector::UpdateUI()
 		//		int temp = meshMaterials[i];
 		//		ImGui::InputInt("MaterialIDX", &temp);
 		//		if(meshMaterials[i] != temp)
-		//			currentSceneModel->currentMeshs[i]->SetMaterialIDX(assimp->GetMaterial(temp), temp);
+		//			currentSceneObject->currentMeshs[i]->SetMaterialIDX(assimp->GetMaterial(temp), temp);
 		//	}
 		//}
 		meshMaterials.clear();

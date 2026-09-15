@@ -3,7 +3,7 @@
 #include "ModelCreater.h"
 #include "imgui_impl_dx11.h"
 #include "AssimpConverter.h"
-#include "SceneModel.h"
+#include "SceneObject.h"
 #include "ModelAsset.h"
 #include "ModelNode.h"
 

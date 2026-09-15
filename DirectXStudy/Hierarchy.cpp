@@ -1,8 +1,8 @@
 #include "Hierarchy.h"
 #include "imgui_impl_win32.h"
-#include "SceneModel.h"
+#include "SceneObject.h"
 
-Hierarchy::Hierarchy(std::vector<SceneModel*>* modelContainer)
+Hierarchy::Hierarchy(std::vector<SceneObject*>* modelContainer)
 	: modelContainer(modelContainer)
 {
 }
@@ -25,77 +25,77 @@ void Hierarchy::UpdateUI()
 	ImGui::End();
 }
 
-void Hierarchy::ModelTraversal(SceneModel* sceneModel)
+void Hierarchy::ModelTraversal(SceneObject* SceneObject)
 {
-	if (sceneModel->childModels.size() == 0)
+	if (SceneObject->childModels.size() == 0)
 	{
-		ImGui::TreeNodeEx((void*)(intptr_t)sceneModel, ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen, "%s", sceneModel->modelName.c_str());
+		ImGui::TreeNodeEx((void*)(intptr_t)SceneObject, ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen, "%s", SceneObject->modelName.c_str());
 
 		if (ImGui::IsItemClicked())
 		{
-			OnHierarchyClick(sceneModel);
+			OnHierarchyClick(SceneObject);
 		}
 		if (ImGui::BeginPopupContextItem())
 		{
-			OnHierarchyClick(sceneModel); 
+			OnHierarchyClick(SceneObject); 
 
 			if (ImGui::MenuItem("Delete"))
 			{
-				OnHierarchyDeleteClick(sceneModel);
+				OnHierarchyDeleteClick(SceneObject);
 			}
 			if (ImGui::MenuItem("Save"))
 			{
-				OnHierarchySaveClick(sceneModel);
+				OnHierarchySaveClick(SceneObject);
 			}
 			if (ImGui::MenuItem("Move"))
 			{
-				OnHierarchyMoveClick(sceneModel);
+				OnHierarchyMoveClick(SceneObject);
 			}
 
 			if (ImGui::MenuItem("Rename"))
 			{
-				OnHierarchyRenameClick(sceneModel);
+				OnHierarchyRenameClick(SceneObject);
 			}
 
 			ImGui::EndPopup();
 		}
 		return;
 	}
-	bool open = ImGui::TreeNodeEx((void*)(intptr_t)sceneModel, ImGuiTreeNodeFlags_OpenOnArrow, "%s", sceneModel->modelName.c_str());
+	bool open = ImGui::TreeNodeEx((void*)(intptr_t)SceneObject, ImGuiTreeNodeFlags_OpenOnArrow, "%s", SceneObject->modelName.c_str());
 	if (ImGui::IsItemClicked())
 	{
-		OnHierarchyClick(sceneModel);
+		OnHierarchyClick(SceneObject);
 	}
 	if (ImGui::BeginPopupContextItem())
 	{
-		OnHierarchyClick(sceneModel); // ��Ŭ���� ��嵵 ����
+		OnHierarchyClick(SceneObject); // ��Ŭ���� ��嵵 ����
 
 		if (ImGui::MenuItem("Delete"))
 		{
-			OnHierarchyDeleteClick(sceneModel);
+			OnHierarchyDeleteClick(SceneObject);
 		}
 
 		if (ImGui::MenuItem("Save"))
 		{
-			OnHierarchySaveClick(sceneModel);
+			OnHierarchySaveClick(SceneObject);
 		}
 		if (ImGui::MenuItem("Move"))
 		{
-			OnHierarchyMoveClick(sceneModel);
+			OnHierarchyMoveClick(SceneObject);
 		}
 
 		if (ImGui::MenuItem("Rename"))
 		{
-			OnHierarchyRenameClick(sceneModel);
+			OnHierarchyRenameClick(SceneObject);
 		}
 
 		ImGui::EndPopup();
 	}
 	if (open)
 	{
-		for (int i = 0; i < sceneModel->childModels.size(); i++)
+		for (int i = 0; i < SceneObject->childModels.size(); i++)
 		{
-			ModelTraversal(sceneModel->childModels[i]);
+			ModelTraversal(SceneObject->childModels[i]);
 		}
 		ImGui::TreePop();
 	}

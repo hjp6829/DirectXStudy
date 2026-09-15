@@ -1,15 +1,15 @@
 #pragma once
 #include <vector>
 
-class SceneModel;
+class SceneObject;
 class Hierarchy;
 
 class Insfector {
 public:
 	Insfector(Hierarchy* hierarchy);
-	void SetSceneModelData(SceneModel* sceneModel);
+	void SetSceneObjectData(SceneObject* SceneObject);
 	void UpdateUI();
 private:
-	SceneModel* currentSceneModel;
+	SceneObject* currentSceneObject;
 	std::vector<int> meshMaterials;
 };

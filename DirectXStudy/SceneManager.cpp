@@ -6,12 +6,13 @@
 #include "ModelCreater.h"
 #include "UIManager.h"
 
-void to_json(nlohmann::json& j, const JsonSceneModelData& data);
-void from_json(const nlohmann::json& j, JsonSceneModelData& data);
+void to_json(nlohmann::json& j, const JsonSceneObjectData& data);
+void from_json(const nlohmann::json& j, JsonSceneObjectData& data);
 
 SceneManager::SceneManager(ID3D11Device* device)
 {
 	modelCreater = new ModelCreater(device);
+	LoadSaveSceneFile();
 }
 
 void SceneManager::SetKeyInput(int key, bool value)
@@ -28,11 +29,12 @@ void SceneManager::SetKeyInput(int key, bool value)
 
 void SceneManager::ModelSelected(std::string path)
 {
-	SceneModel* sceneModel = modelCreater->LoadModelFromFile(path);
-	RegisterModelHierarchy(sceneModel);
-	models.push_back(sceneModel);
+	SceneObject* sceneObject = modelCreater->LoadModelFromFile(path);
+	sceneObject->SetRootNodeCheck(true);
+	RegisterModelHierarchy(sceneObject);
+	models.push_back(sceneObject);
 }
-void SceneManager::RegisterModelHierarchy(SceneModel* model)
+void SceneManager::RegisterModelHierarchy(SceneObject* model)
 {
 	if (model->childModels.size() == 0)
 	{
@@ -42,9 +44,14 @@ void SceneManager::RegisterModelHierarchy(SceneModel* model)
 	}
 	modelIDs.push_back(objectID);
 	model->modelID = objectID++;
-	RegisterModelHierarchy(model);
+	for (int i = 0; i < model->childModels.size(); i++)
+	{
+		SceneObject* childObject = model->childModels[i];
+		childObject->parentModelID = model->modelID;
+		RegisterModelHierarchy(model->childModels[i]);
+	}
 }
-void SceneManager::DeleteModel(SceneModel* model)
+void SceneManager::DeleteModel(SceneObject* model)
 {
 	if (model->IsRootModel())
 	{
@@ -55,7 +62,7 @@ void SceneManager::DeleteModel(SceneModel* model)
 	model->childModels.clear();
 	delete model;
 }
-void SceneManager::DeleteChiledModels(SceneModel* model)
+void SceneManager::DeleteChiledModels(SceneObject* model)
 {
 	for (int i = 0; i < model->childModels.size(); i++)
 	{
@@ -68,58 +75,62 @@ void SceneManager::DeleteChiledModels(SceneModel* model)
 void SceneManager::SaveScene()
 {
 	Log::PrintLog("Scene Save");
-	std::vector<JsonSceneModelData> jsonSceneModelDatas;
+	std::vector<JsonSceneObjectData> jsonSceneObjectDatas;
 	for (int i = 0; i < models.size(); i++)
 	{
-		SceneModel* model = models[i];
-		SaveSceneModelData(model, jsonSceneModelDatas);
+		SceneObject* model = models[i];
+		SaveSceneObjectData(model, jsonSceneObjectDatas);
 	}
 	std::filesystem::path savePath = std::filesystem::path("SaveScene") / "Scene.json";
 	std::filesystem::create_directories(savePath.parent_path());
 	std::ofstream file(savePath);
 
-	nlohmann::json jsonfile = jsonSceneModelDatas;
+	nlohmann::json jsonfile = jsonSceneObjectDatas;
 	file << jsonfile.dump(4);
 	file.close();
 }
 
-void SceneManager::SaveSceneModelData(SceneModel* Model, std::vector<JsonSceneModelData>& jsonSceneModelDatas)
+void SceneManager::SaveSceneObjectData(SceneObject* Model, std::vector<JsonSceneObjectData>& jsonSceneObjectDatas)
 {
-	JsonSceneModelData jsonData;
+	JsonSceneObjectData jsonData;
 	if (Model->childModels.size() == 0)
 	{
 		if (Model->parentModel == nullptr)
-			jsonData.parentModelHeshCode = 0;
+			jsonData.parentObjectID = 0;
 		else
-			jsonData.parentModelHeshCode = Model->parentModel->currentModelNode->modelHeshCode;
+			jsonData.parentObjectID = Model->parentModelID;
 		jsonData.origModelPath = Model->currentModelNode->sourceModelPath;
 		jsonData.modelHeshCode = Model->currentModelNode->modelHeshCode;
 		jsonData.testModelName = Model->currentModelNode->modelName;
+		jsonData.objectID = Model->modelID;
+		jsonData.isRootObject = Model->parentModel == nullptr ? 1 : 0;
 		jsonData.SetTransformData(Model);
-		jsonSceneModelDatas.push_back(jsonData);
+		jsonSceneObjectDatas.push_back(jsonData);
 		return;
 	}
 
 	if (Model->parentModel == nullptr)
-		jsonData.parentModelHeshCode = 0;
+		jsonData.parentObjectID = 0;
 	else
-		jsonData.parentModelHeshCode = Model->parentModel->currentModelNode->modelHeshCode;
+		jsonData.parentObjectID = Model->parentModelID;
 	jsonData.origModelPath = Model->currentModelNode->sourceModelPath;
 	jsonData.modelHeshCode = Model->currentModelNode->modelHeshCode;
 	jsonData.testModelName = Model->currentModelNode->modelName;
+	jsonData.objectID = Model->modelID;
+	jsonData.isRootObject = Model->IsRootModel() == true ? 1 : 0;
 	jsonData.SetTransformData(Model);
-	jsonSceneModelDatas.push_back(jsonData);
+	jsonSceneObjectDatas.push_back(jsonData);
 	for (int i = 0; i < Model->childModels.size(); i++)
 	{
-		SaveSceneModelData(Model->childModels[i], jsonSceneModelDatas);
+		SaveSceneObjectData(Model->childModels[i], jsonSceneObjectDatas);
 	}
 }
 
-void to_json(nlohmann::json& j, const JsonSceneModelData& data)
+void to_json(nlohmann::json& j, const JsonSceneObjectData& data)
 {
 	j = nlohmann::json{
 		{"modelHeshCode", data.modelHeshCode},
-		{"parentModelHeshCode", data.parentModelHeshCode},
+		{"parentObjectID", data.parentObjectID},
 		{"posX", data.localPosx},
 		{"posY", data.localPosy},
 		{"posZ", data.localPosz},
@@ -130,7 +141,9 @@ void to_json(nlohmann::json& j, const JsonSceneModelData& data)
 		{"scaley", data.localScaley},
 		{"scalez", data.localScalez},
 		{"ModelNamePath", data.origModelPath},
-		{ "TestModelNamePath", data.testModelName }
+		{ "TestModelNamePath", data.testModelName },
+		{ "objectID", data.objectID },
+		{ "isRootObject", data.isRootObject}
 	};
 }
 
@@ -149,39 +162,38 @@ void SceneManager::LoadSaveSceneFile()
 
 	std::filesystem::path modelFolderPath = "Assets/DirectXModel";
 
-	std::unordered_map<uint64_t, SceneModel*>loadSceneModels;
+	std::unordered_map<uint64_t, SceneObject*>loadSceneObjects;
 	for (const auto& item : sceneJson)
 	{
-		JsonSceneModelData data = item.get<JsonSceneModelData>();
+		JsonSceneObjectData data = item.get<JsonSceneObjectData>();
 		std::filesystem::path origModelPath = data.origModelPath;
 		std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
-		SceneModel* sceneModel = modelCreater->CreateSceneModelFromJsonData(modelPath, data);
-		sceneModel->parentModelHeshCode = data.parentModelHeshCode;
-		sceneModel->SetPostionOffset(XMFLOAT3(data.localPosx, data.localPosy, data.localPosz));
-		sceneModel->SetRotationOffset(XMFLOAT3(data.localRotx, data.localRoty, data.localRotz));
-		sceneModel->SetScaleOffset(XMFLOAT3(data.localScalex, data.localScaley, data.localScalez));
-		loadSceneModels.insert({ sceneModel->currentModelNode->modelHeshCode, sceneModel });
-		if (sceneModel->parentModelHeshCode == 0)
-			models.push_back(sceneModel);
+		SceneObject* SceneObject = modelCreater->CreateSceneObjectFromJsonData(modelPath, data);
+		SceneObject->parentModelID = data.parentObjectID;
+		SceneObject->SetPostionOffset(XMFLOAT3(data.localPosx, data.localPosy, data.localPosz));
+		SceneObject->SetRotationOffset(XMFLOAT3(data.localRotx, data.localRoty, data.localRotz));
+		SceneObject->SetScaleOffset(XMFLOAT3(data.localScalex, data.localScaley, data.localScalez));
+		SceneObject->modelID = data.objectID;
+		SceneObject->SetRootNodeCheck(data.isRootObject);
+		loadSceneObjects.insert({ SceneObject->modelID, SceneObject });
+		if (data.isRootObject == 1)
+			models.push_back(SceneObject);
 	}
 
-	for (auto& [hashCode, model] : loadSceneModels)
+	for (auto& [hashCode, model] : loadSceneObjects)
 	{
-		if (model->parentModelHeshCode == 0)
-		{
-			Log::PrintLog("parentModelHeshCode == 0 : " + model->modelName);
+		if (model->IsRootModel())
 			continue;
-		}
-		SceneModel* parentModel = loadSceneModels.at(model->parentModelHeshCode);
-		parentModel->InsertChildSceneModel(model);
+		SceneObject* parentModel = loadSceneObjects.at(model->parentModelID);
+		parentModel->InsertChildSceneObject(model);
 	}
-	loadSceneModels.clear();
+	loadSceneObjects.clear();
 }
 
-void from_json(const nlohmann::json& j, JsonSceneModelData& data)
+void from_json(const nlohmann::json& j, JsonSceneObjectData& data)
 {
 	j.at("modelHeshCode").get_to(data.modelHeshCode);
-	j.at("parentModelHeshCode").get_to(data.parentModelHeshCode);
+	j.at("parentObjectID").get_to(data.parentObjectID);
 
 	j.at("posX").get_to(data.localPosx);
 	j.at("posY").get_to(data.localPosy);
@@ -197,4 +209,6 @@ void from_json(const nlohmann::json& j, JsonSceneModelData& data)
 
 	j.at("ModelNamePath").get_to(data.origModelPath);
 	j.at("TestModelNamePath").get_to(data.testModelName);
+	j.at("objectID").get_to(data.objectID);
+	j.at("isRootObject").get_to(data.isRootObject);
 }

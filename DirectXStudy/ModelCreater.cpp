@@ -2,7 +2,7 @@
 #include "DirectXMain.h"
 #include "Mesh.h"
 #include "Log.h"
-#include "SceneModel.h"
+#include "SceneObject.h"
 #include "ModelAsset.h"
 #include "ModelNode.h"
 #include "AssimpConverter.h"
@@ -68,66 +68,66 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 }
 
 
-SceneModel* ModelCreater::CreateSceneModel(ModelAsset* modelAsset)
+SceneObject* ModelCreater::CreateSceneObject(ModelAsset* modelAsset)
 {
-	SceneModel* sceneModel = new SceneModel();
-	BuildSceneModelTree(modelAsset->currentNode, sceneModel);
-	return sceneModel;
+	SceneObject* sceneObject = new SceneObject();
+	BuildSceneObjectTree(modelAsset->currentNode, sceneObject);
+	return sceneObject;
 }
 
-void ModelCreater::BuildSceneModelTree(ModelNode* modelNode, SceneModel* parentSceneModel)
+void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, SceneObject* parentSceneObject)
 {
 	if (modelNode->childNodes.size() == 0)
 	{
-		parentSceneModel->currentModelNode = modelNode;
-		parentSceneModel->modelName = modelNode->modelName;
-		parentSceneModel->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
-		parentSceneModel->modelNamePath = modelNode->sourceModelPath;
+		parentSceneObject->currentModelNode = modelNode;
+		parentSceneObject->modelName = modelNode->modelName;
+		parentSceneObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
+		parentSceneObject->modelNamePath = modelNode->sourceModelPath;
 	}
 	else
 	{
-		parentSceneModel->currentModelNode = modelNode;
-		parentSceneModel->modelName = modelNode->modelName;
-		parentSceneModel->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
-		parentSceneModel->modelNamePath = modelNode->sourceModelPath;
+		parentSceneObject->currentModelNode = modelNode;
+		parentSceneObject->modelName = modelNode->modelName;
+		parentSceneObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
+		parentSceneObject->modelNamePath = modelNode->sourceModelPath;
 		for (int i = 0; i < modelNode->childNodes.size(); i++)
 		{
-			SceneModel* sceneModel = new SceneModel();
-			sceneModel->currentModelNode = modelNode->childNodes[i];
-			sceneModel->parentModel = parentSceneModel;
-			parentSceneModel->childModels.push_back(sceneModel);
-			BuildSceneModelTree(modelNode->childNodes[i], sceneModel);
+			SceneObject* sceneObject = new SceneObject();
+			sceneObject->currentModelNode = modelNode->childNodes[i];
+			sceneObject->parentModel = parentSceneObject;
+			parentSceneObject->childModels.push_back(sceneObject);
+			BuildSceneObjectTree(modelNode->childNodes[i], sceneObject);
 		}
 	}
 }
 
-SceneModel* ModelCreater::LoadModelFromFile(std::string path)
+SceneObject* ModelCreater::LoadModelFromFile(std::string path)
 {
 	auto it = modelAssets.find(path);
 	if(it != modelAssets.end())
 	{
-		return CreateSceneModel(it->second);
+		return CreateSceneObject(it->second);
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
 	modelAssets.insert({path, modelAssetTemp });
-	return CreateSceneModel(modelAssetTemp);
+	return CreateSceneObject(modelAssetTemp);
 }
-SceneModel* ModelCreater::CreateSceneModelFromJsonData(std::filesystem::path path, JsonSceneModelData& jsonModelData)
+SceneObject* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, JsonSceneObjectData& jsonModelData)
 {
 	if (modelAssets.find(path.string()) != modelAssets.end())
 	{
-		return CreateSingleSceneModelByHesh(jsonModelData.modelHeshCode, modelAssets[path.string()]);
+		return CreateSingleSceneObjectByHesh(jsonModelData.modelHeshCode, modelAssets[path.string()]);
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
 	modelAssets.insert({ path.string(), modelAssetTemp});
-	return CreateSingleSceneModelByHesh(jsonModelData.modelHeshCode, modelAssetTemp);
+	return CreateSingleSceneObjectByHesh(jsonModelData.modelHeshCode, modelAssetTemp);
 }
-SceneModel* ModelCreater::CreateSingleSceneModelByHesh(uint64_t heshCode, ModelAsset* modelAsset)
+SceneObject* ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset)
 {
 	ModelNode* modelNode = modelAsset->modelNodesDic.at(heshCode);
-	SceneModel* sceneMode = new SceneModel();
+	SceneObject* sceneMode = new SceneObject();
 	sceneMode->currentModelNode = modelNode;
 	sceneMode->currentModelNode = modelNode;
 	sceneMode->modelName = modelNode->modelName;
