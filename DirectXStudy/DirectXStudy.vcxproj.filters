@@ -117,9 +117,6 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="AssimpConverter.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Mouse.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -148,6 +145,12 @@
       <Filter>소스 파일\Model</Filter>
     </ClCompile>
     <ClCompile Include="ModelNode.cpp">
+      <Filter>소스 파일\Model</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="AssimpConverter.cpp">
       <Filter>소스 파일\Model</Filter>
     </ClCompile>
   </ItemGroup>
@@ -251,9 +254,6 @@
     <ClInclude Include="Datas.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="AssimpConverter.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Keyboard.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -279,6 +279,12 @@
       <Filter>헤더 파일\Model</Filter>
     </ClInclude>
     <ClInclude Include="ModelNode.h">
+      <Filter>헤더 파일\Model</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="AssimpConverter.h">
       <Filter>헤더 파일\Model</Filter>
     </ClInclude>
   </ItemGroup>

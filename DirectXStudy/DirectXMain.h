@@ -27,7 +27,7 @@ class ModelNode;
 class DirectXMain {
 	friend class Bindable;//친구 클래스는 private에 접근이 가능함
 public:
-	DirectXMain(HWND hWnd,std::vector<SceneModel*>& sceneModels);
+	DirectXMain(HWND hWnd);
 	void Start();
 	void Update(float deltaTime);
 	void Render();
@@ -40,6 +40,7 @@ public:
 	Light* GetLight() { return light; }
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
+	void SetSceneModels(std::vector<SceneModel*>* sceneModels){ models = sceneModels; }
 private:
 	ComPtr<IDXGISwapChain> pSwap;
 	ComPtr<ID3D11Device> pDevice;
@@ -60,7 +61,7 @@ private:
 	};
 private:
 	float totalTime;
-	std::vector<SceneModel*>& models;
+	std::vector<SceneModel*>* models;
 	Mouse* currentMouse;
 	Camera* cam;
 	Light* light;

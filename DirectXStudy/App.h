@@ -5,19 +5,19 @@
 #include "Camera.h"
 #include "Light.h"
 #include "Log.h"
-#include <vector>
 
 class ModelCreater;
 class Mouse;
 class UIManager;
 class SceneModel;
+class SceneManager;
 struct JsonSceneModelData;
 
 class App {
 	public:
 		App();
 		void Run();
-	private:
+private:
 		DirectXMain* dxdMain;
 		Window* window;
 		Camera* cam;
@@ -25,17 +25,7 @@ class App {
 		Mouse* mouse;
 		Keyboard* keyboard;
 		UIManager* uimanager;
-		std::vector<SceneModel*> models;
-		ModelCreater* modelCreater;
+		SceneManager* sceneManager;
 		SceneModel* testSaveModel;
-	private:
-		void ModelSelected(std::string modelName);
-		void DeleteModel(SceneModel* model);
-		void DeleteChiledModels(SceneModel* model);
-		void SaveModel(SceneModel* model);
-		void MoveModel(SceneModel* model);
-		void RenameModel(SceneModel* model);
-		void SaveScene(int key, bool value);
-		void SaveSceneModelData(SceneModel* parentModel, std::vector<JsonSceneModelData>& jsonSceneModelDatas);
-		void LoadSaveSceneFile(int key, bool value);
+private:
 };

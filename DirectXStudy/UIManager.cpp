@@ -5,7 +5,7 @@
 #include "Insfector.h"
 #include "SceneModel.h"
 
-UIManager::UIManager(std::vector<SceneModel*>& sceneModels)
+UIManager::UIManager(std::vector<SceneModel*>* sceneModels)
 {
 	hierarchy = new Hierarchy(sceneModels);
 	modelBrowserUI = new ModelBrowserUI();

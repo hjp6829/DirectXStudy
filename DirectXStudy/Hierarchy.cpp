@@ -2,7 +2,7 @@
 #include "imgui_impl_win32.h"
 #include "SceneModel.h"
 
-Hierarchy::Hierarchy(std::vector<SceneModel*>& modelContainer)
+Hierarchy::Hierarchy(std::vector<SceneModel*>* modelContainer)
 	: modelContainer(modelContainer)
 {
 }
@@ -11,15 +11,15 @@ void Hierarchy::UpdateUI()
 {
 	if (ImGui::Begin("Hierarchy"))
 	{
-		if (modelContainer.size() == 0)
+		if (modelContainer->size() == 0)
 		{
 			ImGui::End();
 			return;
 		}
-		for (int i = 0; i < modelContainer.size(); i++)
+		for (int i = 0; i < modelContainer->size(); i++)
 		{
-			if (modelContainer[i] != NULL)
-				ModelTraversal(modelContainer[i]);
+			if ((*modelContainer)[i] != NULL)
+				ModelTraversal((*modelContainer)[i]);
 		}
 	}
 	ImGui::End();

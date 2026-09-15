@@ -7,7 +7,7 @@ class SceneModel;
 class Hierarchy
 {
 public: 
-	Hierarchy(std::vector<SceneModel*>& modelContainer);
+	Hierarchy(std::vector<SceneModel*>* modelContainer);
 	void UpdateUI();
 	std::function<void(SceneModel*)> OnHierarchyClick;
 	std::function<void(SceneModel*)> OnHierarchyDeleteClick;
@@ -15,6 +15,6 @@ public:
 	std::function<void(SceneModel*)> OnHierarchyMoveClick;
 	std::function<void(SceneModel*)> OnHierarchyRenameClick;
 private:
-	std::vector<SceneModel*>& modelContainer;
+	std::vector<SceneModel*>* modelContainer;
 	void ModelTraversal(SceneModel* modelData);
 };
