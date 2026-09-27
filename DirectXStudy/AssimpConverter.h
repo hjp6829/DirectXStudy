@@ -28,7 +28,7 @@ private:
 	std::vector<asMesh> meshs;
 	std::vector<asMaterial> materials;
 	std::vector<ModelLoadData*> models;
-	int modelIDX = 0;
+	int objectIDX = 0;
 	std::string curretnPath;
 	ID3D11Device* device;
 private:

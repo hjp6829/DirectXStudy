@@ -25,11 +25,27 @@ void Hierarchy::UpdateUI()
 	ImGui::End();
 }
 
+void Hierarchy::RaiseOnHierarchyMoveChild(SceneObject* object)
+{
+	for (int i = 0;i < OnHierarchyMoveChildClick.size(); i++)
+	{
+		OnHierarchyMoveChildClick[i](object);
+	}
+}
+
+void Hierarchy::RaiseOnHierarchyMoveParent(SceneObject* object)
+{
+	for (int i = 0;i < OnHierarchyMoveParentClick.size(); i++)
+	{
+		OnHierarchyMoveParentClick[i](object);
+	}
+}
+
 void Hierarchy::ModelTraversal(SceneObject* SceneObject)
 {
-	if (SceneObject->childModels.size() == 0)
+	if (SceneObject->childObjects.size() == 0)
 	{
-		ImGui::TreeNodeEx((void*)(intptr_t)SceneObject, ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen, "%s", SceneObject->modelName.c_str());
+		ImGui::TreeNodeEx((void*)(intptr_t)SceneObject, ImGuiTreeNodeFlags_Leaf | ImGuiTreeNodeFlags_NoTreePushOnOpen, "%s", SceneObject->objectName.c_str());
 
 		if (ImGui::IsItemClicked())
 		{
@@ -43,13 +59,13 @@ void Hierarchy::ModelTraversal(SceneObject* SceneObject)
 			{
 				OnHierarchyDeleteClick(SceneObject);
 			}
-			if (ImGui::MenuItem("Save"))
+			if (ImGui::MenuItem("SetMoveChild"))
 			{
-				OnHierarchySaveClick(SceneObject);
+				RaiseOnHierarchyMoveChild(SceneObject);
 			}
-			if (ImGui::MenuItem("Move"))
+			if (ImGui::MenuItem("SetMoveParent"))
 			{
-				OnHierarchyMoveClick(SceneObject);
+				RaiseOnHierarchyMoveParent(SceneObject);
 			}
 
 			if (ImGui::MenuItem("Rename"))
@@ -61,7 +77,7 @@ void Hierarchy::ModelTraversal(SceneObject* SceneObject)
 		}
 		return;
 	}
-	bool open = ImGui::TreeNodeEx((void*)(intptr_t)SceneObject, ImGuiTreeNodeFlags_OpenOnArrow, "%s", SceneObject->modelName.c_str());
+	bool open = ImGui::TreeNodeEx((void*)(intptr_t)SceneObject, ImGuiTreeNodeFlags_OpenOnArrow, "%s", SceneObject->objectName.c_str());
 	if (ImGui::IsItemClicked())
 	{
 		OnHierarchyClick(SceneObject);
@@ -75,15 +91,15 @@ void Hierarchy::ModelTraversal(SceneObject* SceneObject)
 			OnHierarchyDeleteClick(SceneObject);
 		}
 
-		if (ImGui::MenuItem("Save"))
+		if (ImGui::MenuItem("SetMoveChild"))
 		{
-			OnHierarchySaveClick(SceneObject);
+			RaiseOnHierarchyMoveChild(SceneObject);
 		}
-		if (ImGui::MenuItem("Move"))
+		if (ImGui::MenuItem("SetMoveParent"))
 		{
-			OnHierarchyMoveClick(SceneObject);
+			RaiseOnHierarchyMoveParent(SceneObject);
 		}
-
+		
 		if (ImGui::MenuItem("Rename"))
 		{
 			OnHierarchyRenameClick(SceneObject);
@@ -93,9 +109,9 @@ void Hierarchy::ModelTraversal(SceneObject* SceneObject)
 	}
 	if (open)
 	{
-		for (int i = 0; i < SceneObject->childModels.size(); i++)
+		for (int i = 0; i < SceneObject->childObjects.size(); i++)
 		{
-			ModelTraversal(SceneObject->childModels[i]);
+			ModelTraversal(SceneObject->childObjects[i]);
 		}
 		ImGui::TreePop();
 	}

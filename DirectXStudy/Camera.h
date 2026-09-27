@@ -29,6 +29,7 @@ private:
 	DirectX::XMVECTOR up;
 	DirectX::XMVECTOR right;
 	DirectX::XMVECTOR forward;
+	bool isMouseRight;
 private:
 	void KeyboardEvent(int idx);
 };

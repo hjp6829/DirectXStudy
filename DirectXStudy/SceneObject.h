@@ -16,24 +16,24 @@ class SceneObject
 {
 public:
 	SceneObject() {};
-	SceneObject* parentModel;
+	SceneObject* parentObject;
 	ModelNode* currentModelNode;
-	std::vector<SceneObject*> childModels;
-	std::string modelName;
+	std::vector<SceneObject*> childObjects;
+	std::string objectName;
 	std::string modelNamePath;
-	uint64_t modelID;
-	uint64_t parentModelID;
-	void RenderModel(DirectXMain* dxdMain);
-	void UpdateModel();
+	uint64_t objectID;
+	uint64_t parentobjectID;
+	void RenderObject(DirectXMain* dxdMain);
+	void UpdateObject();
 	void SetMaterialIDX(int meshIDX,int MaterialIDX);
 	void ToggleMeshEnable(bool value);
 	bool meshEnable = true;
-	bool IsRootModel() { return isRootNode; }
-	void SetRootNodeCheck(bool value) { isRootNode  = value; }
+	bool IsRootObject() { return isRootObject; }
+	void SetRootNodeCheck(bool value) { isRootObject = value; }
 	void RemoveModelData();
-	void RemoveChildModel(SceneObject* childModel);
-	void RemoveAllChileModel(SceneObject* childModel);
-	void InsertChildSceneObject(SceneObject* childModel);
+	void RemoveChildObject(SceneObject* childObject);
+	void RemoveAllChileObject(SceneObject* childObject);
+	void InsertChildSceneObject(SceneObject* childObject);
 public:
 	void SetPostionOffset(XMFLOAT3 position){ positionOffset = position;}
 	void SetRotationOffset(XMFLOAT3 rotation) { rotationOffset = rotation; }
@@ -44,9 +44,9 @@ public:
 	void SetPosition(XMFLOAT3 position);
 	void SetRotaion(XMFLOAT3 rotation);
 	void SetScale(XMFLOAT3 scale);
-	XMFLOAT3 GetModelPosition();
-	XMFLOAT3 GetModelRotation();
-	XMFLOAT3 GetModelScale();
+	XMFLOAT3 GetObjectPosition();
+	XMFLOAT3 GetObjectRotation();
+	XMFLOAT3 GetObjectScale();
 	void SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale);
 private:
 	XMFLOAT3 positionOffset = { 0.0f, 0.0f, 4.0f };
@@ -56,5 +56,5 @@ private:
 	XMFLOAT3 importedLocalPosition;
 	XMFLOAT3 importedLocalRotation;
 	XMFLOAT3 importedLocalScale;
-	bool isRootNode;
+	bool isRootObject;
 };

@@ -5,6 +5,7 @@
 #include "Datas.h"
 #include "ModelCreater.h"
 #include "UIManager.h"
+#include <string>
 
 void to_json(nlohmann::json& j, const JsonSceneObjectData& data);
 void from_json(const nlohmann::json& j, JsonSceneObjectData& data);
@@ -17,9 +18,12 @@ SceneManager::SceneManager(ID3D11Device* device)
 
 void SceneManager::SetKeyInput(int key, bool value)
 {
-	if ((char)key == 'Q' && value)
+	if(key == 17)
+		isCtrl = value;
+	if ((char)key == 'S' && value)
 	{
-		SaveScene();
+		if(isCtrl)
+			SaveScene();
 	}
 	if ((char)key == 'E' && value)
 	{
@@ -32,54 +36,60 @@ void SceneManager::ModelSelected(std::string path)
 	SceneObject* sceneObject = modelCreater->LoadModelFromFile(path);
 	sceneObject->SetRootNodeCheck(true);
 	RegisterModelHierarchy(sceneObject);
-	models.push_back(sceneObject);
+	objects.push_back(sceneObject);
 }
 void SceneManager::RegisterModelHierarchy(SceneObject* model)
 {
-	if (model->childModels.size() == 0)
+	if (model->childObjects.size() == 0)
 	{
-		modelIDs.push_back(objectID);
-		model->modelID = objectID++;
+		objectIDs.push_back(objectID);
+		model->objectID = objectID++;
 		return;
 	}
-	modelIDs.push_back(objectID);
-	model->modelID = objectID++;
-	for (int i = 0; i < model->childModels.size(); i++)
+	objectIDs.push_back(objectID);
+	model->objectID = objectID++;
+	for (int i = 0; i < model->childObjects.size(); i++)
 	{
-		SceneObject* childObject = model->childModels[i];
-		childObject->parentModelID = model->modelID;
-		RegisterModelHierarchy(model->childModels[i]);
+		SceneObject* childObject = model->childObjects[i];
+		childObject->parentobjectID = model->objectID;
+		RegisterModelHierarchy(model->childObjects[i]);
 	}
 }
 void SceneManager::DeleteModel(SceneObject* model)
 {
-	if (model->IsRootModel())
+	if (model->IsRootObject())
 	{
-		models.erase(std::remove(models.begin(), models.end(), model), models.end());
+		objects.erase(std::remove(objects.begin(), objects.end(), model), objects.end());
 	}
 	model->RemoveModelData();
 	DeleteChiledModels(model);
-	model->childModels.clear();
+	model->childObjects.clear();
 	delete model;
+}
+void SceneManager::TestSaveMoveParent(SceneObject* model)
+{
+	testMoveChild->parentObject->RemoveChildObject(testMoveChild);
+	testMoveChild->parentObject = model;
+	model->childObjects.push_back(testMoveChild);
 }
 void SceneManager::DeleteChiledModels(SceneObject* model)
 {
-	for (int i = 0; i < model->childModels.size(); i++)
+	for (int i = 0; i < model->childObjects.size(); i++)
 	{
-		DeleteChiledModels(model->childModels[i]);
-		delete model->childModels[i];
+		DeleteChiledModels(model->childObjects[i]);
+		delete model->childObjects[i];
 	}
-	model->childModels.clear();
+	model->childObjects.clear();
 }
 
 void SceneManager::SaveScene()
 {
 	Log::PrintLog("Scene Save");
 	std::vector<JsonSceneObjectData> jsonSceneObjectDatas;
-	for (int i = 0; i < models.size(); i++)
+	for (int i = 0; i < objects.size(); i++)
 	{
-		SceneObject* model = models[i];
-		SaveSceneObjectData(model, jsonSceneObjectDatas);
+		SceneObject* object = objects[i];
+		SaveSceneObjectData(object, jsonSceneObjectDatas);
 	}
 	std::filesystem::path savePath = std::filesystem::path("SaveScene") / "Scene.json";
 	std::filesystem::create_directories(savePath.parent_path());
@@ -93,36 +103,36 @@ void SceneManager::SaveScene()
 void SceneManager::SaveSceneObjectData(SceneObject* Model, std::vector<JsonSceneObjectData>& jsonSceneObjectDatas)
 {
 	JsonSceneObjectData jsonData;
-	if (Model->childModels.size() == 0)
+	if (Model->childObjects.size() == 0)
 	{
-		if (Model->parentModel == nullptr)
+		if (Model->parentObject == nullptr)
 			jsonData.parentObjectID = 0;
 		else
-			jsonData.parentObjectID = Model->parentModelID;
+			jsonData.parentObjectID = Model->parentobjectID;
 		jsonData.origModelPath = Model->currentModelNode->sourceModelPath;
 		jsonData.modelHeshCode = Model->currentModelNode->modelHeshCode;
 		jsonData.testModelName = Model->currentModelNode->modelName;
-		jsonData.objectID = Model->modelID;
-		jsonData.isRootObject = Model->parentModel == nullptr ? 1 : 0;
+		jsonData.objectID = Model->objectID;
+		jsonData.isRootObject = Model->parentObject == nullptr ? 1 : 0;
 		jsonData.SetTransformData(Model);
 		jsonSceneObjectDatas.push_back(jsonData);
 		return;
 	}
 
-	if (Model->parentModel == nullptr)
+	if (Model->parentObject == nullptr)
 		jsonData.parentObjectID = 0;
 	else
-		jsonData.parentObjectID = Model->parentModelID;
+		jsonData.parentObjectID = Model->parentobjectID;
 	jsonData.origModelPath = Model->currentModelNode->sourceModelPath;
 	jsonData.modelHeshCode = Model->currentModelNode->modelHeshCode;
 	jsonData.testModelName = Model->currentModelNode->modelName;
-	jsonData.objectID = Model->modelID;
-	jsonData.isRootObject = Model->IsRootModel() == true ? 1 : 0;
+	jsonData.objectID = Model->objectID;
+	jsonData.isRootObject = Model->IsRootObject() == true ? 1 : 0;
 	jsonData.SetTransformData(Model);
 	jsonSceneObjectDatas.push_back(jsonData);
-	for (int i = 0; i < Model->childModels.size(); i++)
+	for (int i = 0; i < Model->childObjects.size(); i++)
 	{
-		SaveSceneObjectData(Model->childModels[i], jsonSceneObjectDatas);
+		SaveSceneObjectData(Model->childObjects[i], jsonSceneObjectDatas);
 	}
 }
 
@@ -152,6 +162,11 @@ void SceneManager::LoadSaveSceneFile()
 	using json = nlohmann::json;
 	std::filesystem::path path = std::filesystem::current_path();
 	std::filesystem::path saveFilePath = path / "SaveScene"/ "Scene.json";
+	if (!std::filesystem::exists(saveFilePath))
+	{
+		Log::PrintLog("No SaveFile");
+		return;
+	}
 	std::ifstream file(saveFilePath);
 	if (!file.is_open())
 	{
@@ -169,22 +184,22 @@ void SceneManager::LoadSaveSceneFile()
 		std::filesystem::path origModelPath = data.origModelPath;
 		std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
 		SceneObject* SceneObject = modelCreater->CreateSceneObjectFromJsonData(modelPath, data);
-		SceneObject->parentModelID = data.parentObjectID;
+		SceneObject->parentobjectID = data.parentObjectID;
 		SceneObject->SetPostionOffset(XMFLOAT3(data.localPosx, data.localPosy, data.localPosz));
 		SceneObject->SetRotationOffset(XMFLOAT3(data.localRotx, data.localRoty, data.localRotz));
 		SceneObject->SetScaleOffset(XMFLOAT3(data.localScalex, data.localScaley, data.localScalez));
-		SceneObject->modelID = data.objectID;
+		SceneObject->objectID = data.objectID;
 		SceneObject->SetRootNodeCheck(data.isRootObject);
-		loadSceneObjects.insert({ SceneObject->modelID, SceneObject });
+		loadSceneObjects.insert({ SceneObject->objectID, SceneObject });
 		if (data.isRootObject == 1)
-			models.push_back(SceneObject);
+			objects.push_back(SceneObject);
 	}
 
 	for (auto& [hashCode, model] : loadSceneObjects)
 	{
-		if (model->IsRootModel())
+		if (model->IsRootObject())
 			continue;
-		SceneObject* parentModel = loadSceneObjects.at(model->parentModelID);
+		SceneObject* parentModel = loadSceneObjects.at(model->parentobjectID);
 		parentModel->InsertChildSceneObject(model);
 	}
 	loadSceneObjects.clear();

@@ -14,8 +14,8 @@ public:
 	void UpdateUI();
 	std::function<void(std::string)> OnModelSelected;
 	std::function<void(SceneObject*)> OnModelDelete;
-	std::function<void(SceneObject*)> OnHierarchySaveClick;
-	std::function<void(SceneObject*)> OnHierarchyMoveClick;
+	std::function<void(SceneObject*)> OnHierarchyMoveChildClick;
+	std::function<void(SceneObject*)> OnHierarchyMoveParentClick;
 	std::function<void(SceneObject*)> OnHierarchyRenameClick;
 private:
 	Hierarchy* hierarchy;

@@ -4,13 +4,23 @@
 #include "SceneObject.h"
 #include "Hierarchy.h"
 #include "Mesh.h"
-
+#include "Log.h"
 
 Insfector::Insfector(Hierarchy* hierarchy)
 {
 	hierarchy->OnHierarchyClick = [this](SceneObject* model) {
 		SetSceneObjectData(model);
 		};
+	hierarchy->SubscribeOnHierarchyMoveChildClick([this](SceneObject* model) {
+		{
+			Log::PrintLog(model->objectName);
+			SettestMoveChild(model);
+		}});
+	hierarchy->SubscribeOnHierarchyMoveParentClick([this](SceneObject* model) {
+		{
+			Log::PrintLog(model->objectName);
+			SettestMoveParent(model);
+		}});
 }
 
 void Insfector::SetSceneObjectData(SceneObject* SceneObject)
@@ -24,15 +34,20 @@ void Insfector::UpdateUI()
 	{
 		if (ImGui::Begin("Insfector"))
 		{
+			ImGui::Text("Test");
+			ImGui::Text("testMoveChild");
+			ImGui::Text(testMoveChild == nullptr ? "" : (testMoveChild->objectName).c_str());
+			ImGui::Text("testMoveParent");
+			ImGui::Text(testMoveParent == nullptr ? "" : (testMoveParent->objectName).c_str());
 		}
 		ImGui::End();
 		return;
 	}
 	if (ImGui::Begin("Insfector"))
 	{
-		XMFLOAT3 tempPos = currentSceneObject->GetModelPosition();
-		XMFLOAT3 tempRot = currentSceneObject->GetModelRotation();
-		XMFLOAT3 tempScale = currentSceneObject->GetModelScale();
+		XMFLOAT3 tempPos = currentSceneObject->GetObjectPosition();
+		XMFLOAT3 tempRot = currentSceneObject->GetObjectRotation();
+		XMFLOAT3 tempScale = currentSceneObject->GetObjectScale();
 
 		bool enableValue = currentSceneObject->meshEnable;
 		ImGui::Checkbox("Enable",&enableValue);
@@ -49,6 +64,11 @@ void Insfector::UpdateUI()
 		if(ImGui::InputFloat3("Scale", &tempScale.x))
 			currentSceneObject->SetScale(tempScale);
 
+		ImGui::Text("Test");
+		ImGui::Text("testMoveChild");
+		ImGui::Text("%s", testMoveChild == nullptr ? "" : (testMoveChild->objectName).c_str());
+		ImGui::Text("testMoveParent");
+		ImGui::Text("%s", testMoveParent == nullptr ? "" : (testMoveParent->objectName).c_str());
 		//if (currentSceneObject->currentMeshs.size() != 0)
 		//{
 		//	ImGui::Text("Material");

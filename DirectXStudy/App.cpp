@@ -41,12 +41,12 @@ App::App()
 	uimanager->OnModelDelete = [this](SceneObject* model) {
 		sceneManager->DeleteModel(model);
 		};
-	//uimanager->OnHierarchySaveClick = [this](SceneObject* model) {
-	//	sceneManager->SaveModel(model);
-	//	};
-	//uimanager->OnHierarchyMoveClick = [this](SceneObject* model) {
-	//	MoveModel(model);
-	//	};
+	uimanager->OnHierarchyMoveChildClick = [this](SceneObject* model) {
+		sceneManager->TestSaveMoveChild(model);
+		};
+	uimanager->OnHierarchyMoveParentClick = [this](SceneObject* model) {
+		sceneManager->TestSaveMoveParent(model);
+		};
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
 	//	RenameModel(model);
 	//	};
@@ -104,9 +104,9 @@ void App::Run()
 //
 //void App::MoveModel(SceneObject* model)
 //{
-//	testSaveModel->parentModel->RemoveChildModel(testSaveModel);
+//	testSaveModel->parentModel->RemoveChildObject(testSaveModel);
 //	testSaveModel->parentModel = nullptr;
-//	model->childModels.push_back(testSaveModel);
+//	model->childObjects.push_back(testSaveModel);
 //	testSaveModel = nullptr;
 //
 //}

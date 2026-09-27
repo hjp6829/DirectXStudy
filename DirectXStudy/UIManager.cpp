@@ -4,6 +4,7 @@
 #include "ModelBrowserUI.h"
 #include "Insfector.h"
 #include "SceneObject.h"
+#include "Log.h"
 
 UIManager::UIManager(std::vector<SceneObject*>* SceneObjects)
 {
@@ -17,12 +18,12 @@ UIManager::UIManager(std::vector<SceneObject*>* SceneObjects)
 	hierarchy->OnHierarchyDeleteClick = [this](SceneObject* model) {
 		OnModelDelete(model);
 		};
-	hierarchy->OnHierarchySaveClick = [this](SceneObject* model) {
-		OnHierarchySaveClick(model);
-		};
-	hierarchy->OnHierarchyMoveClick = [this](SceneObject* model) {
-		OnHierarchyMoveClick(model);
-		};
+	hierarchy->SubscribeOnHierarchyMoveChildClick([this](SceneObject* model) {
+		OnHierarchyMoveChildClick(model);
+		});
+	hierarchy->SubscribeOnHierarchyMoveParentClick([this](SceneObject* model) {
+		OnHierarchyMoveParentClick(model);
+		});
 	hierarchy->OnHierarchyRenameClick = [this](SceneObject* model) {
 		OnHierarchyRenameClick(model);
 		};

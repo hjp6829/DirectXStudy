@@ -41,8 +41,8 @@ void Camera::CameraUpdate(Mouse* mouse)
 	forward = XMVector3TransformNormal(DirectX::XMVectorSet(0, 0, 1, 0), rotationMatrix);
     // 기존 Position = Position + DirectX::XMVectorScale(forward,(mouse->GetWheelDelta() * mouseWheelSpeed));
     // DirectXMath의 XMVectorAdd를 사용하여 벡터 덧셈을 수행해야 합니다.
-  
-	if (mouse->GetMouseRight())
+	isMouseRight = mouse->GetMouseRight();
+	if (isMouseRight)
 	{
 		rotationX = rotationX - mouse->GetMouseDeltaPos().x * rotationSpeed;
 		rotationY = rotationY + mouse->GetMouseDeltaPos().y * rotationSpeed;
@@ -74,6 +74,8 @@ DirectX::XMFLOAT3 Camera::GetWorldPos()
 
 void Camera::KeyboardEvent(int idx)
 {	
+	if(!isMouseRight)
+		return;
 	if ((char)idx == 'W')
 		Position = DirectX::XMVectorAdd(Position, DirectX::XMVectorScale(forward, mouseWheelSpeed));
 	if ((char)idx == 'S')

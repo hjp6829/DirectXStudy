@@ -80,22 +80,22 @@ void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, SceneObject* paren
 	if (modelNode->childNodes.size() == 0)
 	{
 		parentSceneObject->currentModelNode = modelNode;
-		parentSceneObject->modelName = modelNode->modelName;
+		parentSceneObject->objectName = modelNode->modelName;
 		parentSceneObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
 		parentSceneObject->modelNamePath = modelNode->sourceModelPath;
 	}
 	else
 	{
 		parentSceneObject->currentModelNode = modelNode;
-		parentSceneObject->modelName = modelNode->modelName;
+		parentSceneObject->objectName = modelNode->modelName;
 		parentSceneObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
 		parentSceneObject->modelNamePath = modelNode->sourceModelPath;
 		for (int i = 0; i < modelNode->childNodes.size(); i++)
 		{
 			SceneObject* sceneObject = new SceneObject();
 			sceneObject->currentModelNode = modelNode->childNodes[i];
-			sceneObject->parentModel = parentSceneObject;
-			parentSceneObject->childModels.push_back(sceneObject);
+			sceneObject->parentObject = parentSceneObject;
+			parentSceneObject->childObjects.push_back(sceneObject);
 			BuildSceneObjectTree(modelNode->childNodes[i], sceneObject);
 		}
 	}
@@ -130,7 +130,7 @@ SceneObject* ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, Mode
 	SceneObject* sceneMode = new SceneObject();
 	sceneMode->currentModelNode = modelNode;
 	sceneMode->currentModelNode = modelNode;
-	sceneMode->modelName = modelNode->modelName;
+	sceneMode->objectName = modelNode->modelName;
 	sceneMode->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
 	sceneMode->modelNamePath = modelNode->sourceModelPath;
 	return sceneMode;

@@ -2,7 +2,7 @@
 #include "DirectXMain.h"
 #include "ModelNode.h"
 #include "Log.h"
-XMFLOAT3 SceneObject::GetModelPosition()
+XMFLOAT3 SceneObject::GetObjectPosition()
 {
 	XMFLOAT3 localPos;
 	localPos.x = positionOffset.x + importedLocalPosition.x;
@@ -10,7 +10,7 @@ XMFLOAT3 SceneObject::GetModelPosition()
 	localPos.z = positionOffset.z + importedLocalPosition.z;
 	return localPos;
 }
-XMFLOAT3 SceneObject::GetModelRotation()
+XMFLOAT3 SceneObject::GetObjectRotation()
 {
 	XMFLOAT3 localRot;
 	localRot.x = rotationOffset.x * importedLocalRotation.x;
@@ -18,7 +18,7 @@ XMFLOAT3 SceneObject::GetModelRotation()
 	localRot.z = rotationOffset.z * importedLocalRotation.z;
 	return localRot;
 }
-XMFLOAT3 SceneObject::GetModelScale()
+XMFLOAT3 SceneObject::GetObjectScale()
 {
 	XMFLOAT3 localScale;
 	localScale.x = scaleOffset.x * importedLocalScale.x;
@@ -53,19 +53,19 @@ void SceneObject::SetScale(XMFLOAT3 scale)
 	scaleOffset.z = scale.z / importedLocalScale.z;
 }
 
-void SceneObject::RenderModel(DirectXMain* dxdMain)
+void SceneObject::RenderObject(DirectXMain* dxdMain)
 {
 	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	currentModelNode->RenderMeshs(dxdMain->GetContext(), worldMatrix, ViewMatrix, ProjectionMatrix);
-	for (int i = 0; i < childModels.size(); i++)
+	for (int i = 0; i < childObjects.size(); i++)
 	{
-		childModels[i]->RenderModel(dxdMain);
+		childObjects[i]->RenderObject(dxdMain);
 	}
 }
 
-void SceneObject::UpdateModel()
+void SceneObject::UpdateObject()
 {
 	worldMatrix = XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z) *
 		XMMatrixRotationRollPitchYaw(
@@ -74,13 +74,12 @@ void SceneObject::UpdateModel()
 			XMConvertToRadians(rotationOffset.z)
 		) *
 		XMMatrixTranslation(positionOffset.x, positionOffset.y, positionOffset.z);
-	if(parentModel != nullptr)
-		worldMatrix = worldMatrix * parentModel->worldMatrix;
-
+	if(parentObject != nullptr)
+		worldMatrix = worldMatrix * parentObject->worldMatrix;
 	currentModelNode->UpdateMeshs();
-	for (int i = 0; i < childModels.size(); i++)
+	for (int i = 0; i < childObjects.size(); i++)
 	{
-		childModels[i]->UpdateModel();
+		childObjects[i]->UpdateObject();
 	}
 }
 
@@ -93,46 +92,46 @@ void SceneObject::ToggleMeshEnable(bool value)
 {
 	meshEnable = value;
 	currentModelNode->ToggleMeshEnable(meshEnable);
-	for (int i = 0; i < childModels.size(); i++)
+	for (int i = 0; i < childObjects.size(); i++)
 	{
-		childModels[i]->ToggleMeshEnable(value);
+		childObjects[i]->ToggleMeshEnable(value);
 	}
 }
 
 void SceneObject::RemoveModelData()
 {
-	if (parentModel)
+	if (parentObject)
 	{
-		parentModel->RemoveChildModel(this);
-		parentModel=nullptr;
+		parentObject->RemoveChildObject(this);
+		parentObject =nullptr;
 	}
 	currentModelNode = nullptr;
-	RemoveAllChileModel(this);
+	RemoveAllChileObject(this);
 }
 
-void SceneObject::RemoveChildModel(SceneObject* childModel)
+void SceneObject::RemoveChildObject(SceneObject* childObject)
 {
-	for (auto it = childModels.begin(); it != childModels.end(); ++it)
+	for (auto it = childObjects.begin(); it != childObjects.end(); ++it)
 	{
-		if (*it == childModel)
+		if (*it == childObject)
 		{
-			childModels.erase(it);
+			childObjects.erase(it);
 			break;
 		}
 	}
 }
 
-void SceneObject::RemoveAllChileModel(SceneObject* model)
+void SceneObject::RemoveAllChileObject(SceneObject* childObject)
 {
-	for (int i = 0; i < model->childModels.size(); i++)
+	for (int i = 0; i < childObject->childObjects.size(); i++)
 	{
-		RemoveAllChileModel(model->childModels[i]);
-		model->childModels[i]->currentModelNode = nullptr;
+		RemoveAllChileObject(childObject->childObjects[i]);
+		childObject->childObjects[i]->currentModelNode = nullptr;
 	}
 }
 
-void SceneObject::InsertChildSceneObject(SceneObject* childModel)
+void SceneObject::InsertChildSceneObject(SceneObject* childObject)
 {
-	childModel->parentModel = this;
-	childModels.push_back(childModel);
+	childObject->parentObject = this;
+	childObjects.push_back(childObject);
 }

@@ -104,7 +104,7 @@ void DirectXMain::Update(float deltaTime)
 	totalTime += deltaTime;
 	for (int i = 0; i < models->size(); i++)
 	{
-		(*models)[i]->UpdateModel();
+		(*models)[i]->UpdateObject();
 	}
 }
 
@@ -129,7 +129,7 @@ void DirectXMain::Render()
 
 	for (int i = 0; i < models->size(); i++)
 	{
-		(*models)[i]->RenderModel(this);
+		(*models)[i]->RenderObject(this);
 	}
 }
 
