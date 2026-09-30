@@ -149,6 +149,7 @@
     <ClCompile Include="ModelCreater.cpp" />
     <ClCompile Include="ModelNode.cpp" />
     <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Object.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="PrimitiveTopology.cpp" />
     <ClCompile Include="Sampler.cpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="ModelBrowserUI.h" />
     <ClInclude Include="ModelCreater.h" />
     <ClInclude Include="ModelNode.h" />
+    <ClInclude Include="Object.h" />
     <ClInclude Include="PSContantBuffer.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="DirectXMain.h" />

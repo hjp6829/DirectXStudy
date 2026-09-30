@@ -7,7 +7,7 @@
 
 class ModelNode;
 class ModelAsset;
-class SceneObject;
+class Object;
 class AssimpConverter;
 class ModelLoadData;
 struct JsonSceneObjectData;
@@ -19,11 +19,11 @@ public:
 	ModelAsset* CreateModelAsset(ModelLoadData* modelData, std::filesystem::path modelName);
 	void CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode, ModelAsset* modelAsset);
 	
-	SceneObject* CreateSceneObject(ModelAsset* modelAsset);
-	void BuildSceneObjectTree(ModelNode* modelNode, SceneObject* parentSceneObject);
-	SceneObject* LoadModelFromFile(std::string path);
-	SceneObject* CreateSceneObjectFromJsonData(std::filesystem::path path, JsonSceneObjectData& jsonModelData);
-	SceneObject* CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset);
+	Object* CreateSceneObject(ModelAsset* modelAsset);
+	void BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject);
+	Object* LoadModelFromFile(std::string path);
+	Object* CreateSceneObjectFromJsonData(std::filesystem::path path, JsonSceneObjectData& jsonModelData);
+	Object* CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset);
 private:
 	AssimpConverter* assimp;
 	std::unordered_map<std::string, ModelAsset*> modelAssets;

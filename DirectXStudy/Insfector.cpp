@@ -1,36 +1,36 @@
 #include "Insfector.h"
 #include "imgui_impl_win32.h"
 #include "ModelCreater.h"
-#include "SceneObject.h"
+#include "Object.h"
 #include "Hierarchy.h"
 #include "Mesh.h"
 #include "Log.h"
 
 Insfector::Insfector(Hierarchy* hierarchy)
 {
-	hierarchy->OnHierarchyClick = [this](SceneObject* model) {
-		SetSceneObjectData(model);
+	hierarchy->OnHierarchyClick = [this](Object* object) {
+		SetSceneObjectData(object);
 		};
-	hierarchy->SubscribeOnHierarchyMoveChildClick([this](SceneObject* model) {
+	hierarchy->SubscribeOnHierarchyMoveChildClick([this](Object* object) {
 		{
-			Log::PrintLog(model->objectName);
-			SettestMoveChild(model);
+			Log::PrintLog(object->objectName);
+			SettestMoveChild(object);
 		}});
-	hierarchy->SubscribeOnHierarchyMoveParentClick([this](SceneObject* model) {
+	hierarchy->SubscribeOnHierarchyMoveParentClick([this](Object* object) {
 		{
-			Log::PrintLog(model->objectName);
-			SettestMoveParent(model);
+			Log::PrintLog(object->objectName);
+			SettestMoveParent(object);
 		}});
 }
 
-void Insfector::SetSceneObjectData(SceneObject* SceneObject)
+void Insfector::SetSceneObjectData(Object* object)
 {
-	currentSceneObject = SceneObject;
+	currentObject = object;
 }
 
 void Insfector::UpdateUI()
 {
-	if (currentSceneObject == NULL)
+	if (currentObject == NULL)
 	{
 		if (ImGui::Begin("Insfector"))
 		{
@@ -45,24 +45,24 @@ void Insfector::UpdateUI()
 	}
 	if (ImGui::Begin("Insfector"))
 	{
-		XMFLOAT3 tempPos = currentSceneObject->GetObjectPosition();
-		XMFLOAT3 tempRot = currentSceneObject->GetObjectRotation();
-		XMFLOAT3 tempScale = currentSceneObject->GetObjectScale();
+		XMFLOAT3 tempPos = currentObject->GetObjectPosition();
+		XMFLOAT3 tempRot = currentObject->GetObjectRotation();
+		XMFLOAT3 tempScale = currentObject->GetObjectScale();
 
-		bool enableValue = currentSceneObject->meshEnable;
+		bool enableValue = currentObject->meshEnable;
 		ImGui::Checkbox("Enable",&enableValue);
-		if(enableValue != currentSceneObject->meshEnable)
-			currentSceneObject->ToggleMeshEnable(enableValue);
+		if(enableValue != currentObject->meshEnable)
+			currentObject->ToggleMeshEnable(enableValue);
 		//ImGui::Text(currentSceneObject->modelName.c_str());
 		ImGui::Text("Psotion");
 		if(ImGui::InputFloat3("Position", &tempPos.x))
-			currentSceneObject->SetPosition(tempPos);
+			currentObject->SetPosition(tempPos);
 		ImGui::Text("Rotation");
 		if(ImGui::InputFloat3("Rotation", &tempRot.x))
-			currentSceneObject->SetRotaion(tempRot);
+			currentObject->SetRotaion(tempRot);
 		ImGui::Text("Scale");
 		if(ImGui::InputFloat3("Scale", &tempScale.x))
-			currentSceneObject->SetScale(tempScale);
+			currentObject->SetScale(tempScale);
 
 		ImGui::Text("Test");
 		ImGui::Text("testMoveChild");

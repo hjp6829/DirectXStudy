@@ -2,7 +2,7 @@
 #include "DirectXMain.h"
 #include "Mesh.h"
 #include "Log.h"
-#include "SceneObject.h"
+#include "Object.h"
 #include "ModelAsset.h"
 #include "ModelNode.h"
 #include "AssimpConverter.h"
@@ -68,40 +68,40 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 }
 
 
-SceneObject* ModelCreater::CreateSceneObject(ModelAsset* modelAsset)
+Object* ModelCreater::CreateSceneObject(ModelAsset* modelAsset)
 {
-	SceneObject* sceneObject = new SceneObject();
-	BuildSceneObjectTree(modelAsset->currentNode, sceneObject);
-	return sceneObject;
+	Object* object = new Object();
+	BuildSceneObjectTree(modelAsset->currentNode, object);
+	return object;
 }
 
-void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, SceneObject* parentSceneObject)
+void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject)
 {
 	if (modelNode->childNodes.size() == 0)
 	{
-		parentSceneObject->currentModelNode = modelNode;
-		parentSceneObject->objectName = modelNode->modelName;
-		parentSceneObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
-		parentSceneObject->modelNamePath = modelNode->sourceModelPath;
+		parentObject->currentModelNode = modelNode;
+		parentObject->objectName = modelNode->modelName;
+		parentObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
+		parentObject->modelNamePath = modelNode->sourceModelPath;
 	}
 	else
 	{
-		parentSceneObject->currentModelNode = modelNode;
-		parentSceneObject->objectName = modelNode->modelName;
-		parentSceneObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
-		parentSceneObject->modelNamePath = modelNode->sourceModelPath;
+		parentObject->currentModelNode = modelNode;
+		parentObject->objectName = modelNode->modelName;
+		parentObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
+		parentObject->modelNamePath = modelNode->sourceModelPath;
 		for (int i = 0; i < modelNode->childNodes.size(); i++)
 		{
-			SceneObject* sceneObject = new SceneObject();
-			sceneObject->currentModelNode = modelNode->childNodes[i];
-			sceneObject->parentObject = parentSceneObject;
-			parentSceneObject->childObjects.push_back(sceneObject);
-			BuildSceneObjectTree(modelNode->childNodes[i], sceneObject);
+			Object* object = new Object();
+			object->currentModelNode = modelNode->childNodes[i];
+			object->parentObject = parentObject;
+			parentObject->childObjects.push_back(object);
+			BuildSceneObjectTree(modelNode->childNodes[i], object);
 		}
 	}
 }
 
-SceneObject* ModelCreater::LoadModelFromFile(std::string path)
+Object* ModelCreater::LoadModelFromFile(std::string path)
 {
 	auto it = modelAssets.find(path);
 	if(it != modelAssets.end())
@@ -113,7 +113,7 @@ SceneObject* ModelCreater::LoadModelFromFile(std::string path)
 	modelAssets.insert({path, modelAssetTemp });
 	return CreateSceneObject(modelAssetTemp);
 }
-SceneObject* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, JsonSceneObjectData& jsonModelData)
+Object* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, JsonSceneObjectData& jsonModelData)
 {
 	if (modelAssets.find(path.string()) != modelAssets.end())
 	{
@@ -124,16 +124,16 @@ SceneObject* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path p
 	modelAssets.insert({ path.string(), modelAssetTemp});
 	return CreateSingleSceneObjectByHesh(jsonModelData.modelHeshCode, modelAssetTemp);
 }
-SceneObject* ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset)
+Object* ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset)
 {
 	ModelNode* modelNode = modelAsset->modelNodesDic.at(heshCode);
-	SceneObject* sceneMode = new SceneObject();
-	sceneMode->currentModelNode = modelNode;
-	sceneMode->currentModelNode = modelNode;
-	sceneMode->objectName = modelNode->modelName;
-	sceneMode->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
-	sceneMode->modelNamePath = modelNode->sourceModelPath;
-	return sceneMode;
+	Object* object = new Object();
+	object->currentModelNode = modelNode;
+	object->currentModelNode = modelNode;
+	object->objectName = modelNode->modelName;
+	object->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
+	object->modelNamePath = modelNode->sourceModelPath;
+	return object;
 }
 uint64_t ModelCreater::FNV1a(const std::string& str)
 {

@@ -6,7 +6,7 @@
 #include <wrl/client.h>
 #include <d3d11.h>
 #include <memory>
-#include "SceneObject.h"
+#include "Object.h"
 #include "ModelNode.h"
 
 using Microsoft::WRL::ComPtr;
@@ -76,23 +76,23 @@ struct JsonSceneObjectData
 	int isRootObject;
 	std::string origModelPath;
 	std::string testModelName;
-	void SetTransformData(SceneObject* SceneObject)
+	void SetTransformData(Object* object)
 	{
-		XMFLOAT3 positionOffset = SceneObject->GetPostionOffset();
+		XMFLOAT3 positionOffset = object->GetPostionOffset();
 		localPosx = positionOffset.x;
 		localPosy = positionOffset.y;
 		localPosz = positionOffset.z;
 
-		XMFLOAT3 rotationOffset = SceneObject->GetRotationOffset();
+		XMFLOAT3 rotationOffset = object->GetRotationOffset();
 		localRotx = rotationOffset.x;
 		localRoty = rotationOffset.y;
 		localRotz = rotationOffset.z;
 
-		XMFLOAT3 scaleOffset = SceneObject->GetScaleOffset();
+		XMFLOAT3 scaleOffset = object->GetScaleOffset();
 		localScalex = scaleOffset.x;
 		localScaley = scaleOffset.y;
 		localScalez = scaleOffset.z;
 
-		modelHeshCode = SceneObject->currentModelNode->modelHeshCode;
+		modelHeshCode = object->currentModelNode->modelHeshCode;
 	}
 };

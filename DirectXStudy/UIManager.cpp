@@ -3,10 +3,10 @@
 #include "DirectXMain.h"
 #include "ModelBrowserUI.h"
 #include "Insfector.h"
-#include "SceneObject.h"
+#include "Object.h"
 #include "Log.h"
 
-UIManager::UIManager(std::vector<SceneObject*>* SceneObjects)
+UIManager::UIManager(std::vector<Object*>* SceneObjects)
 {
 	hierarchy = new Hierarchy(SceneObjects);
 	modelBrowserUI = new ModelBrowserUI();
@@ -15,17 +15,17 @@ UIManager::UIManager(std::vector<SceneObject*>* SceneObjects)
 	modelBrowserUI->OnModelSelected = [this](std::string path) {
 		OnModelSelected(path);
 		};
-	hierarchy->OnHierarchyDeleteClick = [this](SceneObject* model) {
-		OnModelDelete(model);
+	hierarchy->OnHierarchyDeleteClick = [this](Object* object) {
+		OnModelDelete(object);
 		};
-	hierarchy->SubscribeOnHierarchyMoveChildClick([this](SceneObject* model) {
-		OnHierarchyMoveChildClick(model);
+	hierarchy->SubscribeOnHierarchyMoveChildClick([this](Object* object) {
+		OnHierarchyMoveChildClick(object);
 		});
-	hierarchy->SubscribeOnHierarchyMoveParentClick([this](SceneObject* model) {
-		OnHierarchyMoveParentClick(model);
+	hierarchy->SubscribeOnHierarchyMoveParentClick([this](Object* object) {
+		OnHierarchyMoveParentClick(object);
 		});
-	hierarchy->OnHierarchyRenameClick = [this](SceneObject* model) {
-		OnHierarchyRenameClick(model);
+	hierarchy->OnHierarchyRenameClick = [this](Object* object) {
+		OnHierarchyRenameClick(object);
 		};
 }
 

@@ -19,7 +19,7 @@ using namespace DirectX;
 
 class AssimpConverter;
 class ModelCreater;
-class SceneObject;
+class Object;
 class ModelAsset;
 class ModelNode;
 
@@ -39,7 +39,7 @@ public:
 	Light* GetLight() { return light; }
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
-	void SetSceneObjects(std::vector<SceneObject*>* SceneObjects){ models = SceneObjects; }
+	void SetSceneObjects(std::vector<Object*>* objectVector){ objects = objectVector; }
 private:
 	ComPtr<IDXGISwapChain> pSwap;
 	ComPtr<ID3D11Device> pDevice;
@@ -60,7 +60,7 @@ private:
 	};
 private:
 	float totalTime;
-	std::vector<SceneObject*>* models;
+	std::vector<Object*>* objects;
 	Mouse* currentMouse;
 	Camera* cam;
 	Light* light;

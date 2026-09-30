@@ -2,28 +2,28 @@
 #include "Datas.h"
 #include <functional>
 
-class SceneObject;
+class Object;
 
 class Hierarchy
 {
 public: 
-	Hierarchy(std::vector<SceneObject*>* modelContainer);
+	Hierarchy(std::vector<Object*>* modelContainer);
 	void UpdateUI();
-	void SubscribeOnHierarchyMoveChildClick(std::function<void(SceneObject*)> function) {
+	void SubscribeOnHierarchyMoveChildClick(std::function<void(Object*)> function) {
 		OnHierarchyMoveChildClick.push_back(function);
 	}
-	void SubscribeOnHierarchyMoveParentClick(std::function<void(SceneObject*)> function) {
+	void SubscribeOnHierarchyMoveParentClick(std::function<void(Object*)> function) {
 		OnHierarchyMoveParentClick.push_back(function);
 	}
-	void RaiseOnHierarchyMoveChild(SceneObject* object);
-	void RaiseOnHierarchyMoveParent(SceneObject* object);
-	std::function<void(SceneObject*)> OnHierarchyClick;
-	std::function<void(SceneObject*)> OnHierarchyDeleteClick;
+	void RaiseOnHierarchyMoveChild(Object* object);
+	void RaiseOnHierarchyMoveParent(Object* object);
+	std::function<void(Object*)> OnHierarchyClick;
+	std::function<void(Object*)> OnHierarchyDeleteClick;
 	
-	std::function<void(SceneObject*)> OnHierarchyRenameClick;
+	std::function<void(Object*)> OnHierarchyRenameClick;
 private:
-	std::vector<SceneObject*>* modelContainer;
-	std::vector<std::function<void(SceneObject*)>> OnHierarchyMoveChildClick;
-	std::vector<std::function<void(SceneObject*)>> OnHierarchyMoveParentClick;
-	void ModelTraversal(SceneObject* modelData);
+	std::vector<Object*>* modelContainer;
+	std::vector<std::function<void(Object*)>> OnHierarchyMoveChildClick;
+	std::vector<std::function<void(Object*)>> OnHierarchyMoveParentClick;
+	void ModelTraversal(Object* modelData);
 };

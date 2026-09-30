@@ -101,9 +101,9 @@ void DirectXMain::Start()
 void DirectXMain::Update(float deltaTime)
 {
 	totalTime += deltaTime;
-	for (int i = 0; i < models->size(); i++)
+	for (int i = 0; i < objects->size(); i++)
 	{
-		(*models)[i]->UpdateObject();
+		(*objects)[i]->UpdateObject();
 	}
 }
 
@@ -126,9 +126,9 @@ void DirectXMain::Render()
 	pContext->Unmap(lightConstantBuffer.Get(), 0);
 	pContext->PSSetConstantBuffers(1, 1, lightConstantBuffer.GetAddressOf());
 
-	for (int i = 0; i < models->size(); i++)
+	for (int i = 0; i < objects->size(); i++)
 	{
-		(*models)[i]->RenderObject(this);
+		(*objects)[i]->RenderObject(this);
 	}
 }
 

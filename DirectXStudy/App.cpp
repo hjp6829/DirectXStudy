@@ -6,7 +6,7 @@
 #include "Keyboard.h"
 #include "UIManager.h"
 #include "ModelCreater.h"
-#include "SceneObject.h"
+#include "Object.h"
 #include "ModelNode.h"
 #include "Datas.h"
 #include <fstream>
@@ -38,17 +38,17 @@ App::App()
 	uimanager->OnModelSelected = [this](std::string path) {
 		sceneManager->ModelSelected(path);
 		};
-	uimanager->OnModelDelete = [this](SceneObject* model) {
-		commandQueue.push([this, model] () {
-			sceneManager->DeleteModel(model);
+	uimanager->OnModelDelete = [this](Object* object) {
+		commandQueue.push([this, object] () {
+			sceneManager->DeleteModel(object);
 		});
 		};
-	uimanager->OnHierarchyMoveChildClick = [this](SceneObject* model) {
-		sceneManager->TestSaveMoveChild(model);
+	uimanager->OnHierarchyMoveChildClick = [this](Object* object) {
+		sceneManager->TestSaveMoveChild(object);
 		};
-	uimanager->OnHierarchyMoveParentClick = [this](SceneObject* model) {
-		commandQueue.push([this, model]() {
-			sceneManager->TestSaveMoveParent(model);
+	uimanager->OnHierarchyMoveParentClick = [this](Object* object) {
+		commandQueue.push([this, object]() {
+			sceneManager->TestSaveMoveParent(object);
 			});
 		};
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
