@@ -194,9 +194,6 @@
     <ClInclude Include="PSContantBuffer.h">
       <Filter>헤더 파일\Bindable</Filter>
     </ClInclude>
-    <ClInclude Include="Object.h">
-      <Filter>헤더 파일\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="IndexBuffer.h">
       <Filter>헤더 파일\Bindable</Filter>
     </ClInclude>

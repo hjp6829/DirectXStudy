@@ -5,6 +5,8 @@
 #include "Camera.h"
 #include "Light.h"
 #include "Log.h"
+#include <queue>
+#include <functional>
 
 class ModelCreater;
 class Mouse;
@@ -26,4 +28,5 @@ private:
 		UIManager* uimanager;
 		SceneManager* sceneManager;
 private:
+	std::queue<std::function<void()>> commandQueue;
 };

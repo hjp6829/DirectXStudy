@@ -62,6 +62,9 @@ struct asMaterial
 	ComPtr<ID3D11ShaderResourceView> textureView;
 	ComPtr<ID3D11ShaderResourceView> normalView;
 };
+//struct SceneSaveData {
+//	std::vector<JsonSceneObjectData> objectDatas;
+//};
 struct JsonSceneObjectData
 {
 	float localPosx, localPosy, localPosz;

@@ -2,8 +2,9 @@
 #include <d3d11.h>
 #include "d3dcompiler.h"
 #include <vector>
-#include "Object.h"
+#include <wrl/client.h>
 
+using Microsoft::WRL::ComPtr;
 
 class Bindable
 {

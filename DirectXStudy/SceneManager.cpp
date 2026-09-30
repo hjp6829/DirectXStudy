@@ -70,6 +70,8 @@ void SceneManager::TestSaveMoveParent(SceneObject* model)
 {
 	testMoveChild->parentObject->RemoveChildObject(testMoveChild);
 	testMoveChild->parentObject = model;
+	testMoveChild->parentobjectID = model->objectID;
+	testMoveChild->UpdateTransformForNewParent(model);
 	model->childObjects.push_back(testMoveChild);
 }
 void SceneManager::DeleteChiledModels(SceneObject* model)

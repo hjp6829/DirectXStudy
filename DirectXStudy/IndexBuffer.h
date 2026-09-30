@@ -3,6 +3,7 @@
 #include <wrl.h>
 #include <DirectXMath.h>
 
+
 class IndexBuffer : public Bindable {
 public:
 	template<class V>

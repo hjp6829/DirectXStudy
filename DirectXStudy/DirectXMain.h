@@ -17,7 +17,6 @@
 using namespace Microsoft::WRL;
 using namespace DirectX;
 
-class Object;
 class AssimpConverter;
 class ModelCreater;
 class SceneObject;

@@ -9,14 +9,6 @@ void ModelNode::RenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worl
 	}
 }
 
-void ModelNode::UpdateMeshs()
-{
-	for (int i = 0; i < currentMeshs.size(); i++)
-	{
-		currentMeshs[i]->Update();
-	}
-}
-
 void ModelNode::ToggleMeshEnable(bool value)
 {
 	for (int i = 0; i < currentMeshs.size(); i++)

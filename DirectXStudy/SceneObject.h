@@ -34,6 +34,7 @@ public:
 	void RemoveChildObject(SceneObject* childObject);
 	void RemoveAllChileObject(SceneObject* childObject);
 	void InsertChildSceneObject(SceneObject* childObject);
+	void UpdateTransformForNewParent(SceneObject* parentObject);
 public:
 	void SetPostionOffset(XMFLOAT3 position){ positionOffset = position;}
 	void SetRotationOffset(XMFLOAT3 rotation) { rotationOffset = rotation; }

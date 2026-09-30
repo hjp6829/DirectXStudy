@@ -14,7 +14,7 @@
 #include "Texture.h"
 #include "Sampler.h"
 
-Mesh::Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* assimp, asMesh* meshData) : Object(device, modelLoadData, assimp, meshData)
+Mesh::Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* assimp, asMesh* meshData)
 {
 	this->AssimpNodeMatrix = modelLoadData->mat;
 	materialIDX = meshData->materialIDX;
@@ -58,14 +58,6 @@ Mesh::Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* 
 	std::unique_ptr vertexBufferTemp = std::make_unique<VertexConstantBufferContainer<ConstantBufferData>>(device,sb, *this);
 	vertexConstantBufferContainer = vertexBufferTemp.get();
 	bindable.push_back(std::move(vertexBufferTemp));
-}
-
-void Mesh::Update()
-{
-	if(!enable)
-		return;
-
-	Object::Update();
 }
 
 void Mesh::Render(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix)

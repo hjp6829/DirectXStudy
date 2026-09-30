@@ -39,13 +39,17 @@ App::App()
 		sceneManager->ModelSelected(path);
 		};
 	uimanager->OnModelDelete = [this](SceneObject* model) {
-		sceneManager->DeleteModel(model);
+		commandQueue.push([this, model] () {
+			sceneManager->DeleteModel(model);
+		});
 		};
 	uimanager->OnHierarchyMoveChildClick = [this](SceneObject* model) {
 		sceneManager->TestSaveMoveChild(model);
 		};
 	uimanager->OnHierarchyMoveParentClick = [this](SceneObject* model) {
-		sceneManager->TestSaveMoveParent(model);
+		commandQueue.push([this, model]() {
+			sceneManager->TestSaveMoveParent(model);
+			});
 		};
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
 	//	RenameModel(model);
@@ -91,6 +95,13 @@ void App::Run()
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
 		dxdMain->EndDraw();
+
+		for (int i = 0; i < commandQueue.size(); i++)
+		{
+			commandQueue.front()();
+			commandQueue.pop();
+		}
+
 		previousTime = currentTime;
 	}
 }

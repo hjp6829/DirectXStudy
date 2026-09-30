@@ -76,7 +76,6 @@ void SceneObject::UpdateObject()
 		XMMatrixTranslation(positionOffset.x, positionOffset.y, positionOffset.z);
 	if(parentObject != nullptr)
 		worldMatrix = worldMatrix * parentObject->worldMatrix;
-	currentModelNode->UpdateMeshs();
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		childObjects[i]->UpdateObject();
@@ -134,4 +133,17 @@ void SceneObject::InsertChildSceneObject(SceneObject* childObject)
 {
 	childObject->parentObject = this;
 	childObjects.push_back(childObject);
+}
+
+void SceneObject::UpdateTransformForNewParent(SceneObject* parentObject)
+{
+	XMVECTOR position;
+	XMVECTOR rotation;
+	XMVECTOR scale;
+	XMMATRIX inverseWorld = worldMatrix * XMMatrixInverse(nullptr, parentObject->worldMatrix);
+
+	XMMatrixDecompose(&scale, &rotation, &position, inverseWorld);
+	XMStoreFloat3(&positionOffset, position);
+	XMStoreFloat3(&rotationOffset, rotation);
+	XMStoreFloat3(&scaleOffset, scale);
 }

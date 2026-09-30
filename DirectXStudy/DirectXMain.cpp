@@ -1,5 +1,4 @@
 #include "DirectXMain.h"
-#include "Object.h"
 #include "ModelCreater.h"
 #include "imgui_impl_dx11.h"
 #include "AssimpConverter.h"
