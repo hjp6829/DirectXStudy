@@ -58,10 +58,12 @@ void Object::RenderObject(DirectXMain* dxdMain)
 	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
-	currentModelNode->RenderMeshs(dxdMain->GetContext(), worldMatrix, ViewMatrix, ProjectionMatrix);
+	if(currentModelNode != nullptr)
+		currentModelNode->RenderMeshs(dxdMain->GetContext(), worldMatrix, ViewMatrix, ProjectionMatrix);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
-		childObjects[i]->RenderObject(dxdMain);
+		if (childObjects[i] != nullptr)
+			childObjects[i]->RenderObject(dxdMain);
 	}
 }
 

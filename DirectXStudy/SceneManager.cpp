@@ -12,7 +12,10 @@ void from_json(const nlohmann::json& j, JsonSceneObjectData& data);
 
 SceneManager::SceneManager(ID3D11Device* device)
 {
+	camera = new CameraObject();
+	camera->objectName = "Camera";
 	modelCreater = new ModelCreater(device);
+	objects.push_back(camera);
 	LoadSaveSceneFile();
 }
 
@@ -29,6 +32,11 @@ void SceneManager::SetKeyInput(int key, bool value)
 	{
 		LoadSaveSceneFile();
 	}
+}
+
+void SceneManager::SetKeyInputHold(int key)
+{
+	camera->KeyboardEvent(key);
 }
 
 void SceneManager::ModelSelected(std::string path)

@@ -29,10 +29,9 @@ App::App()
 	dxdMain->SetSceneObjects(sceneManager->GetSceneObjects());
 	uimanager = new UIManager(sceneManager->GetSceneObjects());
 
-	cam = new Camera(keyboard);
 	light = new Light();
 
-	dxdMain->SetCamera(cam);
+	dxdMain->SetCamera(sceneManager->GetCamera());
 	dxdMain->SetLight(light);
 
 	uimanager->OnModelSelected = [this](std::string path) {
@@ -58,6 +57,30 @@ App::App()
 		{
 			sceneManager->SetKeyInput(key,value);
 		};
+	mouse->OnMouseRightDown = [this](bool value)
+	{
+		sceneManager->SetMouseRightDown(value);
+		//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
+	};
+	mouse->OnMouseWheelDown = [this](bool value)
+		{
+			sceneManager->SetMouseWheelDown(value);
+			//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
+		};
+	mouse->OnMouseWheelDelta = [this](float value)
+		{
+			sceneManager->SetMouseWheelDelta(value);
+			//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
+		};
+	mouse->OnMouseDeltaPos = [this](int x,int y)
+		{
+			sceneManager->SetMouseDeltaPos(x,y);
+			//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
+		};
+	keyboard->OnKeyHold = [this](int key)
+		{
+			sceneManager->SetKeyInputHold(key);
+		};
 }
 
 void App::Run()
@@ -80,13 +103,12 @@ void App::Run()
 		dxdMain->Update(deltaTime);
 		dxdMain->Render();
 
-		cam->CameraUpdate(mouse);
 		keyboard->Update();
 		mouse->SetWheelDelta(0);
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
-		cam->ViewCameraWindow();
+		//cam->ViewCameraWindow();
 		light->ViewLightWindow();
 		uimanager->UpdateUI();
 		//static bool showDemoWindow = true;

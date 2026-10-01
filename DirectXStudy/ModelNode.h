@@ -7,6 +7,7 @@ class Mesh;
 
 class ModelNode {
 public:
+	ModelNode(){}
 	std::vector<Mesh*> currentMeshs;
 	std::vector<ModelNode*> childNodes;
 	std::string modelName;

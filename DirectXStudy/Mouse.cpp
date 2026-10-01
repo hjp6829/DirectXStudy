@@ -15,12 +15,8 @@ void Mouse::SetPos(int x, int y)
 		deltaPos.y = deltaPosYTemp;
 	else
 		deltaPos.y=0;
+	OnMouseDeltaPos(deltaPos.x, deltaPos.y);
 	prePos.x = x;
 	prePos.y = y;
-}
-
-void Mouse::SetWheelDelta(float delta)
-{
-	mouseWheelDelta = delta;
 }
 

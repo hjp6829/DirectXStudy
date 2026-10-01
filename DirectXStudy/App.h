@@ -2,7 +2,6 @@
 #include "DirectXMain.h"
 #include "Window.h"
 #include <chrono>
-#include "Camera.h"
 #include "Light.h"
 #include "Log.h"
 #include <queue>
@@ -21,7 +20,6 @@ class App {
 private:
 		DirectXMain* dxdMain;
 		Window* window;
-		Camera* cam;
 		Light* light;
 		Mouse* mouse;
 		Keyboard* keyboard;

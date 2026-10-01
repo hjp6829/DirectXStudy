@@ -126,7 +126,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="AssimpConverter.cpp" />
-    <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="CameraObject.cpp" />
     <ClCompile Include="Hierarchy.cpp" />
     <ClCompile Include="Insfector.cpp" />
     <ClCompile Include="Keyboard.cpp" />
@@ -167,7 +167,7 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="AssimpConverter.h" />
     <ClInclude Include="Bindable.h" />
-    <ClInclude Include="Camera.h" />
+    <ClInclude Include="CameraObject.h" />
     <ClInclude Include="Datas.h" />
     <ClInclude Include="Hierarchy.h" />
     <ClInclude Include="Insfector.h" />

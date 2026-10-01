@@ -1,7 +1,7 @@
 #pragma once
 #include "Object.h"
 
-class SceneObject : Object
+class SceneObject : public Object
 {
 public:
 	SceneObject() {};

@@ -6,7 +6,7 @@
 #include <DirectXMath.h>
 #include <vector>
 #include "Mouse.h"
-#include "Camera.h"
+#include "CameraObject.h"
 #include "Light.h"
 #include <string>
 
@@ -33,8 +33,8 @@ public:
 	void Shutdown();
 	void EndDraw();
 	void SetMouse(Mouse* mouse) { currentMouse = mouse; }
-	Camera* GetCamera() { return cam; }
-	void SetCamera(Camera *cam) { this->cam=cam;}
+	CameraObject* GetCamera() { return cam; }
+	void SetCamera(CameraObject*cam) { this->cam=cam;}
 	void SetLight(Light* light) { this->light = light; }
 	Light* GetLight() { return light; }
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
@@ -62,7 +62,7 @@ private:
 	float totalTime;
 	std::vector<Object*>* objects;
 	Mouse* currentMouse;
-	Camera* cam;
+	CameraObject* cam;
 	Light* light;
 	GlobalBuffer globalBuffer = {};
 };

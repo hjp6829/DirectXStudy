@@ -105,9 +105,6 @@
     <ClCompile Include="imgui_widgets.cpp">
       <Filter>소스 파일\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="Light.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -154,6 +151,9 @@
       <Filter>소스 파일\Model</Filter>
     </ClCompile>
     <ClCompile Include="Object.cpp">
+      <Filter>소스 파일\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraObject.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
   </ItemGroup>
@@ -236,9 +236,6 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>헤더 파일\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="LightConstantBuffer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -288,6 +285,9 @@
       <Filter>헤더 파일\Model</Filter>
     </ClInclude>
     <ClInclude Include="Object.h">
+      <Filter>헤더 파일\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraObject.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
   </ItemGroup>
