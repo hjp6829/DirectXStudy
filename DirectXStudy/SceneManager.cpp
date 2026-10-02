@@ -14,8 +14,11 @@ SceneManager::SceneManager(ID3D11Device* device)
 {
 	camera = new CameraObject();
 	camera->objectName = "Camera";
+	light = new LightObject();
+	light->objectName = "Light";
 	modelCreater = new ModelCreater(device);
 	objects.push_back(camera);
+	objects.push_back(light);
 	LoadSaveSceneFile();
 }
 
@@ -95,54 +98,34 @@ void SceneManager::DeleteChiledModels(Object* object)
 void SceneManager::SaveScene()
 {
 	Log::PrintLog("Scene Save");
-	std::vector<JsonSceneObjectData> jsonSceneObjectDatas;
-	for (int i = 0; i < objects.size(); i++)
-	{
-		Object* object = objects[i];
-		SaveSceneObjectData(object, jsonSceneObjectDatas);
-	}
 	std::filesystem::path savePath = std::filesystem::path("SaveScene") / "Scene.json";
 	std::filesystem::create_directories(savePath.parent_path());
 	std::ofstream file(savePath);
 
-	nlohmann::json jsonfile = jsonSceneObjectDatas;
+	nlohmann::json jsonfile = nlohmann::json::array();
+	for (int i = 0; i < objects.size(); i++)
+	{
+		Object* object = objects[i];
+		SaveSceneObjectData(object, jsonfile);
+	}
 	file << jsonfile.dump(4);
 	file.close();
 }
 
-void SceneManager::SaveSceneObjectData(Object* object, std::vector<JsonSceneObjectData>& jsonSceneObjectDatas)
+void SceneManager::SaveSceneObjectData(Object* object, nlohmann::json& jsonfile)
 {
-	JsonSceneObjectData jsonData;
+	nlohmann::json objectJson;
 	if (object->childObjects.size() == 0)
 	{
-		if (object->parentObject == nullptr)
-			jsonData.parentObjectID = 0;
-		else
-			jsonData.parentObjectID = object->parentobjectID;
-		jsonData.origModelPath = object->currentModelNode->sourceModelPath;
-		jsonData.modelHeshCode = object->currentModelNode->modelHeshCode;
-		jsonData.testModelName = object->currentModelNode->modelName;
-		jsonData.objectID = object->objectID;
-		jsonData.isRootObject = object->parentObject == nullptr ? 1 : 0;
-		jsonData.SetTransformData(object);
-		jsonSceneObjectDatas.push_back(jsonData);
+		object->Serialize(objectJson);
+		jsonfile.push_back(objectJson);
 		return;
 	}
-
-	if (object->parentObject == nullptr)
-		jsonData.parentObjectID = 0;
-	else
-		jsonData.parentObjectID = object->parentobjectID;
-	jsonData.origModelPath = object->currentModelNode->sourceModelPath;
-	jsonData.modelHeshCode = object->currentModelNode->modelHeshCode;
-	jsonData.testModelName = object->currentModelNode->modelName;
-	jsonData.objectID = object->objectID;
-	jsonData.isRootObject = object->IsRootObject() == true ? 1 : 0;
-	jsonData.SetTransformData(object);
-	jsonSceneObjectDatas.push_back(jsonData);
+	object->Serialize(objectJson);
+	jsonfile.push_back(objectJson);
 	for (int i = 0; i < object->childObjects.size(); i++)
 	{
-		SaveSceneObjectData(object->childObjects[i], jsonSceneObjectDatas);
+		SaveSceneObjectData(object->childObjects[i], jsonfile);
 	}
 }
 

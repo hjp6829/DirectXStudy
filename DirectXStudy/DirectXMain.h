@@ -7,7 +7,7 @@
 #include <vector>
 #include "Mouse.h"
 #include "CameraObject.h"
-#include "Light.h"
+#include "LightObject.h"
 #include <string>
 
 
@@ -35,8 +35,8 @@ public:
 	void SetMouse(Mouse* mouse) { currentMouse = mouse; }
 	CameraObject* GetCamera() { return cam; }
 	void SetCamera(CameraObject*cam) { this->cam=cam;}
-	void SetLight(Light* light) { this->light = light; }
-	Light* GetLight() { return light; }
+	void SetLight(LightObject* light) { this->light = light; }
+	LightObject* GetLight() { return light; }
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
 	void SetSceneObjects(std::vector<Object*>* objectVector){ objects = objectVector; }
@@ -63,6 +63,6 @@ private:
 	std::vector<Object*>* objects;
 	Mouse* currentMouse;
 	CameraObject* cam;
-	Light* light;
+	LightObject* light;
 	GlobalBuffer globalBuffer = {};
 };

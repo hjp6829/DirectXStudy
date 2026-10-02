@@ -29,10 +29,8 @@ App::App()
 	dxdMain->SetSceneObjects(sceneManager->GetSceneObjects());
 	uimanager = new UIManager(sceneManager->GetSceneObjects());
 
-	light = new Light();
-
 	dxdMain->SetCamera(sceneManager->GetCamera());
-	dxdMain->SetLight(light);
+	dxdMain->SetLight(sceneManager->GetLight());
 
 	uimanager->OnModelSelected = [this](std::string path) {
 		sceneManager->ModelSelected(path);
@@ -109,7 +107,7 @@ void App::Run()
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
 		//cam->ViewCameraWindow();
-		light->ViewLightWindow();
+		//light->ViewLightWindow();
 		uimanager->UpdateUI();
 		//static bool showDemoWindow = true;
 		//ImGui::ShowDemoWindow(&showDemoWindow);

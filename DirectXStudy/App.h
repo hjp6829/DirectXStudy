@@ -2,7 +2,6 @@
 #include "DirectXMain.h"
 #include "Window.h"
 #include <chrono>
-#include "Light.h"
 #include "Log.h"
 #include <queue>
 #include <functional>
@@ -20,7 +19,6 @@ class App {
 private:
 		DirectXMain* dxdMain;
 		Window* window;
-		Light* light;
 		Mouse* mouse;
 		Keyboard* keyboard;
 		UIManager* uimanager;

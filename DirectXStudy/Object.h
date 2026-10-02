@@ -4,6 +4,7 @@
 #include <wrl/client.h>
 #include <vector>
 #include <string>
+#include <nlohmann/json.hpp>
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -47,6 +48,10 @@ public:
 	XMFLOAT3 GetObjectRotation();
 	XMFLOAT3 GetObjectScale();
 	void SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale);
+public:
+	void virtual ShowInspectorUI();
+	void virtual Serialize(nlohmann::json& j);
+	void virtual Deserialize(){};
 protected:
 	XMFLOAT3 positionOffset = { 0.0f, 0.0f, 4.0f };
 	XMFLOAT3 rotationOffset = { 0.0f, 0.0f, 0.0f };

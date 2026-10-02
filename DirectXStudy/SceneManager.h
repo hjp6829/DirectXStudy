@@ -2,11 +2,12 @@
 #include <vector>
 #include <d3d11.h>
 #include <string>
+#include "CameraObject.h"
+#include "LightObject.h"
 
 class Object;
 class ModelCreater;
 struct JsonSceneObjectData;
-#include "CameraObject.h"
 
 class SceneManager {
 public:
@@ -23,6 +24,7 @@ public:
 	void SetMouseWheelDelta(float delta) { camera->SetMouseWheelDelta(delta); }
 	void SetMouseDeltaPos(int x, int y) { camera->SetMouseDeltaPos(x, y); }
 	CameraObject* GetCamera() { return camera; }
+	LightObject* GetLight() { return light; }
 private:
 	std::vector<Object*> objects;
 	std::vector<uint64_t> objectIDs;
@@ -32,10 +34,11 @@ private:
 	Object* testMoveChild;
 	Object* testMoveParent;
 	CameraObject* camera;
+	LightObject* light;
 private:
 	void SaveScene();
 	void LoadSaveSceneFile();
-	void SaveSceneObjectData(Object* object, std::vector<JsonSceneObjectData>& jsonSceneObjectDatas);
+	void SaveSceneObjectData(Object* object, nlohmann::json& jsonfile);
 	void DeleteChiledModels(Object* object);
 	void RegisterModelHierarchy(Object* object);
 };

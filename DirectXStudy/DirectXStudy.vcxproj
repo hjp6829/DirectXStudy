@@ -142,7 +142,7 @@
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputLayout.cpp" />
-    <ClCompile Include="Light.cpp" />
+    <ClCompile Include="LightObject.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModelBrowserUI.cpp" />
@@ -172,8 +172,8 @@
     <ClInclude Include="Hierarchy.h" />
     <ClInclude Include="Insfector.h" />
     <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="Light.h" />
     <ClInclude Include="LightConstantBuffer.h" />
+    <ClInclude Include="LightObject.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModelAsset.h" />
