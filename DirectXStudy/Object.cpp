@@ -82,7 +82,7 @@ void Object::Serialize(nlohmann::json& j)
 		{ "isRootObject", IsRootObject() == true ? 1 : 0}
 	};
 }
-void Object::Deserialize(nlohmann::json& j)
+void Object::Deserialize(const nlohmann::json& j)
 {
 	parentobjectID = j["parentObjectID"];
 	SetPostionOffset(XMFLOAT3(j["posX"], j["posY"], j["posZ"]));

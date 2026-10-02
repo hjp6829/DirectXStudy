@@ -25,7 +25,7 @@ void LightObject::Serialize(nlohmann::json& j)
 	j["ObjectType"] = ObjectSaveType::LightObject;
 }
 
-void LightObject::Deserialize(nlohmann::json& j)
+void LightObject::Deserialize(const nlohmann::json& j)
 {
 	Object::Deserialize(j);
 	lightColor.x = j["lightColorR"];

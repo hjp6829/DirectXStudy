@@ -73,17 +73,23 @@ Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type,
 	switch (type)
 	{
 		case 0:
+			{
 			Object* object = modelCreater->CreateSceneObjectFromJsonData(modelPath, jsonfile.at("modelHeshCode"));
 			object->Deserialize(jsonfile);
 			return object;
+			}
 		case 1:
+			{
 			CameraObject* camera = new CameraObject();
 			camera->Deserialize(jsonfile);
 			return camera;
+			}
 		case 2:
-			LightObject * light = new LightObject();
+			{
+			LightObject* light = new LightObject();
 			light->Deserialize(jsonfile);
 			return light;
+			}
 	}
 	return nullptr;
 }
