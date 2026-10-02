@@ -23,6 +23,7 @@ public:
 	void KeyboardEvent(int idx);
 	void DrawInspectorContents() override;
 	void Serialize(nlohmann::json& j) override;
+	void Deserialize(const nlohmann::json& j) override;
 private:
 	float FOV;
 	float nearPlane = 0.5f;

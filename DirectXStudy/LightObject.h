@@ -13,6 +13,7 @@ public:
 public:
 	void DrawInspectorContents() override;
 	void Serialize(nlohmann::json& j) override;
+	void Deserialize(const nlohmann::json& j) override;
 private:
 	XMFLOAT3 lightColor = { 1.0f, 1.0f, 1.0f };
 	float specularStrength = 0.5f;

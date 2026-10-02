@@ -52,7 +52,7 @@ public:
 public:
 	void virtual DrawInspectorContents();
 	void virtual Serialize(nlohmann::json& j);
-	void virtual Deserialize(){};
+	void virtual Deserialize(const nlohmann::json& j);
 protected:
 	XMFLOAT3 positionOffset = { 0.0f, 0.0f, 4.0f };
 	XMFLOAT3 rotationOffset = { 0.0f, 0.0f, 0.0f };

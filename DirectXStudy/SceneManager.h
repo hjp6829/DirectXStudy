@@ -41,4 +41,5 @@ private:
 	void SaveSceneObjectData(Object* object, nlohmann::json& jsonfile);
 	void DeleteChiledModels(Object* object);
 	void RegisterModelHierarchy(Object* object);
+	Object* CreateSceneObject(const nlohmann::json& jsonfile, int type, std::filesystem::path path);
 };

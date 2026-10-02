@@ -22,7 +22,7 @@ public:
 	Object* CreateSceneObject(ModelAsset* modelAsset);
 	void BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject);
 	Object* LoadModelFromFile(std::string path);
-	Object* CreateSceneObjectFromJsonData(std::filesystem::path path, JsonSceneObjectData& jsonModelData);
+	Object* CreateSceneObjectFromJsonData(std::filesystem::path path, uint64_t modelHeshCode);
 	Object* CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset);
 private:
 	AssimpConverter* assimp;

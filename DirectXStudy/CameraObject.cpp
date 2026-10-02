@@ -71,3 +71,7 @@ void CameraObject::Serialize(nlohmann::json& j)
 	Object::Serialize(j);
 	j["ObjectType"] = ObjectSaveType::CameraObject;
 }
+
+void CameraObject::Deserialize(const nlohmann::json& j)
+{
+}

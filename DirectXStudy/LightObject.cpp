@@ -24,3 +24,14 @@ void LightObject::Serialize(nlohmann::json& j)
 	j["maxLightDistance"] = maxLightDistance;
 	j["ObjectType"] = ObjectSaveType::LightObject;
 }
+
+void LightObject::Deserialize(nlohmann::json& j)
+{
+	Object::Deserialize(j);
+	lightColor.x = j["lightColorR"];
+	lightColor.y = j["lightColorG"];
+	lightColor.z = j["lightColorB"];
+	specularStrength = j["specularStrength"];
+	shininess = j["shininess"];
+	maxLightDistance = j["maxLightDistance"];
+}

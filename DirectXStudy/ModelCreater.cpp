@@ -113,16 +113,16 @@ Object* ModelCreater::LoadModelFromFile(std::string path)
 	modelAssets.insert({path, modelAssetTemp });
 	return CreateSceneObject(modelAssetTemp);
 }
-Object* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, JsonSceneObjectData& jsonModelData)
+Object* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, uint64_t modelHeshCode)
 {
 	if (modelAssets.find(path.string()) != modelAssets.end())
 	{
-		return CreateSingleSceneObjectByHesh(jsonModelData.modelHeshCode, modelAssets[path.string()]);
+		return CreateSingleSceneObjectByHesh(modelHeshCode, modelAssets[path.string()]);
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
 	modelAssets.insert({ path.string(), modelAssetTemp});
-	return CreateSingleSceneObjectByHesh(jsonModelData.modelHeshCode, modelAssetTemp);
+	return CreateSingleSceneObjectByHesh(modelHeshCode, modelAssetTemp);
 }
 Object* ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset)
 {

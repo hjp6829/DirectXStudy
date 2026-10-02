@@ -65,6 +65,28 @@ void SceneManager::RegisterModelHierarchy(Object* object)
 		RegisterModelHierarchy(object->childObjects[i]);
 	}
 }
+Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type, std::filesystem::path path)
+{
+	std::filesystem::path modelFolderPath = "Assets/DirectXModel";
+	std::filesystem::path origModelPath = jsonfile["origModelPath"];
+	std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
+	switch (type)
+	{
+		case 0:
+			Object* object = modelCreater->CreateSceneObjectFromJsonData(modelPath, jsonfile.at("modelHeshCode"));
+			object->Deserialize(jsonfile);
+			return object;
+		case 1:
+			CameraObject* camera = new CameraObject();
+			camera->Deserialize(jsonfile);
+			return camera;
+		case 2:
+			LightObject * light = new LightObject();
+			light->Deserialize(jsonfile);
+			return light;
+	}
+	return nullptr;
+}
 void SceneManager::DeleteModel(Object* object)
 {
 	if (object->IsRootObject())
@@ -152,23 +174,23 @@ void SceneManager::LoadSaveSceneFile()
 	json sceneJson;
 	file >> sceneJson;
 
-	std::filesystem::path modelFolderPath = "Assets/DirectXModel";
+
 
 	std::unordered_map<uint64_t, Object*>loadSceneObjects;
 	for (const auto& item : sceneJson)
 	{
-		JsonSceneObjectData data = item.get<JsonSceneObjectData>();
-		std::filesystem::path origModelPath = data.origModelPath;
-		std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
-		Object* object = modelCreater->CreateSceneObjectFromJsonData(modelPath, data);
-		object->parentobjectID = data.parentObjectID;
-		object->SetPostionOffset(XMFLOAT3(data.localPosx, data.localPosy, data.localPosz));
-		object->SetRotationOffset(XMFLOAT3(data.localRotx, data.localRoty, data.localRotz));
-		object->SetScaleOffset(XMFLOAT3(data.localScalex, data.localScaley, data.localScalez));
-		object->objectID = data.objectID;
-		object->SetRootNodeCheck(data.isRootObject);
+		int objectType;
+		item.at("ObjectType").get_to(objectType);
+		Object* object = CreateSceneObject(item, objectType, path);
+
+		//object->parentobjectID = data.parentObjectID;
+		//object->SetPostionOffset(XMFLOAT3(data.localPosx, data.localPosy, data.localPosz));
+		//object->SetRotationOffset(XMFLOAT3(data.localRotx, data.localRoty, data.localRotz));
+		//object->SetScaleOffset(XMFLOAT3(data.localScalex, data.localScaley, data.localScalez));
+		//object->objectID = data.objectID;
+		//object->SetRootNodeCheck(data.isRootObject);
 		loadSceneObjects.insert({ object->objectID, object });
-		if (data.isRootObject == 1)
+		if (item.at("isRootObject") == 1)
 			objects.push_back(object);
 	}
 

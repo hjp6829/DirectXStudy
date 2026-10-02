@@ -11,3 +11,7 @@ void SceneObject::Serialize(nlohmann::json& j)
 	Object::Serialize(j);
 	j["ObjectType"] = ObjectSaveType::GameObject;
 }
+
+void SceneObject::Deserialize(const nlohmann::json& j)
+{
+}
