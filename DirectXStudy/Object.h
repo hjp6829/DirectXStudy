@@ -48,8 +48,9 @@ public:
 	XMFLOAT3 GetObjectRotation();
 	XMFLOAT3 GetObjectScale();
 	void SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale);
+	void ShowInspectorUI();
 public:
-	void virtual ShowInspectorUI();
+	void virtual DrawInspectorContents();
 	void virtual Serialize(nlohmann::json& j);
 	void virtual Deserialize(){};
 protected:

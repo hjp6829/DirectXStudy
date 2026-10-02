@@ -11,7 +11,7 @@ public:
 	float GetMaxLightDistance() { return maxLightDistance; }
 	void SetColor(DirectX::XMFLOAT3 color) { lightColor = color; }
 public:
-	void ShowInspectorUI() override;
+	void DrawInspectorContents() override;
 	void Serialize(nlohmann::json& j) override;
 private:
 	XMFLOAT3 lightColor = { 1.0f, 1.0f, 1.0f };

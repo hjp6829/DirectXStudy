@@ -1,6 +1,7 @@
 #include "CameraObject.h"
 #include "Log.h"
 #include "imgui_impl_win32.h"
+#include "SceneSerializationData.h"
 
 DirectX::XMMATRIX CameraObject::GetProjectionMatrix()
 {
@@ -59,25 +60,14 @@ void CameraObject::KeyboardEvent(int idx)
 	XMStoreFloat3(&positionOffset, pos);
 }
 
-void CameraObject::ShowInspectorUI()
+void CameraObject::DrawInspectorContents()
 {
-	Object::ShowInspectorUI();
-	if (ImGui::Begin("Camera"))
-	{
-		//bool enableValue = meshEnable;
-		//ImGui::Checkbox("Enable", &enableValue);
-		//if (enableValue != meshEnable)
-		//	ToggleMeshEnable(enableValue);
-		////ImGui::Text(currentSceneObject->modelName.c_str());
-		//ImGui::Text("Psotion");
-		//if (ImGui::InputFloat3("Position", &tempPos.x))
-		//	SetPosition(tempPos);
-		//ImGui::Text("Rotation");
-		//if (ImGui::InputFloat3("Rotation", &tempRot.x))
-		//	SetRotaion(tempRot);
-		//ImGui::Text("Scale");
-		//if (ImGui::InputFloat3("Scale", &tempScale.x))
-		//	SetScale(tempScale);
-	}
-	ImGui::End();
+	Object::DrawInspectorContents();
+
+}
+
+void CameraObject::Serialize(nlohmann::json& j)
+{
+	Object::Serialize(j);
+	j["ObjectType"] = ObjectSaveType::CameraObject;
 }

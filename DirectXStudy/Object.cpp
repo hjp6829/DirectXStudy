@@ -37,54 +37,35 @@ void Object::ShowInspectorUI()
 {
 	if (ImGui::Begin("Insfector"))
 	{
-		XMFLOAT3 tempPos = GetObjectPosition();
-		XMFLOAT3 tempRot = GetObjectRotation();
-		XMFLOAT3 tempScale = GetObjectScale();
-
-		bool enableValue = meshEnable;
-		ImGui::Checkbox("Enable", &enableValue);
-		if (enableValue != meshEnable)
-			ToggleMeshEnable(enableValue);
-		//ImGui::Text(currentSceneObject->modelName.c_str());
-		ImGui::Text("Psotion");
-		if (ImGui::InputFloat3("Position", &tempPos.x))
-			SetPosition(tempPos);
-		ImGui::Text("Rotation");
-		if (ImGui::InputFloat3("Rotation", &tempRot.x))
-			SetRotaion(tempRot);
-		ImGui::Text("Scale");
-		if (ImGui::InputFloat3("Scale", &tempScale.x))
-			SetScale(tempScale);
-
-		//ImGui::Text("Test");
-		//ImGui::Text("testMoveChild");
-		//ImGui::Text("%s", testMoveChild == nullptr ? "" : (testMoveChild->objectName).c_str());
-		//ImGui::Text("testMoveParent");
-		//ImGui::Text("%s", testMoveParent == nullptr ? "" : (testMoveParent->objectName).c_str());
-		////if (currentSceneObject->currentMeshs.size() != 0)
-		////{
-		////	ImGui::Text("Material");
-		////	for (int i = 0; i < currentSceneObject->currentMeshs.size(); i++)
-		////	{
-		////		Mesh* meshTemp = currentSceneObject->currentMeshs[i];
-		////		meshMaterials.push_back(meshTemp->GetMaterialIDX());
-		////	}
-		////	for (int i = 0; i < meshMaterials.size(); i++)
-		////	{
-		////		int temp = meshMaterials[i];
-		////		ImGui::InputInt("MaterialIDX", &temp);
-		////		if(meshMaterials[i] != temp)
-		////			currentSceneObject->currentMeshs[i]->SetMaterialIDX(assimp->GetMaterial(temp), temp);
-		////	}
-		////}
-		//meshMaterials.clear();
+		DrawInspectorContents();
 	}
 	ImGui::End();
+}
+void Object::DrawInspectorContents()
+{
+	XMFLOAT3 tempPos = GetObjectPosition();
+	XMFLOAT3 tempRot = GetObjectRotation();
+	XMFLOAT3 tempScale = GetObjectScale();
+
+	bool enableValue = meshEnable;
+	ImGui::Checkbox("Enable", &enableValue);
+	if (enableValue != meshEnable)
+		ToggleMeshEnable(enableValue);
+	//ImGui::Text(currentSceneObject->modelName.c_str());
+	ImGui::Text("Psotion");
+	if (ImGui::InputFloat3("Position", &tempPos.x))
+		SetPosition(tempPos);
+	ImGui::Text("Rotation");
+	if (ImGui::InputFloat3("Rotation", &tempRot.x))
+		SetRotaion(tempRot);
+	ImGui::Text("Scale");
+	if (ImGui::InputFloat3("Scale", &tempScale.x))
+		SetScale(tempScale);
 }
 void Object::Serialize(nlohmann::json& j)
 {
 	j = nlohmann::json{
-		{"modelHeshCode", currentModelNode->modelHeshCode},
+		{"modelHeshCode",currentModelNode == nullptr ? 0 : currentModelNode->modelHeshCode},
 		{"parentObjectID", parentObject == nullptr ? 0 : parentObject->objectID},
 		{"posX", positionOffset.x},
 		{"posY", positionOffset.y},
@@ -96,7 +77,7 @@ void Object::Serialize(nlohmann::json& j)
 		{"scaley", scaleOffset.y},
 		{"scalez", scaleOffset.z},
 		{"ModelNamePath", modelNamePath},
-		{ "TestModelNamePath", currentModelNode->modelName },
+		{ "TestModelNamePath", objectName},
 		{ "objectID", objectID },
 		{ "isRootObject", IsRootObject() == true ? 1 : 0}
 	};

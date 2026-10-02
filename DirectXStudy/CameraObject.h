@@ -21,7 +21,8 @@ public:
 	void SetMouseWheelDelta(int value);
 	void SetMouseDeltaPos(int x,int y);
 	void KeyboardEvent(int idx);
-	void ShowInspectorUI() override;
+	void DrawInspectorContents() override;
+	void Serialize(nlohmann::json& j) override;
 private:
 	float FOV;
 	float nearPlane = 0.5f;

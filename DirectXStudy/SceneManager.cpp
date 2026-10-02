@@ -7,7 +7,6 @@
 #include "UIManager.h"
 #include <string>
 
-void to_json(nlohmann::json& j, const JsonSceneObjectData& data);
 void from_json(const nlohmann::json& j, JsonSceneObjectData& data);
 
 SceneManager::SceneManager(ID3D11Device* device)
@@ -127,27 +126,6 @@ void SceneManager::SaveSceneObjectData(Object* object, nlohmann::json& jsonfile)
 	{
 		SaveSceneObjectData(object->childObjects[i], jsonfile);
 	}
-}
-
-void to_json(nlohmann::json& j, const JsonSceneObjectData& data)
-{
-	j = nlohmann::json{
-		{"modelHeshCode", data.modelHeshCode},
-		{"parentObjectID", data.parentObjectID},
-		{"posX", data.localPosx},
-		{"posY", data.localPosy},
-		{"posZ", data.localPosz},
-		{ "rotx", data.localRotx },
-		{"roty", data.localRoty},
-		{"rotz", data.localRotz},
-		{ "scalex", data.localScalex },
-		{"scaley", data.localScaley},
-		{"scalez", data.localScalez},
-		{"ModelNamePath", data.origModelPath},
-		{ "TestModelNamePath", data.testModelName },
-		{ "objectID", data.objectID },
-		{ "isRootObject", data.isRootObject}
-	};
 }
 
 void SceneManager::LoadSaveSceneFile()
