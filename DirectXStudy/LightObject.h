@@ -3,7 +3,7 @@
 #include <nlohmann/json.hpp>
 class LightObject : public Object{
 public:
-	LightObject(){};
+	LightObject();
 	DirectX::XMFLOAT4 GetLightPos() { return DirectX::XMFLOAT4(positionOffset.x, positionOffset.y, positionOffset.z, 1); }
 	DirectX::XMFLOAT4 GetLightColor() { return DirectX::XMFLOAT4(lightColor.x, lightColor.y, lightColor.z, 1); }
 	float GetSpecularStrength() { return specularStrength; }

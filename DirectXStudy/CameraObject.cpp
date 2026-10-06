@@ -3,6 +3,11 @@
 #include "imgui_impl_win32.h"
 #include "SceneSerializationData.h"
 
+CameraObject::CameraObject()
+{
+	objectName = "Camera";
+}
+
 DirectX::XMMATRIX CameraObject::GetProjectionMatrix()
 {
 	return DirectX::XMMatrixPerspectiveLH(1.0f, 4.0f / 3.0f, nearPlane, farPlane);
@@ -70,8 +75,10 @@ void CameraObject::Serialize(nlohmann::json& j)
 {
 	Object::Serialize(j);
 	j["ObjectType"] = ObjectSaveType::CameraObject;
+	j["isRootObject"] = 1;
 }
 
 void CameraObject::Deserialize(const nlohmann::json& j)
 {
+	Object::Deserialize(j);
 }

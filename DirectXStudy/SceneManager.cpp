@@ -11,13 +11,7 @@ void from_json(const nlohmann::json& j, JsonSceneObjectData& data);
 
 SceneManager::SceneManager(ID3D11Device* device)
 {
-	camera = new CameraObject();
-	camera->objectName = "Camera";
-	light = new LightObject();
-	light->objectName = "Light";
 	modelCreater = new ModelCreater(device);
-	objects.push_back(camera);
-	objects.push_back(light);
 	LoadSaveSceneFile();
 }
 
@@ -67,31 +61,57 @@ void SceneManager::RegisterModelHierarchy(Object* object)
 }
 Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type, std::filesystem::path path)
 {
-	std::filesystem::path modelFolderPath = "Assets/DirectXModel";
-	std::filesystem::path origModelPath = jsonfile["origModelPath"];
-	std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
+	Object* object = nullptr;
 	switch (type)
 	{
 		case 0:
 			{
-			Object* object = modelCreater->CreateSceneObjectFromJsonData(modelPath, jsonfile.at("modelHeshCode"));
+			std::filesystem::path modelFolderPath = "Assets/DirectXModel";
+			std::string origModelPath;
+			jsonfile.at("ModelNamePath").get_to(origModelPath);
+			std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
+			object = modelCreater->CreateSceneObjectFromJsonData(modelPath, jsonfile.at("modelHeshCode"));
 			object->Deserialize(jsonfile);
-			return object;
+			break;
 			}
 		case 1:
 			{
-			CameraObject* camera = new CameraObject();
+			camera = new CameraObject();
 			camera->Deserialize(jsonfile);
-			return camera;
+			object = camera;
+			break;
 			}
 		case 2:
 			{
-			LightObject* light = new LightObject();
+			light = new LightObject();
 			light->Deserialize(jsonfile);
-			return light;
+			object = light;
+			break;
 			}
 	}
-	return nullptr;
+
+	if(isNoSaveFile)
+	{
+		object->objectID = objectID++;
+	}
+	else
+	{
+		objectID = object->objectID;
+	}
+
+	return object;
+}
+void SceneManager::CreateInitJsonFile()
+{
+	isNoSaveFile = true;
+	CameraObject* camera = new CameraObject();
+	camera->objectID = objectID++;
+	LightObject* light = new LightObject();
+	light->objectID = objectID++;
+	objects.push_back(camera);
+	objects.push_back(light);
+	SaveScene();
+	objects.clear();
 }
 void SceneManager::DeleteModel(Object* object)
 {
@@ -163,8 +183,8 @@ void SceneManager::LoadSaveSceneFile()
 	std::filesystem::path saveFilePath = path / "SaveScene"/ "Scene.json";
 	if (!std::filesystem::exists(saveFilePath))
 	{
-		Log::PrintLog("No SaveFile");
-		return;
+		Log::PrintLog("No SaveFile Create Init SaveFile");
+		CreateInitJsonFile();
 	}
 	std::ifstream file(saveFilePath);
 	if (!file.is_open())
@@ -179,8 +199,6 @@ void SceneManager::LoadSaveSceneFile()
 	}
 	json sceneJson;
 	file >> sceneJson;
-
-
 
 	std::unordered_map<uint64_t, Object*>loadSceneObjects;
 	for (const auto& item : sceneJson)
@@ -207,28 +225,6 @@ void SceneManager::LoadSaveSceneFile()
 		Object* parentObject = loadSceneObjects.at(objectTemp->parentobjectID);
 		parentObject->InsertChildSceneObject(objectTemp);
 	}
+	isNoSaveFile = false;
 	loadSceneObjects.clear();
-}
-
-void from_json(const nlohmann::json& j, JsonSceneObjectData& data)
-{
-	j.at("modelHeshCode").get_to(data.modelHeshCode);
-	j.at("parentObjectID").get_to(data.parentObjectID);
-
-	j.at("posX").get_to(data.localPosx);
-	j.at("posY").get_to(data.localPosy);
-	j.at("posZ").get_to(data.localPosz);
-
-	j.at("rotx").get_to(data.localRotx);
-	j.at("roty").get_to(data.localRoty);
-	j.at("rotz").get_to(data.localRotz);
-
-	j.at("scalex").get_to(data.localScalex);
-	j.at("scaley").get_to(data.localScaley);
-	j.at("scalez").get_to(data.localScalez);
-
-	j.at("ModelNamePath").get_to(data.origModelPath);
-	j.at("TestModelNamePath").get_to(data.testModelName);
-	j.at("objectID").get_to(data.objectID);
-	j.at("isRootObject").get_to(data.isRootObject);
 }

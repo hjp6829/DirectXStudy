@@ -35,6 +35,7 @@ private:
 	Object* testMoveParent;
 	CameraObject* camera;
 	LightObject* light;
+	bool isNoSaveFile;
 private:
 	void SaveScene();
 	void LoadSaveSceneFile();
@@ -42,4 +43,5 @@ private:
 	void DeleteChiledModels(Object* object);
 	void RegisterModelHierarchy(Object* object);
 	Object* CreateSceneObject(const nlohmann::json& jsonfile, int type, std::filesystem::path path);
+	void CreateInitJsonFile();
 };

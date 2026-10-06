@@ -3,6 +3,7 @@
 
 class CameraObject : public Object {
 public:
+	CameraObject();
 	DirectX::XMMATRIX GetProjectionMatrix();
 	DirectX::XMMATRIX GetViewMatrix();
 	DirectX::XMFLOAT3 GetWorldPos();

@@ -7,6 +7,7 @@
 #include "ModelNode.h"
 #include "AssimpConverter.h"
 #include "Datas.h"
+#include "SceneObject.h"
 
 ModelCreater::ModelCreater(ID3D11Device* device)
 {
@@ -70,7 +71,7 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 
 Object* ModelCreater::CreateSceneObject(ModelAsset* modelAsset)
 {
-	Object* object = new Object();
+	SceneObject* object = new SceneObject();
 	BuildSceneObjectTree(modelAsset->currentNode, object);
 	return object;
 }
@@ -92,7 +93,7 @@ void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObje
 		parentObject->modelNamePath = modelNode->sourceModelPath;
 		for (int i = 0; i < modelNode->childNodes.size(); i++)
 		{
-			Object* object = new Object();
+			SceneObject* object = new SceneObject();
 			object->currentModelNode = modelNode->childNodes[i];
 			object->parentObject = parentObject;
 			parentObject->childObjects.push_back(object);
@@ -127,7 +128,7 @@ Object* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, 
 Object* ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset)
 {
 	ModelNode* modelNode = modelAsset->modelNodesDic.at(heshCode);
-	Object* object = new Object();
+	SceneObject* object = new SceneObject();
 	object->currentModelNode = modelNode;
 	object->currentModelNode = modelNode;
 	object->objectName = modelNode->modelName;

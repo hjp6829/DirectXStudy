@@ -84,12 +84,12 @@ void Object::Serialize(nlohmann::json& j)
 }
 void Object::Deserialize(const nlohmann::json& j)
 {
-	parentobjectID = j["parentObjectID"];
-	SetPostionOffset(XMFLOAT3(j["posX"], j["posY"], j["posZ"]));
-	SetRotationOffset(XMFLOAT3(j["rotx"], j["roty"], j["rotz"]));
-	SetScaleOffset(XMFLOAT3(j["scalex"], j["scaley"], j["scalez"]));
-	objectID = j["objectID"];
-	SetRootNodeCheck(j["isRootObject"] == 1 ? true : false);
+	j.at("parentObjectID").get_to(parentobjectID);
+	SetPostionOffset(XMFLOAT3(j.at("posX").get<float>(), j.at("posY").get<float>(), j.at("posZ").get<float>()));
+	SetRotationOffset(XMFLOAT3(j.at("rotx").get<float>(), j.at("roty").get<float>(), j.at("rotz").get<float>()));
+	SetScaleOffset(XMFLOAT3(j.at("scalex").get<float>(), j.at("scaley").get<float>(), j.at("scalez").get<float>()));
+	j.at("objectID").get_to(objectID);
+	SetRootNodeCheck(j.at("isRootObject").get<float>() == 1 ? true : false);
 }
 void Object::SetPosition(XMFLOAT3 position)
 {

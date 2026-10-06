@@ -2,6 +2,11 @@
 #include "imgui_impl_win32.h"
 #include "SceneSerializationData.h"
 
+LightObject::LightObject()
+{
+	objectName = "Light";
+}
+
 void LightObject::DrawInspectorContents()
 {
 	Object::DrawInspectorContents();
@@ -23,6 +28,7 @@ void LightObject::Serialize(nlohmann::json& j)
 	j["shininess"] = shininess;
 	j["maxLightDistance"] = maxLightDistance;
 	j["ObjectType"] = ObjectSaveType::LightObject;
+	j["isRootObject"] = 1;
 }
 
 void LightObject::Deserialize(const nlohmann::json& j)

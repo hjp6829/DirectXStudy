@@ -46,12 +46,12 @@ float4 main(VSOut IN) : SV_TARGET
     float specular = pow(saturate(dot(normalTS, H)), shininess) * specularStrength;
 
     float diffuse = saturate(dot(normalTS, L));
-    float brightness = saturate(0.5f + diffuse);
+    float brightness = diffuse;
 
     float4 texColor = tex.Sample(splr, IN.uv);
     texColor.rgb *= brightness * lightColor.rgb * color.rgb;
     texColor.rgb += specular;
-    texColor.rgb *= attenuation;
+    //texColor.rgb *= attenuation;
     return texColor;
     //return float4(1, 1, 1, 1);
 }

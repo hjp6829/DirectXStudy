@@ -14,4 +14,5 @@ void SceneObject::Serialize(nlohmann::json& j)
 
 void SceneObject::Deserialize(const nlohmann::json& j)
 {
+	Object::Deserialize(j);
 }
