@@ -210,3 +210,9 @@ void Object::UpdateTransformForNewParent(Object* parentObject)
 	XMStoreFloat3(&rotationOffset, rotation);
 	XMStoreFloat3(&scaleOffset, scale);
 }
+
+void Object::RemoveFromParent()
+{
+	if(parentObject != nullptr)
+		parentObject->RemoveChildObject(this);
+}

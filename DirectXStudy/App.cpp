@@ -40,16 +40,11 @@ App::App()
 			sceneManager->DeleteModel(object);
 		});
 		};
-	uimanager->OnHierarchyMoveChildClick = [this](Object* object) {
-		sceneManager->TestSaveMoveChild(object);
-		};
-	uimanager->OnHierarchyMoveParentClick = [this](Object* object) {
-		commandQueue.push([this, object]() {
-			sceneManager->TestSaveMoveParent(object);
-			});
-		};
 	uimanager->OnHierarchyObjectClick =[this](Object* object) {
 		sceneManager->SetCurrentSelectObject(object);
+		};
+	uimanager->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {
+		sceneManager->SetHierarchyDropObject(parentObject, childObject);
 		};
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
 	//	RenameModel(model);

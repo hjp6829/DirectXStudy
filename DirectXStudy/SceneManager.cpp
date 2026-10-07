@@ -156,14 +156,31 @@ void SceneManager::DeleteModel(Object* object)
 	object->childObjects.clear();
 	delete object;
 }
-void SceneManager::TestSaveMoveParent(Object* object)
+
+void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObject)
 {
-	testMoveChild->parentObject->RemoveChildObject(testMoveChild);
-	testMoveChild->parentObject = object;
-	testMoveChild->parentobjectID = object->objectID;
-	testMoveChild->UpdateTransformForNewParent(object);
-	object->childObjects.push_back(testMoveChild);
+	childObject->RemoveFromParent();
+	if (parentObject == nullptr)
+	{
+		childObject->parentObject=nullptr;
+		childObject->parentobjectID = 0;
+		childObject->SetRootNodeCheck(true);
+		objects.push_back(childObject);
+		return;
+	}
+
+	childObject->parentObject = parentObject;
+	childObject->parentobjectID = parentObject->objectID;
+	childObject->UpdateTransformForNewParent(parentObject);
+	parentObject->childObjects.push_back(childObject);
+
+	if (childObject->IsRootObject())
+	{
+		objects.erase(std::remove(objects.begin(), objects.end(), childObject), objects.end());
+		childObject->SetRootNodeCheck(false);
+	}
 }
+
 void SceneManager::DeleteChiledModels(Object* object)
 {
 	for (int i = 0; i < object->childObjects.size(); i++)

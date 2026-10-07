@@ -17,13 +17,12 @@ public:
 	void SetKeyInputHold(int key);
 	void CreateObjectSelect(std::string path);
 	void DeleteModel(Object* object);
-	void TestSaveMoveChild(Object* object){ testMoveChild  = object;}
-	void TestSaveMoveParent(Object* object);
 	void SetMouseRightDown(bool value) { camera->SetMouseRightValue(value); }
 	void SetMouseWheelDown(bool value) { camera->SetMouseWheelDown(value); }
 	void SetMouseWheelDelta(float delta) { camera->SetMouseWheelDelta(delta); }
 	void SetMouseDeltaPos(int x, int y) { camera->SetMouseDeltaPos(x, y); }
 	void SetCurrentSelectObject(Object* object) { currentSelectObject = object; }
+	void SetHierarchyDropObject(Object* parentObject, Object* childObject);
 	CameraObject* GetCamera() { return camera; }
 	LightObject* GetLight() { return light; }
 private:
@@ -32,8 +31,6 @@ private:
 	ModelCreater* modelCreater;
 	uint64_t objectID = 0;
 	bool isCtrl;
-	Object* testMoveChild;
-	Object* testMoveParent;
 	CameraObject* camera;
 	LightObject* light;
 	bool isNoSaveFile;
