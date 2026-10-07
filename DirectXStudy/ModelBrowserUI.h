@@ -11,7 +11,7 @@ class ModelBrowserUI
 public:
 	ModelBrowserUI();
 	void UpdateUI();
-	std::function<void(std::string)> OnModelSelected;
+	std::function<void(std::string)> OnCreateObjectSelected;
 private:
 	std::vector<fs::path> files;
 };

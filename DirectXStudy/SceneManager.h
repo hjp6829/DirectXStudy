@@ -15,7 +15,7 @@ public:
 	std::vector<Object*>* GetSceneObjects() { return &objects; }
 	void SetKeyInput(int key, bool value);
 	void SetKeyInputHold(int key);
-	void ModelSelected(std::string path);
+	void CreateObjectSelect(std::string path);
 	void DeleteModel(Object* object);
 	void TestSaveMoveChild(Object* object){ testMoveChild  = object;}
 	void TestSaveMoveParent(Object* object);
@@ -23,6 +23,7 @@ public:
 	void SetMouseWheelDown(bool value) { camera->SetMouseWheelDown(value); }
 	void SetMouseWheelDelta(float delta) { camera->SetMouseWheelDelta(delta); }
 	void SetMouseDeltaPos(int x, int y) { camera->SetMouseDeltaPos(x, y); }
+	void SetCurrentSelectObject(Object* object) { currentSelectObject = object; }
 	CameraObject* GetCamera() { return camera; }
 	LightObject* GetLight() { return light; }
 private:
@@ -36,6 +37,8 @@ private:
 	CameraObject* camera;
 	LightObject* light;
 	bool isNoSaveFile;
+	Object* currentSelectObject;
+	Object* currentDuplicateObject;
 private:
 	void SaveScene();
 	void LoadSaveSceneFile();
@@ -44,4 +47,7 @@ private:
 	void RegisterModelHierarchy(Object* object);
 	Object* CreateSceneObject(const nlohmann::json& jsonfile, int type, std::filesystem::path path);
 	void CreateInitJsonFile();
+	void DuplicateObjectSave();
+	void DuplicateObject();
+	Object* DuplicateSceneObject(Object* object);
 };

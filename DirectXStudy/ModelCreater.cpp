@@ -69,7 +69,7 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 }
 
 
-Object* ModelCreater::CreateSceneObject(ModelAsset* modelAsset)
+Object* ModelCreater::CreateSceneObjectsFromModel(ModelAsset* modelAsset)
 {
 	SceneObject* object = new SceneObject();
 	BuildSceneObjectTree(modelAsset->currentNode, object);
@@ -80,17 +80,13 @@ void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObje
 {
 	if (modelNode->childNodes.size() == 0)
 	{
-		parentObject->currentModelNode = modelNode;
-		parentObject->objectName = modelNode->modelName;
-		parentObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
-		parentObject->modelNamePath = modelNode->sourceModelPath;
+		SetModelToObject(parentObject, modelNode);
+	
 	}
 	else
 	{
-		parentObject->currentModelNode = modelNode;
-		parentObject->objectName = modelNode->modelName;
-		parentObject->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
-		parentObject->modelNamePath = modelNode->sourceModelPath;
+		SetModelToObject(parentObject, modelNode);
+		
 		for (int i = 0; i < modelNode->childNodes.size(); i++)
 		{
 			SceneObject* object = new SceneObject();
@@ -107,12 +103,12 @@ Object* ModelCreater::LoadModelFromFile(std::string path)
 	auto it = modelAssets.find(path);
 	if(it != modelAssets.end())
 	{
-		return CreateSceneObject(it->second);
+		return CreateSceneObjectsFromModel(it->second);
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
 	modelAssets.insert({path, modelAssetTemp });
-	return CreateSceneObject(modelAssetTemp);
+	return CreateSceneObjectsFromModel(modelAssetTemp);
 }
 Object* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, uint64_t modelHeshCode)
 {
@@ -129,12 +125,16 @@ Object* ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsse
 {
 	ModelNode* modelNode = modelAsset->modelNodesDic.at(heshCode);
 	SceneObject* object = new SceneObject();
-	object->currentModelNode = modelNode;
+	SetModelToObject(object, modelNode);
+
+	return object;
+}
+void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)
+{
 	object->currentModelNode = modelNode;
 	object->objectName = modelNode->modelName;
 	object->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
 	object->modelNamePath = modelNode->sourceModelPath;
-	return object;
 }
 uint64_t ModelCreater::FNV1a(const std::string& str)
 {

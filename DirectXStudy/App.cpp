@@ -32,8 +32,8 @@ App::App()
 	dxdMain->SetCamera(sceneManager->GetCamera());
 	dxdMain->SetLight(sceneManager->GetLight());
 
-	uimanager->OnModelSelected = [this](std::string path) {
-		sceneManager->ModelSelected(path);
+	uimanager->OnCreateObjectSelected = [this](std::string path) {
+		sceneManager->CreateObjectSelect(path);
 		};
 	uimanager->OnModelDelete = [this](Object* object) {
 		commandQueue.push([this, object] () {
@@ -47,6 +47,9 @@ App::App()
 		commandQueue.push([this, object]() {
 			sceneManager->TestSaveMoveParent(object);
 			});
+		};
+	uimanager->OnHierarchyObjectClick =[this](Object* object) {
+		sceneManager->SetCurrentSelectObject(object);
 		};
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
 	//	RenameModel(model);

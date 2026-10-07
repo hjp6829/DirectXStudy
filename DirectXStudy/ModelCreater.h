@@ -19,11 +19,12 @@ public:
 	ModelAsset* CreateModelAsset(ModelLoadData* modelData, std::filesystem::path modelName);
 	void CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode, ModelAsset* modelAsset);
 	
-	Object* CreateSceneObject(ModelAsset* modelAsset);
+	Object* CreateSceneObjectsFromModel(ModelAsset* modelAsset);
 	void BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject);
 	Object* LoadModelFromFile(std::string path);
 	Object* CreateSceneObjectFromJsonData(std::filesystem::path path, uint64_t modelHeshCode);
 	Object* CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset);
+	void SetModelToObject(Object* object, ModelNode* modelNode);
 private:
 	AssimpConverter* assimp;
 	std::unordered_map<std::string, ModelAsset*> modelAssets;

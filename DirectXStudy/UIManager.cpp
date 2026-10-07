@@ -10,23 +10,31 @@ UIManager::UIManager(std::vector<Object*>* SceneObjects)
 {
 	hierarchy = new Hierarchy(SceneObjects);
 	modelBrowserUI = new ModelBrowserUI();
-	insfector = new Insfector(hierarchy);
+	insfector = new Insfector();
 
-	modelBrowserUI->OnModelSelected = [this](std::string path) {
-		OnModelSelected(path);
+	modelBrowserUI->OnCreateObjectSelected = [this](std::string path) {
+		OnCreateObjectSelected(path);
 		};
 	hierarchy->OnHierarchyDeleteClick = [this](Object* object) {
 		insfector->ObjectDelete();
 		OnModelDelete(object);
 		};
 	hierarchy->SubscribeOnHierarchyMoveChildClick([this](Object* object) {
+		Log::PrintLog(object->objectName);
 		OnHierarchyMoveChildClick(object);
+		insfector->SettestMoveChild(object);
 		});
 	hierarchy->SubscribeOnHierarchyMoveParentClick([this](Object* object) {
+		Log::PrintLog(object->objectName);
 		OnHierarchyMoveParentClick(object);
+		insfector->SettestMoveParent(object);
 		});
 	hierarchy->OnHierarchyRenameClick = [this](Object* object) {
 		OnHierarchyRenameClick(object);
+		};
+	hierarchy->OnHierarchyClick = [this](Object* object) {
+		OnHierarchyObjectClick(object);
+		insfector->SetSceneObjectData(object);
 		};
 }
 

@@ -6,21 +6,9 @@
 #include "Mesh.h"
 #include "Log.h"
 
-Insfector::Insfector(Hierarchy* hierarchy)
+Insfector::Insfector()
 {
-	hierarchy->OnHierarchyClick = [this](Object* object) {
-		SetSceneObjectData(object);
-		};
-	hierarchy->SubscribeOnHierarchyMoveChildClick([this](Object* object) {
-		{
-			Log::PrintLog(object->objectName);
-			SettestMoveChild(object);
-		}});
-	hierarchy->SubscribeOnHierarchyMoveParentClick([this](Object* object) {
-		{
-			Log::PrintLog(object->objectName);
-			SettestMoveParent(object);
-		}});
+
 }
 
 void Insfector::SetSceneObjectData(Object* object)

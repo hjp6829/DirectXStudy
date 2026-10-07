@@ -6,7 +6,7 @@ class Hierarchy;
 
 class Insfector {
 public:
-	Insfector(Hierarchy* hierarchy);
+	Insfector();
 	void SetSceneObjectData(Object* object);
 	void SettestMoveChild(Object* object){ testMoveChild  = object;}
 	void SettestMoveParent(Object* object){ testMoveParent = object; }

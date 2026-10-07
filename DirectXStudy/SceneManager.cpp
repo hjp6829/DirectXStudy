@@ -7,8 +7,6 @@
 #include "UIManager.h"
 #include <string>
 
-void from_json(const nlohmann::json& j, JsonSceneObjectData& data);
-
 SceneManager::SceneManager(ID3D11Device* device)
 {
 	modelCreater = new ModelCreater(device);
@@ -28,6 +26,16 @@ void SceneManager::SetKeyInput(int key, bool value)
 	{
 		LoadSaveSceneFile();
 	}
+	if ((char)key == 'C' && value)
+	{
+		if (isCtrl)
+			DuplicateObjectSave();
+	}
+	if ((char)key == 'V' && value)
+	{
+		if (isCtrl)
+			DuplicateObject();
+	}
 }
 
 void SceneManager::SetKeyInputHold(int key)
@@ -35,7 +43,7 @@ void SceneManager::SetKeyInputHold(int key)
 	camera->KeyboardEvent(key);
 }
 
-void SceneManager::ModelSelected(std::string path)
+void SceneManager::CreateObjectSelect(std::string path)
 {
 	Object* object = modelCreater->LoadModelFromFile(path);
 	object->SetRootNodeCheck(true);
@@ -104,6 +112,41 @@ void SceneManager::CreateInitJsonFile()
 	objects.push_back(light);
 	SaveScene();
 	objects.clear();
+}
+void SceneManager::DuplicateObjectSave()
+{
+	currentDuplicateObject = currentSelectObject;
+}
+void SceneManager::DuplicateObject()
+{
+	Object* copyObject = DuplicateSceneObject(currentDuplicateObject);
+	objects.push_back(copyObject);
+}
+Object* SceneManager::DuplicateSceneObject(Object* object)
+{
+	if(object->childObjects.size() == 0)
+	{
+		Object* copyObject =new Object();
+		copyObject->objectID = ++objectID;
+		modelCreater->SetModelToObject(copyObject, object->currentModelNode);
+		copyObject->SetPostionOffset(object->GetPostionOffset());
+		copyObject->SetRotationOffset(object->GetRotationOffset());
+		copyObject->SetScaleOffset(object->GetScaleOffset());
+		return copyObject;
+	}
+	Object* copyObject = new Object();
+	copyObject->objectID = ++objectID;
+	modelCreater->SetModelToObject(copyObject, object->currentModelNode);
+	copyObject->SetPostionOffset(object->GetPostionOffset());
+	copyObject->SetRotationOffset(object->GetRotationOffset());
+	copyObject->SetScaleOffset(object->GetScaleOffset());
+	for (int i = 0; i < object->childObjects.size(); i++)
+	{
+		Object* copyChildObject = DuplicateSceneObject(object->childObjects[i]);
+		copyObject->childObjects.push_back(copyChildObject);
+		copyChildObject->parentObject = copyObject;
+	}
+	return copyObject;	
 }
 void SceneManager::DeleteModel(Object* object)
 {

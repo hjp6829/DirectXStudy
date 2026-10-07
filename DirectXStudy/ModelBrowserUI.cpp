@@ -26,7 +26,7 @@ void ModelBrowserUI::UpdateUI()
 		{
 			if (ImGui::Button(files[i].filename().string().c_str()))
 			{
-				OnModelSelected(files[i].string());
+				OnCreateObjectSelected(files[i].string());
 			}
 		}
 	}
