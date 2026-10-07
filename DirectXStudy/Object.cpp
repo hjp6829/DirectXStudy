@@ -91,6 +91,13 @@ void Object::Deserialize(const nlohmann::json& j)
 	j.at("objectID").get_to(objectID);
 	SetRootNodeCheck(j.at("isRootObject").get<float>() == 1 ? true : false);
 }
+void Object::SetDataToCopy(Object* copyObject)
+{
+	copyObject->SetPostionOffset(GetPostionOffset());
+	copyObject->SetRotationOffset(GetRotationOffset());
+	copyObject->SetScaleOffset(GetScaleOffset());
+	copyObject->SetRootNodeCheck(IsRootObject());
+}
 void Object::SetPosition(XMFLOAT3 position)
 {
 	positionOffset.x = position.x - importedLocalPosition.x;

@@ -6,6 +6,7 @@
 #include "ModelCreater.h"
 #include "UIManager.h"
 #include <string>
+#include "SceneObject.h"
 
 SceneManager::SceneManager(ID3D11Device* device)
 {
@@ -126,20 +127,16 @@ Object* SceneManager::DuplicateSceneObject(Object* object)
 {
 	if(object->childObjects.size() == 0)
 	{
-		Object* copyObject =new Object();
+		SceneObject* copyObject =new SceneObject();
 		copyObject->objectID = ++objectID;
 		modelCreater->SetModelToObject(copyObject, object->currentModelNode);
-		copyObject->SetPostionOffset(object->GetPostionOffset());
-		copyObject->SetRotationOffset(object->GetRotationOffset());
-		copyObject->SetScaleOffset(object->GetScaleOffset());
+		object->SetDataToCopy(copyObject);
 		return copyObject;
 	}
-	Object* copyObject = new Object();
+	SceneObject* copyObject = new SceneObject();
 	copyObject->objectID = ++objectID;
 	modelCreater->SetModelToObject(copyObject, object->currentModelNode);
-	copyObject->SetPostionOffset(object->GetPostionOffset());
-	copyObject->SetRotationOffset(object->GetRotationOffset());
-	copyObject->SetScaleOffset(object->GetScaleOffset());
+	object->SetDataToCopy(copyObject);
 	for (int i = 0; i < object->childObjects.size(); i++)
 	{
 		Object* copyChildObject = DuplicateSceneObject(object->childObjects[i]);
@@ -239,7 +236,7 @@ void SceneManager::LoadSaveSceneFile()
 	for (const auto& item : sceneJson)
 	{
 		int objectType;
-		item.at("ObjectType").get_to(objectType);
+		item.at("ObjectType").get_to(objectType);		
 		Object* object = CreateSceneObject(item, objectType, path);
 
 		loadSceneObjects.insert({ object->objectID, object });
