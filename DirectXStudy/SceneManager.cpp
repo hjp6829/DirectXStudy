@@ -47,11 +47,11 @@ void SceneManager::RegisterModelHierarchy(Object* object)
 	if (object->childObjects.size() == 0)
 	{
 		objectIDs.push_back(objectID);
-		object->objectID = objectID++;
+		object->objectID = ++objectID;
 		return;
 	}
 	objectIDs.push_back(objectID);
-	object->objectID = objectID++;
+	object->objectID = ++objectID;
 	for (int i = 0; i < object->childObjects.size(); i++)
 	{
 		Object* childObject = object->childObjects[i];
@@ -89,15 +89,7 @@ Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type,
 			break;
 			}
 	}
-
-	if(isNoSaveFile)
-	{
-		object->objectID = objectID++;
-	}
-	else
-	{
-		objectID = object->objectID;
-	}
+	objectID = object->objectID;
 
 	return object;
 }
@@ -105,9 +97,9 @@ void SceneManager::CreateInitJsonFile()
 {
 	isNoSaveFile = true;
 	CameraObject* camera = new CameraObject();
-	camera->objectID = objectID++;
+	camera->objectID = ++objectID;
 	LightObject* light = new LightObject();
-	light->objectID = objectID++;
+	light->objectID = ++objectID;
 	objects.push_back(camera);
 	objects.push_back(light);
 	SaveScene();
@@ -207,12 +199,6 @@ void SceneManager::LoadSaveSceneFile()
 		item.at("ObjectType").get_to(objectType);
 		Object* object = CreateSceneObject(item, objectType, path);
 
-		//object->parentobjectID = data.parentObjectID;
-		//object->SetPostionOffset(XMFLOAT3(data.localPosx, data.localPosy, data.localPosz));
-		//object->SetRotationOffset(XMFLOAT3(data.localRotx, data.localRoty, data.localRotz));
-		//object->SetScaleOffset(XMFLOAT3(data.localScalex, data.localScaley, data.localScalez));
-		//object->objectID = data.objectID;
-		//object->SetRootNodeCheck(data.isRootObject);
 		loadSceneObjects.insert({ object->objectID, object });
 		if (item.at("isRootObject") == 1)
 			objects.push_back(object);

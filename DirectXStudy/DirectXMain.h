@@ -57,6 +57,10 @@ private:
 		float shininess;
 		float maxLightDistance;
 		float padding2;
+		XMFLOAT3 cameraForward;
+		float padding3;
+		XMFLOAT3 lightForward;
+		float padding4;
 	};
 private:
 	float totalTime;

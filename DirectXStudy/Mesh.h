@@ -46,6 +46,5 @@ private:
 	PSBuffer cb = {};
 	XMMATRIX localMatrix;
 	std::vector<std::unique_ptr<Bindable>> bindable;
-	ComPtr<ID3D11Buffer> colorConstantBuffer;
 	UINT IndexCount;
 };

@@ -74,6 +74,7 @@ void CameraObject::DrawInspectorContents()
 void CameraObject::Serialize(nlohmann::json& j)
 {
 	Object::Serialize(j);
+
 	j["ObjectType"] = ObjectSaveType::CameraObject;
 	j["isRootObject"] = 1;
 }

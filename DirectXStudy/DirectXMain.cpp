@@ -119,6 +119,8 @@ void DirectXMain::Render()
 	globalBuffer.specularStrength = light->GetSpecularStrength();
 	globalBuffer.shininess = light->GetShininess();
 	globalBuffer.maxLightDistance = light->GetMaxLightDistance();
+	globalBuffer.cameraForward = cam->GetCameraForward();
+	globalBuffer.lightForward = light->GetLightForward();
 
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
 	pContext->Map(lightConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);

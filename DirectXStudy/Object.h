@@ -35,9 +35,6 @@ public:
 	void InsertChildSceneObject(Object* childObject);
 	void UpdateTransformForNewParent(Object* parentObject);
 
-	void SetPostionOffset(XMFLOAT3 position) { positionOffset = position; }
-	void SetRotationOffset(XMFLOAT3 rotation) { rotationOffset = rotation; }
-	void SetScaleOffset(XMFLOAT3 scale) { scaleOffset = scale; }
 	XMFLOAT3 GetPostionOffset() { return positionOffset; }
 	XMFLOAT3 GetRotationOffset() { return rotationOffset; }
 	XMFLOAT3 GetScaleOffset() { return scaleOffset; }
@@ -50,6 +47,9 @@ public:
 	void SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale);
 	void ShowInspectorUI();
 public:
+	void virtual SetPostionOffset(XMFLOAT3 position) { positionOffset = position; }
+	void virtual SetRotationOffset(XMFLOAT3 rotation) { rotationOffset = rotation; }
+	void virtual SetScaleOffset(XMFLOAT3 scale) { scaleOffset = scale; }
 	void virtual DrawInspectorContents();
 	void virtual Serialize(nlohmann::json& j);
 	void virtual Deserialize(const nlohmann::json& j);
@@ -62,5 +62,8 @@ protected:
 	XMFLOAT3 importedLocalRotation;
 	XMFLOAT3 importedLocalScale;
 	bool isRootObject;
+	XMVECTOR up;
+	XMVECTOR right;
+	XMVECTOR forward;
 private:
 };

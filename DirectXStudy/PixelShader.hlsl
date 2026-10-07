@@ -27,6 +27,10 @@ cbuffer CBuf2 : register(b1)
     float shininess;
     float maxLightDistance;
     float padding2;
+    float3 cameraForward;
+    float padding3;
+    float3 lightForward;
+    float padding4;
 };
 float4 main(VSOut IN) : SV_TARGET
 {
@@ -36,7 +40,7 @@ float4 main(VSOut IN) : SV_TARGET
     float3 normalTS = normalize(normalMap.x * IN.Tangent + normalMap.y * IN.Bitangent + normalMap.z * IN.normal);
     
     float3 N = normalize(IN.normal);
-    float3 L = normalize(lightPos.xyz - IN.worldPos.xyz);
+    float3 L = normalize(-lightForward);
     float3 V = normalize(cameraPos.xyz - IN.worldPos.xyz);
     float3 H = normalize(L + V);
     float dis = distance(lightPos.xyz, IN.worldPos.xyz);
@@ -45,7 +49,7 @@ float4 main(VSOut IN) : SV_TARGET
     
     float specular = pow(saturate(dot(normalTS, H)), shininess) * specularStrength;
 
-    float diffuse = saturate(dot(normalTS, L));
+    float diffuse = saturate(dot(N, L));
     float brightness = diffuse;
 
     float4 texColor = tex.Sample(splr, IN.uv);
