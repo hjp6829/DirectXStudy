@@ -11,6 +11,7 @@ public:
 	void SettestMoveChild(Object* object){ testMoveChild  = object;}
 	void SettestMoveParent(Object* object){ testMoveParent = object; }
 	void UpdateUI();
+	void ObjectDelete();
 private:
 	Object* currentObject;
 	Object* testMoveChild;

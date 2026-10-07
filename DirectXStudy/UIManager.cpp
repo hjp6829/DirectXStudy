@@ -16,6 +16,7 @@ UIManager::UIManager(std::vector<Object*>* SceneObjects)
 		OnModelSelected(path);
 		};
 	hierarchy->OnHierarchyDeleteClick = [this](Object* object) {
+		insfector->ObjectDelete();
 		OnModelDelete(object);
 		};
 	hierarchy->SubscribeOnHierarchyMoveChildClick([this](Object* object) {

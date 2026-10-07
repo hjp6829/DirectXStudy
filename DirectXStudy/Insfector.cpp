@@ -34,3 +34,8 @@ void Insfector::UpdateUI()
 		return;
 	currentObject->ShowInspectorUI();
 }
+
+void Insfector::ObjectDelete()
+{
+	currentObject=nullptr;
+}
