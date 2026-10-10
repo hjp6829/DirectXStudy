@@ -5,6 +5,7 @@
 #include "SceneObject.h"
 #include "ModelAsset.h"
 #include "ModelNode.h"
+#include "PostProcessingManager.h"
 
 DirectXMain::DirectXMain(HWND hWnd)
 {
@@ -78,6 +79,8 @@ DirectXMain::DirectXMain(HWND hWnd)
 	viewport.MaxDepth = 1.0f;
 
 	pContext->RSSetViewports(1, &viewport);
+
+	postProcessingManager = new PostProcessingManager(pDevice,pContext);
 }
 
 void DirectXMain::Start()
@@ -101,10 +104,12 @@ void DirectXMain::Start()
 void DirectXMain::Update(float deltaTime)
 {
 	totalTime += deltaTime;
+
 	for (int i = 0; i < objects->size(); i++)
 	{
 		(*objects)[i]->UpdateObject();
 	}
+
 }
 
 void DirectXMain::Render()
@@ -132,6 +137,9 @@ void DirectXMain::Render()
 	{
 		(*objects)[i]->RenderObject(this);
 	}
+	postProcessingManager->OutlineRender(currentHierarchySelectObject, this);
+	pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
+	postProcessingManager->PostProcessingRender();
 }
 
 void DirectXMain::Shutdown()

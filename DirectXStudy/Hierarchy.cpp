@@ -74,6 +74,11 @@ void Hierarchy::ModelTraversal(Object* object)
         flags |= ImGuiTreeNodeFlags_Leaf
             | ImGuiTreeNodeFlags_NoTreePushOnOpen;
     }
+    if (object == currentSelectObject)
+    {
+        flags |= ImGuiTreeNodeFlags_Selected;
+    }
+
 
     const bool open = ImGui::TreeNodeEx(
         static_cast<void*>(object),
@@ -86,6 +91,7 @@ void Hierarchy::ModelTraversal(Object* object)
     if (ImGui::IsItemClicked())
     {
         OnHierarchyClick(object);
+		currentSelectObject = object;
     }
 
     // 드래그 시작
@@ -129,6 +135,7 @@ void Hierarchy::ModelTraversal(Object* object)
     if (ImGui::BeginPopupContextItem())
     {
         OnHierarchyClick(object);
+        currentSelectObject = object;
 
         if (ImGui::MenuItem("Delete"))
         {

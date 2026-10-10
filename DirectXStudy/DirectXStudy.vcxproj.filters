@@ -156,6 +156,9 @@
     <ClCompile Include="LightObject.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="PostProcessingManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXMain.h">
@@ -293,6 +296,9 @@
     <ClInclude Include="LightObject.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
+    <ClInclude Include="PostProcessingManager.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="VertexShader.hlsl">
@@ -302,6 +308,15 @@
       <Filter>Shader</Filter>
     </FxCompile>
     <FxCompile Include="LightPS.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="OutlineShader.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PostProcessVertexShader.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="PostProcessPixelShader.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
   </ItemGroup>

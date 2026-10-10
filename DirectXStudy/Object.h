@@ -24,6 +24,7 @@ public:
 	uint64_t objectID;
 	uint64_t parentobjectID;
 	void RenderObject(DirectXMain* dxdMain);
+	void OutlineRenderObject(DirectXMain* dxdMain);
 	void UpdateObject();
 	void ToggleMeshEnable(bool value);
 	bool meshEnable = true;

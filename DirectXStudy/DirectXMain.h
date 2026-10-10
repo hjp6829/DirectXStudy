@@ -22,6 +22,7 @@ class ModelCreater;
 class Object;
 class ModelAsset;
 class ModelNode;
+class PostProcessingManager;
 
 class DirectXMain {
 	friend class Bindable;//친구 클래스는 private에 접근이 가능함
@@ -40,6 +41,7 @@ public:
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
 	void SetSceneObjects(std::vector<Object*>* objectVector){ objects = objectVector; }
+	void SetHierarchySelectObject(Object* selectObject) { currentHierarchySelectObject = selectObject; }
 private:
 	ComPtr<IDXGISwapChain> pSwap;
 	ComPtr<ID3D11Device> pDevice;
@@ -48,6 +50,7 @@ private:
 	ComPtr<ID3D11DepthStencilView> depthStencilView;
 
 	ComPtr<ID3D11Buffer> lightConstantBuffer;
+
 private:
 	struct GlobalBuffer {
 		XMFLOAT4 lightPos;
@@ -69,4 +72,6 @@ private:
 	CameraObject* cam;
 	LightObject* light;
 	GlobalBuffer globalBuffer = {};
+	Object* currentHierarchySelectObject;
+	PostProcessingManager* postProcessingManager;
 };

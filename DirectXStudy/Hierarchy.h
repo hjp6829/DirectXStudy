@@ -16,4 +16,5 @@ public:
 private:
 	std::vector<Object*>* modelContainer;
 	void ModelTraversal(Object* modelData);
+	Object* currentSelectObject;
 };
