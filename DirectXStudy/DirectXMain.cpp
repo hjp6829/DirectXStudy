@@ -137,9 +137,9 @@ void DirectXMain::Render()
 	{
 		(*objects)[i]->RenderObject(this);
 	}
-	postProcessingManager->OutlineRender(currentHierarchySelectObject, this);
+	postProcessingManager->OutlineRender(currentHierarchySelectObject, this);//그려주기
 	pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
-	postProcessingManager->PostProcessingRender();
+	postProcessingManager->PostProcessingRender();//그린거 사용하기
 }
 
 void DirectXMain::Shutdown()
