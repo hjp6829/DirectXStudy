@@ -7,9 +7,12 @@
 #include "UIManager.h"
 #include <string>
 #include "SceneObject.h"
+#include "EventBus.h"
+#include "EventDefinitions.h"
 
 SceneManager::SceneManager(ID3D11Device* device)
 {
+	RegisterEventHandlers();
 	modelCreater = new ModelCreater(device);
 	LoadSaveSceneFile();
 }
@@ -49,17 +52,17 @@ void SceneManager::CreateObjectSelect(std::string path)
 	Object* object = modelCreater->LoadModelFromFile(path);
 	object->SetRootNodeCheck(true);
 	RegisterModelHierarchy(object);
-	objects.push_back(object);
+	objects[object->objectID] = object;
 }
 void SceneManager::RegisterModelHierarchy(Object* object)
 {
 	if (object->childObjects.size() == 0)
 	{
-		objectIDs.push_back(objectID);
+		allObjects[object->objectID] = object;
 		object->objectID = ++objectID;
 		return;
 	}
-	objectIDs.push_back(objectID);
+	allObjects[object->objectID] = object;
 	object->objectID = ++objectID;
 	for (int i = 0; i < object->childObjects.size(); i++)
 	{
@@ -109,8 +112,8 @@ void SceneManager::CreateInitJsonFile()
 	camera->objectID = ++objectID;
 	LightObject* light = new LightObject();
 	light->objectID = ++objectID;
-	objects.push_back(camera);
-	objects.push_back(light);
+	objects[camera->objectID] = camera;
+	objects[light->objectID] = light;
 	SaveScene();
 	objects.clear();
 }
@@ -121,7 +124,7 @@ void SceneManager::DuplicateObjectSave()
 void SceneManager::DuplicateObject()
 {
 	Object* copyObject = DuplicateSceneObject(currentDuplicateObject);
-	objects.push_back(copyObject);
+	objects[copyObject->objectID] = copyObject;
 }
 Object* SceneManager::DuplicateSceneObject(Object* object)
 {
@@ -145,11 +148,37 @@ Object* SceneManager::DuplicateSceneObject(Object* object)
 	}
 	return copyObject;	
 }
+void SceneManager::SetSelectObjectID(EventData* eventData)
+{
+	SelectObjectIDData* eventDataCast = dynamic_cast<SelectObjectIDData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		currentSelectObject = allObjects[eventDataCast->objectID];
+		SelectObjectData selectObjectData;
+		selectObjectData.selectObject = currentSelectObject;
+		EventBus::Publish(EventType::SelectObject, &selectObjectData);
+	}
+}
+void SceneManager::SetSelectObject(EventData* eventData)
+{
+	SelectObjectData* eventDataCast = dynamic_cast<SelectObjectData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		currentSelectObject = eventDataCast->selectObject;
+	}
+}
+void SceneManager::RegisterEventHandlers()
+{
+	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
+	EventBus::Subscribe(EventType::SelectObjectID, [this](EventData* data) {SetSelectObjectID(data); });
+}
 void SceneManager::DeleteModel(Object* object)
 {
 	if (object->IsRootObject())
 	{
-		objects.erase(std::remove(objects.begin(), objects.end(), object), objects.end());
+		objects.erase(object->objectID);
 	}
 	object->RemoveModelData();
 	DeleteChiledModels(object);
@@ -165,7 +194,7 @@ void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObj
 		childObject->parentObject=nullptr;
 		childObject->parentobjectID = 0;
 		childObject->SetRootNodeCheck(true);
-		objects.push_back(childObject);
+		objects[childObject->objectID] = childObject;
 		return;
 	}
 
@@ -176,7 +205,7 @@ void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObj
 
 	if (childObject->IsRootObject())
 	{
-		objects.erase(std::remove(objects.begin(), objects.end(), childObject), objects.end());
+		objects.erase(childObject->objectID);
 		childObject->SetRootNodeCheck(false);
 	}
 }
@@ -199,9 +228,9 @@ void SceneManager::SaveScene()
 	std::ofstream file(savePath);
 
 	nlohmann::json jsonfile = nlohmann::json::array();
-	for (int i = 0; i < objects.size(); i++)
+	for (auto& [key, value] : objects)
 	{
-		Object* object = objects[i];
+		Object* object = value;
 		SaveSceneObjectData(object, jsonfile);
 	}
 	file << jsonfile.dump(4);
@@ -258,7 +287,8 @@ void SceneManager::LoadSaveSceneFile()
 
 		loadSceneObjects.insert({ object->objectID, object });
 		if (item.at("isRootObject") == 1)
-			objects.push_back(object);
+			objects[object->objectID] = object;
+		allObjects[object->objectID] = object;
 	}
 
 	for (auto& [hashCode, objectTemp] : loadSceneObjects)

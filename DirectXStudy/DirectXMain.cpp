@@ -7,9 +7,12 @@
 #include "ModelNode.h"
 #include "PostProcessingManager.h"
 #include "Log.h"
+#include "EventBus.h"
+#include "EventDefinitions.h"
 
 DirectXMain::DirectXMain(HWND hWnd)
 {
+	RegisterEventHandlers();
 	DXGI_SWAP_CHAIN_DESC sd = {};//스왑체인 설계도 설정
 	sd.BufferDesc.Width = 1280;
 	sd.BufferDesc.Height = 960;
@@ -140,12 +143,10 @@ void DirectXMain::Start()
 void DirectXMain::Update(float deltaTime)
 {
 	totalTime += deltaTime;
-
-	for (int i = 0; i < objects->size(); i++)
+	for (auto& [key, value] : *objects)
 	{
-		(*objects)[i]->UpdateObject();
+		value->UpdateObject();
 	}
-
 }
 
 void DirectXMain::Render()
@@ -171,65 +172,70 @@ void DirectXMain::Render()
 
 	if (isMouseLeftClick)
 	{
-		pContext->ClearRenderTargetView(pPickingRenderTarget.Get(), clearColor);
-		pContext->OMSetRenderTargets(1, pPickingRenderTarget.GetAddressOf(), depthStencilView.Get());
-	
-
-		for (int i = 0; i < objects->size(); i++)
+		ImGuiIO& io = ImGui::GetIO();
+		if (!io.WantCaptureMouse)
 		{
-			(*objects)[i]->PickingRenderObject(this);
+			pContext->ClearRenderTargetView(pPickingRenderTarget.Get(), clearColor);
+			pContext->OMSetRenderTargets(1, pPickingRenderTarget.GetAddressOf(), depthStencilView.Get());
+
+			for (auto& [key, value] : *objects)
+			{
+				value->PickingRenderObject(this);
+			}
+			D3D11_BOX sourceBox = {};
+
+			sourceBox.left = mousePosX;
+			sourceBox.right = mousePosX + 1;
+
+			sourceBox.top = mousePosY;
+			sourceBox.bottom = mousePosY + 1;
+
+			sourceBox.front = 0;
+			sourceBox.back = 1;
+
+			pContext->CopySubresourceRegion(
+				pickingStagingTexture.Get(),
+				0,
+				0, 0, 0,
+				pPickingTexture.Get(),
+				0,
+				&sourceBox
+			);
+
+			D3D11_MAPPED_SUBRESOURCE mapped = {};
+
+			HRESULT hr = pContext->Map(
+				pickingStagingTexture.Get(),
+				0,
+				D3D11_MAP_READ,
+				0,
+				&mapped
+			);
+
+			if (SUCCEEDED(hr))
+			{
+				uint64_t objectID =
+					*static_cast<const uint64_t*>(mapped.pData);
+
+				pContext->Unmap(pickingStagingTexture.Get(), 0);
+
+				Log::PrintLog(std::to_string(objectID));
+
+				SelectObjectIDData selectObjectIDData;
+				selectObjectIDData.objectID = objectID;
+				EventBus::Publish(EventType::SelectObjectID, &selectObjectIDData);
+			}
+
+			pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+			pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
+			isMouseLeftClick = false;
 		}
-		D3D11_BOX sourceBox = {};
-
-		sourceBox.left = mousePosX;
-		sourceBox.right = mousePosX + 1;
-
-		sourceBox.top = mousePosY;
-		sourceBox.bottom = mousePosY + 1;
-
-		sourceBox.front = 0;
-		sourceBox.back = 1;
-
-		pContext->CopySubresourceRegion(
-			pickingStagingTexture.Get(),
-			0,
-			0, 0, 0,
-			pPickingTexture.Get(),
-			0,
-			&sourceBox
-		);
-
-		D3D11_MAPPED_SUBRESOURCE mapped = {};
-
-		HRESULT hr = pContext->Map(
-			pickingStagingTexture.Get(),
-			0,
-			D3D11_MAP_READ,
-			0,
-			&mapped
-		);
-
-		if (SUCCEEDED(hr))
-		{
-			uint32_t objectID =
-				*static_cast<const uint32_t*>(mapped.pData);
-
-			pContext->Unmap(pickingStagingTexture.Get(), 0);
-			
-			Log::PrintLog(std::to_string(objectID));
-			// objectID를 사용해서 SceneManager에서 Object 검색
-		}
-
-		pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
-		pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
-		isMouseLeftClick = false;
 	}
-
-	for (int i = 0; i < objects->size(); i++)
+	for (auto& [key, value] : *objects)
 	{
-		(*objects)[i]->RenderObject(this);
+		value->RenderObject(this);
 	}
-	postProcessingManager->OutlineRender(currentHierarchySelectObject, this);//그려주기
+	postProcessingManager->OutlineRender(currentSelectObject, this);//그려주기
 	pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
 	postProcessingManager->PostProcessingRender();//그린거 사용하기
 }
@@ -243,4 +249,17 @@ void DirectXMain::EndDraw()
 	pSwap->Present(1, 0);
 }
 
+void DirectXMain::RegisterEventHandlers()
+{
+	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
+}
+void DirectXMain::SetSelectObject(EventData* eventData)
+{
+	SelectObjectData* eventDataCast = dynamic_cast<SelectObjectData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		currentSelectObject = eventDataCast->selectObject;
+	}
+}
 

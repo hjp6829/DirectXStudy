@@ -4,7 +4,10 @@
 #include <string>
 #include "CameraObject.h"
 #include "LightObject.h"
+#include <unordered_map>
+#include <functional>
 
+class EventData;
 class Object;
 class ModelCreater;
 struct JsonSceneObjectData;
@@ -12,7 +15,7 @@ struct JsonSceneObjectData;
 class SceneManager {
 public:
 	SceneManager(ID3D11Device* device);
-	std::vector<Object*>* GetSceneObjects() { return &objects; }
+	std::unordered_map<uint64_t, Object*>* GetSceneObjects() { return &objects; }
 	void SetKeyInput(int key, bool value);
 	void SetKeyInputHold(int key);
 	void CreateObjectSelect(std::string path);
@@ -21,13 +24,12 @@ public:
 	void SetMouseWheelDown(bool value) { camera->SetMouseWheelDown(value); }
 	void SetMouseWheelDelta(float delta) { camera->SetMouseWheelDelta(delta); }
 	void SetMouseDeltaPos(int x, int y) { camera->SetMouseDeltaPos(x, y); }
-	void SetCurrentSelectObject(Object* object) { currentSelectObject = object; }
 	void SetHierarchyDropObject(Object* parentObject, Object* childObject);
 	CameraObject* GetCamera() { return camera; }
 	LightObject* GetLight() { return light; }
 private:
-	std::vector<Object*> objects;
-	std::vector<uint64_t> objectIDs;
+	std::unordered_map<uint64_t, Object*> objects;
+	std::unordered_map<uint64_t, Object*> allObjects;
 	ModelCreater* modelCreater;
 	uint64_t objectID = 0;
 	bool isCtrl;
@@ -47,4 +49,7 @@ private:
 	void DuplicateObjectSave();
 	void DuplicateObject();
 	Object* DuplicateSceneObject(Object* object);
+	void RegisterEventHandlers();
+	void SetSelectObjectID(EventData* eventData);
+	void SetSelectObject(EventData* eventData);
 };

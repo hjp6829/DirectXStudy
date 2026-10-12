@@ -3,18 +3,20 @@
 #include <functional>
 
 class Object;
+class EventData;
 
 class Hierarchy
 {
 public: 
-	Hierarchy(std::vector<Object*>* modelContainer);
+	Hierarchy(std::unordered_map<uint64_t, Object*>* modelContainer);
 	void UpdateUI();
-	std::function<void(Object*)> OnHierarchyClick;
 	std::function<void(Object*)> OnHierarchyDeleteClick;
 	std::function<void(Object*, Object*)> OnHierarchyDrop;
 	std::function<void(Object*)> OnHierarchyRenameClick;
 private:
-	std::vector<Object*>* modelContainer;
+	std::unordered_map<uint64_t, Object*>* modelContainer;
 	void ModelTraversal(Object* modelData);
 	Object* currentSelectObject;
+	void RegisterEventHandlers();
+	void SetSelectObject(EventData* eventData);
 };

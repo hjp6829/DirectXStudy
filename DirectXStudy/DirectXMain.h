@@ -9,7 +9,8 @@
 #include "CameraObject.h"
 #include "LightObject.h"
 #include <string>
-
+#include <functional>
+#include "EventDefinitions.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
@@ -39,8 +40,7 @@ public:
 	LightObject* GetLight() { return light; }
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
-	void SetSceneObjects(std::vector<Object*>* objectVector){ objects = objectVector; }
-	void SetHierarchySelectObject(Object* selectObject) { currentHierarchySelectObject = selectObject; }
+	void SetSceneObjects(std::unordered_map<uint64_t, Object*>* objectVector){ objects = objectVector; }
 	void MousePickingPos(int x,int y){ mousePosX =x; mousePosY = y;}
 	void MouseLeftClick(bool value){ isMouseLeftClick  = value;}
 private:
@@ -68,13 +68,15 @@ private:
 	};
 private:
 	float totalTime;
-	std::vector<Object*>* objects;
+	std::unordered_map<uint64_t, Object*>* objects;
 	CameraObject* cam;
 	LightObject* light;
 	GlobalBuffer globalBuffer = {};
-	Object* currentHierarchySelectObject;
+	Object* currentSelectObject;
 	PostProcessingManager* postProcessingManager;
 	ComPtr<ID3D11Texture2D> pPickingTexture = NULL;
 	bool isMouseLeftClick;
 	int mousePosX, mousePosY;
+	void RegisterEventHandlers();
+	void SetSelectObject(EventData* eventData);
 };

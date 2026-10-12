@@ -6,7 +6,7 @@
 #include "Object.h"
 #include "Log.h"
 
-UIManager::UIManager(std::vector<Object*>* SceneObjects)
+UIManager::UIManager(std::unordered_map<uint64_t, Object*>* SceneObjects)
 {
 	hierarchy = new Hierarchy(SceneObjects);
 	modelBrowserUI = new ModelBrowserUI();
@@ -22,10 +22,7 @@ UIManager::UIManager(std::vector<Object*>* SceneObjects)
 	hierarchy->OnHierarchyRenameClick = [this](Object* object) {
 		OnHierarchyRenameClick(object);
 		};
-	hierarchy->OnHierarchyClick = [this](Object* object) {
-		OnHierarchyObjectClick(object);
-		insfector->SetSceneObjectData(object);
-		};
+
 	hierarchy->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {
 		OnHierarchyDrop(parentObject, childObject);
 		};

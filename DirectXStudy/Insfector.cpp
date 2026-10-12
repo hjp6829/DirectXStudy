@@ -5,15 +5,12 @@
 #include "Hierarchy.h"
 #include "Mesh.h"
 #include "Log.h"
+#include "EventBus.h"
+#include "EventDefinitions.h"
 
 Insfector::Insfector()
 {
-
-}
-
-void Insfector::SetSceneObjectData(Object* object)
-{
-	currentObject = object;
+	RegisterEventHandlers();
 }
 
 void Insfector::UpdateUI()
@@ -26,4 +23,17 @@ void Insfector::UpdateUI()
 void Insfector::ObjectDelete()
 {
 	currentObject=nullptr;
+}
+void Insfector::RegisterEventHandlers()
+{
+	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
+}
+void Insfector::SetSelectObject(EventData* eventData)
+{
+	SelectObjectData* eventDataCast = dynamic_cast<SelectObjectData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		currentObject = eventDataCast->selectObject;
+	}
 }

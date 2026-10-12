@@ -2,10 +2,12 @@
 #include "imgui_impl_win32.h"
 #include "Object.h"
 #include "Log.h"
+#include "EventBus.h"
+#include "EventDefinitions.h"
 
-Hierarchy::Hierarchy(std::vector<Object*>* modelContainer)
-	: modelContainer(modelContainer)
+Hierarchy::Hierarchy(std::unordered_map<uint64_t, Object*>* modelContainer) : modelContainer(modelContainer)
 {
+    RegisterEventHandlers();
 }
 
 void Hierarchy::UpdateUI()
@@ -14,11 +16,11 @@ void Hierarchy::UpdateUI()
     {
         if (modelContainer != nullptr)
         {
-            for (Object* object : *modelContainer)
+            for (auto& [key, value] : *modelContainer)
             {
-                if (object != nullptr)
+                if (value != nullptr)
                 {
-                    ModelTraversal(object);
+                    ModelTraversal(value);
                 }
             }
 
@@ -90,8 +92,9 @@ void Hierarchy::ModelTraversal(Object* object)
     // 오브젝트 선택
     if (ImGui::IsItemClicked())
     {
-        OnHierarchyClick(object);
-		currentSelectObject = object;
+        SelectObjectData selectObjectData;
+        selectObjectData.selectObject = object;
+        EventBus::Publish(EventType::SelectObject, &selectObjectData);
     }
 
     // 드래그 시작
@@ -134,8 +137,9 @@ void Hierarchy::ModelTraversal(Object* object)
     // 트리 항목에 연결되는 우클릭 메뉴
     if (ImGui::BeginPopupContextItem())
     {
-        OnHierarchyClick(object);
-        currentSelectObject = object;
+        SelectObjectData selectObjectData;
+        selectObjectData.selectObject = object;
+        EventBus::Publish(EventType::SelectObject, &selectObjectData);
 
         if (ImGui::MenuItem("Delete"))
         {
@@ -159,5 +163,20 @@ void Hierarchy::ModelTraversal(Object* object)
         }
 
         ImGui::TreePop();
+    }
+}
+
+void Hierarchy::RegisterEventHandlers()
+{
+    EventBus::Subscribe(EventType::SelectObject, [this](EventData* data){SetSelectObject(data);});
+}
+
+void Hierarchy::SetSelectObject(EventData* eventData)
+{
+    SelectObjectData* eventDataCast = dynamic_cast<SelectObjectData*>(eventData);
+
+    if (eventDataCast != nullptr)
+    {
+        currentSelectObject = eventDataCast->selectObject;
     }
 }

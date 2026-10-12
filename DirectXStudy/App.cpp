@@ -40,10 +40,6 @@ App::App()
 			sceneManager->DeleteModel(object);
 		});
 		};
-	uimanager->OnHierarchyObjectClick =[this](Object* object) {
-		sceneManager->SetCurrentSelectObject(object);
-		dxdMain->SetHierarchySelectObject(object);
-		};
 	uimanager->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {
 		sceneManager->SetHierarchyDropObject(parentObject, childObject);
 		};
