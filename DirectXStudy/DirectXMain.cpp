@@ -6,6 +6,7 @@
 #include "ModelAsset.h"
 #include "ModelNode.h"
 #include "PostProcessingManager.h"
+#include "Log.h"
 
 DirectXMain::DirectXMain(HWND hWnd)
 {
@@ -65,7 +66,7 @@ DirectXMain::DirectXMain(HWND hWnd)
 	dsvDesc.ViewDimension = D3D11_DSV_DIMENSION_TEXTURE2D;
 	dsvDesc.Texture2D.MipSlice = 0;
 
-	pDevice->CreateDepthStencilView(pDepthStencil, &dsvDesc, depthStencilView.GetAddressOf());
+	HRESULT hr = pDevice->CreateDepthStencilView(pDepthStencil, &dsvDesc, depthStencilView.GetAddressOf());
 
 	pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
 
@@ -81,6 +82,41 @@ DirectXMain::DirectXMain(HWND hWnd)
 	pContext->RSSetViewports(1, &viewport);
 
 	postProcessingManager = new PostProcessingManager(pDevice,pContext);
+
+	D3D11_TEXTURE2D_DESC descPicking;
+	descPicking.Width = 1280.0;
+	descPicking.Height = 960.0;
+	descPicking.MipLevels = 1;
+	descPicking.ArraySize = 1;
+	descPicking.Format = DXGI_FORMAT_R32_UINT;
+	descPicking.SampleDesc.Count = 1;
+	descPicking.SampleDesc.Quality = 0;
+	descPicking.Usage = D3D11_USAGE_DEFAULT;
+	descPicking.BindFlags = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+	descPicking.CPUAccessFlags = 0;
+	descPicking.MiscFlags = 0;
+
+	pDevice->CreateTexture2D(&descPicking, nullptr, &pPickingTexture);
+
+	D3D11_RENDER_TARGET_VIEW_DESC outlineDesc = {};
+	outlineDesc.Format = descPicking.Format;
+	outlineDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2D;
+	outlineDesc.Texture2D.MipSlice = 0;
+
+	hr = pDevice->CreateRenderTargetView(pPickingTexture.Get(), &outlineDesc, pPickingRenderTarget.GetAddressOf());
+
+	D3D11_TEXTURE2D_DESC desc = {};
+	desc.Width = 1;
+	desc.Height = 1;
+	desc.MipLevels = 1;
+	desc.ArraySize = 1;
+	desc.Format = DXGI_FORMAT_R32_UINT;
+	desc.SampleDesc.Count = 1;
+	desc.Usage = D3D11_USAGE_STAGING;
+	desc.BindFlags = 0;
+	desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+
+	hr = pDevice->CreateTexture2D(&desc,nullptr,pickingStagingTexture.GetAddressOf());
 }
 
 void DirectXMain::Start()
@@ -132,6 +168,62 @@ void DirectXMain::Render()
 	memcpy(mapped.pData, &globalBuffer, sizeof(globalBuffer));
 	pContext->Unmap(lightConstantBuffer.Get(), 0);
 	pContext->PSSetConstantBuffers(1, 1, lightConstantBuffer.GetAddressOf());
+
+	if (isMouseLeftClick)
+	{
+		pContext->ClearRenderTargetView(pPickingRenderTarget.Get(), clearColor);
+		pContext->OMSetRenderTargets(1, pPickingRenderTarget.GetAddressOf(), depthStencilView.Get());
+	
+
+		for (int i = 0; i < objects->size(); i++)
+		{
+			(*objects)[i]->PickingRenderObject(this);
+		}
+		D3D11_BOX sourceBox = {};
+
+		sourceBox.left = mousePosX;
+		sourceBox.right = mousePosX + 1;
+
+		sourceBox.top = mousePosY;
+		sourceBox.bottom = mousePosY + 1;
+
+		sourceBox.front = 0;
+		sourceBox.back = 1;
+
+		pContext->CopySubresourceRegion(
+			pickingStagingTexture.Get(),
+			0,
+			0, 0, 0,
+			pPickingTexture.Get(),
+			0,
+			&sourceBox
+		);
+
+		D3D11_MAPPED_SUBRESOURCE mapped = {};
+
+		HRESULT hr = pContext->Map(
+			pickingStagingTexture.Get(),
+			0,
+			D3D11_MAP_READ,
+			0,
+			&mapped
+		);
+
+		if (SUCCEEDED(hr))
+		{
+			uint32_t objectID =
+				*static_cast<const uint32_t*>(mapped.pData);
+
+			pContext->Unmap(pickingStagingTexture.Get(), 0);
+			
+			Log::PrintLog(std::to_string(objectID));
+			// objectID를 사용해서 SceneManager에서 Object 검색
+		}
+
+		pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
+		pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
+		isMouseLeftClick = false;
+	}
 
 	for (int i = 0; i < objects->size(); i++)
 	{

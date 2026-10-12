@@ -34,6 +34,12 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	case WM_DESTROY:
 		PostQuitMessage(0);
 		break;
+	case WM_LBUTTONDOWN:
+		Instance()->GetMouse()->SetMouseLeft(true);
+		break;
+	case WM_LBUTTONUP:
+		Instance()->GetMouse()->SetMouseLeft(false);
+		break;
 	case WM_RBUTTONDOWN:
 		Instance()->GetMouse()->SetMouseRight(true);
 		break;

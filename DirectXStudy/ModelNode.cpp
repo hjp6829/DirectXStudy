@@ -17,6 +17,14 @@ void ModelNode::OutlineRenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATR
 	}
 }
 
+void ModelNode::PickingRenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix, int ObjectID)
+{
+	for (int i = 0; i < currentMeshs.size(); i++)
+	{
+		currentMeshs[i]->PickingRender(context, worldMatrix, viewMatrix, projectionMatrix, ObjectID);
+	}
+}
+
 void ModelNode::ToggleMeshEnable(bool value)
 {
 	for (int i = 0; i < currentMeshs.size(); i++)

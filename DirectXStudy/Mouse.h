@@ -11,11 +11,14 @@ public:
 		void SetWheelDown(bool isDown){ OnMouseWheelDown(isDown); }
 		void SetWheelDelta(float delta) {OnMouseWheelDelta(delta);}
 		void SetMouseRight(bool value){ OnMouseRightDown(value); }
+		void SetMouseLeft(bool value) { OnMouseLeftDown(value); }
 public:
 		std::function<void(int, int)> OnMouseDeltaPos;
+		std::function<void(int, int)> OnMousePos;
 		std::function<void(bool)> OnMouseWheelDown;
 		std::function<void(float)> OnMouseWheelDelta;
 		std::function<void(bool)> OnMouseRightDown;
+		std::function<void(bool)> OnMouseLeftDown;
 private:
 	POINT pos;
 	POINT prePos;

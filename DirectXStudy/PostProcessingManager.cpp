@@ -61,14 +61,13 @@ PostProcessingManager::PostProcessingManager(ComPtr<ID3D11Device> pDevice, ComPt
 
 void PostProcessingManager::PostProcessingRender()
 {
-	context->PSSetShaderResources(0, 1, pPostProcessOutlineSRV.GetAddressOf());//포스트 프로세싱에 아웃라인 랜더뷰의 텍스쳐를 넣어줌
-	postProcessOutlineTexture->Bind(context.Get());
+	postProcessOutlineTexture->Bind(context.Get());//pPostProcessOutlineSRV는 pOutlineRenderTarget와 연결되어 텍스쳐를 전달해줌
 	postProcessVertexShader->Bind(context.Get());
 	postProcessPixelShader->Bind(context.Get());
 	context->IASetInputLayout(nullptr);
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	context->OMSetBlendState(outlineBlendState.Get(), blendFactor, 0xffffffff);
-	context->Draw(3, 0);
+	context->OMSetBlendState(outlineBlendState.Get(), blendFactor, 0xffffffff);//기존 랜더타겟에 그려진 오브젝트들도 나오게 하기 위해
+	context->Draw(3, 0);//포스트 프로세싱용 화면을 그려줌 랜더타겟에
 	context->OMSetBlendState(nullptr, nullptr, 0xffffffff);
 }
 

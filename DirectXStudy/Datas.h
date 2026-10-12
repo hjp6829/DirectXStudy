@@ -21,6 +21,10 @@ struct ConstantBufferData {
 struct PSBuffer {
 	XMFLOAT4 color;
 };
+struct PSPickingIDBuffer {
+	int id;
+	float padding[3];
+};
 struct Vertex
 {
 	XMFLOAT3 position;

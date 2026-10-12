@@ -16,6 +16,7 @@ void Mouse::SetPos(int x, int y)
 	else
 		deltaPos.y=0;
 	OnMouseDeltaPos(deltaPos.x, deltaPos.y);
+	OnMousePos(pos.x, pos.y);
 	prePos.x = x;
 	prePos.y = y;
 }

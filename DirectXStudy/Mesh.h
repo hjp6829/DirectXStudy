@@ -13,6 +13,8 @@ class ID3D11DeviceContext;
 class Texture;
 class asMaterial;
 class Bindable;
+template <typename T>
+class PSContantBuffer;
 class PixelShader;
 
 using namespace DirectX;
@@ -23,6 +25,7 @@ public:
 	~Mesh();
 	void Render(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix);
 	void OutlineRender(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix);
+	void PickingRender(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix, int ObjectID);
 	int GetMaterialIDX(){return materialIDX; }
 	void SetMaterialIDX(asMaterial* material, int idx);
 	XMFLOAT3 GetLocalPos();
@@ -46,9 +49,13 @@ private:
 	XMMATRIX AssimpNodeMatrix;
 	ConstantBufferData sb = {};
 	PSBuffer cb = {};
+	PSPickingIDBuffer pickingIDBufferData = {};
 	XMMATRIX localMatrix;
 	std::unique_ptr<PixelShader> outlineShader;
+	std::unique_ptr<PixelShader> pickingShader;
+	ComPtr<ID3D11Buffer> pickingConstantBuffer;
 	std::vector<std::unique_ptr<Bindable>> bindable;
 	std::vector<Bindable*> outlineBindable;
+	std::vector<Bindable*> pickingBindable;
 	UINT IndexCount;
 };

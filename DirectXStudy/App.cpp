@@ -54,6 +54,11 @@ App::App()
 		{
 			sceneManager->SetKeyInput(key,value);
 		};
+	mouse->OnMouseLeftDown = [this](bool value)
+		{
+			dxdMain->MouseLeftClick(value);
+			//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
+		};
 	mouse->OnMouseRightDown = [this](bool value)
 	{
 		sceneManager->SetMouseRightDown(value);
@@ -74,6 +79,10 @@ App::App()
 			sceneManager->SetMouseDeltaPos(x,y);
 			//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
 		};
+	mouse->OnMousePos = [this](int x, int y)
+		{
+			dxdMain->MousePickingPos(x,y);
+		};
 	keyboard->OnKeyHold = [this](int key)
 		{
 			sceneManager->SetKeyInputHold(key);
@@ -86,7 +95,6 @@ void App::Run()
 	MSG msg;
 
 	dxdMain->Start();
-	dxdMain->SetMouse(window->GetMouse());
 
 	while (GetMessage(&msg, NULL, 0, 0))
 	{

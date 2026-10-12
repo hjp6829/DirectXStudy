@@ -147,6 +147,20 @@ void Object::OutlineRenderObject(DirectXMain* dxdMain)
 	}
 }
 
+void Object::PickingRenderObject(DirectXMain* dxdMain)
+{
+	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
+	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
+
+	if (currentModelNode != nullptr)
+		currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), worldMatrix, ViewMatrix, ProjectionMatrix, objectID);
+	for (int i = 0; i < childObjects.size(); i++)
+	{
+		if (childObjects[i] != nullptr)
+			childObjects[i]->PickingRenderObject(dxdMain);
+	}
+}
+
 void Object::UpdateObject()
 {
 	worldMatrix = XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z) *

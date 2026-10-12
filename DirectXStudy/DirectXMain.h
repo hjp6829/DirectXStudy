@@ -33,7 +33,6 @@ public:
 	void Render();
 	void Shutdown();
 	void EndDraw();
-	void SetMouse(Mouse* mouse) { currentMouse = mouse; }
 	CameraObject* GetCamera() { return cam; }
 	void SetCamera(CameraObject*cam) { this->cam=cam;}
 	void SetLight(LightObject* light) { this->light = light; }
@@ -42,15 +41,17 @@ public:
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
 	void SetSceneObjects(std::vector<Object*>* objectVector){ objects = objectVector; }
 	void SetHierarchySelectObject(Object* selectObject) { currentHierarchySelectObject = selectObject; }
+	void MousePickingPos(int x,int y){ mousePosX =x; mousePosY = y;}
+	void MouseLeftClick(bool value){ isMouseLeftClick  = value;}
 private:
 	ComPtr<IDXGISwapChain> pSwap;
 	ComPtr<ID3D11Device> pDevice;
 	ComPtr<ID3D11DeviceContext> pContext;
 	ComPtr<ID3D11RenderTargetView> pRenderTarget;
 	ComPtr<ID3D11DepthStencilView> depthStencilView;
-
+	ComPtr<ID3D11RenderTargetView> pPickingRenderTarget;
 	ComPtr<ID3D11Buffer> lightConstantBuffer;
-
+	ComPtr<ID3D11Texture2D> pickingStagingTexture;
 private:
 	struct GlobalBuffer {
 		XMFLOAT4 lightPos;
@@ -68,10 +69,12 @@ private:
 private:
 	float totalTime;
 	std::vector<Object*>* objects;
-	Mouse* currentMouse;
 	CameraObject* cam;
 	LightObject* light;
 	GlobalBuffer globalBuffer = {};
 	Object* currentHierarchySelectObject;
 	PostProcessingManager* postProcessingManager;
+	ComPtr<ID3D11Texture2D> pPickingTexture = NULL;
+	bool isMouseLeftClick;
+	int mousePosX, mousePosY;
 };
