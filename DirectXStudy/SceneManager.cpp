@@ -150,7 +150,7 @@ Object* SceneManager::DuplicateSceneObject(Object* object)
 }
 void SceneManager::SetSelectObjectID(EventData* eventData)
 {
-	SelectObjectIDData* eventDataCast = dynamic_cast<SelectObjectIDData*>(eventData);
+	SelectObjectIDData* eventDataCast = static_cast<SelectObjectIDData*>(eventData);
 
 	if (eventDataCast != nullptr)
 	{
@@ -162,7 +162,7 @@ void SceneManager::SetSelectObjectID(EventData* eventData)
 }
 void SceneManager::SetSelectObject(EventData* eventData)
 {
-	SelectObjectData* eventDataCast = dynamic_cast<SelectObjectData*>(eventData);
+	SelectObjectData* eventDataCast = static_cast<SelectObjectData*>(eventData);
 
 	if (eventDataCast != nullptr)
 	{

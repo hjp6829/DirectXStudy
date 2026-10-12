@@ -30,7 +30,7 @@ void Insfector::RegisterEventHandlers()
 }
 void Insfector::SetSelectObject(EventData* eventData)
 {
-	SelectObjectData* eventDataCast = dynamic_cast<SelectObjectData*>(eventData);
+	SelectObjectData* eventDataCast = static_cast<SelectObjectData*>(eventData);
 
 	if (eventDataCast != nullptr)
 	{

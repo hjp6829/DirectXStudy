@@ -32,15 +32,15 @@ App::App()
 	dxdMain->SetCamera(sceneManager->GetCamera());
 	dxdMain->SetLight(sceneManager->GetLight());
 
-	uimanager->OnCreateObjectSelected = [this](std::string path) {
+	uimanager->OnCreateObjectSelected = [this](std::string path) {//이벤트 버스
 		sceneManager->CreateObjectSelect(path);
 		};
-	uimanager->OnModelDelete = [this](Object* object) {
+	uimanager->OnModelDelete = [this](Object* object) {//이벤트 버스
 		commandQueue.push([this, object] () {
 			sceneManager->DeleteModel(object);
 		});
 		};
-	uimanager->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {
+	uimanager->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {//이벤트 버스
 		sceneManager->SetHierarchyDropObject(parentObject, childObject);
 		};
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {

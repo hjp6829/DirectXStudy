@@ -255,7 +255,7 @@ void DirectXMain::RegisterEventHandlers()
 }
 void DirectXMain::SetSelectObject(EventData* eventData)
 {
-	SelectObjectData* eventDataCast = dynamic_cast<SelectObjectData*>(eventData);
+	SelectObjectData* eventDataCast = static_cast<SelectObjectData*>(eventData);
 
 	if (eventDataCast != nullptr)
 	{
