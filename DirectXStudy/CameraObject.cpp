@@ -2,6 +2,7 @@
 #include "Log.h"
 #include "imgui_impl_win32.h"
 #include "SceneSerializationData.h"
+#include "Input.h"
 
 CameraObject::CameraObject()
 {
@@ -49,21 +50,6 @@ void CameraObject::SetMouseDeltaPos(int x, int y)
 	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(up,y), mouseSpeed));
 	XMStoreFloat3(&positionOffset, pos);
 }
-void CameraObject::KeyboardEvent(int idx)
-{
-	if (!isMouseRight)
-		return;
-	XMVECTOR pos = XMLoadFloat3(&positionOffset);
-	if ((char)idx == 'W')
-		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, mouseWheelSpeed));
-	if ((char)idx == 'S')
-		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, -mouseWheelSpeed));
-	if ((char)idx == 'A')
-		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, -mouseWheelSpeed));
-	if ((char)idx == 'D')
-		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, mouseWheelSpeed));
-	XMStoreFloat3(&positionOffset, pos);
-}
 
 void CameraObject::DrawInspectorContents()
 {
@@ -82,4 +68,21 @@ void CameraObject::Serialize(nlohmann::json& j)
 void CameraObject::Deserialize(const nlohmann::json& j)
 {
 	Object::Deserialize(j);
+}
+
+void CameraObject::UpdateObject()
+{	
+	Object::UpdateObject();
+	if (!isMouseRight)
+		return;
+	XMVECTOR pos = XMLoadFloat3(&positionOffset);
+	if (Input::GetKey('W'))
+		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, mouseWheelSpeed));
+	if (Input::GetKey('S'))
+		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, -mouseWheelSpeed));
+	if (Input::GetKey('A'))
+		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, -mouseWheelSpeed));
+	if (Input::GetKey('D'))
+		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, mouseWheelSpeed));
+	XMStoreFloat3(&positionOffset, pos);
 }

@@ -34,8 +34,7 @@ void Insfector::UpdateUI()
 		if (ImGui::Selectable("TestScript"))
 		{
 			std::unique_ptr<ScriptComponent> testScript = scriptRegistry->CreateScript("TestScript");
-			TestScript* test = static_cast<TestScript*>(testScript.get());
-			Log::PrintLog(std::to_string(test->testid));
+			currentObject->SetComponent(std::move(testScript));
 		}
 
 		ImGui::EndPopup();

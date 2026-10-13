@@ -140,15 +140,6 @@ void DirectXMain::Start()
 	pDevice->CreateBuffer(&sDes, &sd, lightConstantBuffer.GetAddressOf());
 }
 
-void DirectXMain::Update(float deltaTime)
-{
-	totalTime += deltaTime;
-	for (auto& [key, value] : *objects)
-	{
-		value->UpdateObject();
-	}
-}
-
 void DirectXMain::Render()
 {
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // RGBA
@@ -219,11 +210,14 @@ void DirectXMain::Render()
 
 				pContext->Unmap(pickingStagingTexture.Get(), 0);
 
-				Log::PrintLog(std::to_string(objectID));
+				if (objectID != 0)
+				{
+					Log::PrintLog(std::to_string(objectID));
 
-				SelectObjectIDData selectObjectIDData;
-				selectObjectIDData.objectID = objectID;
-				EventBus::Publish(EventType::SelectObjectID, &selectObjectIDData);
+					SelectObjectIDData selectObjectIDData;
+					selectObjectIDData.objectID = objectID;
+					EventBus::Publish(EventType::SelectObjectID, &selectObjectIDData);
+				}
 			}
 
 			pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);

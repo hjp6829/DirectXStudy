@@ -21,7 +21,7 @@ private:
 		DirectXMain* dxdMain;
 		Window* window;
 		Mouse* mouse;
-		Keyboard* keyboard;
+		Input* input;
 		UIManager* uimanager;
 		SceneManager* sceneManager;
 private:

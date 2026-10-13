@@ -21,10 +21,10 @@ public:
 	void SetMouseWheelDown(bool value) { isMouseWheelDown = value; }
 	void SetMouseWheelDelta(int value);
 	void SetMouseDeltaPos(int x,int y);
-	void KeyboardEvent(int idx);
 	void DrawInspectorContents() override;
 	void Serialize(nlohmann::json& j) override;
 	void Deserialize(const nlohmann::json& j) override;
+	void UpdateObject() override;
 	XMFLOAT3 GetCameraForward(){XMFLOAT3 forwardFloat3; XMStoreFloat3(&forwardFloat3, forward); return forwardFloat3; }
 private:
 	float FOV;
@@ -33,7 +33,7 @@ private:
 	float rotationSpeed = 0.5f;
 	float mouseSpeed = 0.03;
 	float mouseWheelSpeed = 0.2;
-	float KeyboardSpeed = 0.1;
+	float InputSpeed = 0.1;
 	bool isMouseRight;
 	bool isMouseWheelDown;
 	int mouseWheelDelta;

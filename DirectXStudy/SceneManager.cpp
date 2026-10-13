@@ -9,6 +9,8 @@
 #include "SceneObject.h"
 #include "EventBus.h"
 #include "EventDefinitions.h"
+#include "imgui_impl_dx11.h"
+#include "Input.h"
 
 SceneManager::SceneManager(ID3D11Device* device)
 {
@@ -16,35 +18,33 @@ SceneManager::SceneManager(ID3D11Device* device)
 	modelCreater = new ModelCreater(device);
 	LoadSaveSceneFile();
 }
-
-void SceneManager::SetKeyInput(int key, bool value)
+void SceneManager::Update(float deltaTime)
 {
-	if(key == 17)
-		isCtrl = value;
-	if ((char)key == 'S' && value)
+	for (auto& [key, value] : allObjects)
 	{
-		if(isCtrl)
-			SaveScene();
+		value->UpdateComponent(deltaTime);
 	}
-	if ((char)key == 'E' && value)
+	for (auto& [key, value] : objects)
 	{
+		value->UpdateObject();
+	}
+
+	if(Input::GetKey(VK_CONTROL))
+		isCtrl = true;
+
+	if (Input::GetKeyDown('E'))
 		LoadSaveSceneFile();
-	}
-	if ((char)key == 'C' && value)
+
+	if (isCtrl)
 	{
-		if (isCtrl)
+		if (Input::GetKeyDown('S'))
+			SaveScene();
+		if (Input::GetKeyDown('C'))
 			DuplicateObjectSave();
-	}
-	if ((char)key == 'V' && value)
-	{
-		if (isCtrl)
+		if (Input::GetKeyDown('V'))
 			DuplicateObject();
 	}
-}
-
-void SceneManager::SetKeyInputHold(int key)
-{
-	camera->KeyboardEvent(key);
+	isCtrl = false;
 }
 
 void SceneManager::CreateObjectSelect(std::string path)
@@ -53,6 +53,30 @@ void SceneManager::CreateObjectSelect(std::string path)
 	object->SetRootNodeCheck(true);
 	RegisterModelHierarchy(object);
 	objects[object->objectID] = object;
+}
+void SceneManager::SetMouseRightDown(bool value)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	if (!io.WantCaptureMouse)
+		camera->SetMouseRightValue(value);
+}
+void SceneManager::SetMouseWheelDown(bool value)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	if (!io.WantCaptureMouse)
+		camera->SetMouseWheelDown(value);
+}
+void SceneManager::SetMouseWheelDelta(float delta)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	if (!io.WantCaptureMouse)
+		camera->SetMouseWheelDelta(delta);
+}
+void SceneManager::SetMouseDeltaPos(int x, int y)
+{
+	ImGuiIO& io = ImGui::GetIO();
+	if (!io.WantCaptureMouse)
+		camera->SetMouseDeltaPos(x, y);
 }
 void SceneManager::RegisterModelHierarchy(Object* object)
 {
@@ -180,6 +204,7 @@ void SceneManager::DeleteObject(EventData* eventData)
 		{
 			objects.erase(tempObject->objectID);
 		}
+		allObjects.erase(tempObject->objectID);
 		tempObject->RemoveModelData();
 		DeleteChiledModels(tempObject);
 		tempObject->childObjects.clear();

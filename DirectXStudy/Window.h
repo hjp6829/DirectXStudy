@@ -3,15 +3,15 @@
 #include <windowsx.h>
 #include "Mouse.h"
 
-class Keyboard;
+class Input;
 
 class Window {
 public:
-	Window(Mouse* mouse, Keyboard* keybard);
+	Window(Mouse* mouse, Input* input);
 	~Window();
 	static Window* Instance() { return instance; }
 	Mouse* GetMouse() { return mouse; }
-	Keyboard* GetKeyboard() { return keyboard; }
+	Input* GetInput() { return input; }
 	HWND GetHwnd() { return hWnd; }
 private:
 		static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
@@ -19,6 +19,6 @@ private:
 		HINSTANCE hInst;
 		static Window* instance;
 		Mouse* mouse;
-		Keyboard* keyboard;
+		Input* input;
 		HWND hWnd;
 };

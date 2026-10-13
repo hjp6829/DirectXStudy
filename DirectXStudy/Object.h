@@ -29,7 +29,7 @@ public:
 	void RenderObject(DirectXMain* dxdMain);
 	void OutlineRenderObject(DirectXMain* dxdMain);
 	void PickingRenderObject(DirectXMain* dxdMain);
-	void UpdateObject();
+
 	void ToggleMeshEnable(bool value);
 	bool meshEnable = true;
 	bool IsRootObject() { return isRootObject; }
@@ -52,7 +52,10 @@ public:
 	XMFLOAT3 GetObjectScale();
 	void SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale);
 	void ShowInspectorUI();
+	void SetComponent(std::unique_ptr<Component> component);
+	void UpdateComponent(float deltaTime);
 public:
+	void virtual UpdateObject();
 	void virtual SetPostionOffset(XMFLOAT3 position) { positionOffset = position; }
 	void virtual SetRotationOffset(XMFLOAT3 rotation) { rotationOffset = rotation; }
 	void virtual SetScaleOffset(XMFLOAT3 scale) { scaleOffset = scale; }

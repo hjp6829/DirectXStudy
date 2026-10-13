@@ -3,7 +3,7 @@
 #include "imgui_impl_win32.h"
 #include "AssimpConverter.h"
 #include "Mouse.h"
-#include "Keyboard.h"
+#include "Input.h"
 #include "UIManager.h"
 #include "ModelCreater.h"
 #include "Object.h"
@@ -23,9 +23,9 @@ App::App()
 	ImGui::StyleColorsDark();
 
 	mouse = new Mouse();
-	keyboard = new Keyboard();
+	input = new Input();
 
-	window = new Window(mouse, keyboard);
+	window = new Window(mouse, input);
 	dxdMain = new DirectXMain(window->GetHwnd());
 	sceneManager = new SceneManager(dxdMain->GetDevice());
 	dxdMain->SetSceneObjects(sceneManager->GetSceneObjects());
@@ -43,10 +43,7 @@ App::App()
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
 	//	RenameModel(model);
 	//	};
-	keyboard->OnKeyPressed = [this](int key, bool value)
-		{
-			sceneManager->SetKeyInput(key,value);
-		};
+
 	mouse->OnMouseLeftDown = [this](bool value)
 		{
 			dxdMain->MouseLeftClick(value);
@@ -75,10 +72,6 @@ App::App()
 		{
 			dxdMain->MousePickingPos(x,y);
 		};
-	keyboard->OnKeyHold = [this](int key)
-		{
-			sceneManager->SetKeyInputHold(key);
-		};
 }
 
 void App::Run()
@@ -97,19 +90,14 @@ void App::Run()
 		auto currentTime = std::chrono::steady_clock::now();
 		std::chrono::duration<float> elapsed = currentTime - previousTime;
 		float deltaTime = elapsed.count();
-		dxdMain->Update(deltaTime);
+		sceneManager->Update(deltaTime);
+		input->Update();
 		dxdMain->Render();
-
-		keyboard->Update();
 		mouse->SetWheelDelta(0);
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
-		//cam->ViewCameraWindow();
-		//light->ViewLightWindow();
 		uimanager->UpdateUI();
-		//static bool showDemoWindow = true;
-		//ImGui::ShowDemoWindow(&showDemoWindow);
 		ImGui::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 

@@ -4,7 +4,7 @@
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "Log.h"
-#include "Keyboard.h"
+#include "Input.h"
 
 Window* Window::instance = nullptr;
 
@@ -24,10 +24,10 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	switch (message)
 	{
 	case WM_KEYDOWN:
-		Instance()->GetKeyboard()->SetKeyState(wParam,true);
+		Instance()->GetInput()->SetKeyState(wParam,true);
 		break;
 	case WM_KEYUP:
-		Instance()->GetKeyboard()->SetKeyState(wParam, false);
+		Instance()->GetInput()->SetKeyState(wParam, false);
 		break;
 	case WM_PAINT:
 		break;
@@ -73,10 +73,10 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	return 0;
 }
 
-Window::Window(Mouse* mouse, Keyboard* keybard) : hInst(GetModuleHandle(nullptr))
+Window::Window(Mouse* mouse, Input* input) : hInst(GetModuleHandle(nullptr))
 {
 	this->mouse = mouse;
-	this->keyboard = keybard;
+	this->input = input;
 	instance = this;
 	WNDCLASSEX wces = {};
 	wces.cbSize = sizeof(wces);

@@ -30,7 +30,6 @@ class DirectXMain {
 public:
 	DirectXMain(HWND hWnd);
 	void Start();
-	void Update(float deltaTime);
 	void Render();
 	void Shutdown();
 	void EndDraw();
@@ -67,7 +66,7 @@ private:
 		float padding4;
 	};
 private:
-	float totalTime;
+
 	std::unordered_map<uint64_t, Object*>* objects;
 	CameraObject* cam;
 	LightObject* light;

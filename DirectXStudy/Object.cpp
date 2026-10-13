@@ -42,6 +42,19 @@ void Object::ShowInspectorUI()
 {
 	DrawInspectorContents();
 }
+void Object::SetComponent(std::unique_ptr<Component> component)
+{
+	component->Initialize(this);
+	components.push_back(std::move(component));
+
+}
+void Object::UpdateComponent(float deltaTime)
+{
+	for (auto& component : components)
+	{
+		component->Update();
+	}
+}
 void Object::DrawInspectorContents()
 {
 	XMFLOAT3 tempPos = GetObjectPosition();
