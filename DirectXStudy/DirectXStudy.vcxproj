@@ -157,7 +157,10 @@
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneObject.cpp" />
+    <ClCompile Include="ScriptComponent.cpp" />
+    <ClCompile Include="ScriptRegistry.cpp" />
     <ClCompile Include="Surface.cpp" />
+    <ClCompile Include="TestScript.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
@@ -170,6 +173,7 @@
     <ClInclude Include="AssimpConverter.h" />
     <ClInclude Include="Bindable.h" />
     <ClInclude Include="CameraObject.h" />
+    <ClInclude Include="Component.h" />
     <ClInclude Include="Datas.h" />
     <ClInclude Include="EventBus.h" />
     <ClInclude Include="EventDefinitions.h" />
@@ -206,7 +210,10 @@
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="SceneSerializationData.h" />
+    <ClInclude Include="ScriptComponent.h" />
+    <ClInclude Include="ScriptRegistry.h" />
     <ClInclude Include="Surface.h" />
+    <ClInclude Include="TestScript.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="VertexBuffer.h" />

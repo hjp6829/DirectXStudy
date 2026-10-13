@@ -169,23 +169,29 @@ void SceneManager::SetSelectObject(EventData* eventData)
 		currentSelectObject = eventDataCast->selectObject;
 	}
 }
+void SceneManager::DeleteObject(EventData* eventData)
+{
+	SelectObjectIDData* eventDataCast = static_cast<SelectObjectIDData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		Object* tempObject = allObjects[eventDataCast->objectID];
+		if (tempObject->IsRootObject())
+		{
+			objects.erase(tempObject->objectID);
+		}
+		tempObject->RemoveModelData();
+		DeleteChiledModels(tempObject);
+		tempObject->childObjects.clear();
+		delete tempObject;
+	}
+}
 void SceneManager::RegisterEventHandlers()
 {
 	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
 	EventBus::Subscribe(EventType::SelectObjectID, [this](EventData* data) {SetSelectObjectID(data); });
+	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteObject(data); });
 }
-void SceneManager::DeleteModel(Object* object)
-{
-	if (object->IsRootObject())
-	{
-		objects.erase(object->objectID);
-	}
-	object->RemoveModelData();
-	DeleteChiledModels(object);
-	object->childObjects.clear();
-	delete object;
-}
-
 void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObject)
 {
 	childObject->RemoveFromParent();

@@ -11,6 +11,7 @@ class Mouse;
 class UIManager;
 class SceneManager;
 struct JsonSceneObjectData;
+class EventData;
 
 class App {
 	public:
@@ -25,4 +26,6 @@ private:
 		SceneManager* sceneManager;
 private:
 	std::queue<std::function<void()>> commandQueue;
+	void RegisterEventHandlers();
+	void DeleteObject(EventData* eventData);
 };

@@ -12,9 +12,11 @@
 #include <fstream>
 #include <nlohmann/json.hpp>
 #include "SceneManager.h"
+#include "EventBus.h"
 
 App::App()
 {
+	RegisterEventHandlers();
 	Log* log = new Log();
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -35,11 +37,6 @@ App::App()
 	uimanager->OnCreateObjectSelected = [this](std::string path) {//이벤트 버스
 		sceneManager->CreateObjectSelect(path);
 		};
-	uimanager->OnModelDelete = [this](Object* object) {//이벤트 버스
-		commandQueue.push([this, object] () {
-			sceneManager->DeleteModel(object);
-		});
-		};
 	uimanager->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {//이벤트 버스
 		sceneManager->SetHierarchyDropObject(parentObject, childObject);
 		};
@@ -53,17 +50,16 @@ App::App()
 	mouse->OnMouseLeftDown = [this](bool value)
 		{
 			dxdMain->MouseLeftClick(value);
-			//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
+			
 		};
 	mouse->OnMouseRightDown = [this](bool value)
 	{
 		sceneManager->SetMouseRightDown(value);
-		//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
+		
 	};
 	mouse->OnMouseWheelDown = [this](bool value)
 		{
 			sceneManager->SetMouseWheelDown(value);
-			//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
 		};
 	mouse->OnMouseWheelDelta = [this](float value)
 		{
@@ -145,8 +141,24 @@ void App::Run()
 //
 //}
 //
-//void App::RenameModel(SceneObject* model)
-//{
-//}
+void App::RegisterEventHandlers()
+{
+	EventBus::Subscribe(EventType::RequestDeleteObject, [this](EventData* data) {DeleteObject(data); });
+}
+void App::DeleteObject(EventData* eventData)
+{
+	SelectObjectIDData* eventDataCast = static_cast<SelectObjectIDData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		uint64_t objectID = eventDataCast->objectID;
+		commandQueue.push([this, objectID]() {
+			SelectObjectIDData selectObjectData;
+			selectObjectData.objectID = objectID;
+			EventBus::Publish(EventType::ObjectWillBeDeleted, &selectObjectData);
+			});
+	}
+
+}
 
 

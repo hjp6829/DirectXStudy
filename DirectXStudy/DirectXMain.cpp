@@ -252,6 +252,7 @@ void DirectXMain::EndDraw()
 void DirectXMain::RegisterEventHandlers()
 {
 	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
+	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteCurrentObject(data); });
 }
 void DirectXMain::SetSelectObject(EventData* eventData)
 {
@@ -261,5 +262,9 @@ void DirectXMain::SetSelectObject(EventData* eventData)
 	{
 		currentSelectObject = eventDataCast->selectObject;
 	}
+}
+void DirectXMain::DeleteCurrentObject(EventData* eventData)
+{
+	currentSelectObject = nullptr;
 }
 

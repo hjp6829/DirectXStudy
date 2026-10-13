@@ -7,26 +7,45 @@
 #include "Log.h"
 #include "EventBus.h"
 #include "EventDefinitions.h"
+#include "ScriptRegistry.h"
+#include "ScriptComponent.h"
+#include <filesystem>
+#include "TestScript.h"
 
 Insfector::Insfector()
 {
 	RegisterEventHandlers();
+	scriptRegistry = new ScriptRegistry();
 }
 
 void Insfector::UpdateUI()
 {
 	if(currentObject == nullptr)
 		return;
-	currentObject->ShowInspectorUI();
-}
+	if (ImGui::Begin("Insfector")) {
+		currentObject->ShowInspectorUI();
+	}
+	if (ImGui::Button("Add Component"))
+	{
+		ImGui::OpenPopup("ScriptList");
+	}
+	if (ImGui::BeginPopup("ScriptList"))
+	{
+		if (ImGui::Selectable("TestScript"))
+		{
+			std::unique_ptr<ScriptComponent> testScript = scriptRegistry->CreateScript("TestScript");
+			TestScript* test = static_cast<TestScript*>(testScript.get());
+			Log::PrintLog(std::to_string(test->testid));
+		}
 
-void Insfector::ObjectDelete()
-{
-	currentObject=nullptr;
+		ImGui::EndPopup();
+	}
+	ImGui::End();
 }
 void Insfector::RegisterEventHandlers()
 {
 	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
+	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteObject(data); });
 }
 void Insfector::SetSelectObject(EventData* eventData)
 {
@@ -36,4 +55,8 @@ void Insfector::SetSelectObject(EventData* eventData)
 	{
 		currentObject = eventDataCast->selectObject;
 	}
+}
+void Insfector::DeleteObject(EventData* eventData)
+{
+	currentObject = nullptr;
 }

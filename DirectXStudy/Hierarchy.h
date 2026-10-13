@@ -10,7 +10,6 @@ class Hierarchy
 public: 
 	Hierarchy(std::unordered_map<uint64_t, Object*>* modelContainer);
 	void UpdateUI();
-	std::function<void(Object*)> OnHierarchyDeleteClick;
 	std::function<void(Object*, Object*)> OnHierarchyDrop;
 	std::function<void(Object*)> OnHierarchyRenameClick;
 private:
@@ -19,4 +18,5 @@ private:
 	Object* currentSelectObject;
 	void RegisterEventHandlers();
 	void SetSelectObject(EventData* eventData);
+	void DeleteCurrentObject(EventData* eventData);
 };

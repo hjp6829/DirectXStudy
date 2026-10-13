@@ -3,6 +3,11 @@
 #include "ModelNode.h"
 #include "Log.h"
 #include "imgui_impl_win32.h"
+#include "Component.h"
+
+Object::Object() = default;
+Object::~Object() = default;
+
 XMFLOAT3 Object::GetObjectPosition()
 {
 	XMFLOAT3 localPos;
@@ -35,11 +40,7 @@ void Object::SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 lo
 }
 void Object::ShowInspectorUI()
 {
-	if (ImGui::Begin("Insfector"))
-	{
-		DrawInspectorContents();
-	}
-	ImGui::End();
+	DrawInspectorContents();
 }
 void Object::DrawInspectorContents()
 {

@@ -79,4 +79,5 @@ private:
 	int mousePosX, mousePosY;
 	void RegisterEventHandlers();
 	void SetSelectObject(EventData* eventData);
+	void DeleteCurrentObject(EventData* eventData);
 };

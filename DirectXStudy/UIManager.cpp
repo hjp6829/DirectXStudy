@@ -15,10 +15,6 @@ UIManager::UIManager(std::unordered_map<uint64_t, Object*>* SceneObjects)
 	modelBrowserUI->OnCreateObjectSelected = [this](std::string path) {
 		OnCreateObjectSelected(path);
 		};
-	hierarchy->OnHierarchyDeleteClick = [this](Object* object) {
-		insfector->ObjectDelete();
-		OnModelDelete(object);
-		};
 	hierarchy->OnHierarchyRenameClick = [this](Object* object) {
 		OnHierarchyRenameClick(object);
 		};

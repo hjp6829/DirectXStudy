@@ -13,7 +13,6 @@ public:
 	UIManager(std::unordered_map<uint64_t, Object*>* SceneObjects);
 	void UpdateUI();
 	std::function<void(std::string)> OnCreateObjectSelected;
-	std::function<void(Object*)> OnModelDelete;
 	std::function<void(Object*)> OnHierarchyRenameClick;
 	std::function<void(Object*, Object*)> OnHierarchyDrop;
 private:

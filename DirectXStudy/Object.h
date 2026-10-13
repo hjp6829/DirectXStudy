@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 #include <nlohmann/json.hpp>
+#include <memory>
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -12,10 +13,12 @@ using namespace DirectX;
 class Mesh;
 class DirectXMain;
 class ModelNode;
+class Component;
 
 class Object {
 public:
-	Object(){};
+	Object();
+	virtual ~Object();
 	Object* parentObject;
 	ModelNode* currentModelNode;
 	std::vector<Object*> childObjects;
@@ -69,5 +72,6 @@ protected:
 	XMVECTOR up;
 	XMVECTOR right;
 	XMVECTOR forward;
+	std::vector<std::unique_ptr<Component>> components;
 private:
 };

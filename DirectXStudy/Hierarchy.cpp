@@ -143,7 +143,9 @@ void Hierarchy::ModelTraversal(Object* object)
 
         if (ImGui::MenuItem("Delete"))
         {
-            OnHierarchyDeleteClick(object);
+            SelectObjectIDData selectObjectData;
+            selectObjectData.objectID = object->objectID;
+            EventBus::Publish(EventType::RequestDeleteObject, &selectObjectData);
         }
 
         if (ImGui::MenuItem("Rename"))
@@ -169,6 +171,7 @@ void Hierarchy::ModelTraversal(Object* object)
 void Hierarchy::RegisterEventHandlers()
 {
     EventBus::Subscribe(EventType::SelectObject, [this](EventData* data){SetSelectObject(data);});
+    EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteCurrentObject(data); });
 }
 
 void Hierarchy::SetSelectObject(EventData* eventData)
@@ -179,4 +182,9 @@ void Hierarchy::SetSelectObject(EventData* eventData)
     {
         currentSelectObject = eventDataCast->selectObject;
     }
+}
+
+void Hierarchy::DeleteCurrentObject(EventData* eventData)
+{
+    currentSelectObject = nullptr;
 }

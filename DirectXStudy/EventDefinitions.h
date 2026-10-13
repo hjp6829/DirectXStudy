@@ -5,7 +5,9 @@ class Object;
 
 enum class EventType {
 	SelectObject,
-	SelectObjectID
+	SelectObjectID,
+	RequestDeleteObject,
+	ObjectWillBeDeleted
 };
 
 class EventData {

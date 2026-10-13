@@ -19,7 +19,6 @@ public:
 	void SetKeyInput(int key, bool value);
 	void SetKeyInputHold(int key);
 	void CreateObjectSelect(std::string path);
-	void DeleteModel(Object* object);
 	void SetMouseRightDown(bool value) { camera->SetMouseRightValue(value); }
 	void SetMouseWheelDown(bool value) { camera->SetMouseWheelDown(value); }
 	void SetMouseWheelDelta(float delta) { camera->SetMouseWheelDelta(delta); }
@@ -52,4 +51,5 @@ private:
 	void RegisterEventHandlers();
 	void SetSelectObjectID(EventData* eventData);
 	void SetSelectObject(EventData* eventData);
+	void DeleteObject(EventData* eventData);
 };

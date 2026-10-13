@@ -7,11 +7,9 @@ void EventBus::Subscribe(EventType type, std::function<void(EventData*)> callbac
 
 void EventBus::Publish(EventType type, EventData* data)
 {
-	for (auto& [key, value] : eventListeners)
+	std::vector<std::function<void(EventData*)>> currentEvent = eventListeners[type];
+	for (int i = 0; i < currentEvent.size(); i++)
 	{
-		for (int i = 0; i < value.size(); i++)
-		{
-			value[i](data);
-		}
+		currentEvent[i](data);
 	}
 }
