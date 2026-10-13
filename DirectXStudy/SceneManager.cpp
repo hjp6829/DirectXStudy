@@ -245,6 +245,7 @@ void SceneManager::DeleteChiledModels(Object* object)
 {
 	for (int i = 0; i < object->childObjects.size(); i++)
 	{
+		allObjects.erase(object->childObjects[i]->objectID);
 		DeleteChiledModels(object->childObjects[i]);
 		delete object->childObjects[i];
 	}
