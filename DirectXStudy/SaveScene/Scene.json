@@ -7,15 +7,17 @@
         "modelHeshCode": 0,
         "objectID": 1,
         "parentObjectID": 0,
-        "posX": -8.738020896911621,
-        "posY": 3.6638073921203613,
-        "posZ": -2.459211826324463,
-        "rotx": 18.5,
-        "roty": 54.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": -8.738020896911621,
+            "posY": 3.6638073921203613,
+            "posZ": -2.459211826324463,
+            "rotx": 18.5,
+            "roty": 54.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "",
@@ -29,17 +31,19 @@
         "modelHeshCode": 0,
         "objectID": 2,
         "parentObjectID": 0,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0,
         "shininess": 32.0,
-        "specularStrength": 0.5
+        "specularStrength": 0.5,
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -49,15 +53,17 @@
         "modelHeshCode": 8021923539437501734,
         "objectID": 3,
         "parentObjectID": 0,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 0.009999999776482582,
-        "scaley": 0.009999999776482582,
-        "scalez": 0.009999999776482582
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 0.009999999776482582,
+            "scaley": 0.009999999776482582,
+            "scalez": 0.009999999776482582
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -67,15 +73,17 @@
         "modelHeshCode": 5611827442737709043,
         "objectID": 4,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -85,15 +93,17 @@
         "modelHeshCode": 4419431720432958872,
         "objectID": 5,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -103,15 +113,17 @@
         "modelHeshCode": 7995716663994079566,
         "objectID": 6,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -121,15 +133,17 @@
         "modelHeshCode": 5799488117831964464,
         "objectID": 7,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -139,15 +153,17 @@
         "modelHeshCode": 14128105283016305437,
         "objectID": 8,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -157,15 +173,17 @@
         "modelHeshCode": 9688024269842911626,
         "objectID": 9,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -175,15 +193,17 @@
         "modelHeshCode": 1444374500172197592,
         "objectID": 10,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -193,15 +213,17 @@
         "modelHeshCode": 12729731305790327433,
         "objectID": 11,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -211,15 +233,17 @@
         "modelHeshCode": 13368151778190284826,
         "objectID": 12,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -229,15 +253,17 @@
         "modelHeshCode": 15291283503716913665,
         "objectID": 13,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -247,15 +273,17 @@
         "modelHeshCode": 4363657513412308615,
         "objectID": 14,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -265,15 +293,17 @@
         "modelHeshCode": 684403403160125605,
         "objectID": 15,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -283,15 +313,17 @@
         "modelHeshCode": 14479896970655707674,
         "objectID": 16,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -301,15 +333,17 @@
         "modelHeshCode": 13949567666794153933,
         "objectID": 17,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -319,15 +353,17 @@
         "modelHeshCode": 5352761163275776481,
         "objectID": 18,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -337,15 +373,17 @@
         "modelHeshCode": 11831399736540545182,
         "objectID": 19,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -355,15 +393,17 @@
         "modelHeshCode": 9937422445263972379,
         "objectID": 20,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -373,15 +413,17 @@
         "modelHeshCode": 4400078462535086544,
         "objectID": 21,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -391,15 +433,17 @@
         "modelHeshCode": 9070889421474948931,
         "objectID": 22,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -409,15 +453,17 @@
         "modelHeshCode": 9535806855557811578,
         "objectID": 23,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -427,15 +473,17 @@
         "modelHeshCode": 6100787482411157560,
         "objectID": 24,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -445,15 +493,17 @@
         "modelHeshCode": 7147757695948320092,
         "objectID": 25,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -463,15 +513,17 @@
         "modelHeshCode": 5239750109935218272,
         "objectID": 26,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -481,15 +533,17 @@
         "modelHeshCode": 9965454416690065231,
         "objectID": 27,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -499,15 +553,17 @@
         "modelHeshCode": 15522391232028040250,
         "objectID": 28,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -517,15 +573,17 @@
         "modelHeshCode": 9594527865485773830,
         "objectID": 29,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -535,15 +593,17 @@
         "modelHeshCode": 7100860783774874784,
         "objectID": 30,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -553,15 +613,17 @@
         "modelHeshCode": 12550982583335559417,
         "objectID": 31,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -571,15 +633,17 @@
         "modelHeshCode": 7398334503695761480,
         "objectID": 32,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -589,15 +653,17 @@
         "modelHeshCode": 11343628006191248696,
         "objectID": 33,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -607,15 +673,17 @@
         "modelHeshCode": 4056931927777917755,
         "objectID": 34,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -625,15 +693,17 @@
         "modelHeshCode": 375876413505249178,
         "objectID": 35,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -643,15 +713,17 @@
         "modelHeshCode": 8407007007650296814,
         "objectID": 36,
         "parentObjectID": 35,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -661,15 +733,17 @@
         "modelHeshCode": 13289166798917018968,
         "objectID": 37,
         "parentObjectID": 35,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -679,15 +753,17 @@
         "modelHeshCode": 14915020589854040197,
         "objectID": 38,
         "parentObjectID": 35,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -697,15 +773,17 @@
         "modelHeshCode": 10423807800222883554,
         "objectID": 39,
         "parentObjectID": 35,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -715,15 +793,17 @@
         "modelHeshCode": 3206149100622728268,
         "objectID": 40,
         "parentObjectID": 35,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -733,15 +813,17 @@
         "modelHeshCode": 32250846721458738,
         "objectID": 41,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -751,15 +833,17 @@
         "modelHeshCode": 14468596652761972948,
         "objectID": 42,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -769,15 +853,17 @@
         "modelHeshCode": 13349127494873809529,
         "objectID": 43,
         "parentObjectID": 42,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -787,15 +873,17 @@
         "modelHeshCode": 12557617018339990503,
         "objectID": 44,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -805,15 +893,17 @@
         "modelHeshCode": 6306012944925654986,
         "objectID": 45,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -823,15 +913,17 @@
         "modelHeshCode": 15666989060059342366,
         "objectID": 46,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -841,15 +933,17 @@
         "modelHeshCode": 3799619446884267504,
         "objectID": 47,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -859,15 +953,17 @@
         "modelHeshCode": 7517470723247259601,
         "objectID": 48,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -877,15 +973,17 @@
         "modelHeshCode": 16165568207985945566,
         "objectID": 49,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -895,15 +993,17 @@
         "modelHeshCode": 2066843901884881537,
         "objectID": 50,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -913,15 +1013,17 @@
         "modelHeshCode": 13060517610088601024,
         "objectID": 51,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -931,15 +1033,17 @@
         "modelHeshCode": 3015113936601261528,
         "objectID": 52,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -949,15 +1053,17 @@
         "modelHeshCode": 5129280826149357107,
         "objectID": 53,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -967,15 +1073,17 @@
         "modelHeshCode": 14267075971075024330,
         "objectID": 54,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -985,15 +1093,17 @@
         "modelHeshCode": 5594338997720630762,
         "objectID": 55,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1003,15 +1113,17 @@
         "modelHeshCode": 17053267893820356472,
         "objectID": 56,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1021,15 +1133,17 @@
         "modelHeshCode": 6977990443918703210,
         "objectID": 57,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1039,15 +1153,17 @@
         "modelHeshCode": 16401937778192496125,
         "objectID": 58,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1057,15 +1173,17 @@
         "modelHeshCode": 6381166846322174719,
         "objectID": 59,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1075,15 +1193,17 @@
         "modelHeshCode": 11146387635030778930,
         "objectID": 60,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1093,15 +1213,17 @@
         "modelHeshCode": 2882470730630102554,
         "objectID": 61,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1111,15 +1233,17 @@
         "modelHeshCode": 5914470725882606134,
         "objectID": 62,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1129,15 +1253,17 @@
         "modelHeshCode": 8705565769710477801,
         "objectID": 63,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1147,15 +1273,17 @@
         "modelHeshCode": 14597668438958809806,
         "objectID": 64,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1165,15 +1293,17 @@
         "modelHeshCode": 3334425030965224504,
         "objectID": 65,
         "parentObjectID": 17,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1183,15 +1313,17 @@
         "modelHeshCode": 13952539715203034558,
         "objectID": 66,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1201,15 +1333,17 @@
         "modelHeshCode": 5228228591217050740,
         "objectID": 67,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1219,15 +1353,17 @@
         "modelHeshCode": 8442966422769544815,
         "objectID": 68,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1237,15 +1373,17 @@
         "modelHeshCode": 10431322651928098057,
         "objectID": 69,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1255,15 +1393,17 @@
         "modelHeshCode": 1651130232227177522,
         "objectID": 70,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1273,15 +1413,17 @@
         "modelHeshCode": 7533350111388324918,
         "objectID": 71,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1291,15 +1433,17 @@
         "modelHeshCode": 8128322162170389739,
         "objectID": 72,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1309,15 +1453,17 @@
         "modelHeshCode": 609116117835186293,
         "objectID": 73,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1327,15 +1473,17 @@
         "modelHeshCode": 6205190436643760900,
         "objectID": 74,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1345,15 +1493,17 @@
         "modelHeshCode": 15526673698473283793,
         "objectID": 75,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1363,15 +1513,17 @@
         "modelHeshCode": 13603541972946654954,
         "objectID": 76,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1381,15 +1533,17 @@
         "modelHeshCode": 11215352075848752460,
         "objectID": 77,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1399,15 +1553,17 @@
         "modelHeshCode": 14390369821548198911,
         "objectID": 78,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1417,15 +1573,17 @@
         "modelHeshCode": 13923673701108630326,
         "objectID": 79,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1435,15 +1593,17 @@
         "modelHeshCode": 17080092396700973123,
         "objectID": 80,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1453,15 +1613,17 @@
         "modelHeshCode": 5500346086668375924,
         "objectID": 81,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1471,15 +1633,17 @@
         "modelHeshCode": 13657867050287228507,
         "objectID": 82,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1489,15 +1653,17 @@
         "modelHeshCode": 503976421987231654,
         "objectID": 83,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1507,15 +1673,17 @@
         "modelHeshCode": 5103899453082324077,
         "objectID": 84,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1525,15 +1693,17 @@
         "modelHeshCode": 102779592869762915,
         "objectID": 85,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1543,15 +1713,17 @@
         "modelHeshCode": 17787612643740380546,
         "objectID": 86,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1561,15 +1733,17 @@
         "modelHeshCode": 3681079730032348959,
         "objectID": 87,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1579,15 +1753,17 @@
         "modelHeshCode": 10482590633715309408,
         "objectID": 88,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1597,15 +1773,17 @@
         "modelHeshCode": 748636165273574078,
         "objectID": 89,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1615,15 +1793,17 @@
         "modelHeshCode": 5131645835298166385,
         "objectID": 90,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1633,15 +1813,17 @@
         "modelHeshCode": 7922740879126038052,
         "objectID": 91,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1651,15 +1833,17 @@
         "modelHeshCode": 5731192159751134338,
         "objectID": 92,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1669,15 +1853,17 @@
         "modelHeshCode": 8875458764238830741,
         "objectID": 93,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1687,15 +1873,17 @@
         "modelHeshCode": 11494223042802629485,
         "objectID": 94,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1705,15 +1893,17 @@
         "modelHeshCode": 8750355927226806214,
         "objectID": 95,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1723,15 +1913,17 @@
         "modelHeshCode": 12102297861633106164,
         "objectID": 96,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1741,15 +1933,17 @@
         "modelHeshCode": 14496928679688874608,
         "objectID": 97,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1759,15 +1953,17 @@
         "modelHeshCode": 13702812558739605024,
         "objectID": 98,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1777,15 +1973,17 @@
         "modelHeshCode": 2003971770580532776,
         "objectID": 99,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1795,15 +1993,17 @@
         "modelHeshCode": 7156760587708741721,
         "objectID": 100,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1813,15 +2013,17 @@
         "modelHeshCode": 7355074898672138183,
         "objectID": 101,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1831,15 +2033,17 @@
         "modelHeshCode": 2653653536008936756,
         "objectID": 102,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1849,15 +2053,17 @@
         "modelHeshCode": 12892670836379994258,
         "objectID": 103,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1867,15 +2073,17 @@
         "modelHeshCode": 11642142756181718303,
         "objectID": 104,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1885,15 +2093,17 @@
         "modelHeshCode": 11700758212993372299,
         "objectID": 105,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1903,15 +2113,17 @@
         "modelHeshCode": 16836521790388200085,
         "objectID": 106,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1921,15 +2133,17 @@
         "modelHeshCode": 6379489219941135374,
         "objectID": 107,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1939,15 +2153,17 @@
         "modelHeshCode": 12531034483212808828,
         "objectID": 108,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1957,15 +2173,17 @@
         "modelHeshCode": 3200125898989453679,
         "objectID": 109,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1975,15 +2193,17 @@
         "modelHeshCode": 1008541995242447213,
         "objectID": 110,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -1993,15 +2213,17 @@
         "modelHeshCode": 9562509592447351643,
         "objectID": 111,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2011,15 +2233,17 @@
         "modelHeshCode": 13751698233650019893,
         "objectID": 112,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2029,15 +2253,17 @@
         "modelHeshCode": 3906464109492283068,
         "objectID": 113,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2047,15 +2273,17 @@
         "modelHeshCode": 564780058597617327,
         "objectID": 114,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2065,15 +2293,17 @@
         "modelHeshCode": 3273031315113289689,
         "objectID": 115,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2083,15 +2313,17 @@
         "modelHeshCode": 16566986571694632360,
         "objectID": 116,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2101,15 +2333,17 @@
         "modelHeshCode": 9819083286144152992,
         "objectID": 117,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2119,15 +2353,17 @@
         "modelHeshCode": 5206442809288018370,
         "objectID": 118,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2137,15 +2373,17 @@
         "modelHeshCode": 13632380766755145828,
         "objectID": 119,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2155,15 +2393,17 @@
         "modelHeshCode": 17213030925773468953,
         "objectID": 120,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2173,15 +2413,17 @@
         "modelHeshCode": 8654594608013969647,
         "objectID": 121,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2191,15 +2433,17 @@
         "modelHeshCode": 1734987664689888282,
         "objectID": 122,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2209,15 +2453,17 @@
         "modelHeshCode": 699979821215468034,
         "objectID": 123,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2227,15 +2473,17 @@
         "modelHeshCode": 5451378295179643104,
         "objectID": 124,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2245,15 +2493,17 @@
         "modelHeshCode": 2167342992851712414,
         "objectID": 125,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2263,15 +2513,17 @@
         "modelHeshCode": 14164167900447459390,
         "objectID": 126,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2281,15 +2533,17 @@
         "modelHeshCode": 3847331558103379266,
         "objectID": 127,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2299,15 +2553,17 @@
         "modelHeshCode": 11489711877938718054,
         "objectID": 128,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2317,15 +2573,17 @@
         "modelHeshCode": 17780688811465026075,
         "objectID": 129,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2335,15 +2593,17 @@
         "modelHeshCode": 10506295628172329445,
         "objectID": 130,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2353,15 +2613,17 @@
         "modelHeshCode": 5159901005247470352,
         "objectID": 131,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2371,15 +2633,17 @@
         "modelHeshCode": 9447070737292579971,
         "objectID": 132,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2389,15 +2653,17 @@
         "modelHeshCode": 9440453894474200261,
         "objectID": 133,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2407,15 +2673,17 @@
         "modelHeshCode": 14599613263816069652,
         "objectID": 134,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     },
     {
         "ModelNamePath": "Leopard 2A4\\Leopard 2A4.FBX",
@@ -2425,14 +2693,16 @@
         "modelHeshCode": 6045487336936702838,
         "objectID": 135,
         "parentObjectID": 3,
-        "posX": 0.0,
-        "posY": 0.0,
-        "posZ": 4.0,
-        "rotx": 0.0,
-        "roty": 0.0,
-        "rotz": 0.0,
-        "scalex": 1.0,
-        "scaley": 1.0,
-        "scalez": 1.0
+        "transform": {
+            "posX": 0.0,
+            "posY": 0.0,
+            "posZ": 4.0,
+            "rotx": 0.0,
+            "roty": 0.0,
+            "rotz": 0.0,
+            "scalex": 1.0,
+            "scaley": 1.0,
+            "scalez": 1.0
+        }
     }
 ]

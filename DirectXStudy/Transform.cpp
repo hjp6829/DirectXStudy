@@ -96,9 +96,10 @@ void Transform::Serialize(nlohmann::json& j)
 }
 void Transform::Deserialize(const nlohmann::json& j)
 {
-	SetPostionOffset(DirectX::XMFLOAT3(j.at("posX").get<float>(), j.at("posY").get<float>(), j.at("posZ").get<float>()));
-	SetRotationOffset(DirectX::XMFLOAT3(j.at("rotx").get<float>(), j.at("roty").get<float>(), j.at("rotz").get<float>()));
-	SetScaleOffset(DirectX::XMFLOAT3(j.at("scalex").get<float>(), j.at("scaley").get<float>(), j.at("scalez").get<float>()));
+	const auto& transformJson = j.at("transform");
+	SetPostionOffset(DirectX::XMFLOAT3(transformJson.at("posX").get<float>(), transformJson.at("posY").get<float>(), transformJson.at("posZ").get<float>()));
+	SetRotationOffset(DirectX::XMFLOAT3(transformJson.at("rotx").get<float>(), transformJson.at("roty").get<float>(), transformJson.at("rotz").get<float>()));
+	SetScaleOffset(DirectX::XMFLOAT3(transformJson.at("scalex").get<float>(), transformJson.at("scaley").get<float>(), transformJson.at("scalez").get<float>()));
 }
 
 void Transform::UpdateTransformForNewParent(Transform* parentTransform)
