@@ -10,3 +10,8 @@ void ScriptComponent::Start()
 {
 	Component::Start();
 }
+
+void ScriptComponent::InspectorUpdate()
+{
+	Component::InspectorUpdate();
+}

@@ -69,6 +69,7 @@ void App::Run()
 		ImGui::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
+		sceneManager->LateUpdate(deltaTime);
 		dxdMain->EndDraw();
 
 		for (int i = 0; i < commandQueue.size(); i++)

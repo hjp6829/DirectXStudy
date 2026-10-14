@@ -4,6 +4,7 @@
 #include "Log.h"
 #include "imgui_impl_win32.h"
 #include "Component.h"
+#include <algorithm>
 
 Object::Object() = default;
 Object::~Object() = default;
@@ -42,17 +43,50 @@ void Object::ShowInspectorUI()
 {
 	DrawInspectorContents();
 }
+void Object::ShowComponentInspectorUI()
+{	
+	for (auto& component : components)
+	{
+		ImGui::Separator();
+		component->InspectorUpdate();
+	}
+}
 void Object::SetComponent(std::unique_ptr<Component> component)
 {
 	component->Initialize(this);
 	components.push_back(std::move(component));
 
 }
+void Object::DeleteComponent(Component* component)
+{
+	commandQueue.push([this, component]()
+		{
+			components.erase(
+				std::remove_if(
+					components.begin(),
+					components.end(),
+					[component](const std::unique_ptr<Component>& current)
+					{
+						return current.get() == component;
+					}
+				),
+				components.end()
+			);
+		});
+}
 void Object::UpdateComponent(float deltaTime)
 {
 	for (auto& component : components)
 	{
 		component->Update();
+	}
+}
+void Object::LateUpate(float deltaTime)
+{
+	for (int i = 0; i < commandQueue.size(); i++)
+	{
+		commandQueue.front()();
+		commandQueue.pop();
 	}
 }
 void Object::DrawInspectorContents()

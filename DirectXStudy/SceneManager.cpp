@@ -47,6 +47,14 @@ void SceneManager::Update(float deltaTime)
 	isCtrl = false;
 }
 
+void SceneManager::LateUpdate(float deltaTime)
+{
+	for (auto& [key, value] : allObjects)
+	{
+		value->LateUpate(deltaTime);
+	}
+}
+
 void SceneManager::CreateObjectSelect(std::string path)
 {
 	Object* object = modelCreater->LoadModelFromFile(path);

@@ -24,9 +24,6 @@ DirectX::XMMATRIX CameraObject::GetViewMatrix()
 }
 void CameraObject::MouseWheelPosUpdate()
 {
-	ImGuiIO& io = ImGui::GetIO();
-	if (io.WantCaptureMouse)
-		return;
 	DirectX::XMMATRIX rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffset.x), DirectX::XMConvertToRadians(rotationOffset.y), DirectX::XMConvertToRadians(rotationOffset.z));
 	forward = XMVector3TransformNormal(DirectX::XMVectorSet(0, 0, 1, 0), rotationMatrix);
 
@@ -36,9 +33,6 @@ void CameraObject::MouseWheelPosUpdate()
 }
 void CameraObject::CameraTransformUpdate()
 {
-	ImGuiIO& io = ImGui::GetIO();
-	if(io.WantCaptureMouse)
-		return;
 	DirectX::XMMATRIX rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffset.x), DirectX::XMConvertToRadians(rotationOffset.y), DirectX::XMConvertToRadians(rotationOffset.z));
 	up = XMVector3TransformNormal(DirectX::XMVectorSet(0, 1, 0, 0), rotationMatrix);
 	right = XMVector3TransformNormal(DirectX::XMVectorSet(1, 0, 0, 0), rotationMatrix);
@@ -93,6 +87,9 @@ void CameraObject::Deserialize(const nlohmann::json& j)
 void CameraObject::UpdateObject()
 {	
 	Object::UpdateObject();
+	ImGuiIO& io = ImGui::GetIO();
+	if (io.WantCaptureMouse)
+		return;
 	CameraTransformUpdate();
 	MouseWheelPosUpdate();
 }

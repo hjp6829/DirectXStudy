@@ -24,6 +24,7 @@ void Insfector::UpdateUI()
 		return;
 	if (ImGui::Begin("Insfector")) {
 		currentObject->ShowInspectorUI();
+		currentObject->ShowComponentInspectorUI();
 	}
 	if (ImGui::Button("Add Component"))
 	{

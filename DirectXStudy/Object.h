@@ -6,6 +6,7 @@
 #include <string>
 #include <nlohmann/json.hpp>
 #include <memory>
+#include <queue>
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -52,8 +53,11 @@ public:
 	XMFLOAT3 GetObjectScale();
 	void SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale);
 	void ShowInspectorUI();
+	void ShowComponentInspectorUI();
 	void SetComponent(std::unique_ptr<Component> component);
+	void DeleteComponent(Component* component);
 	void UpdateComponent(float deltaTime);
+	void LateUpate(float deltaTime);
 public:
 	void virtual UpdateObject();
 	void virtual SetPostionOffset(XMFLOAT3 position) { positionOffset = position; }
@@ -77,4 +81,5 @@ protected:
 	XMVECTOR forward;
 	std::vector<std::unique_ptr<Component>> components;
 private:
+	std::queue<std::function<void()>> commandQueue;
 };
