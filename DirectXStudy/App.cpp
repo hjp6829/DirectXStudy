@@ -2,7 +2,6 @@
 #include "imgui_impl_dx11.h"
 #include "imgui_impl_win32.h"
 #include "AssimpConverter.h"
-#include "Mouse.h"
 #include "Input.h"
 #include "UIManager.h"
 #include "ModelCreater.h"
@@ -22,10 +21,9 @@ App::App()
 	ImGui::CreateContext();
 	ImGui::StyleColorsDark();
 
-	mouse = new Mouse();
 	input = new Input();
 
-	window = new Window(mouse, input);
+	window = new Window(input);
 	dxdMain = new DirectXMain(window->GetHwnd());
 	sceneManager = new SceneManager(dxdMain->GetDevice());
 	dxdMain->SetSceneObjects(sceneManager->GetSceneObjects());
@@ -43,35 +41,6 @@ App::App()
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
 	//	RenameModel(model);
 	//	};
-
-	mouse->OnMouseLeftDown = [this](bool value)
-		{
-			dxdMain->MouseLeftClick(value);
-			
-		};
-	mouse->OnMouseRightDown = [this](bool value)
-	{
-		sceneManager->SetMouseRightDown(value);
-		
-	};
-	mouse->OnMouseWheelDown = [this](bool value)
-		{
-			sceneManager->SetMouseWheelDown(value);
-		};
-	mouse->OnMouseWheelDelta = [this](float value)
-		{
-			sceneManager->SetMouseWheelDelta(value);
-			//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
-		};
-	mouse->OnMouseDeltaPos = [this](int x,int y)
-		{
-			sceneManager->SetMouseDeltaPos(x,y);
-			//Log::GetInstance()->LogMessage("Mouse Wheel Delta: " + std::to_string(delta));
-		};
-	mouse->OnMousePos = [this](int x, int y)
-		{
-			dxdMain->MousePickingPos(x,y);
-		};
 }
 
 void App::Run()
@@ -93,7 +62,6 @@ void App::Run()
 		sceneManager->Update(deltaTime);
 		input->Update();
 		dxdMain->Render();
-		mouse->SetWheelDelta(0);
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();

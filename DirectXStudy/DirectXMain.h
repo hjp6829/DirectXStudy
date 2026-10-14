@@ -5,7 +5,6 @@
 #include <cmath>
 #include <DirectXMath.h>
 #include <vector>
-#include "Mouse.h"
 #include "CameraObject.h"
 #include "LightObject.h"
 #include <string>
@@ -40,8 +39,6 @@ public:
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
 	void SetSceneObjects(std::unordered_map<uint64_t, Object*>* objectVector){ objects = objectVector; }
-	void MousePickingPos(int x,int y){ mousePosX =x; mousePosY = y;}
-	void MouseLeftClick(bool value){ isMouseLeftClick  = value;}
 private:
 	ComPtr<IDXGISwapChain> pSwap;
 	ComPtr<ID3D11Device> pDevice;
@@ -74,8 +71,6 @@ private:
 	Object* currentSelectObject;
 	PostProcessingManager* postProcessingManager;
 	ComPtr<ID3D11Texture2D> pPickingTexture = NULL;
-	bool isMouseLeftClick;
-	int mousePosX, mousePosY;
 	void RegisterEventHandlers();
 	void SetSelectObject(EventData* eventData);
 	void DeleteCurrentObject(EventData* eventData);

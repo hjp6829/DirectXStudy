@@ -9,6 +9,7 @@
 #include "Log.h"
 #include "EventBus.h"
 #include "EventDefinitions.h"
+#include "Input.h"
 
 DirectXMain::DirectXMain(HWND hWnd)
 {
@@ -161,7 +162,7 @@ void DirectXMain::Render()
 	pContext->Unmap(lightConstantBuffer.Get(), 0);
 	pContext->PSSetConstantBuffers(1, 1, lightConstantBuffer.GetAddressOf());
 
-	if (isMouseLeftClick)
+	if (Input::GetMouseButtonDown(0))
 	{
 		ImGuiIO& io = ImGui::GetIO();
 		if (!io.WantCaptureMouse)
@@ -173,13 +174,14 @@ void DirectXMain::Render()
 			{
 				value->PickingRenderObject(this);
 			}
+			POINT mousePos = Input::mousePosition();
 			D3D11_BOX sourceBox = {};
 
-			sourceBox.left = mousePosX;
-			sourceBox.right = mousePosX + 1;
+			sourceBox.left = mousePos.x;
+			sourceBox.right = mousePos.x + 1;
 
-			sourceBox.top = mousePosY;
-			sourceBox.bottom = mousePosY + 1;
+			sourceBox.top = mousePos.y;
+			sourceBox.bottom = mousePos.y + 1;
 
 			sourceBox.front = 0;
 			sourceBox.back = 1;
@@ -222,7 +224,6 @@ void DirectXMain::Render()
 
 			pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 			pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
-			isMouseLeftClick = false;
 		}
 	}
 	for (auto& [key, value] : *objects)

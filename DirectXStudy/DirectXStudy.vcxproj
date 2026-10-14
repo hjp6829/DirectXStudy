@@ -150,7 +150,6 @@
     <ClCompile Include="ModelBrowserUI.cpp" />
     <ClCompile Include="ModelCreater.cpp" />
     <ClCompile Include="ModelNode.cpp" />
-    <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="PostProcessingManager.cpp" />
@@ -204,7 +203,6 @@
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="IndexBuffer.h" />
     <ClInclude Include="InputLayout.h" />
-    <ClInclude Include="Mouse.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="PrimitiveTopology.h" />
     <ClInclude Include="Sampler.h" />

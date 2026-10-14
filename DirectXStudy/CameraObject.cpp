@@ -22,32 +22,52 @@ DirectX::XMMATRIX CameraObject::GetViewMatrix()
 	XMVECTOR pos = XMLoadFloat3(&positionOffset);
 	return DirectX::XMMatrixInverse(NULL, DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffset.x), DirectX::XMConvertToRadians(rotationOffset.y), DirectX::XMConvertToRadians(rotationOffset.z)) * DirectX::XMMatrixTranslationFromVector(pos));
 }
-void CameraObject::SetMouseWheelDelta(int value)
+void CameraObject::MouseWheelPosUpdate()
 {
+	ImGuiIO& io = ImGui::GetIO();
+	if (io.WantCaptureMouse)
+		return;
 	DirectX::XMMATRIX rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffset.x), DirectX::XMConvertToRadians(rotationOffset.y), DirectX::XMConvertToRadians(rotationOffset.z));
 	forward = XMVector3TransformNormal(DirectX::XMVectorSet(0, 0, 1, 0), rotationMatrix);
 
 	XMVECTOR pos = XMLoadFloat3(&positionOffset);
-	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(forward, value), mouseWheelSpeed));
+	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(forward, Input::mouseWheelDelta()), mouseWheelSpeed));
 	XMStoreFloat3(&positionOffset, pos);
 }
-void CameraObject::SetMouseDeltaPos(int x, int y)
+void CameraObject::CameraTransformUpdate()
 {
+	ImGuiIO& io = ImGui::GetIO();
+	if(io.WantCaptureMouse)
+		return;
 	DirectX::XMMATRIX rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffset.x), DirectX::XMConvertToRadians(rotationOffset.y), DirectX::XMConvertToRadians(rotationOffset.z));
 	up = XMVector3TransformNormal(DirectX::XMVectorSet(0, 1, 0, 0), rotationMatrix);
 	right = XMVector3TransformNormal(DirectX::XMVectorSet(1, 0, 0, 0), rotationMatrix);
 	forward = XMVector3TransformNormal(DirectX::XMVectorSet(0, 0, 1, 0), rotationMatrix);
-	if (isMouseRight)
+
+	POINT mousePos = Input::mousePositionDelta();
+
+	if (Input::GetMouseButton(1))
 	{
-		rotationOffset.x = rotationOffset.x + y * rotationSpeed;
-		rotationOffset.y = rotationOffset.y - x * rotationSpeed;
+		rotationOffset.x = rotationOffset.x + mousePos.y * rotationSpeed;
+		rotationOffset.y = rotationOffset.y - mousePos.x * rotationSpeed;
+
+		XMVECTOR pos = XMLoadFloat3(&positionOffset);
+		if (Input::GetKey('W'))
+			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, mouseWheelSpeed));
+		if (Input::GetKey('S'))
+			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, -mouseWheelSpeed));
+		if (Input::GetKey('A'))
+			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, -mouseWheelSpeed));
+		if (Input::GetKey('D'))
+			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, mouseWheelSpeed));
+		XMStoreFloat3(&positionOffset, pos);
 		return;
 	}
-	if (!isMouseWheelDown)
+	if (!Input::GetMouseButton(2))
 		return;
 	XMVECTOR pos = XMLoadFloat3(&positionOffset);
-	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(right, x), mouseSpeed));
-	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(up,y), mouseSpeed));
+	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(right, mousePos.x), mouseSpeed));
+	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(up, mousePos.y), mouseSpeed));
 	XMStoreFloat3(&positionOffset, pos);
 }
 
@@ -73,16 +93,6 @@ void CameraObject::Deserialize(const nlohmann::json& j)
 void CameraObject::UpdateObject()
 {	
 	Object::UpdateObject();
-	if (!isMouseRight)
-		return;
-	XMVECTOR pos = XMLoadFloat3(&positionOffset);
-	if (Input::GetKey('W'))
-		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, mouseWheelSpeed));
-	if (Input::GetKey('S'))
-		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, -mouseWheelSpeed));
-	if (Input::GetKey('A'))
-		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, -mouseWheelSpeed));
-	if (Input::GetKey('D'))
-		pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, mouseWheelSpeed));
-	XMStoreFloat3(&positionOffset, pos);
+	CameraTransformUpdate();
+	MouseWheelPosUpdate();
 }

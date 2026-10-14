@@ -35,36 +35,32 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 		PostQuitMessage(0);
 		break;
 	case WM_LBUTTONDOWN:
-		Instance()->GetMouse()->SetMouseLeft(true);
+		Instance()->GetInput()->SetMouseButton(0,true);
 		break;
 	case WM_LBUTTONUP:
-		Instance()->GetMouse()->SetMouseLeft(false);
+		Instance()->GetInput()->SetMouseButton(0, false);
 		break;
 	case WM_RBUTTONDOWN:
-		Instance()->GetMouse()->SetMouseRight(true);
+		Instance()->GetInput()->SetMouseButton(1, true);
 		break;
 	case WM_RBUTTONUP:
-		Instance()->GetMouse()->SetMouseRight(false);
+		Instance()->GetInput()->SetMouseButton(1, false);
 		break;
 	case WM_MBUTTONDOWN:
-		Instance()->GetMouse()->SetWheelDown(true);
+		Instance()->GetInput()->SetMouseButton(2, true);
 		break;
 	case WM_MBUTTONUP:
-		Instance()->GetMouse()->SetWheelDown(false);
+		Instance()->GetInput()->SetMouseButton(2, false);
 		break;
 	case WM_MOUSEWHEEL:
 	{
 		int delta = GET_WHEEL_DELTA_WPARAM(wParam);
-
-		if (delta > 0)
-			Instance()->GetMouse()->SetWheelDelta(1);
-		else if (delta < 0)
-			Instance()->GetMouse()->SetWheelDelta(-1);
+		Instance()->GetInput()->SetMouseWheelDelta(delta);
 		break;
 	}
 	case WM_MOUSEMOVE:
 	{
-		Instance()->GetMouse()->SetPos(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
+		Instance()->GetInput()->SetMousePos(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam));
 	}
 	default:
 		return DefWindowProc(hWnd, message, wParam, lParam);
@@ -73,9 +69,8 @@ LRESULT CALLBACK Window::WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM 
 	return 0;
 }
 
-Window::Window(Mouse* mouse, Input* input) : hInst(GetModuleHandle(nullptr))
+Window::Window(Input* input) : hInst(GetModuleHandle(nullptr))
 {
-	this->mouse = mouse;
 	this->input = input;
 	instance = this;
 	WNDCLASSEX wces = {};

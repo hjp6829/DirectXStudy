@@ -18,10 +18,6 @@ public:
 	void Update(float deltaTime);
 	std::unordered_map<uint64_t, Object*>* GetSceneObjects() { return &objects; }
 	void CreateObjectSelect(std::string path);
-	void SetMouseRightDown(bool value); //{ camera->SetMouseRightValue(value); }
-	void SetMouseWheelDown(bool value); //{ camera->SetMouseWheelDown(value); }
-	void SetMouseWheelDelta(float delta); //{ camera->SetMouseWheelDelta(delta); }
-	void SetMouseDeltaPos(int x, int y); //{ camera->SetMouseDeltaPos(x, y); }
 	void SetHierarchyDropObject(Object* parentObject, Object* childObject);
 	CameraObject* GetCamera() { return camera; }
 	LightObject* GetLight() { return light; }

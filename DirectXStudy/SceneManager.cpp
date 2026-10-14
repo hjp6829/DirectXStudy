@@ -54,30 +54,6 @@ void SceneManager::CreateObjectSelect(std::string path)
 	RegisterModelHierarchy(object);
 	objects[object->objectID] = object;
 }
-void SceneManager::SetMouseRightDown(bool value)
-{
-	ImGuiIO& io = ImGui::GetIO();
-	if (!io.WantCaptureMouse)
-		camera->SetMouseRightValue(value);
-}
-void SceneManager::SetMouseWheelDown(bool value)
-{
-	ImGuiIO& io = ImGui::GetIO();
-	if (!io.WantCaptureMouse)
-		camera->SetMouseWheelDown(value);
-}
-void SceneManager::SetMouseWheelDelta(float delta)
-{
-	ImGuiIO& io = ImGui::GetIO();
-	if (!io.WantCaptureMouse)
-		camera->SetMouseWheelDelta(delta);
-}
-void SceneManager::SetMouseDeltaPos(int x, int y)
-{
-	ImGuiIO& io = ImGui::GetIO();
-	if (!io.WantCaptureMouse)
-		camera->SetMouseDeltaPos(x, y);
-}
 void SceneManager::RegisterModelHierarchy(Object* object)
 {
 	if (object->childObjects.size() == 0)
