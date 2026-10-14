@@ -346,6 +346,8 @@
     <FxCompile Include="PostProcessPixelShader.hlsl">
       <Filter>Shader</Filter>
     </FxCompile>
-    <FxCompile Include="PickingPixelShader.hlsl" />
+    <FxCompile Include="PickingPixelShader.hlsl">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>
