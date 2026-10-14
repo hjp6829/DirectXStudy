@@ -7,6 +7,7 @@
 #include <nlohmann/json.hpp>
 #include <memory>
 #include <queue>
+#include "Transform.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -39,47 +40,24 @@ public:
 	void RemoveChildObject(Object* childObject);
 	void RemoveAllChileObject(Object* childObject);
 	void InsertChildSceneObject(Object* childObject);
-	void UpdateTransformForNewParent(Object* parentObject);
 	void RemoveFromParent();
 
-	XMFLOAT3 GetPostionOffset() { return positionOffset; }
-	XMFLOAT3 GetRotationOffset() { return rotationOffset; }
-	XMFLOAT3 GetScaleOffset() { return scaleOffset; }
-	void SetPosition(XMFLOAT3 position);
-	void SetRotaion(XMFLOAT3 rotation);
-	void SetScale(XMFLOAT3 scale);
-	XMFLOAT3 GetObjectPosition();
-	XMFLOAT3 GetObjectRotation();
-	XMFLOAT3 GetObjectScale();
-	void SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale);
-	void ShowInspectorUI();
 	void ShowComponentInspectorUI();
 	void SetComponent(std::unique_ptr<Component> component);
 	void DeleteComponent(Component* component);
 	void UpdateComponent(float deltaTime);
 	void LateUpate(float deltaTime);
+
+	Transform* GetTransform(){return &transform;}
 public:
 	void virtual UpdateObject();
-	void virtual SetPostionOffset(XMFLOAT3 position) { positionOffset = position; }
-	void virtual SetRotationOffset(XMFLOAT3 rotation) { rotationOffset = rotation; }
-	void virtual SetScaleOffset(XMFLOAT3 scale) { scaleOffset = scale; }
-	void virtual DrawInspectorContents();
 	void virtual Serialize(nlohmann::json& j);
 	void virtual Deserialize(const nlohmann::json& j);
 	void virtual SetDataToCopy(Object* copyObject);
 protected:
-	XMFLOAT3 positionOffset = { 0.0f, 0.0f, 4.0f };
-	XMFLOAT3 rotationOffset = { 0.0f, 0.0f, 0.0f };
-	XMFLOAT3 scaleOffset = { 1.0f, 1.0f, 1.0f };
-	XMMATRIX worldMatrix;
-	XMFLOAT3 importedLocalPosition;
-	XMFLOAT3 importedLocalRotation;
-	XMFLOAT3 importedLocalScale;
 	bool isRootObject;
-	XMVECTOR up;
-	XMVECTOR right;
-	XMVECTOR forward;
 	std::vector<std::unique_ptr<Component>> components;
+	Transform transform;
 private:
 	std::queue<std::function<void()>> commandQueue;
 };

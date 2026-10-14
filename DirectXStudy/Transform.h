@@ -1,0 +1,59 @@
+#pragma once
+#include "Component.h"
+#include <DirectXMath.h>
+#include <nlohmann/json.hpp>
+
+class Transform : public Component
+{
+public:
+	void SetPosition(DirectX::XMFLOAT3 position);
+	void SetRotaion(DirectX::XMFLOAT3 rotation);
+	void SetScale(DirectX::XMFLOAT3 scale);
+	DirectX::XMFLOAT3& GetPostionOffset() { return positionOffset; }
+	DirectX::XMFLOAT3& GetRotationOffset() { return rotationOffset; }
+	DirectX::XMFLOAT3& GetScaleOffset() { return scaleOffset; }
+	DirectX::XMFLOAT3 GetObjectPosition();
+	DirectX::XMFLOAT3 GetObjectRotation();
+	DirectX::XMFLOAT3 GetObjectScale();
+	void SetPostionOffset(DirectX::XMFLOAT3 position) { positionOffset = position; }
+	void SetRotationOffset(DirectX::XMFLOAT3 rotation) { rotationOffset = rotation; }
+	void SetScaleOffset(DirectX::XMFLOAT3 scale) { scaleOffset = scale; }
+	void SetLocalTransform(DirectX::XMFLOAT3 localPos, DirectX::XMFLOAT3 localRot, DirectX::XMFLOAT3 localScale);
+	DirectX::XMMATRIX GetWorldMatrix() {return worldMatrix; }
+	void SetWorldMatrix(DirectX::XMMATRIX matrix) { worldMatrix = matrix; }
+	void MakeWorldMatrix();
+	void Serialize(nlohmann::json& j);
+	void Deserialize(const nlohmann::json& j);
+	void UpdateTransformForNewParent(Transform* parentTransform);
+
+	DirectX::XMFLOAT3 GetForwardVector3()
+	{
+		DirectX::XMFLOAT3 temp;
+		DirectX::XMStoreFloat3(&temp,forward);
+		return temp;
+	}
+
+	// Getter
+	DirectX::XMVECTOR GetUp() const { return up; }
+	DirectX::XMVECTOR GetRight() const { return right; }
+	DirectX::XMVECTOR GetForward() const { return forward; }
+
+	// Setter
+	void SetUp(DirectX::FXMVECTOR value) { up = value; }
+	void SetRight(DirectX::FXMVECTOR value) { right = value; }
+	void SetForward(DirectX::FXMVECTOR value) { forward = value; }
+
+public:
+	void InspectorUpdate() override;
+private:
+	DirectX::XMFLOAT3 positionOffset = { 0.0f, 0.0f, 4.0f };
+	DirectX::XMFLOAT3 rotationOffset = { 0.0f, 0.0f, 0.0f };
+	DirectX::XMFLOAT3 scaleOffset = { 1.0f, 1.0f, 1.0f };
+	DirectX::XMMATRIX worldMatrix;
+	DirectX::XMFLOAT3 importedLocalPosition;
+	DirectX::XMFLOAT3 importedLocalRotation;
+	DirectX::XMFLOAT3 importedLocalScale;
+	DirectX::XMVECTOR up;
+	DirectX::XMVECTOR right;
+	DirectX::XMVECTOR forward;
+};

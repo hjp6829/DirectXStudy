@@ -7,16 +7,16 @@ LightObject::LightObject()
 	objectName = "Light";
 }
 
-void LightObject::DrawInspectorContents()
-{
-	Object::DrawInspectorContents();
-	ImGui::InputFloat("Specular Strength", &specularStrength);
-	ImGui::InputFloat("Shininess", &shininess);
-	ImGui::InputFloat("Max Light Distance", &maxLightDistance);
-	ImGui::Text("Color");
-	if (ImGui::InputFloat3("Color", &lightColor.x))
-		SetColor(lightColor);
-}
+//void LightObject::DrawInspectorContents()
+//{
+//	Object::DrawInspectorContents();
+//	ImGui::InputFloat("Specular Strength", &specularStrength);
+//	ImGui::InputFloat("Shininess", &shininess);
+//	ImGui::InputFloat("Max Light Distance", &maxLightDistance);
+//	ImGui::Text("Color");
+//	if (ImGui::InputFloat3("Color", &lightColor.x))
+//		SetColor(lightColor);
+//}
 
 void LightObject::Serialize(nlohmann::json& j)
 {
@@ -41,10 +41,4 @@ void LightObject::Deserialize(const nlohmann::json& j)
 	specularStrength = j["specularStrength"];
 	shininess = j["shininess"];
 	maxLightDistance = j["maxLightDistance"];
-}
-void LightObject::SetPostionOffset(XMFLOAT3 position)
-{
-	Object::SetPostionOffset(position);
-	DirectX::XMMATRIX rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffset.x), DirectX::XMConvertToRadians(rotationOffset.y), DirectX::XMConvertToRadians(rotationOffset.z));
-	forward = XMVector3TransformNormal(DirectX::XMVectorSet(0, 0, 1, 0), rotationMatrix);
 }

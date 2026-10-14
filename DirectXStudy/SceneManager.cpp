@@ -215,7 +215,7 @@ void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObj
 
 	childObject->parentObject = parentObject;
 	childObject->parentobjectID = parentObject->objectID;
-	childObject->UpdateTransformForNewParent(parentObject);
+	childObject->GetTransform()->UpdateTransformForNewParent(parentObject->GetTransform());
 	parentObject->childObjects.push_back(childObject);
 
 	if (childObject->IsRootObject())

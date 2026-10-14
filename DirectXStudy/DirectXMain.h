@@ -50,17 +50,19 @@ private:
 	ComPtr<ID3D11Texture2D> pickingStagingTexture;
 private:
 	struct GlobalBuffer {
-		XMFLOAT4 lightPos;
+		XMFLOAT3 lightPos;
+		float padding;
 		XMFLOAT4 lightColor;
-		XMFLOAT4 cameraPos;
+		XMFLOAT3 cameraPos;
+		float padding2;
 		float specularStrength;
 		float shininess;
 		float maxLightDistance;
-		float padding2;
-		XMFLOAT3 cameraForward;
 		float padding3;
-		XMFLOAT3 lightForward;
+		XMFLOAT3 cameraForward;
 		float padding4;
+		XMFLOAT3 lightForward;
+		float padding5;
 	};
 private:
 

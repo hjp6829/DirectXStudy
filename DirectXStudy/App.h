@@ -10,7 +10,6 @@ class ModelCreater;
 class Mouse;
 class UIManager;
 class SceneManager;
-struct JsonSceneObjectData;
 class EventData;
 
 class App {

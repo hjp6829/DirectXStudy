@@ -133,7 +133,7 @@ void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)
 {
 	object->currentModelNode = modelNode;
 	object->objectName = modelNode->modelName;
-	object->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
+	object->GetTransform()->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
 	object->modelNamePath = modelNode->sourceModelPath;
 }
 uint64_t ModelCreater::FNV1a(const std::string& str)

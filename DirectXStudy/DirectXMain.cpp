@@ -126,7 +126,7 @@ DirectXMain::DirectXMain(HWND hWnd)
 void DirectXMain::Start()
 {
 	globalBuffer.lightColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	globalBuffer.lightPos = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+	//globalBuffer.lightPos = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 
 	D3D11_BUFFER_DESC sDes = {};
 	sDes.ByteWidth = sizeof(globalBuffer);
@@ -147,14 +147,14 @@ void DirectXMain::Render()
 	pContext->ClearRenderTargetView(pRenderTarget.Get(), clearColor);
 	pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
-	globalBuffer.cameraPos = cam->GetCameraPos();
-	globalBuffer.lightPos = light->GetLightPos();
+	globalBuffer.cameraPos = cam->GetTransform()->GetPostionOffset();
+	globalBuffer.lightPos = light->GetTransform()->GetPostionOffset();
 	globalBuffer.lightColor = light->GetLightColor();
 	globalBuffer.specularStrength = light->GetSpecularStrength();
 	globalBuffer.shininess = light->GetShininess();
 	globalBuffer.maxLightDistance = light->GetMaxLightDistance();
-	globalBuffer.cameraForward = cam->GetCameraForward();
-	globalBuffer.lightForward = light->GetLightForward();
+	globalBuffer.cameraForward = cam->GetTransform()->GetForwardVector3();
+	globalBuffer.lightForward = light->GetTransform()->GetForwardVector3();
 
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
 	pContext->Map(lightConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);

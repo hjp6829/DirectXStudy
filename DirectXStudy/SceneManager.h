@@ -10,7 +10,6 @@
 class EventData;
 class Object;
 class ModelCreater;
-struct JsonSceneObjectData;
 
 class SceneManager {
 public:

@@ -9,40 +9,6 @@
 Object::Object() = default;
 Object::~Object() = default;
 
-XMFLOAT3 Object::GetObjectPosition()
-{
-	XMFLOAT3 localPos;
-	localPos.x = positionOffset.x + importedLocalPosition.x;
-	localPos.y = positionOffset.y + importedLocalPosition.y;
-	localPos.z = positionOffset.z + importedLocalPosition.z;
-	return localPos;
-}
-XMFLOAT3 Object::GetObjectRotation()
-{
-	XMFLOAT3 localRot;
-	localRot.x = rotationOffset.x * importedLocalRotation.x;
-	localRot.y = rotationOffset.y * importedLocalRotation.y;
-	localRot.z = rotationOffset.z * importedLocalRotation.z;
-	return localRot;
-}
-XMFLOAT3 Object::GetObjectScale()
-{
-	XMFLOAT3 localScale;
-	localScale.x = scaleOffset.x * importedLocalScale.x;
-	localScale.y = scaleOffset.y * importedLocalScale.y;
-	localScale.z = scaleOffset.z * importedLocalScale.z;
-	return localScale;
-}
-void Object::SetLocalTransform(XMFLOAT3 localPos, XMFLOAT3 localRot, XMFLOAT3 localScale)
-{
-	importedLocalPosition = localPos;
-	importedLocalRotation = localRot;
-	importedLocalScale = localScale;
-}
-void Object::ShowInspectorUI()
-{
-	DrawInspectorContents();
-}
 void Object::ShowComponentInspectorUI()
 {	
 	for (auto& component : components)
@@ -89,83 +55,33 @@ void Object::LateUpate(float deltaTime)
 		commandQueue.pop();
 	}
 }
-void Object::DrawInspectorContents()
-{
-	XMFLOAT3 tempPos = GetObjectPosition();
-	XMFLOAT3 tempRot = GetObjectRotation();
-	XMFLOAT3 tempScale = GetObjectScale();
-
-	bool enableValue = meshEnable;
-	ImGui::Checkbox("Enable", &enableValue);
-	if (enableValue != meshEnable)
-		ToggleMeshEnable(enableValue);
-	//ImGui::Text(currentSceneObject->modelName.c_str());
-	ImGui::Text("Psotion");
-	if (ImGui::InputFloat3("Position", &tempPos.x))
-		SetPosition(tempPos);
-	ImGui::Text("Rotation");
-	if (ImGui::InputFloat3("Rotation", &tempRot.x))
-		SetRotaion(tempRot);
-	ImGui::Text("Scale");
-	if (ImGui::InputFloat3("Scale", &tempScale.x))
-		SetScale(tempScale);
-}
 void Object::Serialize(nlohmann::json& j)
 {
 	j = nlohmann::json{
 		{"modelHeshCode",currentModelNode == nullptr ? 0 : currentModelNode->modelHeshCode},
 		{"parentObjectID", parentObject == nullptr ? 0 : parentObject->objectID},
-		{"posX", positionOffset.x},
-		{"posY", positionOffset.y},
-		{"posZ", positionOffset.z},
-		{ "rotx", rotationOffset.x },
-		{"roty", rotationOffset.y},
-		{"rotz", rotationOffset.z},
-		{ "scalex", scaleOffset.x },
-		{"scaley", scaleOffset.y},
-		{"scalez", scaleOffset.z},
 		{"ModelNamePath", modelNamePath},
 		{ "TestModelNamePath", objectName},
 		{ "objectID", objectID },
-		{ "isRootObject", IsRootObject() == true ? 1 : 0}
+		{ "isRootObject", IsRootObject() == true ? 1 : 0},
 	};
+	transform.Serialize(j["transform"]);
 }
 void Object::Deserialize(const nlohmann::json& j)
 {
 	j.at("parentObjectID").get_to(parentobjectID);
-	SetPostionOffset(XMFLOAT3(j.at("posX").get<float>(), j.at("posY").get<float>(), j.at("posZ").get<float>()));
-	SetRotationOffset(XMFLOAT3(j.at("rotx").get<float>(), j.at("roty").get<float>(), j.at("rotz").get<float>()));
-	SetScaleOffset(XMFLOAT3(j.at("scalex").get<float>(), j.at("scaley").get<float>(), j.at("scalez").get<float>()));
 	j.at("objectID").get_to(objectID);
 	SetRootNodeCheck(j.at("isRootObject").get<float>() == 1 ? true : false);
+	transform.Deserialize(j);
 }
 void Object::SetDataToCopy(Object* copyObject)
 {
-	copyObject->SetPostionOffset(GetPostionOffset());
-	copyObject->SetRotationOffset(GetRotationOffset());
-	copyObject->SetScaleOffset(GetScaleOffset());
+	copyObject->GetTransform()->SetPostionOffset(transform.GetPostionOffset());
+	copyObject->GetTransform()->SetRotationOffset(transform.GetRotationOffset());
+	copyObject->GetTransform()->SetScaleOffset(transform.GetScaleOffset());
 	copyObject->SetRootNodeCheck(IsRootObject());
 }
-void Object::SetPosition(XMFLOAT3 position)
-{
-	positionOffset.x = position.x - importedLocalPosition.x;
-	positionOffset.y = position.y - importedLocalPosition.y;
-	positionOffset.z = position.z - importedLocalPosition.z;
-}
 
-void Object::SetRotaion(XMFLOAT3 rotation)
-{
-	rotationOffset.x = rotation.x - importedLocalRotation.x;
-	rotationOffset.y = rotation.y - importedLocalRotation.y;
-	rotationOffset.z = rotation.z - importedLocalRotation.z;
-}
-
-void Object::SetScale(XMFLOAT3 scale)
-{
-	scaleOffset.x = scale.x / importedLocalScale.x;
-	scaleOffset.y = scale.y / importedLocalScale.y;
-	scaleOffset.z = scale.z / importedLocalScale.z;
-}
 
 void Object::RenderObject(DirectXMain* dxdMain)
 {
@@ -173,7 +89,7 @@ void Object::RenderObject(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	if(currentModelNode != nullptr)
-		currentModelNode->RenderMeshs(dxdMain->GetContext(), worldMatrix, ViewMatrix, ProjectionMatrix);
+		currentModelNode->RenderMeshs(dxdMain->GetContext(), transform.GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
@@ -187,7 +103,7 @@ void Object::OutlineRenderObject(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	if (currentModelNode != nullptr)
-		currentModelNode->OutlineRenderMeshs(dxdMain->GetContext(), worldMatrix, ViewMatrix, ProjectionMatrix);
+		currentModelNode->OutlineRenderMeshs(dxdMain->GetContext(), transform.GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
@@ -201,7 +117,7 @@ void Object::PickingRenderObject(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	if (currentModelNode != nullptr)
-		currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), worldMatrix, ViewMatrix, ProjectionMatrix, objectID);
+		currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), transform.GetWorldMatrix(), ViewMatrix, ProjectionMatrix, objectID);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
@@ -211,15 +127,9 @@ void Object::PickingRenderObject(DirectXMain* dxdMain)
 
 void Object::UpdateObject()
 {
-	worldMatrix = XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z) *
-		XMMatrixRotationRollPitchYaw(
-			XMConvertToRadians(rotationOffset.x),
-			XMConvertToRadians(rotationOffset.y),
-			XMConvertToRadians(rotationOffset.z)
-		) *
-		XMMatrixTranslation(positionOffset.x, positionOffset.y, positionOffset.z);
+	transform.MakeWorldMatrix();
 	if (parentObject != nullptr)
-		worldMatrix = worldMatrix * parentObject->worldMatrix;
+		transform.SetWorldMatrix(transform.GetWorldMatrix() * parentObject->GetTransform()->GetWorldMatrix());
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		childObjects[i]->UpdateObject();
@@ -272,19 +182,6 @@ void Object::InsertChildSceneObject(Object* childObject)
 {
 	childObject->parentObject = this;
 	childObjects.push_back(childObject);
-}
-
-void Object::UpdateTransformForNewParent(Object* parentObject)
-{
-	XMVECTOR position;
-	XMVECTOR rotation;
-	XMVECTOR scale;
-	XMMATRIX inverseWorld = worldMatrix * XMMatrixInverse(nullptr, parentObject->worldMatrix);
-
-	XMMatrixDecompose(&scale, &rotation, &position, inverseWorld);
-	XMStoreFloat3(&positionOffset, position);
-	XMStoreFloat3(&rotationOffset, rotation);
-	XMStoreFloat3(&scaleOffset, scale);
 }
 
 void Object::RemoveFromParent()

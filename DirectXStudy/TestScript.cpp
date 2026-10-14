@@ -8,30 +8,30 @@
 void TestScript::Update()
 {
 	ScriptComponent::Update();
-	if (Input::GetKey('W'))
-	{
-		DirectX::XMFLOAT3 position = currentObject->GetObjectPosition();
-		position.x += moveSpeed;
-		currentObject->SetPosition(position);
-	}
-	if (Input::GetKey('S'))
-	{
-		DirectX::XMFLOAT3 position = currentObject->GetObjectPosition();
-		position.x -= moveSpeed;
-		currentObject->SetPosition(position);
-	}
-	if (Input::GetKey('A'))
-	{
-		DirectX::XMFLOAT3 position = currentObject->GetObjectPosition();
-		position.z += moveSpeed;
-		currentObject->SetPosition(position);
-	}
-	if (Input::GetKey('D'))
-	{
-		DirectX::XMFLOAT3 position = currentObject->GetObjectPosition();
-		position.z -= moveSpeed;
-		currentObject->SetPosition(position);
-	}
+	//if (Input::GetKey('W'))
+	//{
+	//	DirectX::XMFLOAT3 position = currentObject->GetObjectPosition();
+	//	position.x += moveSpeed;
+	//	currentObject->SetPosition(position);
+	//}
+	//if (Input::GetKey('S'))
+	//{
+	//	DirectX::XMFLOAT3 position = currentObject->GetObjectPosition();
+	//	position.x -= moveSpeed;
+	//	currentObject->SetPosition(position);
+	//}
+	//if (Input::GetKey('A'))
+	//{
+	//	DirectX::XMFLOAT3 position = currentObject->GetObjectPosition();
+	//	position.z += moveSpeed;
+	//	currentObject->SetPosition(position);
+	//}
+	//if (Input::GetKey('D'))
+	//{
+	//	DirectX::XMFLOAT3 position = currentObject->GetObjectPosition();
+	//	position.z -= moveSpeed;
+	//	currentObject->SetPosition(position);
+	//}
 }
 
 void TestScript::Start()

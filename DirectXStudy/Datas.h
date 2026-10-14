@@ -66,37 +66,3 @@ struct asMaterial
 	ComPtr<ID3D11ShaderResourceView> textureView;
 	ComPtr<ID3D11ShaderResourceView> normalView;
 };
-//struct SceneSaveData {
-//	std::vector<JsonSceneObjectData> objectDatas;
-//};
-struct JsonSceneObjectData
-{
-	float localPosx, localPosy, localPosz;
-	float localRotx, localRoty, localRotz;
-	float localScalex, localScaley, localScalez;
-	uint64_t modelHeshCode;
-	uint64_t parentObjectID;
-	uint64_t objectID;
-	int isRootObject;
-	std::string origModelPath;
-	std::string testModelName;
-	void SetTransformData(Object* object)
-	{
-		XMFLOAT3 positionOffset = object->GetPostionOffset();
-		localPosx = positionOffset.x;
-		localPosy = positionOffset.y;
-		localPosz = positionOffset.z;
-
-		XMFLOAT3 rotationOffset = object->GetRotationOffset();
-		localRotx = rotationOffset.x;
-		localRoty = rotationOffset.y;
-		localRotz = rotationOffset.z;
-
-		XMFLOAT3 scaleOffset = object->GetScaleOffset();
-		localScalex = scaleOffset.x;
-		localScaley = scaleOffset.y;
-		localScalez = scaleOffset.z;
-
-		modelHeshCode = object->currentModelNode->modelHeshCode;
-	}
-};

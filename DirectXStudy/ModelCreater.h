@@ -10,7 +10,6 @@ class ModelAsset;
 class Object;
 class AssimpConverter;
 class ModelLoadData;
-struct JsonSceneObjectData;
 
 class ModelCreater
 {

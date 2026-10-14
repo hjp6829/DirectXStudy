@@ -20,17 +20,19 @@ cbuffer CBuf1 : register(b0)
 };
 cbuffer CBuf2 : register(b1)
 {
-    float4 lightPos;
+    float3 lightPos;
+    float padding;
     float4 lightColor;
-    float4 cameraPos;
+    float3 cameraPos;
+    float padding2;
     float specularStrength;
     float shininess;
     float maxLightDistance;
-    float padding2;
-    float3 cameraForward;
     float padding3;
-    float3 lightForward;
+    float3 cameraForward;
     float padding4;
+    float3 lightForward;
+    float padding5;
 };
 float4 main(VSOut IN) : SV_TARGET
 {
