@@ -12,7 +12,7 @@ public:
 	std::vector<ModelNode*> childNodes;
 	std::string modelName;
 	std::string sourceModelPath;
-	XMMATRIX localMatrix;
+	DirectX::XMMATRIX localMatrix;
 	uint64_t modelHeshCode;
 public:
 	void RenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix);

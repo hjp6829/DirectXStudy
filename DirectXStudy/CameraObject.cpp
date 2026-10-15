@@ -15,17 +15,21 @@ DirectX::XMMATRIX CameraObject::GetProjectionMatrix()
 }
 DirectX::XMMATRIX CameraObject::GetViewMatrix()
 {
-	XMVECTOR pos = XMLoadFloat3(&transform->GetObjectPosition());
-	XMFLOAT3 rotationOffsetTemp = transform->GetObjectRotation();
-	return DirectX::XMMatrixInverse(NULL, DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffsetTemp.x), DirectX::XMConvertToRadians(rotationOffsetTemp.y), DirectX::XMConvertToRadians(rotationOffsetTemp.z)) * DirectX::XMMatrixTranslationFromVector(pos));
+	DirectX::XMVECTOR position;
+	DirectX::XMVECTOR rotation;
+	DirectX::XMVECTOR scale;
+
+	XMMatrixDecompose(&scale, &rotation, &position, transform->GetWorldMatrix());
+	DirectX::XMVECTOR Temp = rotation* position;
+
+	XMMATRIX cameraWorld =XMMatrixRotationQuaternion(rotation) * XMMatrixTranslationFromVector(position);
+
+	return DirectX::XMMatrixInverse(nullptr,cameraWorld);
 }
 void CameraObject::MouseWheelPosUpdate()
 {
-	XMFLOAT3 rotationOffsetTemp = transform->GetObjectRotation();
-	DirectX::XMMATRIX rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffsetTemp.x), DirectX::XMConvertToRadians(rotationOffsetTemp.y), DirectX::XMConvertToRadians(rotationOffsetTemp.z));
-	transform->SetForward(XMVector3TransformNormal(DirectX::XMVectorSet(0, 0, 1, 0), rotationMatrix));
-
-	XMVECTOR pos = XMLoadFloat3(&transform->GetObjectPosition());
+	DirectX::XMFLOAT3 position = transform->GetObjectPosition();
+	DirectX::XMVECTOR pos = DirectX::XMLoadFloat3(&position);
 	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(transform->GetForward(), Input::mouseWheelDelta()), mouseWheelSpeed));
 	XMFLOAT3 positionTemp;
 	DirectX::XMStoreFloat3(&positionTemp, pos);
@@ -41,7 +45,8 @@ void CameraObject::CameraTransformUpdate()
 		rotationOffsetTemp.x = rotationOffsetTemp.x - mousePos.y * rotationSpeed;
 		rotationOffsetTemp.y = rotationOffsetTemp.y - mousePos.x * rotationSpeed;
 
-		XMVECTOR pos = XMLoadFloat3(&transform->GetObjectPosition());
+		DirectX::XMFLOAT3 position = transform->GetObjectPosition();
+		DirectX::XMVECTOR pos = DirectX::XMLoadFloat3(&position);
 		if (Input::GetKey('W'))
 			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(transform->GetForward(), mouseWheelSpeed));
 		if (Input::GetKey('S'))
@@ -58,7 +63,8 @@ void CameraObject::CameraTransformUpdate()
 	}
 	if (!Input::GetMouseButton(2))
 		return;
-	XMVECTOR pos = XMLoadFloat3(&transform->GetObjectPosition());
+	DirectX::XMFLOAT3 position = transform->GetObjectPosition();
+	DirectX::XMVECTOR pos = DirectX::XMLoadFloat3(&position);
 	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(transform->GetRight(), mousePos.x), mouseSpeed));
 	pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(DirectX::XMVectorScale(transform->GetUp(), mousePos.y), mouseSpeed));
 	XMFLOAT3 positionTemp;
