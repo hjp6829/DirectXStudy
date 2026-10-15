@@ -6,6 +6,7 @@
 class Transform : public Component
 {
 public:
+	Transform();
 	void SetPosition(DirectX::XMFLOAT3 position);
 	void SetRotaion(DirectX::XMFLOAT3 rotation);
 	void SetScale(DirectX::XMFLOAT3 scale);
@@ -16,7 +17,7 @@ public:
 	DirectX::XMFLOAT3 GetObjectRotation();
 	DirectX::XMFLOAT3 GetObjectScale();
 	void SetPostionOffset(DirectX::XMFLOAT3 position) { positionOffset = position; }
-	void SetRotationOffset(DirectX::XMFLOAT3 rotation) { rotationOffset = rotation; }
+	void SetRotationOffset(DirectX::XMFLOAT3 rotation);
 	void SetScaleOffset(DirectX::XMFLOAT3 scale) { scaleOffset = scale; }
 	void SetLocalTransform(DirectX::XMFLOAT3 localPos, DirectX::XMFLOAT3 localRot, DirectX::XMFLOAT3 localScale);
 	DirectX::XMMATRIX GetWorldMatrix() {return worldMatrix; }
@@ -45,6 +46,8 @@ public:
 
 public:
 	void InspectorUpdate() override;
+private:
+	void UpdateDirectionVectors();
 private:
 	DirectX::XMFLOAT3 positionOffset = { 0.0f, 0.0f, 4.0f };
 	DirectX::XMFLOAT3 rotationOffset = { 0.0f, 0.0f, 0.0f };

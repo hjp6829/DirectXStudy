@@ -48,7 +48,7 @@ public:
 	void UpdateComponent(float deltaTime);
 	void LateUpate(float deltaTime);
 
-	Transform* GetTransform(){return &transform;}
+	Transform* GetTransform(){return transform;}
 public:
 	void virtual UpdateObject();
 	void virtual Serialize(nlohmann::json& j);
@@ -57,7 +57,7 @@ public:
 protected:
 	bool isRootObject;
 	std::vector<std::unique_ptr<Component>> components;
-	Transform transform;
+	Transform* transform;
 private:
 	std::queue<std::function<void()>> commandQueue;
 };

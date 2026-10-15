@@ -1,6 +1,11 @@
 #include "Transform.h"
 #include "imgui_impl_win32.h"
 
+Transform::Transform()
+{
+	UpdateDirectionVectors();
+}
+
 void Transform::SetPosition(DirectX::XMFLOAT3 position)
 {
 	positionOffset.x = position.x - importedLocalPosition.x;
@@ -13,6 +18,7 @@ void Transform::SetRotaion(DirectX::XMFLOAT3 rotation)
 	rotationOffset.x = rotation.x - importedLocalRotation.x;
 	rotationOffset.y = rotation.y - importedLocalRotation.y;
 	rotationOffset.z = rotation.z - importedLocalRotation.z;
+	UpdateDirectionVectors();
 }
 
 void Transform::SetScale(DirectX::XMFLOAT3 scale)
@@ -47,6 +53,12 @@ DirectX::XMFLOAT3 Transform::GetObjectScale()
 	return localScale;
 }
 
+void Transform::SetRotationOffset(DirectX::XMFLOAT3 rotation)
+{
+	rotationOffset = rotation;
+	UpdateDirectionVectors();
+}
+
 void Transform::MakeWorldMatrix()
 {
 	worldMatrix = DirectX::XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z)*
@@ -73,6 +85,13 @@ void Transform::InspectorUpdate()
 	ImGui::Text("Scale");
 	if (ImGui::InputFloat3("Scale", &tempScale.x))
 		SetScale(tempScale);
+}
+void Transform::UpdateDirectionVectors()
+{
+	DirectX::XMMATRIX rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffset.x), DirectX::XMConvertToRadians(rotationOffset.y), DirectX::XMConvertToRadians(rotationOffset.z));
+	up = XMVector3TransformNormal(DirectX::XMVectorSet(0, 1, 0, 0), rotationMatrix);
+	right = XMVector3TransformNormal(DirectX::XMVectorSet(1, 0, 0, 0), rotationMatrix);
+	forward = XMVector3TransformNormal(DirectX::XMVectorSet(0, 0, 1, 0), rotationMatrix);
 }
 void Transform::SetLocalTransform(DirectX::XMFLOAT3 localPos, DirectX::XMFLOAT3 localRot, DirectX::XMFLOAT3 localScale)
 {
@@ -113,4 +132,5 @@ void Transform::UpdateTransformForNewParent(Transform* parentTransform)
 	XMStoreFloat3(&positionOffset, position);
 	XMStoreFloat3(&rotationOffset, rotation);
 	XMStoreFloat3(&scaleOffset, scale);
+	UpdateDirectionVectors();
 }

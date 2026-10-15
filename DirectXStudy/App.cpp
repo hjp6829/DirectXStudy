@@ -60,7 +60,7 @@ void App::Run()
 		std::chrono::duration<float> elapsed = currentTime - previousTime;
 		float deltaTime = elapsed.count();
 		sceneManager->Update(deltaTime);
-		input->Update();
+
 		dxdMain->Render();
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
@@ -71,7 +71,7 @@ void App::Run()
 
 		sceneManager->LateUpdate(deltaTime);
 		dxdMain->EndDraw();
-
+		input->Update();
 		for (int i = 0; i < commandQueue.size(); i++)
 		{
 			commandQueue.front()();
