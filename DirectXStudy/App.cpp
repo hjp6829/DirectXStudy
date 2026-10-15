@@ -46,21 +46,21 @@ App::App()
 void App::Run()
 {
 	auto previousTime = std::chrono::steady_clock::now();
-	MSG msg;
+	MSG msg = {};
 
 	dxdMain->Start();
 
 	while (GetMessage(&msg, NULL, 0, 0))
 	{
-
 		TranslateMessage(&msg);
 		DispatchMessage(&msg);
 
 		auto currentTime = std::chrono::steady_clock::now();
 		std::chrono::duration<float> elapsed = currentTime - previousTime;
 		float deltaTime = elapsed.count();
-		sceneManager->Update(deltaTime);
 
+		sceneManager->ObjectsUpdate(deltaTime);
+		sceneManager->ObjectsLateUpdate(deltaTime);
 		dxdMain->Render();
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
@@ -69,13 +69,14 @@ void App::Run()
 		ImGui::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-		sceneManager->LateUpdate(deltaTime);
 		dxdMain->EndDraw();
 		input->Update();
-		for (int i = 0; i < commandQueue.size(); i++)
+		while (!commandQueue.empty())
 		{
-			commandQueue.front()();
+			auto command = std::move(commandQueue.front());
 			commandQueue.pop();
+
+			command();
 		}
 
 		previousTime = currentTime;

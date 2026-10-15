@@ -147,8 +147,8 @@ void DirectXMain::Render()
 	pContext->ClearRenderTargetView(pRenderTarget.Get(), clearColor);
 	pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
-	globalBuffer.cameraPos = cam->GetTransform()->GetPostionOffset();
-	globalBuffer.lightPos = light->GetTransform()->GetPostionOffset();
+	globalBuffer.cameraPos = cam->GetTransform()->GetObjectPosition();
+	globalBuffer.lightPos = light->GetTransform()->GetObjectPosition();
 	globalBuffer.lightColor = light->GetLightColor();
 	globalBuffer.specularStrength = light->GetSpecularStrength();
 	globalBuffer.shininess = light->GetShininess();

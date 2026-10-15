@@ -58,6 +58,6 @@ float4 main(VSOut IN) : SV_TARGET
     texColor.rgb *= brightness * lightColor.rgb * color.rgb;
     texColor.rgb += specular;
     //texColor.rgb *= attenuation;
-    return texColor;
-    //return float4(1, 1, 1, 1);
+    //return texColor;
+    return float4(1, 1, 1, 1);
 }

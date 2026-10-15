@@ -46,7 +46,7 @@ public:
 	void SetComponent(std::unique_ptr<Component> component);
 	void DeleteComponent(Component* component);
 	void UpdateComponent(float deltaTime);
-	void LateUpate(float deltaTime);
+	void LateUpateComponent(float deltaTime);
 
 	Transform* GetTransform(){return transform;}
 public:

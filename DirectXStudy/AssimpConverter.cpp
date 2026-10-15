@@ -59,13 +59,16 @@ void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& par
 	aiQuaternion rotation;
 	aiVector3D position;
 
-	currentNode->mTransformation.Decompose(scale, rotation, position);
+	currentNode->mTransformation.Decompose(scale, rotation, position);//ÄõÅÍ´Ï¾ð°ª
 
 	std::string nodeName = modelData->currentNode->mName.C_Str();
 	modelData->modelName = nodeName;
-	modelData->localPos = XMFLOAT3(position.x, position.y, position.z);
-	modelData->localRot = XMFLOAT3(rotation.x, rotation.y, rotation.z);
-	modelData->localScale = XMFLOAT3(scale.x, scale.y, scale.z);
+	modelData->localMatrix = DirectX::XMMatrixTranspose(DirectX::XMMatrixSet(
+		localTransform.a1, localTransform.a2, localTransform.a3, localTransform.a4,
+		localTransform.b1, localTransform.b2, localTransform.b3, localTransform.b4,
+		localTransform.c1, localTransform.c2, localTransform.c3, localTransform.c4,
+		localTransform.d1, localTransform.d2, localTransform.d3, localTransform.d4
+	));
 
 	for (int i = 0; i < modelData->currentNode->mNumMeshes; i++)
 	{

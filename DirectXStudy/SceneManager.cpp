@@ -18,7 +18,7 @@ SceneManager::SceneManager(ID3D11Device* device)
 	modelCreater = new ModelCreater(device);
 	LoadSaveSceneFile();
 }
-void SceneManager::Update(float deltaTime)
+void SceneManager::ObjectsUpdate(float deltaTime)
 {
 	for (auto& [key, value] : allObjects)
 	{
@@ -47,11 +47,15 @@ void SceneManager::Update(float deltaTime)
 	isCtrl = false;
 }
 
-void SceneManager::LateUpdate(float deltaTime)
+void SceneManager::ObjectsLateUpdate(float deltaTime)
 {
 	for (auto& [key, value] : allObjects)
 	{
-		value->LateUpate(deltaTime);
+		value->LateUpateComponent(deltaTime);
+	}
+	for (auto& [key, value] : objects)
+	{
+		value->UpdateObject();
 	}
 }
 
@@ -215,7 +219,13 @@ void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObj
 
 	childObject->parentObject = parentObject;
 	childObject->parentobjectID = parentObject->objectID;
-	childObject->GetTransform()->UpdateTransformForNewParent(parentObject->GetTransform());
+	XMMATRIX oldWorldMatrix = childObject->GetTransform()->GetWorldMatrix();
+	XMMATRIX parentWorldMatrix = XMMatrixIdentity();
+	if (parentObject != nullptr)
+	{
+		parentWorldMatrix = parentObject->GetTransform()->GetWorldMatrix();
+	}
+	childObject->GetTransform()->UpdateTransformForNewParent(oldWorldMatrix, parentWorldMatrix);
 	parentObject->childObjects.push_back(childObject);
 
 	if (childObject->IsRootObject())

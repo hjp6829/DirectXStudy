@@ -6,6 +6,14 @@ void Component::Initialize(Object* object)
 {
 	currentObject = object;
 }
+void Component::Update()
+{
+
+}
+
+void Component::LateUpdate()
+{
+}
 
 void Component::InspectorUpdate()
 {

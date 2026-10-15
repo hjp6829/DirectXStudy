@@ -42,9 +42,7 @@ public:
 	std::vector<int> meshIDX;
 	aiNode* currentNode;
 	std::vector<ModelLoadData*> childNodes;
-	XMFLOAT3 localPos;
-	XMFLOAT3 localRot;
-	XMFLOAT3 localScale;
+	XMMATRIX localMatrix;
 	//Model* currentModel;
 	int idx;
 	void Clear() {

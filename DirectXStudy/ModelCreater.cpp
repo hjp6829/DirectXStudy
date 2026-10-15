@@ -39,9 +39,7 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 			parentModelNode->currentMeshs.push_back(mesh);
 		}
 		parentModelNode->modelName = modelLoadData->modelName;
-		parentModelNode->modelLocalPos = modelLoadData->localPos;
-		parentModelNode->modelLocalRot = modelLoadData->localRot;
-		parentModelNode->modelLocalScale = modelLoadData->localScale;
+		parentModelNode->localMatrix = modelLoadData->localMatrix;
 		parentModelNode->modelHeshCode = FNV1a(parentModelNode->sourceModelPath + modelLoadData->modelName);
 		modelAsset->modelNodesDic.insert({ parentModelNode->modelHeshCode, parentModelNode });
 		return;
@@ -63,9 +61,7 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 		childModelNode->sourceModelPath = parentModelNode->sourceModelPath;
 		CreateChildModelNode(modelLoadData->childNodes[i], childModelNode, modelAsset);
 	}
-	parentModelNode->modelLocalPos = modelLoadData->localPos;
-	parentModelNode->modelLocalRot = modelLoadData->localRot;
-	parentModelNode->modelLocalScale = modelLoadData->localScale;
+	parentModelNode->localMatrix = modelLoadData->localMatrix;
 }
 
 
@@ -133,7 +129,7 @@ void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)
 {
 	object->currentModelNode = modelNode;
 	object->objectName = modelNode->modelName;
-	object->GetTransform()->SetLocalTransform(modelNode->modelLocalPos, modelNode->modelLocalRot, modelNode->modelLocalScale);
+	object->GetTransform()->SetLocalTransform(modelNode->localMatrix);
 	object->modelNamePath = modelNode->sourceModelPath;
 }
 uint64_t ModelCreater::FNV1a(const std::string& str)

@@ -14,8 +14,8 @@ class ModelCreater;
 class SceneManager {
 public:
 	SceneManager(ID3D11Device* device);
-	void Update(float deltaTime);
-	void LateUpdate(float deltaTime);
+	void ObjectsUpdate(float deltaTime);
+	void ObjectsLateUpdate(float deltaTime);
 	std::unordered_map<uint64_t, Object*>* GetSceneObjects() { return &objects; }
 	void CreateObjectSelect(std::string path);
 	void SetHierarchyDropObject(Object* parentObject, Object* childObject);

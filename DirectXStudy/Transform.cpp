@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "imgui_impl_win32.h"
+DirectX::XMFLOAT3 QuaternionToEulerDegrees(DirectX::FXMVECTOR quaternion);
 
 Transform::Transform()
 {
@@ -8,66 +9,109 @@ Transform::Transform()
 
 void Transform::SetPosition(DirectX::XMFLOAT3 position)
 {
-	positionOffset.x = position.x - importedLocalPosition.x;
-	positionOffset.y = position.y - importedLocalPosition.y;
-	positionOffset.z = position.z - importedLocalPosition.z;
+	DirectX::XMFLOAT3 importedPosition;
+	DirectX::XMStoreFloat3(&importedPosition, importPosition);
+
+	positionOffset.x = position.x - importedPosition.x;
+	positionOffset.y = position.y - importedPosition.y;
+	positionOffset.z = position.z - importedPosition.z;
 }
 
 void Transform::SetRotaion(DirectX::XMFLOAT3 rotation)
 {
-	rotationOffset.x = rotation.x - importedLocalRotation.x;
-	rotationOffset.y = rotation.y - importedLocalRotation.y;
-	rotationOffset.z = rotation.z - importedLocalRotation.z;
-	UpdateDirectionVectors();
+	using namespace DirectX;
+
+	XMVECTOR targetQuaternion = XMQuaternionRotationRollPitchYaw(
+		XMConvertToRadians(rotation.x),
+		XMConvertToRadians(rotation.y),
+		XMConvertToRadians(rotation.z)
+	);//오일러 -> 쿼터니언
+
+	XMMATRIX offsetRotationMatrix =
+		XMMatrixInverse(nullptr, XMMatrixRotationQuaternion(importRotation)) *
+		XMMatrixRotationQuaternion(targetQuaternion);//원본의 역행렬 * 들어온값의 행렬 90 - 30 = 60
+	//90은 들어온 값 30은 역행렬 60은 offset ->원본 회전값은 +30임
+
+	XMVECTOR offsetQuaternion = XMQuaternionRotationMatrix(offsetRotationMatrix);
+
+	XMStoreFloat4(&rotationOffset,XMQuaternionNormalize(offsetQuaternion));
 }
 
 void Transform::SetScale(DirectX::XMFLOAT3 scale)
 {
-	scaleOffset.x = scale.x / importedLocalScale.x;
-	scaleOffset.y = scale.y / importedLocalScale.y;
-	scaleOffset.z = scale.z / importedLocalScale.z;
+	DirectX::XMFLOAT3 importedScale;
+
+	XMStoreFloat3(&importedScale, importScale);
+
+	scaleOffset.x = scale.x / importedScale.x;
+	scaleOffset.y = scale.y / importedScale.y;
+	scaleOffset.z = scale.z / importedScale.z;
 }
 
 DirectX::XMFLOAT3 Transform::GetObjectPosition()
 {
-	DirectX::XMFLOAT3 localPos;
-	localPos.x = positionOffset.x + importedLocalPosition.x;
-	localPos.y = positionOffset.y + importedLocalPosition.y;
-	localPos.z = positionOffset.z + importedLocalPosition.z;
-	return localPos;
+	DirectX::XMFLOAT3 importedPosition;
+	XMStoreFloat3(&importedPosition, importPosition);
+
+	return {
+		importedPosition.x + positionOffset.x,
+		importedPosition.y + positionOffset.y,
+		importedPosition.z + positionOffset.z
+	};
 }
 DirectX::XMFLOAT3 Transform::GetObjectRotation()
 {
-	DirectX::XMFLOAT3 localRot;
-	localRot.x = rotationOffset.x * importedLocalRotation.x;
-	localRot.y = rotationOffset.y * importedLocalRotation.y;
-	localRot.z = rotationOffset.z * importedLocalRotation.z;
-	return localRot;
+	using namespace DirectX;
+
+	XMMATRIX matrix = importLocalMatrix *XMMatrixRotationQuaternion(XMLoadFloat4(&rotationOffset));
+
+	XMVECTOR scale;
+	XMVECTOR rotation;
+	XMVECTOR position;
+
+	if (!XMMatrixDecompose(&scale, &rotation, &position, matrix))
+		return { 0, 0, 0 };
+
+	return QuaternionToEulerDegrees(rotation);
 }
 DirectX::XMFLOAT3 Transform::GetObjectScale()
 {
-	DirectX::XMFLOAT3 localScale;
-	localScale.x = scaleOffset.x * importedLocalScale.x;
-	localScale.y = scaleOffset.y * importedLocalScale.y;
-	localScale.z = scaleOffset.z * importedLocalScale.z;
-	return localScale;
+	DirectX::XMFLOAT3 importedScale;
+
+	DirectX::XMStoreFloat3(&importedScale,importScale);
+	return {
+		importedScale.x * scaleOffset.x,
+		importedScale.y * scaleOffset.y,
+		importedScale.z * scaleOffset.z
+	};
 }
 
 void Transform::SetRotationOffset(DirectX::XMFLOAT3 rotation)
 {
-	rotationOffset = rotation;
+	using namespace DirectX;
+
+	XMVECTOR quaternion = XMQuaternionRotationRollPitchYaw(
+		XMConvertToRadians(rotation.x),
+		XMConvertToRadians(rotation.y),
+		XMConvertToRadians(rotation.z)
+	);
+
+	XMStoreFloat4(&rotationOffset, quaternion);
 	UpdateDirectionVectors();
 }
 
-void Transform::MakeWorldMatrix()
+void Transform::MakeLocalMatrix()
 {
-	worldMatrix = DirectX::XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z)*
-		DirectX::XMMatrixRotationRollPitchYaw(
-			DirectX::XMConvertToRadians(rotationOffset.x),
-			DirectX::XMConvertToRadians(rotationOffset.y),
-			DirectX::XMConvertToRadians(rotationOffset.z)
-		)*
-		DirectX::XMMatrixTranslation(positionOffset.x, positionOffset.y, positionOffset.z);
+	DirectX::XMVECTOR quaternion = XMLoadFloat4(&rotationOffset);
+	DirectX::XMMATRIX offsetMatrix =
+		DirectX::XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z) *
+		DirectX::XMMatrixRotationQuaternion(quaternion) *//쿼터니언을 xmmatrix로 변환
+		DirectX::XMMatrixTranslation(
+			positionOffset.x,
+			positionOffset.y,
+			positionOffset.z
+		);
+	localMatrix = importLocalMatrix * offsetMatrix ;
 }
 
 void Transform::InspectorUpdate()
@@ -93,11 +137,10 @@ void Transform::UpdateDirectionVectors()
 	right = XMVector3TransformNormal(DirectX::XMVectorSet(1, 0, 0, 0), rotationMatrix);
 	forward = XMVector3TransformNormal(DirectX::XMVectorSet(0, 0, 1, 0), rotationMatrix);
 }
-void Transform::SetLocalTransform(DirectX::XMFLOAT3 localPos, DirectX::XMFLOAT3 localRot, DirectX::XMFLOAT3 localScale)
+void Transform::SetImportLocalTransform(DirectX::XMMATRIX localMatrix)
 {
-	importedLocalPosition = localPos;
-	importedLocalRotation = localRot;
-	importedLocalScale = localScale;
+	this->importLocalMatrix = localMatrix;
+	DirectX::XMMatrixDecompose(&importScale, &importRotation, &importPosition, importLocalMatrix);
 }
 void Transform::Serialize(nlohmann::json& j)
 {
@@ -121,16 +164,47 @@ void Transform::Deserialize(const nlohmann::json& j)
 	SetScaleOffset(DirectX::XMFLOAT3(transformJson.at("scalex").get<float>(), transformJson.at("scaley").get<float>(), transformJson.at("scalez").get<float>()));
 }
 
-void Transform::UpdateTransformForNewParent(Transform* parentTransform)
+void Transform::UpdateTransformForNewParent(DirectX::FXMMATRIX oldWorldMatrix, DirectX::FXMMATRIX newParentWorldMatrix)
 {
 	DirectX::XMVECTOR position;
 	DirectX::XMVECTOR rotation;
 	DirectX::XMVECTOR scale;
-	DirectX::XMMATRIX inverseWorld = worldMatrix * DirectX::XMMatrixInverse(nullptr, parentTransform->GetWorldMatrix());
+	DirectX::XMMATRIX inverseLocal = oldWorldMatrix * DirectX::XMMatrixInverse(nullptr, newParentWorldMatrix);
 
-	XMMatrixDecompose(&scale, &rotation, &position, inverseWorld);
+	XMMatrixDecompose(&scale, &rotation, &position, inverseLocal);
 	XMStoreFloat3(&positionOffset, position);
-	XMStoreFloat3(&rotationOffset, rotation);
+	XMStoreFloat4(&rotationOffset, rotation);
 	XMStoreFloat3(&scaleOffset, scale);
 	UpdateDirectionVectors();
+}
+DirectX::XMFLOAT3 QuaternionToEulerDegrees(DirectX::FXMVECTOR quaternion)
+{
+	using namespace DirectX;
+
+	XMFLOAT4 q;
+	XMStoreFloat4(&q, XMQuaternionNormalize(quaternion));
+
+	// X축 회전 (Pitch)
+	float sinPitch = 2.0f * (q.w * q.x - q.y * q.z);
+	sinPitch = std::clamp(sinPitch, -1.0f, 1.0f);
+
+	float pitch = std::asin(sinPitch);
+
+	// Y축 회전 (Yaw)
+	float yaw = std::atan2(
+		2.0f * (q.w * q.y + q.x * q.z),
+		1.0f - 2.0f * (q.x * q.x + q.y * q.y)
+	);
+
+	// Z축 회전 (Roll)
+	float roll = std::atan2(
+		2.0f * (q.w * q.z + q.x * q.y),
+		1.0f - 2.0f * (q.x * q.x + q.z * q.z)
+	);
+
+	return XMFLOAT3(
+		XMConvertToDegrees(pitch),
+		XMConvertToDegrees(yaw),
+		XMConvertToDegrees(roll)
+	);
 }

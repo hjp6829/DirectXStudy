@@ -9,12 +9,15 @@ public:
 	void Initialize(Object* object);
 public:
 	virtual ~Component() = default;
-	virtual void  Start() {};
-	virtual void Update() {};
+	virtual void  Awake(){};
+	virtual void  Start(){};
+	virtual void Update();
+	virtual void LateUpdate();
 	virtual void InspectorUpdate();
 protected:
 	Object* currentObject;
 	std::string componentName;
 private:
 	void DeleteComponentFromObject();
+	bool isInit;
 };

@@ -13,6 +13,15 @@ Object::Object()
 	std::unique_ptr<Transform> transformTemp = std::make_unique<Transform>();
 	transform = transformTemp.get();
 	components.push_back(std::move(transformTemp));
+
+	for (auto& component : components)
+	{
+		component->Awake();
+	}
+	for (auto& component : components)
+	{
+		component->Start();
+	}
 }
 
 void Object::ShowComponentInspectorUI()
@@ -26,8 +35,9 @@ void Object::ShowComponentInspectorUI()
 void Object::SetComponent(std::unique_ptr<Component> component)
 {
 	component->Initialize(this);
+	component->Awake();
+	component->Start();
 	components.push_back(std::move(component));
-
 }
 void Object::DeleteComponent(Component* component)
 {
@@ -53,12 +63,18 @@ void Object::UpdateComponent(float deltaTime)
 		component->Update();
 	}
 }
-void Object::LateUpate(float deltaTime)
+void Object::LateUpateComponent(float deltaTime)
 {
-	for (int i = 0; i < commandQueue.size(); i++)
+	for (auto& component : components)
 	{
-		commandQueue.front()();
+		component->LateUpdate();
+	}
+	while (!commandQueue.empty())
+	{
+		auto command = std::move(commandQueue.front());
 		commandQueue.pop();
+
+		command();
 	}
 }
 void Object::Serialize(nlohmann::json& j)
@@ -82,9 +98,9 @@ void Object::Deserialize(const nlohmann::json& j)
 }
 void Object::SetDataToCopy(Object* copyObject)
 {
-	copyObject->GetTransform()->SetPostionOffset(transform->GetPostionOffset());
-	copyObject->GetTransform()->SetRotationOffset(transform->GetRotationOffset());
-	copyObject->GetTransform()->SetScaleOffset(transform->GetScaleOffset());
+	//copyObject->GetTransform()->SetPostionOffset(transform->GetPostionOffset());
+	//copyObject->GetTransform()->SetRotationOffset(transform->GetRotationOffset());
+	//copyObject->GetTransform()->SetScaleOffset(transform->GetScaleOffset());
 	copyObject->SetRootNodeCheck(IsRootObject());
 }
 
@@ -95,7 +111,7 @@ void Object::RenderObject(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	if(currentModelNode != nullptr)
-		currentModelNode->RenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
+		currentModelNode->RenderMeshs(dxdMain->GetContext(), transform->GetLocalMatrix(), ViewMatrix, ProjectionMatrix);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
@@ -109,7 +125,7 @@ void Object::OutlineRenderObject(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	if (currentModelNode != nullptr)
-		currentModelNode->OutlineRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
+		currentModelNode->OutlineRenderMeshs(dxdMain->GetContext(), transform->GetLocalMatrix(), ViewMatrix, ProjectionMatrix);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
@@ -123,7 +139,7 @@ void Object::PickingRenderObject(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	if (currentModelNode != nullptr)
-		currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix, objectID);
+		currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), transform->GetLocalMatrix(), ViewMatrix, ProjectionMatrix, objectID);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
@@ -133,9 +149,11 @@ void Object::PickingRenderObject(DirectXMain* dxdMain)
 
 void Object::UpdateObject()
 {
-	transform->MakeWorldMatrix();
+	transform->MakeLocalMatrix();
 	if (parentObject != nullptr)
-		transform->SetWorldMatrix(transform->GetWorldMatrix() * parentObject->GetTransform()->GetWorldMatrix());
+		transform->SetWorldMatrix(transform->GetLocalMatrix() * parentObject->GetTransform()->GetWorldMatrix());
+	else
+		transform->SetWorldMatrix(transform->GetLocalMatrix());
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		childObjects[i]->UpdateObject();
