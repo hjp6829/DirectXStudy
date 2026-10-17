@@ -15,7 +15,7 @@ private:
 	float FOV;
 	float nearPlane = 0.5f;
 	float farPlane = 1000.0f;
-	float rotationSpeed = 0.5f;
+	float rotationSpeed = 0.1f;
 	float mouseSpeed = 0.03;
 	float mouseWheelSpeed = 0.2;
 	float InputSpeed = 0.1;

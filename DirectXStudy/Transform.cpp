@@ -1,5 +1,6 @@
 #include "Transform.h"
 #include "imgui_impl_win32.h"
+#include "Log.h"
 DirectX::XMFLOAT3 QuaternionToEulerDegrees(DirectX::FXMVECTOR quaternion);
 
 Transform::Transform()
@@ -25,16 +26,18 @@ void Transform::SetRotaion(DirectX::XMFLOAT3 rotation)
 		XMConvertToRadians(rotation.x),
 		XMConvertToRadians(rotation.y),
 		XMConvertToRadians(rotation.z)
-	);//¿ÀÀÏ·¯ -> ÄõÅÍ´Ï¾ð
+	);//ï¿½ï¿½ï¿½Ï·ï¿½ -> ï¿½ï¿½ï¿½Í´Ï¾ï¿½
 
 	XMMATRIX offsetRotationMatrix =
 		XMMatrixInverse(nullptr, XMMatrixRotationQuaternion(importRotation)) *
-		XMMatrixRotationQuaternion(targetQuaternion);//¿øº»ÀÇ ¿ªÇà·Ä * µé¾î¿Â°ªÀÇ Çà·Ä 90 - 30 = 60
-	//90Àº µé¾î¿Â °ª 30Àº ¿ªÇà·Ä 60Àº offset ->¿øº» È¸Àü°ªÀº +30ÀÓ
+		XMMatrixRotationQuaternion(targetQuaternion);//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ * ï¿½ï¿½ï¿½Â°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 90 - 30 = 60
+	//90ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 30ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ 60ï¿½ï¿½ offset ->ï¿½ï¿½ï¿½ï¿½ È¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ +30ï¿½ï¿½
 
 	XMVECTOR offsetQuaternion = XMQuaternionRotationMatrix(offsetRotationMatrix);
 
 	XMStoreFloat4(&rotationOffset,XMQuaternionNormalize(offsetQuaternion));
+
+	UpdateDirectionVectors();
 }
 
 void Transform::SetScale(DirectX::XMFLOAT3 scale)
@@ -63,16 +66,14 @@ DirectX::XMFLOAT3 Transform::GetObjectRotation()
 {
 	using namespace DirectX;
 
-	XMMATRIX matrix = importLocalMatrix *XMMatrixRotationQuaternion(XMLoadFloat4(&rotationOffset));
+	XMMATRIX rotationMatrix =
+		XMMatrixRotationQuaternion(importRotation) *
+		XMMatrixRotationQuaternion(XMLoadFloat4(&rotationOffset));
 
-	XMVECTOR scale;
-	XMVECTOR rotation;
-	XMVECTOR position;
+	XMVECTOR rotationQuaternion =
+		XMQuaternionRotationMatrix(rotationMatrix);
 
-	if (!XMMatrixDecompose(&scale, &rotation, &position, matrix))
-		return { 0, 0, 0 };
-
-	return QuaternionToEulerDegrees(rotation);
+	return QuaternionToEulerDegrees(rotationQuaternion);
 }
 DirectX::XMFLOAT3 Transform::GetObjectScale()
 {
@@ -105,7 +106,7 @@ void Transform::MakeLocalMatrix()
 	DirectX::XMVECTOR quaternion = XMLoadFloat4(&rotationOffset);
 	DirectX::XMMATRIX offsetMatrix =
 		DirectX::XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z) *
-		DirectX::XMMatrixRotationQuaternion(quaternion) *//ÄõÅÍ´Ï¾ðÀ» xmmatrix·Î º¯È¯
+		DirectX::XMMatrixRotationQuaternion(quaternion) *//ï¿½ï¿½ï¿½Í´Ï¾ï¿½ï¿½ï¿½ xmmatrixï¿½ï¿½ ï¿½ï¿½È¯
 		DirectX::XMMatrixTranslation(
 			positionOffset.x,
 			positionOffset.y,
@@ -132,10 +133,20 @@ void Transform::InspectorUpdate()
 }
 void Transform::UpdateDirectionVectors()
 {
-	DirectX::XMMATRIX rotationMatrix = DirectX::XMMatrixRotationRollPitchYaw(DirectX::XMConvertToRadians(rotationOffset.x), DirectX::XMConvertToRadians(rotationOffset.y), DirectX::XMConvertToRadians(rotationOffset.z));
-	up = XMVector3TransformNormal(DirectX::XMVectorSet(0, 1, 0, 0), rotationMatrix);
-	right = XMVector3TransformNormal(DirectX::XMVectorSet(1, 0, 0, 0), rotationMatrix);
-	forward = XMVector3TransformNormal(DirectX::XMVectorSet(0, 0, 1, 0), rotationMatrix);
+	using namespace DirectX;
+
+	XMMATRIX rotationMatrix =
+		XMMatrixRotationQuaternion(importRotation) *
+		XMMatrixRotationQuaternion(XMLoadFloat4(&rotationOffset));
+
+	up = XMVector3Normalize(
+		XMVector3TransformNormal(XMVectorSet(0, 1, 0, 0), rotationMatrix));
+
+	right = XMVector3Normalize(
+		XMVector3TransformNormal(XMVectorSet(1, 0, 0, 0), rotationMatrix));
+
+	forward = XMVector3Normalize(
+		XMVector3TransformNormal(XMVectorSet(0, 0, 1, 0), rotationMatrix));
 }
 void Transform::SetImportLocalTransform(DirectX::XMMATRIX localMatrix)
 {
@@ -184,19 +195,19 @@ DirectX::XMFLOAT3 QuaternionToEulerDegrees(DirectX::FXMVECTOR quaternion)
 	XMFLOAT4 q;
 	XMStoreFloat4(&q, XMQuaternionNormalize(quaternion));
 
-	// XÃà È¸Àü (Pitch)
+	// Xï¿½ï¿½ È¸ï¿½ï¿½ (Pitch)
 	float sinPitch = 2.0f * (q.w * q.x - q.y * q.z);
 	sinPitch = std::clamp(sinPitch, -1.0f, 1.0f);
 
 	float pitch = std::asin(sinPitch);
 
-	// YÃà È¸Àü (Yaw)
+	// Yï¿½ï¿½ È¸ï¿½ï¿½ (Yaw)
 	float yaw = std::atan2(
 		2.0f * (q.w * q.y + q.x * q.z),
 		1.0f - 2.0f * (q.x * q.x + q.y * q.y)
 	);
 
-	// ZÃà È¸Àü (Roll)
+	// Zï¿½ï¿½ È¸ï¿½ï¿½ (Roll)
 	float roll = std::atan2(
 		2.0f * (q.w * q.z + q.x * q.y),
 		1.0f - 2.0f * (q.x * q.x + q.z * q.z)

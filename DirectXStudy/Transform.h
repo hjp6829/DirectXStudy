@@ -48,11 +48,11 @@ public:
 private:
 	void UpdateDirectionVectors();
 private:
-	DirectX::XMFLOAT3 positionOffset = { 0.0f, 0.0f, 4.0f };//»ç¿ëÀÚ°¡ ¼öÁ¤ÇÑ À§Â÷°ª
-	DirectX::XMFLOAT4 rotationOffset = { 0.0f, 0.0f, 0.0f,0.0f };//»ç¿ëÀÚ°¡ ¼öÁ¤ÇÑ À§Â÷°ª
-	DirectX::XMFLOAT3 scaleOffset = { 1.0f, 1.0f, 1.0f };//»ç¿ëÀÚ°¡ ¼öÁ¤ÇÑ À§Â÷°ª
-	DirectX::XMMATRIX localMatrix;
-	DirectX::XMMATRIX importLocalMatrix;
+	DirectX::XMFLOAT3 positionOffset = { 0.0f, 0.0f, 0.0f };//ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	DirectX::XMFLOAT4 rotationOffset = { 0.0f, 0.0f, 0.0f,1.0f };//ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	DirectX::XMFLOAT3 scaleOffset = { 1.0f, 1.0f, 1.0f };//ï¿½ï¿½ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	DirectX::XMMATRIX localMatrix = DirectX::XMMatrixIdentity();
+	DirectX::XMMATRIX importLocalMatrix = DirectX::XMMatrixIdentity();
 	DirectX::XMVECTOR importScale;
 	DirectX::XMVECTOR importRotation;
 	DirectX::XMVECTOR importPosition;

@@ -74,8 +74,7 @@ Mesh::Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* 
 	pickingBindable.push_back(primitiveTopologyTemp.get());
 	bindable.push_back(std::move(primitiveTopologyTemp));
 
-	localMatrix = AssimpNodeMatrix *
-		XMMatrixScaling(scale.x, scale.y, scale.z) *
+	localMatrix = 	XMMatrixScaling(scale.x, scale.y, scale.z) *
 		XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z) *
 		XMMatrixTranslation(position.x, position.y, position.z);
 
@@ -105,7 +104,7 @@ void Mesh::Render(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX v
 {
 	if (!enable)
 		return;
-	DirectX::XMStoreFloat4x4(&sb.worldMatrix, localMatrix * worldMatrix);
+	DirectX::XMStoreFloat4x4(&sb.worldMatrix, localMatrix* worldMatrix);
 	vertexConstantBufferContainer->SetModelMatrix(viewMatrix, projectionMatrix);
 	for (int i = 0; i < bindable.size(); i++)
 	{

@@ -111,7 +111,7 @@ void Object::RenderObject(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	if(currentModelNode != nullptr)
-		currentModelNode->RenderMeshs(dxdMain->GetContext(), transform->GetLocalMatrix(), ViewMatrix, ProjectionMatrix);
+		currentModelNode->RenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
@@ -125,7 +125,7 @@ void Object::OutlineRenderObject(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	if (currentModelNode != nullptr)
-		currentModelNode->OutlineRenderMeshs(dxdMain->GetContext(), transform->GetLocalMatrix(), ViewMatrix, ProjectionMatrix);
+		currentModelNode->OutlineRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
@@ -139,7 +139,7 @@ void Object::PickingRenderObject(DirectXMain* dxdMain)
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
 	if (currentModelNode != nullptr)
-		currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), transform->GetLocalMatrix(), ViewMatrix, ProjectionMatrix, objectID);
+		currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix, objectID);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)

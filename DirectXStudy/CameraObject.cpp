@@ -41,9 +41,10 @@ void CameraObject::CameraTransformUpdate()
 
 	if (Input::GetMouseButton(1))
 	{
-		XMFLOAT3 rotationOffsetTemp = transform->GetObjectRotation();
-		rotationOffsetTemp.x = rotationOffsetTemp.x - mousePos.y * rotationSpeed;
-		rotationOffsetTemp.y = rotationOffsetTemp.y - mousePos.x * rotationSpeed;
+		XMFLOAT3 cameraRotation = transform->GetObjectRotation();
+
+		cameraRotation.x = cameraRotation.x + mousePos.y * rotationSpeed;
+		cameraRotation.y = cameraRotation.y - mousePos.x * rotationSpeed;
 
 		DirectX::XMFLOAT3 position = transform->GetObjectPosition();
 		DirectX::XMVECTOR pos = DirectX::XMLoadFloat3(&position);
@@ -58,7 +59,8 @@ void CameraObject::CameraTransformUpdate()
 		XMFLOAT3 positionTemp;
 		DirectX::XMStoreFloat3(&positionTemp, pos);
 		transform->SetPosition(positionTemp);
-		transform->SetRotaion(rotationOffsetTemp);
+		transform->SetRotaion(cameraRotation);
+		
 		return;
 	}
 	if (!Input::GetMouseButton(2))
