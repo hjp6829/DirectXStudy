@@ -12,6 +12,8 @@
 #include <nlohmann/json.hpp>
 #include "SceneManager.h"
 #include "EventBus.h"
+#include "RuntimeManager.h"
+#include "Log.h"
 
 App::App()
 {
@@ -26,8 +28,9 @@ App::App()
 	window = new Window(input);
 	dxdMain = new DirectXMain(window->GetHwnd());
 	sceneManager = new SceneManager(dxdMain->GetDevice());
-	dxdMain->SetSceneObjects(sceneManager->GetSceneObjects());
-	uimanager = new UIManager(sceneManager->GetSceneObjects());
+	runtimeManager = new RuntimeManager(dxdMain->GetDevice());
+	dxdMain->SetObjects(sceneManager->GetSceneObjects(), runtimeManager->GetSceneObjects());
+	uimanager = new UIManager(sceneManager->GetSceneObjects(), runtimeManager->GetSceneObjects());
 
 	dxdMain->SetCamera(sceneManager->GetCamera());
 	dxdMain->SetLight(sceneManager->GetLight());
@@ -59,8 +62,16 @@ void App::Run()
 		std::chrono::duration<float> elapsed = currentTime - previousTime;
 		float deltaTime = elapsed.count();
 
-		sceneManager->ObjectsUpdate(deltaTime);
-		sceneManager->ObjectsLateUpdate(deltaTime);
+		if (activeSceneMode == ActiveSceneMode::SceneMode)
+		{
+			sceneManager->ObjectsUpdate(deltaTime);
+			sceneManager->ObjectsLateUpdate(deltaTime);
+		}
+		else
+		{
+			runtimeManager->ObjectsUpdate(deltaTime);
+			runtimeManager->ObjectsLateUpdate(deltaTime);
+		}
 		dxdMain->Render();
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
@@ -102,6 +113,7 @@ void App::Run()
 void App::RegisterEventHandlers()
 {
 	EventBus::Subscribe(EventType::RequestDeleteObject, [this](EventData* data) {DeleteObject(data); });
+	EventBus::Subscribe(EventType::ActiveSceneChanged, [this](EventData* data) {ActiveSceneModeChange(data); });
 }
 void App::DeleteObject(EventData* eventData)
 {
@@ -119,4 +131,14 @@ void App::DeleteObject(EventData* eventData)
 
 }
 
+void App::ActiveSceneModeChange(EventData* eventData)
+{
+	ActiveSceneChangedEventData* eventDataCast = static_cast<ActiveSceneChangedEventData*>(eventData);
 
+	if (eventDataCast != nullptr)
+	{
+		activeSceneMode = eventDataCast->activeSceneMode;
+		if(activeSceneMode == ActiveSceneMode::RuntimeMode)
+			runtimeManager->StartRuntime(sceneManager->GetSceneAllObjects());
+	}
+}

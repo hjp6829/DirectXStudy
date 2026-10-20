@@ -17,10 +17,12 @@ public:
 	void ObjectsUpdate(float deltaTime);
 	void ObjectsLateUpdate(float deltaTime);
 	std::unordered_map<uint64_t, Object*>* GetSceneObjects() { return &objects; }
+	std::unordered_map<uint64_t, Object*>* GetSceneAllObjects() {return &allObjects; }
 	void CreateObjectSelect(std::string path);
 	void SetHierarchyDropObject(Object* parentObject, Object* childObject);
 	CameraObject* GetCamera() { return camera; }
 	LightObject* GetLight() { return light; }
+
 private:
 	std::unordered_map<uint64_t, Object*> objects;
 	std::unordered_map<uint64_t, Object*> allObjects;

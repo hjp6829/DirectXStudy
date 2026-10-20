@@ -48,6 +48,7 @@ public:
 	void UpdateComponent(float deltaTime);
 	void LateUpateComponent(float deltaTime);
 
+	void SetTransform(Transform* transform) {this->transform = transform;}
 	Transform* GetTransform(){return transform;}
 public:
 	void virtual UpdateObject();

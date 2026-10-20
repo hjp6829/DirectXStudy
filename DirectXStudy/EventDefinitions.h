@@ -7,9 +7,13 @@ enum class EventType {
 	SelectObject,
 	SelectObjectID,
 	RequestDeleteObject,
-	ObjectWillBeDeleted
+	ObjectWillBeDeleted,
+	ActiveSceneChanged
 };
-
+enum class ActiveSceneMode {
+	SceneMode,
+	RuntimeMode,
+};
 class EventData {
 public:
 	virtual ~EventData() = default;
@@ -22,4 +26,9 @@ public:
 class SelectObjectIDData : public EventData {
 public:
 	uint64_t objectID;
+};
+class ActiveSceneChangedEventData : public EventData
+{
+public:
+	ActiveSceneMode activeSceneMode;
 };

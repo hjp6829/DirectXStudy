@@ -18,12 +18,13 @@ SceneManager::SceneManager(ID3D11Device* device)
 	modelCreater = new ModelCreater(device);
 	LoadSaveSceneFile();
 }
+
 void SceneManager::ObjectsUpdate(float deltaTime)
 {
-	for (auto& [key, value] : allObjects)
-	{
-		value->UpdateComponent(deltaTime);
-	}
+	//for (auto& [key, value] : allObjects)
+	//{
+	//	value->UpdateComponent(deltaTime);
+	//}
 	for (auto& [key, value] : objects)
 	{
 		value->UpdateObject();

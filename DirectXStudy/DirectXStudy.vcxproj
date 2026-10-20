@@ -154,6 +154,7 @@
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="PostProcessingManager.cpp" />
     <ClCompile Include="PrimitiveTopology.cpp" />
+    <ClCompile Include="RuntimeManager.cpp" />
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneObject.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="InputLayout.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="PrimitiveTopology.h" />
+    <ClInclude Include="RuntimeManager.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneObject.h" />

@@ -1,10 +1,12 @@
 #include "Transform.h"
 #include "imgui_impl_win32.h"
 #include "Log.h"
+#include "Component.h"
 DirectX::XMFLOAT3 QuaternionToEulerDegrees(DirectX::FXMVECTOR quaternion);
 
 Transform::Transform()
 {
+	componentName = "transform";
 	UpdateDirectionVectors();
 }
 
@@ -104,7 +106,7 @@ void Transform::SetRotationOffset(DirectX::XMFLOAT3 rotation)
 void Transform::MakeLocalMatrix()
 {
 	DirectX::XMVECTOR quaternion = XMLoadFloat4(&rotationOffset);
-	DirectX::XMMATRIX offsetMatrix =
+	offsetMatrix =
 		DirectX::XMMatrixScaling(scaleOffset.x, scaleOffset.y, scaleOffset.z) *
 		DirectX::XMMatrixRotationQuaternion(quaternion) *//���ʹϾ��� xmmatrix�� ��ȯ
 		DirectX::XMMatrixTranslation(
@@ -115,8 +117,32 @@ void Transform::MakeLocalMatrix()
 	localMatrix = importLocalMatrix * offsetMatrix ;
 }
 
+void Transform::CopyTransform(Transform* origTransform)
+{
+	DirectX::XMVECTOR position;
+	DirectX::XMVECTOR rotation;
+	DirectX::XMVECTOR scale;
+
+	DirectX::XMMATRIX matrixTemp = origTransform->GetOffsetMatrix();
+	DirectX::XMMatrixDecompose(&scale,&rotation,&position, matrixTemp);
+
+	XMStoreFloat3(&positionOffset, position);
+	XMStoreFloat4(&rotationOffset, rotation);
+	XMStoreFloat3(&scaleOffset, scale);
+
+	SetImportLocalTransform(origTransform->GetImportLocalMatrix());
+}
+
+std::unique_ptr<Component> Transform::Clone() const
+{
+	std::unique_ptr<Transform> Temp = std::make_unique<Transform>(*this);
+	Temp->componentName = "CopyTransform";
+	return std::move(Temp);
+}
+
 void Transform::InspectorUpdate()
 {
+	Component::InspectorUpdate();
 	DirectX::XMFLOAT3 tempPos = GetObjectPosition();
 	DirectX::XMFLOAT3 tempRot = GetObjectRotation();
 	DirectX::XMFLOAT3 tempScale = GetObjectScale();

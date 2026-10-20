@@ -25,7 +25,8 @@ public:
 	void Serialize(nlohmann::json& j);
 	void Deserialize(const nlohmann::json& j);
 	void UpdateTransformForNewParent(DirectX::FXMMATRIX oldWorldMatrix, DirectX::FXMMATRIX newParentWorldMatrix);
-
+	DirectX::XMMATRIX GetImportLocalMatrix() { return importLocalMatrix; }
+	DirectX::XMMATRIX GetOffsetMatrix(){return offsetMatrix; }
 	DirectX::XMFLOAT3 GetForwardVector3()
 	{
 		DirectX::XMFLOAT3 temp;
@@ -42,7 +43,8 @@ public:
 	void SetUp(DirectX::FXMVECTOR value) { up = value; }
 	void SetRight(DirectX::FXMVECTOR value) { right = value; }
 	void SetForward(DirectX::FXMVECTOR value) { forward = value; }
-
+	void CopyTransform(Transform* origTransform);
+	std::unique_ptr<Component> Clone()const override;
 public:
 	void InspectorUpdate() override;
 private:
@@ -60,4 +62,5 @@ private:
 	DirectX::XMVECTOR up;
 	DirectX::XMVECTOR right;
 	DirectX::XMVECTOR forward;
+	DirectX::XMMATRIX offsetMatrix;
 };

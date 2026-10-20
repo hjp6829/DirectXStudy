@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <memory>
 class Object;
 
 class Component {
@@ -14,6 +15,7 @@ public:
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void InspectorUpdate();
+	virtual std::unique_ptr<Component> Clone() const = 0;
 protected:
 	Object* currentObject;
 	std::string componentName;

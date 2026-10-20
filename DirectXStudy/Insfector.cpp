@@ -12,8 +12,10 @@
 #include <filesystem>
 #include "TestScript.h"
 
-Insfector::Insfector()
+Insfector::Insfector(std::unordered_map<uint64_t, Object*>* modelContainer, std::unordered_map<uint64_t, Object*>* runtimeObjects)
 {
+	this->sceneObjects = modelContainer;
+	this->runtimeObjects = runtimeObjects;
 	RegisterEventHandlers();
 	scriptRegistry = new ScriptRegistry();
 }
@@ -45,6 +47,7 @@ void Insfector::RegisterEventHandlers()
 {
 	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
 	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteObject(data); });
+	EventBus::Subscribe(EventType::ActiveSceneChanged, [this](EventData* data) {ActiveModeChange(data); });
 }
 void Insfector::SetSelectObject(EventData* eventData)
 {
@@ -58,4 +61,15 @@ void Insfector::SetSelectObject(EventData* eventData)
 void Insfector::DeleteObject(EventData* eventData)
 {
 	currentObject = nullptr;
+}
+
+void Insfector::ActiveModeChange(EventData* eventData)
+{
+	ActiveSceneChangedEventData* eventDataCast = static_cast<ActiveSceneChangedEventData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		if(eventDataCast->activeSceneMode == ActiveSceneMode::RuntimeMode)
+			currentObject = (*runtimeObjects)[currentObject->objectID];
+	}
 }

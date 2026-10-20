@@ -4,13 +4,14 @@
 #include "ModelBrowserUI.h"
 #include "Insfector.h"
 #include "Object.h"
-#include "Log.h"
+#include "EventDefinitions.h"
+#include "imgui_impl_win32.h"
 
-UIManager::UIManager(std::unordered_map<uint64_t, Object*>* SceneObjects)
+UIManager::UIManager(std::unordered_map<uint64_t, Object*>* SceneObjects, std::unordered_map<uint64_t, Object*>* runtimeObjects)
 {
-	hierarchy = new Hierarchy(SceneObjects);
+	hierarchy = new Hierarchy(SceneObjects, runtimeObjects);
 	modelBrowserUI = new ModelBrowserUI();
-	insfector = new Insfector();
+	insfector = new Insfector(SceneObjects, runtimeObjects);
 
 	modelBrowserUI->OnCreateObjectSelected = [this](std::string path) {
 		OnCreateObjectSelected(path);
@@ -22,6 +23,7 @@ UIManager::UIManager(std::unordered_map<uint64_t, Object*>* SceneObjects)
 	hierarchy->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {
 		OnHierarchyDrop(parentObject, childObject);
 		};
+
 }
 
 void UIManager::UpdateUI()
@@ -29,4 +31,28 @@ void UIManager::UpdateUI()
 	hierarchy->UpdateUI();
 	modelBrowserUI->UpdateUI();
 	insfector->UpdateUI();
+	if (ImGui::Begin("PlayMode"))
+	{
+		if (ImGui::Button("ModeChange"))
+		{
+			if (activeSceneMode == ActiveSceneMode::SceneMode)
+			{
+
+				activeSceneMode = ActiveSceneMode::RuntimeMode;
+			}
+			else
+			{
+
+				activeSceneMode = ActiveSceneMode::SceneMode;
+			}
+			ActiveSceneChangedEventData activeSceneModeClass;
+			activeSceneModeClass.activeSceneMode = activeSceneMode;
+			EventBus::Publish(EventType::ActiveSceneChanged, &activeSceneModeClass);
+		}
+		if (activeSceneMode == ActiveSceneMode::SceneMode)
+			ImGui::Text("SceneMode");
+		else
+			ImGui::Text("PlayMode");
+	}
+	ImGui::End();
 }

@@ -46,3 +46,8 @@ void TestScript::InspectorUpdate()
 	ImGui::Text("Speed");
 	ImGui::InputFloat("moveSpeed",&moveSpeed);
 }
+
+std::unique_ptr<Component> TestScript::Clone()const
+{
+	return std::make_unique<TestScript>(*this);
+}

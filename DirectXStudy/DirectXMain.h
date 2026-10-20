@@ -38,7 +38,7 @@ public:
 	LightObject* GetLight() { return light; }
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
-	void SetSceneObjects(std::unordered_map<uint64_t, Object*>* objectVector){ objects = objectVector; }
+	void SetObjects(std::unordered_map<uint64_t, Object*>* sceneObjects, std::unordered_map<uint64_t, Object*>* runTimeObjects);
 private:
 	ComPtr<IDXGISwapChain> pSwap;
 	ComPtr<ID3D11Device> pDevice;
@@ -65,8 +65,9 @@ private:
 		float padding5;
 	};
 private:
-
-	std::unordered_map<uint64_t, Object*>* objects;
+	std::unordered_map<uint64_t, Object*>* currentObjects;
+	std::unordered_map<uint64_t, Object*>* sceneObjects;
+	std::unordered_map<uint64_t, Object*>* runTimeObjects;
 	CameraObject* cam;
 	LightObject* light;
 	GlobalBuffer globalBuffer = {};
@@ -76,4 +77,5 @@ private:
 	void RegisterEventHandlers();
 	void SetSelectObject(EventData* eventData);
 	void DeleteCurrentObject(EventData* eventData);
+	void SetActiveMode(EventData* eventData);
 };

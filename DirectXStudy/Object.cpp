@@ -98,10 +98,25 @@ void Object::Deserialize(const nlohmann::json& j)
 }
 void Object::SetDataToCopy(Object* copyObject)
 {
-	//copyObject->GetTransform()->SetPostionOffset(transform->GetPostionOffset());
-	//copyObject->GetTransform()->SetRotationOffset(transform->GetRotationOffset());
-	//copyObject->GetTransform()->SetScaleOffset(transform->GetScaleOffset());
+	//copyObject->GetTransform()->CopyTransform(transform);
 	copyObject->SetRootNodeCheck(IsRootObject());
+	copyObject->objectName = objectName;
+	copyObject->modelNamePath = modelNamePath;
+	copyObject->objectID = objectID;
+	copyObject->parentobjectID = parentobjectID;
+	copyObject->currentModelNode = currentModelNode;
+	for (const auto& component : components)
+	{
+		std::unique_ptr<Component> temp = component->Clone();
+
+		if (Transform* transformComponent = dynamic_cast<Transform*>(component.get()))
+		{
+			copyObject->GetTransform()->CopyTransform(transformComponent);
+			continue;
+		}
+
+		copyObject->SetComponent(std::move(temp));
+	}
 }
 
 

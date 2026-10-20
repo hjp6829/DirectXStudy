@@ -170,7 +170,7 @@ void DirectXMain::Render()
 			pContext->ClearRenderTargetView(pPickingRenderTarget.Get(), clearColor);
 			pContext->OMSetRenderTargets(1, pPickingRenderTarget.GetAddressOf(), depthStencilView.Get());
 
-			for (auto& [key, value] : *objects)
+			for (auto& [key, value] : *currentObjects)
 			{
 				value->PickingRenderObject(this);
 			}
@@ -226,7 +226,7 @@ void DirectXMain::Render()
 			pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
 		}
 	}
-	for (auto& [key, value] : *objects)
+	for (auto& [key, value] : *currentObjects)
 	{
 		value->RenderObject(this);
 	}
@@ -241,13 +241,27 @@ void DirectXMain::Shutdown()
 
 void DirectXMain::EndDraw()
 {
-	pSwap->Present(1, 0);
+	HRESULT hr = pSwap->Present(1, 0);
+	if (FAILED(hr))
+	{
+		HRESULT reason = pDevice->GetDeviceRemovedReason();
+
+		Log::PrintLog("Present failed");
+	}
+}
+
+void DirectXMain::SetObjects(std::unordered_map<uint64_t, Object*>* sceneObjects, std::unordered_map<uint64_t, Object*>* runTimeObjects)
+{
+	this->sceneObjects = sceneObjects;
+	this->runTimeObjects = runTimeObjects;
+	currentObjects = this->sceneObjects;
 }
 
 void DirectXMain::RegisterEventHandlers()
 {
 	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
 	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteCurrentObject(data); });
+	EventBus::Subscribe(EventType::ActiveSceneChanged, [this](EventData* data) {SetActiveMode(data); });
 }
 void DirectXMain::SetSelectObject(EventData* eventData)
 {
@@ -261,5 +275,18 @@ void DirectXMain::SetSelectObject(EventData* eventData)
 void DirectXMain::DeleteCurrentObject(EventData* eventData)
 {
 	currentSelectObject = nullptr;
+}
+
+void DirectXMain::SetActiveMode(EventData* eventData)
+{
+	ActiveSceneChangedEventData* eventDataCast = static_cast<ActiveSceneChangedEventData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		if(eventDataCast->activeSceneMode == ActiveSceneMode::SceneMode)
+			currentObjects = this->sceneObjects;
+		else
+			currentObjects = this->runTimeObjects;
+	}
 }
 
