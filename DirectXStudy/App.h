@@ -9,9 +9,8 @@
 class ModelCreater;
 class Mouse;
 class UIManager;
-class SceneManager;
 class EventData;
-class RuntimeManager;
+class WorldManager;
 
 class App {
 	public:
@@ -23,8 +22,7 @@ private:
 		Mouse* mouse;
 		Input* input;
 		UIManager* uimanager;
-		SceneManager* sceneManager;
-		RuntimeManager* runtimeManager;
+		WorldManager* worldManager;
 private:
 	std::queue<std::function<void()>> commandQueue;
 	void RegisterEventHandlers();

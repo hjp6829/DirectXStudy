@@ -6,12 +6,13 @@
 #include "Object.h"
 #include "EventDefinitions.h"
 #include "imgui_impl_win32.h"
+#include "WorldManager.h"
 
-UIManager::UIManager(std::unordered_map<uint64_t, Object*>* SceneObjects, std::unordered_map<uint64_t, Object*>* runtimeObjects)
+UIManager::UIManager(WorldManager* worldManager)
 {
-	hierarchy = new Hierarchy(SceneObjects, runtimeObjects);
+	hierarchy = new Hierarchy(worldManager);
 	modelBrowserUI = new ModelBrowserUI();
-	insfector = new Insfector(SceneObjects, runtimeObjects);
+	insfector = new Insfector(worldManager);
 
 	modelBrowserUI->OnCreateObjectSelected = [this](std::string path) {
 		OnCreateObjectSelected(path);

@@ -4,17 +4,17 @@
 #include "Log.h"
 #include "EventBus.h"
 #include "EventDefinitions.h"
+#include "WorldManager.h"
 
-Hierarchy::Hierarchy(std::unordered_map<uint64_t, Object*>* modelContainer, std::unordered_map<uint64_t, Object*>* runtimeObjects) 
+Hierarchy::Hierarchy(WorldManager* worldManager)
 {
-    sceneObjects = modelContainer;
-    this->runtimeObjects = runtimeObjects;
-    currentObjects = modelContainer;
+    this->worldManager = worldManager;
     RegisterEventHandlers();
 }
 
 void Hierarchy::UpdateUI()
 {
+    currentObjects = worldManager->GetRootObjects();
     if (ImGui::Begin("Hierarchy"))
     {
         if (currentObjects != nullptr)
@@ -175,7 +175,6 @@ void Hierarchy::RegisterEventHandlers()
 {
     EventBus::Subscribe(EventType::SelectObject, [this](EventData* data){SetSelectObject(data);});
     EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteCurrentObject(data); });
-    EventBus::Subscribe(EventType::ActiveSceneChanged, [this](EventData* data) {SetRuntimeObjects(data); });
 }
 
 void Hierarchy::SetSelectObject(EventData* eventData)
@@ -193,15 +192,3 @@ void Hierarchy::DeleteCurrentObject(EventData* eventData)
     currentSelectObject = nullptr;
 }
 
-void Hierarchy::SetRuntimeObjects(EventData* eventData)
-{
-    ActiveSceneChangedEventData* eventDataCast = static_cast<ActiveSceneChangedEventData*>(eventData);
-
-    if (eventDataCast != nullptr)
-    {
-        if(eventDataCast->activeSceneMode == ActiveSceneMode::SceneMode)
-            currentObjects = sceneObjects;
-        else
-            currentObjects = runtimeObjects;
-    }
-}

@@ -8,10 +8,11 @@ class Hierarchy;
 class ModelBrowserUI;
 class Insfector;
 class Object;
+class WorldManager;
 
 class UIManager {
 public:
-	UIManager(std::unordered_map<uint64_t, Object*>* SceneObjects, std::unordered_map<uint64_t, Object*>* runtimeObjects);
+	UIManager(WorldManager* worldManager);
 	void UpdateUI();
 	std::function<void(std::string)> OnCreateObjectSelected;
 	std::function<void(Object*)> OnHierarchyRenameClick;

@@ -23,6 +23,7 @@ class Object;
 class ModelAsset;
 class ModelNode;
 class PostProcessingManager;
+class WorldManager;
 
 class DirectXMain {
 	friend class Bindable;//친구 클래스는 private에 접근이 가능함
@@ -38,7 +39,7 @@ public:
 	LightObject* GetLight() { return light; }
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
-	void SetObjects(std::unordered_map<uint64_t, Object*>* sceneObjects, std::unordered_map<uint64_t, Object*>* runTimeObjects);
+	void SetObjects(WorldManager* worldManager);
 private:
 	ComPtr<IDXGISwapChain> pSwap;
 	ComPtr<ID3D11Device> pDevice;
@@ -74,8 +75,8 @@ private:
 	Object* currentSelectObject;
 	PostProcessingManager* postProcessingManager;
 	ComPtr<ID3D11Texture2D> pPickingTexture = NULL;
+	WorldManager* worldManager;
 	void RegisterEventHandlers();
 	void SetSelectObject(EventData* eventData);
 	void DeleteCurrentObject(EventData* eventData);
-	void SetActiveMode(EventData* eventData);
 };

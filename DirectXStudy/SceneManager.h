@@ -1,31 +1,29 @@
 #pragma once
 #include <vector>
-#include <d3d11.h>
 #include <string>
 #include "CameraObject.h"
 #include "LightObject.h"
-#include <unordered_map>
 #include <functional>
+#include "ObjectManager.h"
 
 class EventData;
-class Object;
+
 class ModelCreater;
 
-class SceneManager {
+class SceneManager : public ObjectManager {
 public:
 	SceneManager(ID3D11Device* device);
-	void ObjectsUpdate(float deltaTime);
-	void ObjectsLateUpdate(float deltaTime);
-	std::unordered_map<uint64_t, Object*>* GetSceneObjects() { return &objects; }
-	std::unordered_map<uint64_t, Object*>* GetSceneAllObjects() {return &allObjects; }
+	void ObjectsUpdate(float deltaTime) const override;
+	void ObjectsLateUpdate(float deltaTime)const override;
+	std::unordered_map<uint64_t, Object*>* GetObjects() override;
+	std::unordered_map<uint64_t, Object*>* GetAllObjects() override;
 	void CreateObjectSelect(std::string path);
 	void SetHierarchyDropObject(Object* parentObject, Object* childObject);
 	CameraObject* GetCamera() { return camera; }
 	LightObject* GetLight() { return light; }
-
+	Object* GetObjectByID(uint64_t id) override;
 private:
-	std::unordered_map<uint64_t, Object*> objects;
-	std::unordered_map<uint64_t, Object*> allObjects;
+
 	ModelCreater* modelCreater;
 	uint64_t objectID = 0;
 	bool isCtrl;

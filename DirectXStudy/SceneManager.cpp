@@ -19,7 +19,7 @@ SceneManager::SceneManager(ID3D11Device* device)
 	LoadSaveSceneFile();
 }
 
-void SceneManager::ObjectsUpdate(float deltaTime)
+void SceneManager::ObjectsUpdate(float deltaTime)const
 {
 	//for (auto& [key, value] : allObjects)
 	//{
@@ -48,7 +48,7 @@ void SceneManager::ObjectsUpdate(float deltaTime)
 	isCtrl = false;
 }
 
-void SceneManager::ObjectsLateUpdate(float deltaTime)
+void SceneManager::ObjectsLateUpdate(float deltaTime)const
 {
 	for (auto& [key, value] : allObjects)
 	{
@@ -236,6 +236,11 @@ void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObj
 	}
 }
 
+Object* SceneManager::GetObjectByID(uint64_t id)
+{
+	return allObjects[id];;
+}
+
 void SceneManager::DeleteChiledModels(Object* object)
 {
 	for (int i = 0; i < object->childObjects.size(); i++)
@@ -327,4 +332,13 @@ void SceneManager::LoadSaveSceneFile()
 	}
 	isNoSaveFile = false;
 	loadSceneObjects.clear();
+}
+
+std::unordered_map<uint64_t, Object*>* SceneManager::GetObjects()
+{
+	return &objects;
+}
+std::unordered_map<uint64_t, Object*>* SceneManager::GetAllObjects()
+{
+	return &allObjects;
 }

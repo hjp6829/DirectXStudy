@@ -11,17 +11,20 @@
 #include "ScriptComponent.h"
 #include <filesystem>
 #include "TestScript.h"
+#include "WorldManager.h"
 
-Insfector::Insfector(std::unordered_map<uint64_t, Object*>* modelContainer, std::unordered_map<uint64_t, Object*>* runtimeObjects)
+Insfector::Insfector(WorldManager* worldManager)
 {
-	this->sceneObjects = modelContainer;
-	this->runtimeObjects = runtimeObjects;
+	this->worldManager = worldManager;
 	RegisterEventHandlers();
 	scriptRegistry = new ScriptRegistry();
 }
 
 void Insfector::UpdateUI()
 {
+	if(currentObjectID == -1)
+		return;
+	Object* currentObject = worldManager->GetObjectByID(currentObjectID);
 	if(currentObject == nullptr)
 		return;
 	if (ImGui::Begin("Insfector")) {
@@ -45,31 +48,20 @@ void Insfector::UpdateUI()
 }
 void Insfector::RegisterEventHandlers()
 {
-	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
+	EventBus::Subscribe(EventType::SelectObjectID, [this](EventData* data) {SetSelectObjectID(data); });
 	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteObject(data); });
-	EventBus::Subscribe(EventType::ActiveSceneChanged, [this](EventData* data) {ActiveModeChange(data); });
 }
-void Insfector::SetSelectObject(EventData* eventData)
+void Insfector::SetSelectObjectID(EventData* eventData)
 {
-	SelectObjectData* eventDataCast = static_cast<SelectObjectData*>(eventData);
+	SelectObjectIDData* eventDataCast = static_cast<SelectObjectIDData*>(eventData);
 
 	if (eventDataCast != nullptr)
 	{
-		currentObject = eventDataCast->selectObject;
+		currentObjectID = eventDataCast->objectID;
 	}
 }
 void Insfector::DeleteObject(EventData* eventData)
 {
-	currentObject = nullptr;
+	currentObjectID = -1;
 }
 
-void Insfector::ActiveModeChange(EventData* eventData)
-{
-	ActiveSceneChangedEventData* eventDataCast = static_cast<ActiveSceneChangedEventData*>(eventData);
-
-	if (eventDataCast != nullptr)
-	{
-		if(eventDataCast->activeSceneMode == ActiveSceneMode::RuntimeMode)
-			currentObject = (*runtimeObjects)[currentObject->objectID];
-	}
-}

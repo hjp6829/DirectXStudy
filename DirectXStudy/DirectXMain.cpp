@@ -10,6 +10,7 @@
 #include "EventBus.h"
 #include "EventDefinitions.h"
 #include "Input.h"
+#include "WorldManager.h"
 
 DirectXMain::DirectXMain(HWND hWnd)
 {
@@ -144,6 +145,7 @@ void DirectXMain::Start()
 void DirectXMain::Render()
 {
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // RGBA
+	currentObjects = worldManager->GetRootObjects();
 	pContext->ClearRenderTargetView(pRenderTarget.Get(), clearColor);
 	pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
@@ -250,18 +252,15 @@ void DirectXMain::EndDraw()
 	}
 }
 
-void DirectXMain::SetObjects(std::unordered_map<uint64_t, Object*>* sceneObjects, std::unordered_map<uint64_t, Object*>* runTimeObjects)
+void DirectXMain::SetObjects(WorldManager* worldManager)
 {
-	this->sceneObjects = sceneObjects;
-	this->runTimeObjects = runTimeObjects;
-	currentObjects = this->sceneObjects;
+	this->worldManager = worldManager;
 }
 
 void DirectXMain::RegisterEventHandlers()
 {
 	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
 	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteCurrentObject(data); });
-	EventBus::Subscribe(EventType::ActiveSceneChanged, [this](EventData* data) {SetActiveMode(data); });
 }
 void DirectXMain::SetSelectObject(EventData* eventData)
 {
@@ -277,16 +276,4 @@ void DirectXMain::DeleteCurrentObject(EventData* eventData)
 	currentSelectObject = nullptr;
 }
 
-void DirectXMain::SetActiveMode(EventData* eventData)
-{
-	ActiveSceneChangedEventData* eventDataCast = static_cast<ActiveSceneChangedEventData*>(eventData);
-
-	if (eventDataCast != nullptr)
-	{
-		if(eventDataCast->activeSceneMode == ActiveSceneMode::SceneMode)
-			currentObjects = this->sceneObjects;
-		else
-			currentObjects = this->runTimeObjects;
-	}
-}
 

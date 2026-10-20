@@ -2,23 +2,20 @@
 #include <vector>
 #include <unordered_map>
 
-class Object;
 class EventData;
 class ScriptRegistry;
+class WorldManager;
 
 class Insfector {
 public:
-	Insfector(std::unordered_map<uint64_t, Object*>* modelContainer, std::unordered_map<uint64_t, Object*>* runtimeObjects);
+	Insfector(WorldManager* worldManager);
 	void UpdateUI();
 private:
-	std::unordered_map<uint64_t, Object*>* currentObjects;
-	std::unordered_map<uint64_t, Object*>* sceneObjects;
-	std::unordered_map<uint64_t, Object*>* runtimeObjects;
-	Object* currentObject;
+	WorldManager* worldManager;
+	uint64_t currentObjectID = -1;
 	std::vector<int> meshMaterials;
 	void RegisterEventHandlers();
-	void SetSelectObject(EventData* eventData);
+	void SetSelectObjectID(EventData* eventData);
 	void DeleteObject(EventData* eventData);
-	void ActiveModeChange(EventData* eventData);
 	ScriptRegistry* scriptRegistry;
 };

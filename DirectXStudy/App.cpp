@@ -14,6 +14,7 @@
 #include "EventBus.h"
 #include "RuntimeManager.h"
 #include "Log.h"
+#include "WorldManager.h"
 
 App::App()
 {
@@ -27,8 +28,8 @@ App::App()
 
 	window = new Window(input);
 	dxdMain = new DirectXMain(window->GetHwnd());
-	sceneManager = new SceneManager(dxdMain->GetDevice());
-	runtimeManager = new RuntimeManager(dxdMain->GetDevice());
+
+	worldManager = new WorldManager(dxdMain->GetDevice());
 	dxdMain->SetObjects(sceneManager->GetSceneObjects(), runtimeManager->GetSceneObjects());
 	uimanager = new UIManager(sceneManager->GetSceneObjects(), runtimeManager->GetSceneObjects());
 
@@ -62,16 +63,8 @@ void App::Run()
 		std::chrono::duration<float> elapsed = currentTime - previousTime;
 		float deltaTime = elapsed.count();
 
-		if (activeSceneMode == ActiveSceneMode::SceneMode)
-		{
-			sceneManager->ObjectsUpdate(deltaTime);
-			sceneManager->ObjectsLateUpdate(deltaTime);
-		}
-		else
-		{
-			runtimeManager->ObjectsUpdate(deltaTime);
-			runtimeManager->ObjectsLateUpdate(deltaTime);
-		}
+		worldManager->ObjectsUpdate(deltaTime);
+		worldManager->ObjectsLateUpdate(deltaTime);
 		dxdMain->Render();
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
@@ -135,10 +128,10 @@ void App::ActiveSceneModeChange(EventData* eventData)
 {
 	ActiveSceneChangedEventData* eventDataCast = static_cast<ActiveSceneChangedEventData*>(eventData);
 
-	if (eventDataCast != nullptr)
-	{
-		activeSceneMode = eventDataCast->activeSceneMode;
-		if(activeSceneMode == ActiveSceneMode::RuntimeMode)
-			runtimeManager->StartRuntime(sceneManager->GetSceneAllObjects());
-	}
+	//if (eventDataCast != nullptr)
+	//{
+	//	activeSceneMode = eventDataCast->activeSceneMode;
+	//	if(activeSceneMode == ActiveSceneMode::RuntimeMode)
+	//		runtimeManager->StartRuntime(sceneManager->GetSceneAllObjects());
+	//}
 }

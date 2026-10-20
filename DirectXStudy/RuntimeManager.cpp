@@ -8,7 +8,7 @@ RuntimeManager::RuntimeManager(ID3D11Device* device)
 {
 
 }
-void RuntimeManager::ObjectsUpdate(float deltaTime)
+void RuntimeManager::ObjectsUpdate(float deltaTime)const
 {
 	for (auto& [key, value] : allObjects)
 	{
@@ -19,7 +19,7 @@ void RuntimeManager::ObjectsUpdate(float deltaTime)
 		value->UpdateObject();
 	}
 }
-void RuntimeManager::ObjectsLateUpdate(float deltaTime)
+void RuntimeManager::ObjectsLateUpdate(float deltaTime)const
 {
 	for (auto& [key, value] : allObjects)
 	{
@@ -29,6 +29,18 @@ void RuntimeManager::ObjectsLateUpdate(float deltaTime)
 	{
 		value->UpdateObject();
 	}
+}
+std::unordered_map<uint64_t, Object*>* RuntimeManager::GetObjects()
+{
+	return &objects;
+}
+std::unordered_map<uint64_t, Object*>* RuntimeManager::GetAllObjects()
+{
+	return &allObjects;
+}
+Object* RuntimeManager::GetObjectByID(uint64_t id)
+{
+	return allObjects[id];
 }
 void RuntimeManager::SetHierarchyDropObject(Object* parentObject, Object* childObject)
 {

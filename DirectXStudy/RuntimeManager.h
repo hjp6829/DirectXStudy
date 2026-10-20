@@ -1,15 +1,14 @@
 #pragma once
-#include <d3d11.h>
-#include <unordered_map>
+#include "ObjectManager.h"
 
-class Object;
-
-class RuntimeManager {
+class RuntimeManager : public ObjectManager {
 public:
 	RuntimeManager(ID3D11Device* device);
-	void ObjectsUpdate(float deltaTime);
-	void ObjectsLateUpdate(float deltaTime);
-	std::unordered_map<uint64_t, Object*>* GetSceneObjects() { return &objects; }
+	void ObjectsUpdate(float deltaTime) const override;
+	void ObjectsLateUpdate(float deltaTime) const override;
+	std::unordered_map<uint64_t, Object*>* GetObjects() override;
+	std::unordered_map<uint64_t, Object*>* GetAllObjects() override;
+	Object* GetObjectByID(uint64_t id) override;
 	void SetHierarchyDropObject(Object* parentObject, Object* childObject);
 	void StartRuntime(std::unordered_map<uint64_t, Object*>* sceneObjects);
 private:
