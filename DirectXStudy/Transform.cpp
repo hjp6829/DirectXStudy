@@ -142,7 +142,6 @@ std::unique_ptr<Component> Transform::Clone() const
 
 void Transform::InspectorUpdate()
 {
-	Component::InspectorUpdate();
 	DirectX::XMFLOAT3 tempPos = GetObjectPosition();
 	DirectX::XMFLOAT3 tempRot = GetObjectRotation();
 	DirectX::XMFLOAT3 tempScale = GetObjectScale();

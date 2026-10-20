@@ -146,6 +146,8 @@ void DirectXMain::Render()
 {
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // RGBA
 	currentObjects = worldManager->GetRootObjects();
+	cam = worldManager->GetCamera(0);
+	light = worldManager->GetLight();
 	pContext->ClearRenderTargetView(pRenderTarget.Get(), clearColor);
 	pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 

@@ -23,7 +23,13 @@ Insfector::Insfector(WorldManager* worldManager)
 void Insfector::UpdateUI()
 {
 	if(currentObjectID == -1)
+	{
+		if (ImGui::Begin("Insfector")) {
+			
+		}
+		ImGui::End();
 		return;
+	}
 	Object* currentObject = worldManager->GetObjectByID(currentObjectID);
 	if(currentObject == nullptr)
 		return;

@@ -151,6 +151,7 @@
     <ClCompile Include="ModelCreater.cpp" />
     <ClCompile Include="ModelNode.cpp" />
     <ClCompile Include="Object.cpp" />
+    <ClCompile Include="ObjectManager.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="PostProcessingManager.cpp" />
     <ClCompile Include="PrimitiveTopology.cpp" />

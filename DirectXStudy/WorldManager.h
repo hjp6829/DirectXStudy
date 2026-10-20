@@ -1,32 +1,32 @@
 #pragma once
 #include <d3d11.h>
 #include <unordered_map>
+#include "ObjectManager.h"
 
 class SceneManager;
 class RuntimeManager;
 class Object;
 class EventData;
-class ObjectManager;
 
 class WorldManager {
 public:
 	WorldManager(ID3D11Device* device);
 	void ObjectsUpdate(float deltaTime);
 	void ObjectsLateUpdate(float deltaTime);
-	std::unordered_map<uint64_t, Object*>* GetRootObjects(){return currentRootObjects;}
-	std::unordered_map<uint64_t, Object*>* GetAllObjects() { return currentAllObjects; }
+	std::unordered_map<uint64_t, Object*>* GetRootObjects(){return currentManager->GetObjects();}
+	std::unordered_map<uint64_t, Object*>* GetAllObjects() { return currentManager->GetAllObjects(); }
 	Object* GetObjectByID(uint64_t id){return currentManager->GetObjectByID(id); }
+	CameraObject* GetCamera(int idx){return currentManager->GetCamera(idx); }
+	LightObject* GetLight(){return currentManager->GetLight(); }
+	void SetCreateObject(std::string path);
 private:
 	SceneManager* sceneManager;
 	RuntimeManager* runtimeManager;
 	ObjectManager* currentManager;
-
-	std::unordered_map<uint64_t, Object*>* currentRootObjects;
-	std::unordered_map<uint64_t, Object*>* currentAllObjects;
-	std::unordered_map<uint64_t, Object*> objects;
-	std::unordered_map<uint64_t, Object*> allObjects;
 private:
-
 	void RegisterEventHandlers();
 	void SetActiveMode(EventData* eventData);
+	void SetSelectObjectID(EventData* eventData);
+	void DeleteObject(EventData* eventData);
+	void DeleteChiledModels(Object* object);
 };

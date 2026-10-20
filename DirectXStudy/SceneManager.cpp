@@ -12,14 +12,12 @@
 #include "imgui_impl_dx11.h"
 #include "Input.h"
 
-SceneManager::SceneManager(ID3D11Device* device)
+SceneManager::SceneManager(ID3D11Device* device) : ObjectManager(device)
 {
-	RegisterEventHandlers();
-	modelCreater = new ModelCreater(device);
 	LoadSaveSceneFile();
 }
 
-void SceneManager::ObjectsUpdate(float deltaTime)const
+void SceneManager::ObjectsUpdate(float deltaTime)
 {
 	//for (auto& [key, value] : allObjects)
 	//{
@@ -48,42 +46,18 @@ void SceneManager::ObjectsUpdate(float deltaTime)const
 	isCtrl = false;
 }
 
-void SceneManager::ObjectsLateUpdate(float deltaTime)const
+void SceneManager::ObjectsLateUpdate(float deltaTime)
 {
-	for (auto& [key, value] : allObjects)
-	{
-		value->LateUpateComponent(deltaTime);
-	}
+	//for (auto& [key, value] : allObjects)
+	//{
+	//	value->LateUpateComponent(deltaTime);
+	//}
 	for (auto& [key, value] : objects)
 	{
 		value->UpdateObject();
 	}
 }
 
-void SceneManager::CreateObjectSelect(std::string path)
-{
-	Object* object = modelCreater->LoadModelFromFile(path);
-	object->SetRootNodeCheck(true);
-	RegisterModelHierarchy(object);
-	objects[object->objectID] = object;
-}
-void SceneManager::RegisterModelHierarchy(Object* object)
-{
-	if (object->childObjects.size() == 0)
-	{
-		allObjects[object->objectID] = object;
-		object->objectID = ++objectID;
-		return;
-	}
-	allObjects[object->objectID] = object;
-	object->objectID = ++objectID;
-	for (int i = 0; i < object->childObjects.size(); i++)
-	{
-		Object* childObject = object->childObjects[i];
-		childObject->parentobjectID = object->objectID;
-		RegisterModelHierarchy(object->childObjects[i]);
-	}
-}
 Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type, std::filesystem::path path)
 {
 	Object* object = nullptr;
@@ -101,9 +75,10 @@ Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type,
 			}
 		case 1:
 			{
-			camera = new CameraObject();
+			CameraObject* camera = new CameraObject();
 			camera->Deserialize(jsonfile);
 			object = camera;
+			cameras.push_back(camera);
 			break;
 			}
 		case 2:
@@ -123,6 +98,7 @@ void SceneManager::CreateInitJsonFile()
 	isNoSaveFile = true;
 	CameraObject* camera = new CameraObject();
 	camera->objectID = ++objectID;
+	camera->SetIsSceneCamera(true);
 	LightObject* light = new LightObject();
 	light->objectID = ++objectID;
 	objects[camera->objectID] = camera;
@@ -161,51 +137,6 @@ Object* SceneManager::DuplicateSceneObject(Object* object)
 	}
 	return copyObject;	
 }
-void SceneManager::SetSelectObjectID(EventData* eventData)
-{
-	SelectObjectIDData* eventDataCast = static_cast<SelectObjectIDData*>(eventData);
-
-	if (eventDataCast != nullptr)
-	{
-		currentSelectObject = allObjects[eventDataCast->objectID];
-		SelectObjectData selectObjectData;
-		selectObjectData.selectObject = currentSelectObject;
-		EventBus::Publish(EventType::SelectObject, &selectObjectData);
-	}
-}
-void SceneManager::SetSelectObject(EventData* eventData)
-{
-	SelectObjectData* eventDataCast = static_cast<SelectObjectData*>(eventData);
-
-	if (eventDataCast != nullptr)
-	{
-		currentSelectObject = eventDataCast->selectObject;
-	}
-}
-void SceneManager::DeleteObject(EventData* eventData)
-{
-	SelectObjectIDData* eventDataCast = static_cast<SelectObjectIDData*>(eventData);
-
-	if (eventDataCast != nullptr)
-	{
-		Object* tempObject = allObjects[eventDataCast->objectID];
-		if (tempObject->IsRootObject())
-		{
-			objects.erase(tempObject->objectID);
-		}
-		allObjects.erase(tempObject->objectID);
-		tempObject->RemoveModelData();
-		DeleteChiledModels(tempObject);
-		tempObject->childObjects.clear();
-		delete tempObject;
-	}
-}
-void SceneManager::RegisterEventHandlers()
-{
-	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetSelectObject(data); });
-	EventBus::Subscribe(EventType::SelectObjectID, [this](EventData* data) {SetSelectObjectID(data); });
-	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteObject(data); });
-}
 void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObject)
 {
 	childObject->RemoveFromParent();
@@ -234,11 +165,6 @@ void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObj
 		objects.erase(childObject->objectID);
 		childObject->SetRootNodeCheck(false);
 	}
-}
-
-Object* SceneManager::GetObjectByID(uint64_t id)
-{
-	return allObjects[id];;
 }
 
 void SceneManager::DeleteChiledModels(Object* object)

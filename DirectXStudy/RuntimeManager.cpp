@@ -3,12 +3,13 @@
 #include "EventBus.h"
 #include "EventDefinitions.h"
 #include "Log.h"
+#include "ModelCreater.h"
 
-RuntimeManager::RuntimeManager(ID3D11Device* device)
+RuntimeManager::RuntimeManager(ID3D11Device* device) : ObjectManager(device)
 {
 
 }
-void RuntimeManager::ObjectsUpdate(float deltaTime)const
+void RuntimeManager::ObjectsUpdate(float deltaTime)
 {
 	for (auto& [key, value] : allObjects)
 	{
@@ -19,7 +20,7 @@ void RuntimeManager::ObjectsUpdate(float deltaTime)const
 		value->UpdateObject();
 	}
 }
-void RuntimeManager::ObjectsLateUpdate(float deltaTime)const
+void RuntimeManager::ObjectsLateUpdate(float deltaTime)
 {
 	for (auto& [key, value] : allObjects)
 	{
@@ -37,10 +38,6 @@ std::unordered_map<uint64_t, Object*>* RuntimeManager::GetObjects()
 std::unordered_map<uint64_t, Object*>* RuntimeManager::GetAllObjects()
 {
 	return &allObjects;
-}
-Object* RuntimeManager::GetObjectByID(uint64_t id)
-{
-	return allObjects[id];
 }
 void RuntimeManager::SetHierarchyDropObject(Object* parentObject, Object* childObject)
 {
@@ -71,12 +68,13 @@ void RuntimeManager::SetHierarchyDropObject(Object* parentObject, Object* childO
 		childObject->SetRootNodeCheck(false);
 	}
 }
-
 void RuntimeManager::StartRuntime(std::unordered_map<uint64_t, Object*>* sceneObjects)
 {
 	for (auto& [key, value] : *sceneObjects)
 	{
 		Object* objctTemp = new Object();
+		if (auto* camera = dynamic_cast<CameraObject*>(value); camera && camera->CheckSceneCamera())
+			continue;
 		value->SetDataToCopy(objctTemp);
 		allObjects[objctTemp->objectID] = objctTemp;
 	}

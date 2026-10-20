@@ -4,11 +4,10 @@
 class RuntimeManager : public ObjectManager {
 public:
 	RuntimeManager(ID3D11Device* device);
-	void ObjectsUpdate(float deltaTime) const override;
-	void ObjectsLateUpdate(float deltaTime) const override;
+	void ObjectsUpdate(float deltaTime) override;
+	void ObjectsLateUpdate(float deltaTime) override;
 	std::unordered_map<uint64_t, Object*>* GetObjects() override;
 	std::unordered_map<uint64_t, Object*>* GetAllObjects() override;
-	Object* GetObjectByID(uint64_t id) override;
 	void SetHierarchyDropObject(Object* parentObject, Object* childObject);
 	void StartRuntime(std::unordered_map<uint64_t, Object*>* sceneObjects);
 private:

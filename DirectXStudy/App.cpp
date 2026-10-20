@@ -30,18 +30,15 @@ App::App()
 	dxdMain = new DirectXMain(window->GetHwnd());
 
 	worldManager = new WorldManager(dxdMain->GetDevice());
-	dxdMain->SetObjects(sceneManager->GetSceneObjects(), runtimeManager->GetSceneObjects());
-	uimanager = new UIManager(sceneManager->GetSceneObjects(), runtimeManager->GetSceneObjects());
-
-	dxdMain->SetCamera(sceneManager->GetCamera());
-	dxdMain->SetLight(sceneManager->GetLight());
+	dxdMain->SetObjects(worldManager);
+	uimanager = new UIManager(worldManager);
 
 	uimanager->OnCreateObjectSelected = [this](std::string path) {//이벤트 버스
-		sceneManager->CreateObjectSelect(path);
+		worldManager->SetCreateObject(path);
 		};
-	uimanager->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {//이벤트 버스
-		sceneManager->SetHierarchyDropObject(parentObject, childObject);
-		};
+	//uimanager->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {//이벤트 버스
+	//	sceneManager->SetHierarchyDropObject(parentObject, childObject);
+	//	};
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
 	//	RenameModel(model);
 	//	};

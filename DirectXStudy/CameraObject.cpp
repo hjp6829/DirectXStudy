@@ -11,7 +11,7 @@ CameraObject::CameraObject()
 
 DirectX::XMMATRIX CameraObject::GetProjectionMatrix()
 {
-	return DirectX::XMMatrixPerspectiveLH(1.0f, 4.0f / 3.0f, nearPlane, farPlane);
+	return DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, nearPlane, farPlane);
 }
 DirectX::XMMATRIX CameraObject::GetViewMatrix()
 {
@@ -80,11 +80,13 @@ void CameraObject::Serialize(nlohmann::json& j)
 
 	j["ObjectType"] = ObjectSaveType::CameraObject;
 	j["isRootObject"] = 1;
+	j["IsSceneCamera"] = isSceneCamera == true ? 1 : 0;
 }
 
 void CameraObject::Deserialize(const nlohmann::json& j)
 {
 	Object::Deserialize(j);
+	isSceneCamera = j.at("IsSceneCamera").get<float>() == 1 ? true : false;
 }
 
 void CameraObject::UpdateObject()

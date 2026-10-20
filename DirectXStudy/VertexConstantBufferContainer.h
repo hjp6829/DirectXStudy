@@ -31,7 +31,7 @@ inline void VertexConstantBufferContainer<T>::Bind(ID3D11DeviceContext* context)
 {
 	ConstantBufferData* cb = parentMesh->GetVertexConstantBuffer();
 	DirectX::XMMATRIX worldMatrix = DirectX::XMLoadFloat4x4(&cb->worldMatrix);
-	DirectX::XMStoreFloat4x4(&cb->finalMatrix, XMMatrixTranspose(worldMatrix * ViewMatrix * XMMatrixPerspectiveLH(1.0, 3.0 / 4.0, 0.5, 1000)));
+	DirectX::XMStoreFloat4x4(&cb->finalMatrix, XMMatrixTranspose(worldMatrix * ViewMatrix * ProjectionMatrix));
 	DirectX::XMStoreFloat4x4(&cb->worldMatrix, XMMatrixTranspose(worldMatrix));
 	vertexConstantBuffer->Update(context, *parentMesh->GetVertexConstantBuffer());
 

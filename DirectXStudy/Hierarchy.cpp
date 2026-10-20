@@ -95,9 +95,9 @@ void Hierarchy::ModelTraversal(Object* object)
     // 오브젝트 선택
     if (ImGui::IsItemClicked())
     {
-        SelectObjectData selectObjectData;
-        selectObjectData.selectObject = object;
-        EventBus::Publish(EventType::SelectObject, &selectObjectData);
+        SelectObjectIDData selectObjectIDData;
+        selectObjectIDData.objectID = object->objectID;
+        EventBus::Publish(EventType::SelectObjectID, &selectObjectIDData);
     }
 
     // 드래그 시작
@@ -140,9 +140,9 @@ void Hierarchy::ModelTraversal(Object* object)
     // 트리 항목에 연결되는 우클릭 메뉴
     if (ImGui::BeginPopupContextItem())
     {
-        SelectObjectData selectObjectData;
-        selectObjectData.selectObject = object;
-        EventBus::Publish(EventType::SelectObject, &selectObjectData);
+        SelectObjectIDData selectObjectIDData;
+        selectObjectIDData.objectID = object->objectID;
+        EventBus::Publish(EventType::SelectObjectID, &selectObjectIDData);
 
         if (ImGui::MenuItem("Delete"))
         {
@@ -173,17 +173,17 @@ void Hierarchy::ModelTraversal(Object* object)
 
 void Hierarchy::RegisterEventHandlers()
 {
-    EventBus::Subscribe(EventType::SelectObject, [this](EventData* data){SetSelectObject(data);});
+    EventBus::Subscribe(EventType::SelectObjectID, [this](EventData* data){SetSelectObjectID(data);});
     EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteCurrentObject(data); });
 }
 
-void Hierarchy::SetSelectObject(EventData* eventData)
+void Hierarchy::SetSelectObjectID(EventData* eventData)
 {
-    SelectObjectData* eventDataCast = static_cast<SelectObjectData*>(eventData);
+    SelectObjectIDData* eventDataCast = static_cast<SelectObjectIDData*>(eventData);
 
     if (eventDataCast != nullptr)
     {
-        currentSelectObject = eventDataCast->selectObject;
+        currentSelectObject = worldManager->GetObjectByID(eventDataCast->objectID);
     }
 }
 

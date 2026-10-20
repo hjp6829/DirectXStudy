@@ -10,6 +10,7 @@ WorldManager::WorldManager(ID3D11Device* device)
 	sceneManager = new SceneManager(device);
 	runtimeManager = new RuntimeManager(device);
 	currentManager = sceneManager;
+	sceneManager->GetCamera(0);
 }
 
 void WorldManager::ObjectsUpdate(float deltaTime)
@@ -20,9 +21,15 @@ void WorldManager::ObjectsLateUpdate(float deltaTime)
 {
 	currentManager->ObjectsLateUpdate(deltaTime);
 }
+void WorldManager::SetCreateObject(std::string path)
+{
+	currentManager->SetCreateObject(path);
+}
 void WorldManager::RegisterEventHandlers()
 {
-	EventBus::Subscribe(EventType::SelectObject, [this](EventData* data) {SetActiveMode(data); });
+	EventBus::Subscribe(EventType::ActiveSceneChanged, [this](EventData* data) {SetActiveMode(data); });
+	EventBus::Subscribe(EventType::SelectObjectID, [this](EventData* data) {SetSelectObjectID(data); });
+	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteObject(data); });
 }
 void WorldManager::SetActiveMode(EventData* eventData)
 {
@@ -34,7 +41,45 @@ void WorldManager::SetActiveMode(EventData* eventData)
 			currentManager = sceneManager;
 		else
 			currentManager = runtimeManager;
-		currentRootObjects = currentManager->GetObjects();
-		currentAllObjects = currentManager->GetAllObjects();
 	}
+}
+void WorldManager::SetSelectObjectID(EventData* eventData)
+{
+	SelectObjectIDData* eventDataCast = static_cast<SelectObjectIDData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		SelectObjectData selectObjectData;
+		selectObjectData.selectObject = currentManager->GetObjectByID(eventDataCast->objectID);
+		EventBus::Publish(EventType::SelectObject, &selectObjectData);
+	}
+}
+void WorldManager::DeleteObject(EventData* eventData)
+{
+	SelectObjectIDData* eventDataCast = static_cast<SelectObjectIDData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		Object* tempObject = currentManager->GetObjectByID(eventDataCast->objectID);
+
+		if (tempObject->IsRootObject())
+		{
+			(*currentManager->GetObjects()).erase(tempObject->objectID);
+		}
+		(*currentManager->GetAllObjects()).erase(tempObject->objectID);
+		tempObject->RemoveModelData();
+		DeleteChiledModels(tempObject);
+		tempObject->childObjects.clear();
+		delete tempObject;
+	}
+}
+void WorldManager::DeleteChiledModels(Object* object)
+{
+	for (int i = 0; i < object->childObjects.size(); i++)
+	{
+		(*currentManager->GetAllObjects()).erase(object->childObjects[i]->objectID);
+		DeleteChiledModels(object->childObjects[i]);
+		delete object->childObjects[i];
+	}
+	object->childObjects.clear();
 }

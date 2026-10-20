@@ -11,6 +11,8 @@ public:
 	void Deserialize(const nlohmann::json& j) override;
 	void UpdateObject() override;
 	void MouseWheelPosUpdate();
+	bool CheckSceneCamera(){return isSceneCamera;}
+	void SetIsSceneCamera(bool value){ isSceneCamera = value;}
 private:
 	float FOV;
 	float nearPlane = 0.5f;
@@ -19,4 +21,5 @@ private:
 	float mouseSpeed = 0.03;
 	float mouseWheelSpeed = 0.2;
 	float InputSpeed = 0.1;
+	bool isSceneCamera = false;
 };

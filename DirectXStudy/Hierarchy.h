@@ -20,6 +20,6 @@ private:
 	void ModelTraversal(Object* modelData);
 	Object* currentSelectObject;
 	void RegisterEventHandlers();
-	void SetSelectObject(EventData* eventData);
+	void SetSelectObjectID(EventData* eventData);
 	void DeleteCurrentObject(EventData* eventData);
 };
