@@ -78,7 +78,7 @@ Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type,
 			CameraObject* camera = new CameraObject();
 			camera->Deserialize(jsonfile);
 			object = camera;
-			cameras.push_back(camera);
+			sceneCamera = camera;
 			break;
 			}
 		case 2:

@@ -1,12 +1,15 @@
 #pragma once
 #include <d3d11.h>
 #include <unordered_map>
+#include "ObjectType.h"
 #include "ObjectManager.h"
 
 class SceneManager;
 class RuntimeManager;
 class Object;
 class EventData;
+class ICamera;
+class ScriptRegistry;
 
 class WorldManager {
 public:
@@ -16,13 +19,15 @@ public:
 	std::unordered_map<uint64_t, Object*>* GetRootObjects(){return currentManager->GetObjects();}
 	std::unordered_map<uint64_t, Object*>* GetAllObjects() { return currentManager->GetAllObjects(); }
 	Object* GetObjectByID(uint64_t id){return currentManager->GetObjectByID(id); }
-	CameraObject* GetCamera(int idx){return currentManager->GetCamera(idx); }
+	ICamera* GetCamera(int idx){return currentManager->GetCamera(idx); }
 	LightObject* GetLight(){return currentManager->GetLight(); }
 	void SetCreateObject(std::string path);
+	void CreateObject(ObjectType type);
 private:
 	SceneManager* sceneManager;
 	RuntimeManager* runtimeManager;
 	ObjectManager* currentManager;
+	ScriptRegistry* scriptRegistry;
 private:
 	void RegisterEventHandlers();
 	void SetActiveMode(EventData* eventData);

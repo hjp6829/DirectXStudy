@@ -155,6 +155,10 @@ void Hierarchy::ModelTraversal(Object* object)
         {
             OnHierarchyRenameClick(object);
         }
+        if (ImGui::MenuItem("Camera"))
+        {
+            OnHierarchyCreateObjectClick(ObjectType::Camera);
+        }
 
         ImGui::EndPopup();
     }

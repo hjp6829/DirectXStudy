@@ -4,9 +4,11 @@
 #include "CameraObject.h"
 #include "LightObject.h"
 #include "Log.h"
+#include "ObjectType.h"
 
 class Object;
 class ModelCreater;
+class ICamera;
 
 class ObjectManager
 {
@@ -20,14 +22,18 @@ public:
 		auto it = allObjects.find(id);
 		return it != allObjects.end() ? it->second : nullptr;
 	}
-	CameraObject* GetCamera(int idx){return cameras[idx];}
+	void SetCameraVector(ICamera* camera){ cameras.push_back(camera); }
+	ICamera* GetCamera(int idx){return cameras[idx];}
+	ICamera* GetSceneCamera(){return sceneCamera; }
 	LightObject* GetLight() {return light; }
 	void SetCreateObject(std::string path);
 	void RegisterModelHierarchy(Object* object);
+	Object* CreateObject(ObjectType type);
 protected:
 	std::unordered_map<uint64_t, Object*> objects;
 	std::unordered_map<uint64_t, Object*> allObjects;
-	std::vector<CameraObject*> cameras;
+	std::vector<ICamera*> cameras;
+	ICamera* sceneCamera;
 	LightObject* light;
 	ModelCreater* modelCreater;
 	uint64_t objectID = 0;

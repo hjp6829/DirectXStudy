@@ -17,7 +17,6 @@ Insfector::Insfector(WorldManager* worldManager)
 {
 	this->worldManager = worldManager;
 	RegisterEventHandlers();
-	scriptRegistry = new ScriptRegistry();
 }
 
 void Insfector::UpdateUI()
@@ -44,8 +43,12 @@ void Insfector::UpdateUI()
 	{
 		if (ImGui::Selectable("TestScript"))
 		{
-			std::unique_ptr<ScriptComponent> testScript = scriptRegistry->CreateScript("TestScript");
-			currentObject->SetComponent(std::move(testScript));
+			//std::unique_ptr<ScriptComponent> testScript = scriptRegistry->CreateScript("TestScript");
+			//currentObject->SetComponent(std::move(testScript));
+		}
+		if (ImGui::Selectable("Camera"))
+		{
+
 		}
 
 		ImGui::EndPopup();

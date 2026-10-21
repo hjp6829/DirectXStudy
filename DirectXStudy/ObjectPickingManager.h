@@ -9,12 +9,13 @@ using namespace Microsoft::WRL;
 
 class DirectXMain;
 class Object;
+class ICamera;
 
 class ObjectPickingManager
 {
 public:
 	ObjectPickingManager(ComPtr<ID3D11Device> pDevice);
-	bool PickingObject(DirectXMain* dxdMain, std::unordered_map<uint64_t, Object*>* rootObjects);
+	bool PickingObject(DirectXMain* dxdMain, std::unordered_map<uint64_t, Object*>* rootObjects,ICamera* cam);
 private:
 	ComPtr<ID3D11RenderTargetView> pPickingRenderTarget;
 	ComPtr<ID3D11Texture2D> pickingStagingTexture;

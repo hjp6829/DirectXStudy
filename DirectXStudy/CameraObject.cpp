@@ -28,11 +28,11 @@ CameraObject::CameraObject()
 	//transform->SetImportLocalMatrix(newMatrix);
 }
 
-DirectX::XMMATRIX CameraObject::GetProjectionMatrix()
+DirectX::XMMATRIX CameraObject::GetProjectionMatrix()const
 {
 	return DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, nearPlane, farPlane);
 }
-DirectX::XMMATRIX CameraObject::GetViewMatrix()
+DirectX::XMMATRIX CameraObject::GetViewMatrix()const
 {
 	DirectX::XMVECTOR position;
 	DirectX::XMVECTOR rotation;
@@ -44,6 +44,14 @@ DirectX::XMMATRIX CameraObject::GetViewMatrix()
 	XMMATRIX cameraWorld =XMMatrixRotationQuaternion(rotation) * XMMatrixTranslationFromVector(position);
 
 	return DirectX::XMMatrixInverse(nullptr,cameraWorld);
+}
+DirectX::XMFLOAT3 CameraObject::GetCameraPosition() const
+{
+	return transform->GetObjectPosition();
+}
+DirectX::XMFLOAT3 CameraObject::GetCameraForward() const
+{
+	return transform->GetForwardVector3();
 }
 void CameraObject::MouseWheelPosUpdate()
 {

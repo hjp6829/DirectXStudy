@@ -72,13 +72,11 @@ void RuntimeManager::StartRuntime(std::unordered_map<uint64_t, Object*>* sceneOb
 {
 	for (auto& [key, value] : *sceneObjects)
 	{		
-		//if (auto* camera = dynamic_cast<CameraObject*>(value); camera && camera->CheckSceneCamera())
-		//	continue;
+		if (auto* camera = dynamic_cast<CameraObject*>(value); camera && camera->CheckSceneCamera())
+			continue;
 		Object* objctTemp = new Object();
 		value->SetDataToCopy(objctTemp);
 		allObjects[objctTemp->objectID] = objctTemp;
-		if (auto* camera = dynamic_cast<CameraObject*>(value); camera)//test
-			cameras.push_back(camera);
 		if (auto* light = dynamic_cast<LightObject*>(value); light)//test
 			this->light = light;
 	}

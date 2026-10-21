@@ -7,6 +7,7 @@
 #include "EventDefinitions.h"
 #include "imgui_impl_win32.h"
 #include "WorldManager.h"
+#include "ObjectType.h"
 
 UIManager::UIManager(WorldManager* worldManager)
 {
@@ -23,6 +24,9 @@ UIManager::UIManager(WorldManager* worldManager)
 
 	hierarchy->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {
 		OnHierarchyDrop(parentObject, childObject);
+		};
+	hierarchy->OnHierarchyCreateObjectClick = [this](ObjectType type) {
+		OnCreateObject(type);
 		};
 
 }

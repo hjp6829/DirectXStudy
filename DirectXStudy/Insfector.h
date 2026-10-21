@@ -3,7 +3,6 @@
 #include <unordered_map>
 
 class EventData;
-class ScriptRegistry;
 class WorldManager;
 
 class Insfector {
@@ -17,5 +16,4 @@ private:
 	void RegisterEventHandlers();
 	void SetSelectObjectID(EventData* eventData);
 	void DeleteObject(EventData* eventData);
-	ScriptRegistry* scriptRegistry;
 };

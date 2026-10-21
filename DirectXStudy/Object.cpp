@@ -120,24 +120,21 @@ void Object::SetDataToCopy(Object* copyObject)
 }
 
 
-void Object::RenderObject(RenderPass renderPass,DirectXMain* dxdMain)
+void Object::RenderObject(RenderPass renderPass, ID3D11DeviceContext* context, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix)
 {
-	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
-	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
-
 	switch (renderPass)
 	{
 	case RenderPass::Main:
 		if (currentModelNode != nullptr)
-			currentModelNode->RenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
+			currentModelNode->RenderMeshs(context, transform->GetWorldMatrix(), viewMatrix, projectionMatrix);
 		break;
 	case RenderPass::Outline:
 		if (currentModelNode != nullptr)
-			currentModelNode->OutlineRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
+			currentModelNode->OutlineRenderMeshs(context, transform->GetWorldMatrix(), viewMatrix, projectionMatrix);
 		break;
 	case RenderPass::Picking:
 		if (currentModelNode != nullptr)
-			currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix,objectID);
+			currentModelNode->PickingRenderMeshs(context, transform->GetWorldMatrix(), viewMatrix, projectionMatrix,objectID);
 		break;
 	default:
 		break;
@@ -146,7 +143,7 @@ void Object::RenderObject(RenderPass renderPass,DirectXMain* dxdMain)
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
-			childObjects[i]->RenderObject(renderPass,dxdMain);
+			childObjects[i]->RenderObject(renderPass, context, viewMatrix, projectionMatrix);
 	}
 }
 

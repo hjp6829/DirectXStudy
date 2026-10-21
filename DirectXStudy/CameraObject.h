@@ -1,11 +1,14 @@
 #pragma once
 #include "Object.h"
+#include "ICamera.h"
 
-class CameraObject : public Object {
+class CameraObject : public Object , public ICamera{
 public:
 	CameraObject();
-	DirectX::XMMATRIX GetProjectionMatrix();
-	DirectX::XMMATRIX GetViewMatrix();
+	DirectX::XMMATRIX GetProjectionMatrix() const override;
+	DirectX::XMMATRIX GetViewMatrix()const override;
+	DirectX::XMFLOAT3 GetCameraPosition()const override;
+	DirectX::XMFLOAT3 GetCameraForward() const override;
 	void CameraTransformUpdate();
 	void Serialize(nlohmann::json& j) override;
 	void Deserialize(const nlohmann::json& j) override;

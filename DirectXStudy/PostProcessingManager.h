@@ -16,13 +16,14 @@ class VertexShader;
 class PixelShader;
 class Object;
 class DirectXMain;
+class ICamera;
 
 class PostProcessingManager
 {
 public:
 	PostProcessingManager(ComPtr<ID3D11Device> pDevice, ComPtr<ID3D11DeviceContext> pContext);
 	void PostProcessingRender();
-	void OutlineRender(Object* currentObject, DirectXMain* dxdMain);
+	void OutlineRender(Object* currentObject, DirectXMain* dxdMain, ICamera* cam);
 private:
 	ComPtr<ID3D11RenderTargetView> pOutlineRenderTarget;
 	ComPtr<ID3D11ShaderResourceView> pPostProcessOutlineSRV;

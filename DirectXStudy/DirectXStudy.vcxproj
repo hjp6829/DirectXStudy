@@ -126,6 +126,7 @@
   <ItemGroup>
     <ClCompile Include="App.cpp" />
     <ClCompile Include="AssimpConverter.cpp" />
+    <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CameraObject.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="EventBus.cpp" />
@@ -177,12 +178,14 @@
     <ClInclude Include="App.h" />
     <ClInclude Include="AssimpConverter.h" />
     <ClInclude Include="Bindable.h" />
+    <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CameraObject.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Datas.h" />
     <ClInclude Include="EventBus.h" />
     <ClInclude Include="EventDefinitions.h" />
     <ClInclude Include="Hierarchy.h" />
+    <ClInclude Include="ICamera.h" />
     <ClInclude Include="Insfector.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="LightConstantBuffer.h" />
@@ -196,6 +199,7 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
     <ClInclude Include="ObjectPickingManager.h" />
+    <ClInclude Include="ObjectType.h" />
     <ClInclude Include="PostProcessingManager.h" />
     <ClInclude Include="PSContantBuffer.h" />
     <ClInclude Include="ConstantBuffer.h" />

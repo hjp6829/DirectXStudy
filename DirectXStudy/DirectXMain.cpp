@@ -11,6 +11,7 @@
 #include "Input.h"
 #include "WorldManager.h"
 #include "ObjectPickingManager.h"
+#include "ICamera.h"
 
 DirectXMain::DirectXMain(HWND hWnd)
 {
@@ -117,13 +118,13 @@ void DirectXMain::Render()
 	pContext->ClearRenderTargetView(pRenderTarget.Get(), clearColor);
 	pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
-	globalBuffer.cameraPos = cam->GetTransform()->GetObjectPosition();
+	globalBuffer.cameraPos = cam->GetCameraPosition();
 	globalBuffer.lightPos = light->GetTransform()->GetObjectPosition();
 	globalBuffer.lightColor = light->GetLightColor();
 	globalBuffer.specularStrength = light->GetSpecularStrength();
 	globalBuffer.shininess = light->GetShininess();
 	globalBuffer.maxLightDistance = light->GetMaxLightDistance();
-	globalBuffer.cameraForward = cam->GetTransform()->GetForwardVector3();
+	globalBuffer.cameraForward = cam->GetCameraForward();
 	globalBuffer.lightForward = light->GetTransform()->GetForwardVector3();
 
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
@@ -133,7 +134,7 @@ void DirectXMain::Render()
 	pContext->PSSetConstantBuffers(1, 1, lightConstantBuffer.GetAddressOf());
 	if (Input::GetMouseButtonDown(0))
 	{
-		if (pickingManager->PickingObject(this, rootObjects))
+		if (pickingManager->PickingObject(this, rootObjects, cam))
 		{
 			pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 			pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
@@ -141,12 +142,12 @@ void DirectXMain::Render()
 	}
 	for (auto& [key, value] : *rootObjects)
 	{
-		value->RenderObject(RenderPass::Main,this);
+		value->RenderObject(RenderPass::Main,pContext.Get(), cam->GetViewMatrix(), cam->GetProjectionMatrix());
 	}
 
 	if(currentOutlineID == -1)
 		return;
-	postProcessingManager->OutlineRender(worldManager->GetObjectByID(currentOutlineID), this);//그려주기
+	postProcessingManager->OutlineRender(worldManager->GetObjectByID(currentOutlineID), this, cam);//그려주기
 	pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
 	postProcessingManager->PostProcessingRender();//그린거 사용하기
 }

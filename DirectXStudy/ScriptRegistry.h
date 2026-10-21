@@ -2,20 +2,20 @@
 #include <filesystem>
 #include <functional>
 
-class ScriptComponent;
+class Component;
 
 class ScriptRegistry
 {
 public:
     ScriptRegistry();
-    using ScriptFactory = std::function<std::unique_ptr<ScriptComponent>()>;
+    using ComponentFactory = std::function<std::unique_ptr<Component>()>;
 
-    void RegisterScript( const std::string& name,ScriptFactory factory)
+    void RegisterScript( const std::string& name, ComponentFactory factory)
     {
         scriptFactories[name] = std::move(factory);
     }
 
-    std::unique_ptr<ScriptComponent> CreateScript( const std::string& name)
+    std::unique_ptr<Component> CreateScript( const std::string& name)
     {
         auto it = scriptFactories.find(name);
 
@@ -26,5 +26,5 @@ public:
     }
 
 private:
-    std::unordered_map<std::string, ScriptFactory> scriptFactories;
+    std::unordered_map<std::string, ComponentFactory> scriptFactories;
 };

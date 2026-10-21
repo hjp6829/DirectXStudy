@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "EventBus.h"
+#include "ObjectType.h"
 
 class Hierarchy;
 class ModelBrowserUI;
@@ -17,6 +18,7 @@ public:
 	std::function<void(std::string)> OnCreateObjectSelected;
 	std::function<void(Object*)> OnHierarchyRenameClick;
 	std::function<void(Object*, Object*)> OnHierarchyDrop;
+	std::function<void(ObjectType)> OnCreateObject;
 private:
 	Hierarchy* hierarchy;
 	ModelBrowserUI* modelBrowserUI;

@@ -30,3 +30,12 @@ void ObjectManager::RegisterModelHierarchy(Object* object)
 		RegisterModelHierarchy(object->childObjects[i]);
 	}
 }
+
+Object* ObjectManager::CreateObject(ObjectType type)
+{
+	Object* tempObject = new Object();
+	tempObject->SetRootNodeCheck(true);
+	tempObject->objectID = ++objectID;
+	objects[tempObject->objectID] = tempObject;
+	return tempObject;
+}

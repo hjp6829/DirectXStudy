@@ -3,14 +3,16 @@
 #include "EventDefinitions.h"
 #include "SceneManager.h"
 #include "RuntimeManager.h"
+#include "ScriptRegistry.h"
+#include "ICamera.h"
 
 WorldManager::WorldManager(ID3D11Device* device)
 {
 	RegisterEventHandlers();
+	scriptRegistry = new ScriptRegistry();
 	sceneManager = new SceneManager(device);
 	runtimeManager = new RuntimeManager(device);
 	currentManager = sceneManager;
-	sceneManager->GetCamera(0);
 }
 
 void WorldManager::ObjectsUpdate(float deltaTime)
@@ -24,6 +26,25 @@ void WorldManager::ObjectsLateUpdate(float deltaTime)
 void WorldManager::SetCreateObject(std::string path)
 {
 	currentManager->SetCreateObject(path);
+}
+void WorldManager::CreateObject(ObjectType type)
+{
+	Object* tempObject = currentManager->CreateObject(type);
+	switch (type)
+	{
+	case ObjectType::Camera:
+		{
+			std::unique_ptr<Component> componentTemp = scriptRegistry->CreateScript("CameraComponent");
+			ICamera* cameraComponent = dynamic_cast<ICamera*>(componentTemp.get());
+			currentManager->SetCameraVector(cameraComponent);
+			tempObject->SetComponent(std::move(componentTemp));
+		}
+		break;
+	case ObjectType::Light:
+		break;
+	default:
+		break;
+	}
 }
 void WorldManager::RegisterEventHandlers()
 {

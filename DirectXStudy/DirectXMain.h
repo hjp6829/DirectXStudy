@@ -5,7 +5,6 @@
 #include <cmath>
 #include <DirectXMath.h>
 #include <vector>
-#include "CameraObject.h"
 #include "LightObject.h"
 #include <string>
 #include <functional>
@@ -25,6 +24,7 @@ class ModelNode;
 class PostProcessingManager;
 class WorldManager;
 class ObjectPickingManager;
+class ICamera;
 
 class DirectXMain {
 	friend class Bindable;//친구 클래스는 private에 접근이 가능함
@@ -34,7 +34,6 @@ public:
 	void Render();
 	void Shutdown();
 	void EndDraw();
-	CameraObject* GetCamera() { return cam; }
 	ID3D11Device* GetDevice() { return pDevice.Get(); }
 	ID3D11DeviceContext* GetContext() { return pContext.Get(); }
 	ID3D11DepthStencilView* GetDepthStencilView(){return depthStencilView.Get(); }
@@ -64,7 +63,7 @@ private:
 	};
 private:
 	std::unordered_map<uint64_t, Object*>* rootObjects;
-	CameraObject* cam;
+	ICamera* cam;
 	LightObject* light;
 	GlobalBuffer globalBuffer = {};
 	uint64_t currentOutlineID;

@@ -6,6 +6,7 @@
 #include "EventBus.h"
 #include "Object.h"
 #include "DirectXMain.h"
+#include "ICamera.h"
 
 ObjectPickingManager::ObjectPickingManager(ComPtr<ID3D11Device> pDevice)
 {
@@ -45,7 +46,7 @@ ObjectPickingManager::ObjectPickingManager(ComPtr<ID3D11Device> pDevice)
 	pDevice->CreateTexture2D(&desc, nullptr, pickingStagingTexture.GetAddressOf());
 }
 
-bool ObjectPickingManager::PickingObject(DirectXMain* dxdMain, std::unordered_map<uint64_t, Object*>* rootObjects)
+bool ObjectPickingManager::PickingObject(DirectXMain* dxdMain, std::unordered_map<uint64_t, Object*>* rootObjects,ICamera* cam)
 {
 		ImGuiIO& io = ImGui::GetIO();
 		if (!io.WantCaptureMouse)
@@ -55,7 +56,7 @@ bool ObjectPickingManager::PickingObject(DirectXMain* dxdMain, std::unordered_ma
 
 			for (auto& [key, value] : *rootObjects)
 			{
-				value->RenderObject(RenderPass::Picking, dxdMain);
+				value->RenderObject(RenderPass::Picking, dxdMain->GetContext(), cam->GetViewMatrix(), cam->GetProjectionMatrix());
 			}
 			POINT mousePos = Input::mousePosition();
 			D3D11_BOX sourceBox = {};
