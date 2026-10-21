@@ -27,6 +27,13 @@ void WorldManager::SetCreateObject(std::string path)
 {
 	currentManager->SetCreateObject(path);
 }
+ICamera* WorldManager::GetCamera(int idx)
+{
+	if(activeSceneMode == ActiveSceneMode::SceneMode)
+		return currentManager->GetSceneCamera();
+	else
+		return currentManager->GetCamera(idx);
+}
 void WorldManager::CreateObject(ObjectType type)
 {
 	Object* tempObject = currentManager->CreateObject(type);
@@ -64,8 +71,8 @@ void WorldManager::SetActiveMode(EventData* eventData)
 		{
 			runtimeManager->StartRuntime(sceneManager->GetAllObjects());
 			currentManager = runtimeManager;
-			Log::PrintLog(std::to_string(currentManager->GetAllObjects()->size()));
 		}
+		activeSceneMode = eventDataCast->activeSceneMode;
 	}
 }
 void WorldManager::SetSelectObjectID(EventData* eventData)

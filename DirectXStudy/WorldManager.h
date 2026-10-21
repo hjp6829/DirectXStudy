@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include "ObjectType.h"
 #include "ObjectManager.h"
+#include "EventDefinitions.h"
 
 class SceneManager;
 class RuntimeManager;
@@ -19,7 +20,7 @@ public:
 	std::unordered_map<uint64_t, Object*>* GetRootObjects(){return currentManager->GetObjects();}
 	std::unordered_map<uint64_t, Object*>* GetAllObjects() { return currentManager->GetAllObjects(); }
 	Object* GetObjectByID(uint64_t id){return currentManager->GetObjectByID(id); }
-	ICamera* GetCamera(int idx){return currentManager->GetCamera(idx); }
+	ICamera* GetCamera(int idx);
 	LightObject* GetLight(){return currentManager->GetLight(); }
 	void SetCreateObject(std::string path);
 	void CreateObject(ObjectType type);
@@ -34,4 +35,5 @@ private:
 	void SetSelectObjectID(EventData* eventData);
 	void DeleteObject(EventData* eventData);
 	void DeleteChiledModels(Object* object);
+	ActiveSceneMode activeSceneMode;
 };
