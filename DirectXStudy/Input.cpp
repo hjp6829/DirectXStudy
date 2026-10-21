@@ -13,6 +13,8 @@ void Input::Update()
 	previousKeyboardState = currentKeyboardState;
 	previousMouseState = currentMouseState;
 	mouseWheelDeltaValue = 0;
+	mouseDeltaPos.x = 0;
+	mouseDeltaPos.y = 0;
 }
 
 void Input::SetKeyState(int idx, bool value)

@@ -65,21 +65,27 @@ void CameraObject::CameraTransformUpdate()
 		cameraRotation.x = cameraRotation.x + mousePos.y * rotationSpeed;
 		cameraRotation.y = cameraRotation.y - mousePos.x * rotationSpeed;
 
+		transform->SetRotaion(cameraRotation);
+
 		DirectX::XMFLOAT3 position = transform->GetObjectPosition();
 		DirectX::XMVECTOR pos = DirectX::XMLoadFloat3(&position);
+
+		const XMVECTOR forward = XMVector3Normalize(transform->GetForward());
+		const XMVECTOR right = XMVector3Normalize(transform->GetRight());
+
 		if (Input::GetKey('W'))
-			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(transform->GetForward(), mouseWheelSpeed));
+			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, mouseWheelSpeed));
 		if (Input::GetKey('S'))
-			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(transform->GetForward(), -mouseWheelSpeed));
+			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(forward, -mouseWheelSpeed));
 		if (Input::GetKey('A'))
-			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(transform->GetRight(), -mouseWheelSpeed));
+			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, -mouseWheelSpeed));
 		if (Input::GetKey('D'))
-			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(transform->GetRight(), mouseWheelSpeed));
+			pos = DirectX::XMVectorAdd(pos, DirectX::XMVectorScale(right, mouseWheelSpeed));
+		
 		XMFLOAT3 positionTemp;
 		DirectX::XMStoreFloat3(&positionTemp, pos);
 		transform->SetPosition(positionTemp);
-		transform->SetRotaion(cameraRotation);
-		
+
 		return;
 	}
 	if (!Input::GetMouseButton(2))
