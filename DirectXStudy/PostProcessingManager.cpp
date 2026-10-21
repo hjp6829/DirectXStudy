@@ -78,6 +78,6 @@ void PostProcessingManager::OutlineRender(Object* currentObject,DirectXMain* dxd
 
 	if (currentObject != nullptr)
 	{
-		currentObject->OutlineRenderObject(dxdMain);
+		currentObject->RenderObject(RenderPass::Outline,dxdMain);
 	}
 }

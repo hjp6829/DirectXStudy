@@ -17,12 +17,12 @@ void ObjectManager::RegisterModelHierarchy(Object* object)
 {
 	if (object->childObjects.size() == 0)
 	{
-		allObjects[object->objectID] = object;
 		object->objectID = ++objectID;
+		allObjects[object->objectID] = object;
 		return;
 	}
-	allObjects[object->objectID] = object;
 	object->objectID = ++objectID;
+	allObjects[object->objectID] = object;
 	for (int i = 0; i < object->childObjects.size(); i++)
 	{
 		Object* childObject = object->childObjects[i];

@@ -40,7 +40,11 @@ void WorldManager::SetActiveMode(EventData* eventData)
 		if (eventDataCast->activeSceneMode == ActiveSceneMode::SceneMode)
 			currentManager = sceneManager;
 		else
+		{
+			runtimeManager->StartRuntime(sceneManager->GetAllObjects());
 			currentManager = runtimeManager;
+			Log::PrintLog(std::to_string(currentManager->GetAllObjects()->size()));
+		}
 	}
 }
 void WorldManager::SetSelectObjectID(EventData* eventData)

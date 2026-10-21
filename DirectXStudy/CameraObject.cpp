@@ -6,7 +6,26 @@
 
 CameraObject::CameraObject()
 {
-	objectName = "Camera";
+	objectName = "Camera";;
+
+	//DirectX::XMVECTOR scale;
+	//DirectX::XMVECTOR rotation;
+	//DirectX::XMVECTOR translation;
+
+	//DirectX::XMMatrixDecompose(
+	//	&scale,
+	//	&rotation,
+	//	&translation,
+	//	transform->GetImportLocalMatrix()
+	//);
+
+	//scale = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 0.0f);
+
+	//DirectX::XMMATRIX newMatrix =
+	//	DirectX::XMMatrixScalingFromVector(scale) *
+	//	DirectX::XMMatrixRotationQuaternion(rotation) *
+	//	DirectX::XMMatrixTranslationFromVector(translation);
+	//transform->SetImportLocalMatrix(newMatrix);
 }
 
 DirectX::XMMATRIX CameraObject::GetProjectionMatrix()

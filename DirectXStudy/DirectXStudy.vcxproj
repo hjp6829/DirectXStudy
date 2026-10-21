@@ -152,6 +152,7 @@
     <ClCompile Include="ModelNode.cpp" />
     <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectManager.cpp" />
+    <ClCompile Include="ObjectPickingManager.cpp" />
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="PostProcessingManager.cpp" />
     <ClCompile Include="PrimitiveTopology.cpp" />
@@ -194,6 +195,7 @@
     <ClInclude Include="ModelNode.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectManager.h" />
+    <ClInclude Include="ObjectPickingManager.h" />
     <ClInclude Include="PostProcessingManager.h" />
     <ClInclude Include="PSContantBuffer.h" />
     <ClInclude Include="ConstantBuffer.h" />
@@ -210,6 +212,7 @@
     <ClInclude Include="InputLayout.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="PrimitiveTopology.h" />
+    <ClInclude Include="RenderingTypes.h" />
     <ClInclude Include="RuntimeManager.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="SceneManager.h" />

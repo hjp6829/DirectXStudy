@@ -69,7 +69,6 @@ void App::Run()
 		uimanager->UpdateUI();
 		ImGui::Render();
 		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
 		dxdMain->EndDraw();
 		input->Update();
 		while (!commandQueue.empty())

@@ -10,7 +10,4 @@ public:
 	std::unordered_map<uint64_t, Object*>* GetAllObjects() override;
 	void SetHierarchyDropObject(Object* parentObject, Object* childObject);
 	void StartRuntime(std::unordered_map<uint64_t, Object*>* sceneObjects);
-private:
-	std::unordered_map<uint64_t, Object*> objects;
-	std::unordered_map<uint64_t, Object*> allObjects;
 };

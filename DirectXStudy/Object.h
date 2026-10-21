@@ -8,6 +8,7 @@
 #include <memory>
 #include <queue>
 #include "Transform.h"
+#include "RenderingTypes.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -28,9 +29,7 @@ public:
 	std::string modelNamePath;
 	uint64_t objectID;
 	uint64_t parentobjectID;
-	void RenderObject(DirectXMain* dxdMain);
-	void OutlineRenderObject(DirectXMain* dxdMain);
-	void PickingRenderObject(DirectXMain* dxdMain);
+	void RenderObject(RenderPass renderPass,DirectXMain* dxdMain);
 
 	void ToggleMeshEnable(bool value);
 	bool meshEnable = true;

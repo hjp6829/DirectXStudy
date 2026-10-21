@@ -16,7 +16,7 @@ public:
 	void SetPostionOffset(DirectX::XMFLOAT3 position) { positionOffset = position; }
 	void SetRotationOffset(DirectX::XMFLOAT3 rotation);
 	void SetScaleOffset(DirectX::XMFLOAT3 scale) { scaleOffset = scale; }
-	void SetImportLocalTransform(DirectX::XMMATRIX localMatrix);
+	void SetImportLocalMatrix(DirectX::XMMATRIX localMatrix);
 	DirectX::XMMATRIX GetLocalMatrix() {return localMatrix; }
 	void SetLocalMatrix(DirectX::XMMATRIX matrix) { localMatrix = matrix; }
 	DirectX::XMMATRIX GetWorldMatrix() { return worldMatrix; }

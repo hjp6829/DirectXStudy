@@ -120,45 +120,33 @@ void Object::SetDataToCopy(Object* copyObject)
 }
 
 
-void Object::RenderObject(DirectXMain* dxdMain)
+void Object::RenderObject(RenderPass renderPass,DirectXMain* dxdMain)
 {
 	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
 	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
 
-	if(currentModelNode != nullptr)
-		currentModelNode->RenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
-	for (int i = 0; i < childObjects.size(); i++)
+	switch (renderPass)
 	{
-		if (childObjects[i] != nullptr)
-			childObjects[i]->RenderObject(dxdMain);
+	case RenderPass::Main:
+		if (currentModelNode != nullptr)
+			currentModelNode->RenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
+		break;
+	case RenderPass::Outline:
+		if (currentModelNode != nullptr)
+			currentModelNode->OutlineRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
+		break;
+	case RenderPass::Picking:
+		if (currentModelNode != nullptr)
+			currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix,objectID);
+		break;
+	default:
+		break;
 	}
-}
 
-void Object::OutlineRenderObject(DirectXMain* dxdMain)
-{
-	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
-	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
-
-	if (currentModelNode != nullptr)
-		currentModelNode->OutlineRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix);
 	for (int i = 0; i < childObjects.size(); i++)
 	{
 		if (childObjects[i] != nullptr)
-			childObjects[i]->OutlineRenderObject(dxdMain);
-	}
-}
-
-void Object::PickingRenderObject(DirectXMain* dxdMain)
-{
-	XMMATRIX ViewMatrix = dxdMain->GetCamera()->GetViewMatrix();
-	XMMATRIX ProjectionMatrix = dxdMain->GetCamera()->GetProjectionMatrix();
-
-	if (currentModelNode != nullptr)
-		currentModelNode->PickingRenderMeshs(dxdMain->GetContext(), transform->GetWorldMatrix(), ViewMatrix, ProjectionMatrix, objectID);
-	for (int i = 0; i < childObjects.size(); i++)
-	{
-		if (childObjects[i] != nullptr)
-			childObjects[i]->PickingRenderObject(dxdMain);
+			childObjects[i]->RenderObject(renderPass,dxdMain);
 	}
 }
 

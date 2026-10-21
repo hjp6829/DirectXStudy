@@ -16,7 +16,10 @@ public:
 	virtual void ObjectsLateUpdate(float deltaTime) = 0;
 	virtual std::unordered_map<uint64_t, Object*>* GetObjects() =0;
 	virtual std::unordered_map<uint64_t, Object*>* GetAllObjects()=0;
-	Object* GetObjectByID(uint64_t id) { return allObjects[id]; }
+	Object* GetObjectByID(uint64_t id) {
+		auto it = allObjects.find(id);
+		return it != allObjects.end() ? it->second : nullptr;
+	}
 	CameraObject* GetCamera(int idx){return cameras[idx];}
 	LightObject* GetLight() {return light; }
 	void SetCreateObject(std::string path);

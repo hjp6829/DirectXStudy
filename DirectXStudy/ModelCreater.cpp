@@ -129,7 +129,7 @@ void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)
 {
 	object->currentModelNode = modelNode;
 	object->objectName = modelNode->modelName;
-	object->GetTransform()->SetImportLocalTransform(modelNode->localMatrix);
+	object->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
 	object->modelNamePath = modelNode->sourceModelPath;
 }
 uint64_t ModelCreater::FNV1a(const std::string& str)

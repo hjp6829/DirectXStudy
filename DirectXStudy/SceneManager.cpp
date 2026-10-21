@@ -48,10 +48,10 @@ void SceneManager::ObjectsUpdate(float deltaTime)
 
 void SceneManager::ObjectsLateUpdate(float deltaTime)
 {
-	//for (auto& [key, value] : allObjects)
-	//{
-	//	value->LateUpateComponent(deltaTime);
-	//}
+	for (auto& [key, value] : allObjects)
+	{
+		value->LateUpateComponent(deltaTime);
+	}
 	for (auto& [key, value] : objects)
 	{
 		value->UpdateObject();

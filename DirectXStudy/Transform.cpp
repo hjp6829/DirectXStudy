@@ -130,7 +130,7 @@ void Transform::CopyTransform(Transform* origTransform)
 	XMStoreFloat4(&rotationOffset, rotation);
 	XMStoreFloat3(&scaleOffset, scale);
 
-	SetImportLocalTransform(origTransform->GetImportLocalMatrix());
+	SetImportLocalMatrix(origTransform->GetImportLocalMatrix());
 }
 
 std::unique_ptr<Component> Transform::Clone() const
@@ -173,7 +173,7 @@ void Transform::UpdateDirectionVectors()
 	forward = XMVector3Normalize(
 		XMVector3TransformNormal(XMVectorSet(0, 0, 1, 0), rotationMatrix));
 }
-void Transform::SetImportLocalTransform(DirectX::XMMATRIX localMatrix)
+void Transform::SetImportLocalMatrix(DirectX::XMMATRIX localMatrix)
 {
 	this->importLocalMatrix = localMatrix;
 	DirectX::XMMatrixDecompose(&importScale, &importRotation, &importPosition, importLocalMatrix);
