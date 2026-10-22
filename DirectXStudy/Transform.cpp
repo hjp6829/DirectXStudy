@@ -89,17 +89,12 @@ DirectX::XMFLOAT3 Transform::GetObjectScale()
 	};
 }
 
-void Transform::SetRotationOffset(DirectX::XMFLOAT3 rotation)
+void Transform::SetRotationOffset(DirectX::XMFLOAT4 rotation)
 {
 	using namespace DirectX;
 
-	XMVECTOR quaternion = XMQuaternionRotationRollPitchYaw(
-		XMConvertToRadians(rotation.x),
-		XMConvertToRadians(rotation.y),
-		XMConvertToRadians(rotation.z)
-	);
+	rotationOffset = rotation;
 
-	XMStoreFloat4(&rotationOffset, quaternion);
 	UpdateDirectionVectors();
 }
 
@@ -187,6 +182,7 @@ void Transform::Serialize(nlohmann::json& j)
 		{ "rotx", rotationOffset.x },
 		{"roty", rotationOffset.y},
 		{"rotz", rotationOffset.z},
+		{"rotw", rotationOffset.w},
 		{ "scalex", scaleOffset.x },
 		{"scaley", scaleOffset.y},
 		{"scalez", scaleOffset.z},
@@ -196,7 +192,7 @@ void Transform::Deserialize(const nlohmann::json& j)
 {
 	const auto& transformJson = j.at("transform");
 	SetPostionOffset(DirectX::XMFLOAT3(transformJson.at("posX").get<float>(), transformJson.at("posY").get<float>(), transformJson.at("posZ").get<float>()));
-	SetRotationOffset(DirectX::XMFLOAT3(transformJson.at("rotx").get<float>(), transformJson.at("roty").get<float>(), transformJson.at("rotz").get<float>()));
+	SetRotationOffset(DirectX::XMFLOAT4(transformJson.at("rotx").get<float>(), transformJson.at("roty").get<float>(), transformJson.at("rotz").get<float>(), transformJson.at("rotw").get<float>()));
 	SetScaleOffset(DirectX::XMFLOAT3(transformJson.at("scalex").get<float>(), transformJson.at("scaley").get<float>(), transformJson.at("scalez").get<float>()));
 }
 

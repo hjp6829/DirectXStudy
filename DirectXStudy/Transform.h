@@ -14,7 +14,7 @@ public:
 	DirectX::XMFLOAT3 GetObjectRotation();
 	DirectX::XMFLOAT3 GetObjectScale();
 	void SetPostionOffset(DirectX::XMFLOAT3 position) { positionOffset = position; }
-	void SetRotationOffset(DirectX::XMFLOAT3 rotation);
+	void SetRotationOffset(DirectX::XMFLOAT4 rotation);
 	void SetScaleOffset(DirectX::XMFLOAT3 scale) { scaleOffset = scale; }
 	void SetImportLocalMatrix(DirectX::XMMATRIX localMatrix);
 	DirectX::XMMATRIX GetLocalMatrix() {return localMatrix; }
