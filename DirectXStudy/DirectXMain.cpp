@@ -113,6 +113,10 @@ void DirectXMain::Render()
 {
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // RGBA
 	rootObjects = worldManager->GetRootObjects();
+	if (testMode == ActiveSceneMode::RuntimeMode)
+	{
+		Log::PrintLog("a");
+	}
 	cam = worldManager->GetCamera(0);
 	light = worldManager->GetLight();
 	pContext->ClearRenderTargetView(pRenderTarget.Get(), clearColor);
@@ -176,6 +180,7 @@ void DirectXMain::RegisterEventHandlers()
 {
 	EventBus::Subscribe(EventType::SelectObjectID, [this](EventData* data) {SetSelectObjectID(data); });
 	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteCurrentObject(data); });
+	EventBus::Subscribe(EventType::ActiveSceneChanged, [this](EventData* data) {test(data); });
 }
 void DirectXMain::SetSelectObjectID(EventData* eventData)
 {
@@ -189,6 +194,16 @@ void DirectXMain::SetSelectObjectID(EventData* eventData)
 void DirectXMain::DeleteCurrentObject(EventData* eventData)
 {
 	currentOutlineID = -1;
+}
+
+void DirectXMain::test(EventData* eventData)
+{
+	ActiveSceneChangedEventData* eventDataCast = static_cast<ActiveSceneChangedEventData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		testMode = eventDataCast->activeSceneMode;
+	}
 }
 
 

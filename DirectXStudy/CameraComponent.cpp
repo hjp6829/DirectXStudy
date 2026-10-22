@@ -1,5 +1,10 @@
 #include "CameraComponent.h"
 #include "Object.h"
+#include "imgui_impl_win32.h"
+CameraComponent::CameraComponent()
+{
+	componentName = "Camera";
+}
 DirectX::XMMATRIX CameraComponent::GetProjectionMatrix()const
 {
 	return DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, nearPlane, farPlane);
@@ -26,6 +31,13 @@ DirectX::XMFLOAT3 CameraComponent::GetCameraPosition() const
 DirectX::XMFLOAT3 CameraComponent::GetCameraForward() const
 {
 	return currentObject->GetTransform()->GetForwardVector3();
+}
+
+void CameraComponent::InspectorUpdate()
+{
+	ImGui::Text("Psotion");
+	ImGui::Text("Psotion");
+	ImGui::Text("Psotion");
 }
 
 std::unique_ptr<Component> CameraComponent::Clone() const

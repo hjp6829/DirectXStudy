@@ -6,10 +6,12 @@
 
 class CameraComponent : public Component, public ICamera {
 public:
+	CameraComponent();
 	DirectX::XMMATRIX GetProjectionMatrix()const override;
 	DirectX::XMMATRIX GetViewMatrix() const override;
 	DirectX::XMFLOAT3 GetCameraPosition()const override;
 	DirectX::XMFLOAT3 GetCameraForward() const override;
+	void InspectorUpdate() override;
 	std::unique_ptr<Component> Clone()const override;
 private:
 	float FOV;

@@ -34,11 +34,11 @@ App::App()
 	uimanager = new UIManager(worldManager);
 
 	uimanager->OnCreateObjectSelected = [this](std::string path) {//이벤트 버스
-		worldManager->SetCreateObject(path);
+		worldManager->SetCreateObject(path);//나중에 이름 바꿔야함
 		};
-	//uimanager->OnHierarchyDrop = [this](Object* parentObject, Object* childObject) {//이벤트 버스
-	//	sceneManager->SetHierarchyDropObject(parentObject, childObject);
-	//	};
+	uimanager->OnCreateObject = [this](ObjectType type) {//이벤트 버스
+		worldManager->CreateObject(type);
+		};
 	//uimanager->OnHierarchyRenameClick = [this](SceneObject* model) {
 	//	RenameModel(model);
 	//	};

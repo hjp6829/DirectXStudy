@@ -29,6 +29,8 @@ public:
 	void SetCreateObject(std::string path);
 	void RegisterModelHierarchy(Object* object);
 	Object* CreateObject(ObjectType type);
+	void SetNewObject(Object* object);
+	uint64_t cameraID=0;
 protected:
 	std::unordered_map<uint64_t, Object*> objects;
 	std::unordered_map<uint64_t, Object*> allObjects;

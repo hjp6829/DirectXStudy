@@ -73,4 +73,6 @@ private:
 	void RegisterEventHandlers();
 	void SetSelectObjectID(EventData* eventData);
 	void DeleteCurrentObject(EventData* eventData);
+	void test(EventData* eventData);
+	ActiveSceneMode testMode;
 };

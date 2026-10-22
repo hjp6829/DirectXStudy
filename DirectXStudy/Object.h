@@ -48,6 +48,7 @@ public:
 
 	void SetTransform(Transform* transform) {this->transform = transform;}
 	Transform* GetTransform(){return transform;}
+	std::vector<std::unique_ptr<Component>>* GetComponents(){return &components;}
 public:
 	void virtual UpdateObject();
 	void virtual Serialize(nlohmann::json& j);

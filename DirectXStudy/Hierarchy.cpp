@@ -59,7 +59,24 @@ void Hierarchy::UpdateUI()
 
                 ImGui::EndDragDropTarget();
             }
+
+            // Dummy 영역을 우클릭했을 때
+            if (ImGui::BeginPopupContextItem("HierarchyEmptyPopup"))
+            {
+                if (ImGui::MenuItem("Create Empty"))
+                {
+                    OnHierarchyCreateObjectClick(ObjectType::Empty);
+                }
+
+                if (ImGui::MenuItem("Camera"))
+                {
+                    OnHierarchyCreateObjectClick(ObjectType::Camera);
+                }
+
+                ImGui::EndPopup();
+            }
         }
+       
     }
 
     ImGui::End();
@@ -154,10 +171,6 @@ void Hierarchy::ModelTraversal(Object* object)
         if (ImGui::MenuItem("Rename"))
         {
             OnHierarchyRenameClick(object);
-        }
-        if (ImGui::MenuItem("Camera"))
-        {
-            OnHierarchyCreateObjectClick(ObjectType::Camera);
         }
 
         ImGui::EndPopup();

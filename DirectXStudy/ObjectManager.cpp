@@ -39,3 +39,10 @@ Object* ObjectManager::CreateObject(ObjectType type)
 	objects[tempObject->objectID] = tempObject;
 	return tempObject;
 }
+
+void ObjectManager::SetNewObject(Object* object)
+{
+	if(object->IsRootObject())
+		objects[object->objectID] = object;
+	allObjects[object->objectID] = object;
+}
