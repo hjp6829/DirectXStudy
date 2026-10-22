@@ -73,14 +73,6 @@ Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type,
 			object->Deserialize(jsonfile);
 			break;
 			}
-		case 1:
-			{
-			CameraObject* camera = new CameraObject();
-			camera->Deserialize(jsonfile);
-			object = camera;
-			sceneCamera = camera;
-			break;
-			}
 		case 2:
 			{
 			light = new LightObject();
@@ -136,6 +128,14 @@ Object* SceneManager::DuplicateSceneObject(Object* object)
 		copyChildObject->parentObject = copyObject;
 	}
 	return copyObject;	
+}
+Object* SceneManager::CreateSceneCamera(const nlohmann::json& jsonfile)
+{
+	CameraObject* camera = new CameraObject();
+	camera->Deserialize(jsonfile);
+	sceneCamera = camera;
+	objectID = camera->objectID;
+	return camera;
 }
 void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObject)
 {
@@ -240,8 +240,12 @@ void SceneManager::LoadSaveSceneFile()
 	for (const auto& item : sceneJson)
 	{
 		int objectType;
-		item.at("ObjectType").get_to(objectType);		
-		Object* object = CreateSceneObject(item, objectType, path);
+		item.at("ObjectType").get_to(objectType);	
+		Object* object = nullptr;
+		if(objectType ==  1)
+			object = CreateSceneCamera(item);
+		else
+			object = CreateSceneObject(item, objectType, path);
 
 		loadSceneObjects.insert({ object->objectID, object });
 		if (item.at("isRootObject") == 1)

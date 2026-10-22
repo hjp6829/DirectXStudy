@@ -113,10 +113,6 @@ void DirectXMain::Render()
 {
 	float clearColor[4] = { 0.0f, 0.0f, 0.0f, 1.0f }; // RGBA
 	rootObjects = worldManager->GetRootObjects();
-	if (testMode == ActiveSceneMode::RuntimeMode)
-	{
-		Log::PrintLog("a");
-	}
 	cam = worldManager->GetCamera(0);
 	light = worldManager->GetLight();
 	pContext->ClearRenderTargetView(pRenderTarget.Get(), clearColor);

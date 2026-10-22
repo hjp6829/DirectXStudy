@@ -68,7 +68,10 @@ void WorldManager::SetActiveMode(EventData* eventData)
 	if (eventDataCast != nullptr)
 	{
 		if (eventDataCast->activeSceneMode == ActiveSceneMode::SceneMode)
+		{
+			runtimeManager->EndRunTime();
 			currentManager = sceneManager;
+		}
 		else
 		{
 			runtimeManager->StartRuntime(sceneManager->GetAllObjects());

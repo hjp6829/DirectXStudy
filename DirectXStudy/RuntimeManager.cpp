@@ -105,3 +105,16 @@ void RuntimeManager::StartRuntime(std::unordered_map<uint64_t, Object*>* sceneOb
 		objctTemp->parentObject = allObjects[parentID];
 	}
 }
+
+void RuntimeManager::EndRunTime()
+{
+	cameras.clear();
+	for (auto& [key, value] : allObjects)
+	{
+		delete(value);
+	}
+	allObjects.clear();
+	objects.clear();
+	sceneCamera = nullptr;
+	light = nullptr;
+}

@@ -35,9 +35,7 @@ DirectX::XMFLOAT3 CameraComponent::GetCameraForward() const
 
 void CameraComponent::InspectorUpdate()
 {
-	ImGui::Text("Psotion");
-	ImGui::Text("Psotion");
-	ImGui::Text("Psotion");
+	Component::InspectorUpdate();
 }
 
 std::unique_ptr<Component> CameraComponent::Clone() const

@@ -33,5 +33,5 @@ private:
 	void DuplicateObjectSave();
 	void DuplicateObject();
 	Object* DuplicateSceneObject(Object* object);
-
+	Object* CreateSceneCamera(const nlohmann::json& jsonfile);
 };
