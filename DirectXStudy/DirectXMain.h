@@ -42,8 +42,6 @@ private:
 	ComPtr<IDXGISwapChain> pSwap;
 	ComPtr<ID3D11Device> pDevice;
 	ComPtr<ID3D11DeviceContext> pContext;
-	ComPtr<ID3D11RenderTargetView> pRenderTarget;
-	ComPtr<ID3D11DepthStencilView> depthStencilView;
 	ComPtr<ID3D11Buffer> lightConstantBuffer;
 private:
 	struct GlobalBuffer {
@@ -68,8 +66,6 @@ private:
 	GlobalBuffer globalBuffer = {};
 	uint64_t currentOutlineID;
 	RendererManager* rendererManager;
-	PostProcessingManager* postProcessingManager;
-	ObjectPickingManager* pickingManager;
 	WorldManager* worldManager;
 	void RegisterEventHandlers();
 	void SetSelectObjectID(EventData* eventData);
