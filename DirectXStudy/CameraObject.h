@@ -17,7 +17,7 @@ public:
 	bool CheckSceneCamera(){return isSceneCamera;}
 	void SetIsSceneCamera(bool value){ isSceneCamera = value;}
 private:
-	float FOV;
+	float FOV = 60;
 	float nearPlane = 0.5f;
 	float farPlane = 1000.0f;
 	float rotationSpeed = 0.1f;

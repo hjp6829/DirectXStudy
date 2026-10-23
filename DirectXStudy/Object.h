@@ -14,7 +14,7 @@ using Microsoft::WRL::ComPtr;
 using namespace DirectX;
 
 class Mesh;
-class ModelNode;
+
 class Component;
 
 class Object {
@@ -22,7 +22,6 @@ public:
 	Object();
 	virtual ~Object();
 	Object* parentObject;
-	ModelNode* currentModelNode;
 	std::vector<Object*> childObjects;
 	std::string objectName;
 	std::string modelNamePath;
@@ -30,8 +29,6 @@ public:
 	uint64_t parentobjectID;
 	void RenderObject(RenderPass renderPass, ID3D11DeviceContext* context,DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix);
 
-	void ToggleMeshEnable(bool value);
-	bool meshEnable = true;
 	bool IsRootObject() { return isRootObject; }
 	void SetRootNodeCheck(bool value) { isRootObject = value; }
 	void RemoveModelData();

@@ -1,7 +1,10 @@
 #include "ScriptRegistry.h"
 #include "TestScript.h"
 #include "CameraComponent.h"
-
+#include "Object.h"
+#include "MeshRenderer.h"
+#include "EventBus.h"
+#include "EventDefinitions.h"
 
 ScriptRegistry::ScriptRegistry()
 {
@@ -13,4 +16,22 @@ ScriptRegistry::ScriptRegistry()
         return std::make_unique<CameraComponent>();
         }
     );
+    RegisterScript("MeshRenderer", []() {
+        return std::make_unique<MeshRenderer>();
+        }
+    );
+}
+
+void ScriptRegistry::CreateScript(const std::string& name, Object* object)
+{
+    auto it = scriptFactories.find(name);
+
+    if (it == scriptFactories.end())
+        return;
+
+    std::unique_ptr<Component> TempComp = it->second();
+    ComponentEventData componentEventData;
+    componentEventData.component = TempComp.get();
+    EventBus::Publish(EventType::ComponentAdded, &componentEventData);
+    object->SetComponent(std::move(TempComp));
 }

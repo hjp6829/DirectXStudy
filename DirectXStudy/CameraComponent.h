@@ -16,7 +16,7 @@ public:
 	void Serialize(nlohmann::json& j) override;
 	void Deserialize(const nlohmann::json& j) override;
 private:
-	float FOV;
+	float FOV = 60;
 	float nearPlane = 0.5f;
 	float farPlane = 1000.0f;
 	float rotationSpeed = 0.1f;

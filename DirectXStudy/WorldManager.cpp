@@ -42,10 +42,13 @@ void WorldManager::CreateObject(ObjectType type)
 	case ObjectType::Camera:
 		{
 			tempObject->objectName = "Camera" + std::to_string(++currentManager->cameraID);
-			std::unique_ptr<Component> componentTemp = scriptRegistry->CreateScript("CameraComponent");
-			ICamera* cameraComponent = dynamic_cast<ICamera*>(componentTemp.get());
+			scriptRegistry->CreateScript("CameraComponent", tempObject);
+			ICamera* cameraComponent = nullptr;
+			for (auto& value : *tempObject->GetComponents())
+			{
+				cameraComponent = dynamic_cast<ICamera*>(value.get());
+			}
 			currentManager->SetCameraVector(cameraComponent);
-			tempObject->SetComponent(std::move(componentTemp));
 			currentManager->SetNewObject(tempObject);
 		}
 		break;

@@ -30,7 +30,7 @@ CameraObject::CameraObject()
 
 DirectX::XMMATRIX CameraObject::GetProjectionMatrix()const
 {
-	return DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, nearPlane, farPlane);
+	return DirectX::XMMatrixPerspectiveLH(XMConvertToRadians(FOV), 3.0f / 4.0f, nearPlane, farPlane);
 }
 DirectX::XMMATRIX CameraObject::GetViewMatrix()const
 {

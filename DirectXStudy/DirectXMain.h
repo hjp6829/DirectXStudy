@@ -67,6 +67,7 @@ private:
 	LightObject* light;
 	GlobalBuffer globalBuffer = {};
 	uint64_t currentOutlineID;
+	RendererManager* rendererManager;
 	PostProcessingManager* postProcessingManager;
 	ObjectPickingManager* pickingManager;
 	WorldManager* worldManager;

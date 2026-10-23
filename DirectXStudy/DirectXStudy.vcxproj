@@ -148,6 +148,7 @@
     <ClCompile Include="LightObject.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="ModelBrowserUI.cpp" />
     <ClCompile Include="ModelCreater.cpp" />
     <ClCompile Include="ModelNode.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="PixelShader.cpp" />
     <ClCompile Include="PostProcessingManager.cpp" />
     <ClCompile Include="PrimitiveTopology.cpp" />
+    <ClCompile Include="RendererManager.cpp" />
     <ClCompile Include="RuntimeManager.cpp" />
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="SceneManager.cpp" />
@@ -192,6 +194,7 @@
     <ClInclude Include="LightObject.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="ModelAsset.h" />
     <ClInclude Include="ModelBrowserUI.h" />
     <ClInclude Include="ModelCreater.h" />
@@ -216,6 +219,7 @@
     <ClInclude Include="InputLayout.h" />
     <ClInclude Include="PixelShader.h" />
     <ClInclude Include="PrimitiveTopology.h" />
+    <ClInclude Include="RendererManager.h" />
     <ClInclude Include="RenderingTypes.h" />
     <ClInclude Include="RuntimeManager.h" />
     <ClInclude Include="Sampler.h" />

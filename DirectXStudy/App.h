@@ -11,6 +11,7 @@ class Mouse;
 class UIManager;
 class EventData;
 class WorldManager;
+class RendererManager;
 
 class App {
 	public:
@@ -23,10 +24,12 @@ private:
 		Input* input;
 		UIManager* uimanager;
 		WorldManager* worldManager;
+
 private:
 	std::queue<std::function<void()>> commandQueue;
 	void RegisterEventHandlers();
 	void DeleteObject(EventData* eventData);
 	void ActiveSceneModeChange(EventData* eventData);
 	ActiveSceneMode activeSceneMode = ActiveSceneMode::SceneMode;
+
 };

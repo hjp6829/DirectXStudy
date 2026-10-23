@@ -3,6 +3,7 @@
 #include <functional>
 
 class Component;
+class Object;
 
 class ScriptRegistry
 {
@@ -15,16 +16,7 @@ public:
         scriptFactories[name] = std::move(factory);
     }
 
-    std::unique_ptr<Component> CreateScript( const std::string& name)
-    {
-        auto it = scriptFactories.find(name);
-
-        if (it == scriptFactories.end())
-            return nullptr;
-
-        return it->second();
-    }
-
+    void CreateScript(const std::string& name,Object* object);
 private:
     std::unordered_map<std::string, ComponentFactory> scriptFactories;
 };

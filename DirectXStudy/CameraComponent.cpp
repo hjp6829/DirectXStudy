@@ -7,7 +7,7 @@ CameraComponent::CameraComponent()
 }
 DirectX::XMMATRIX CameraComponent::GetProjectionMatrix()const
 {
-	return DirectX::XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, nearPlane, farPlane);
+	return DirectX::XMMatrixPerspectiveLH(XMConvertToRadians(FOV), 3.0f / 4.0f, nearPlane, farPlane);
 }
 DirectX::XMMATRIX CameraComponent::GetViewMatrix()const
 {
@@ -36,6 +36,8 @@ DirectX::XMFLOAT3 CameraComponent::GetCameraForward() const
 void CameraComponent::InspectorUpdate()
 {
 	Component::InspectorUpdate();
+
+	ImGui::InputFloat("FOV",&FOV);
 }
 
 std::unique_ptr<Component> CameraComponent::Clone() const
@@ -45,9 +47,12 @@ std::unique_ptr<Component> CameraComponent::Clone() const
 }
 void CameraComponent::Serialize(nlohmann::json& j)
 {
-
+	j = nlohmann::json{
+		{"FOV",FOV}
+	};
 }
 
 void CameraComponent::Deserialize(const nlohmann::json& j)
 {
+	FOV = j.at("FOV").get<float>();
 }

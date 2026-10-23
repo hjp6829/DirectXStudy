@@ -21,6 +21,7 @@ public:
 	virtual void Serialize(nlohmann::json& j) = 0;
 	virtual void Deserialize(const nlohmann::json& j) = 0;
 	std::string GetComponentName() {return componentName;}
+	Object* GetOwnObject(){return currentObject;}
 protected:
 	Object* currentObject;
 	std::string componentName;

@@ -12,6 +12,7 @@
 #include "WorldManager.h"
 #include "ObjectPickingManager.h"
 #include "ICamera.h"
+#include "RendererManager.h"
 
 DirectXMain::DirectXMain(HWND hWnd)
 {
@@ -89,6 +90,7 @@ DirectXMain::DirectXMain(HWND hWnd)
 
 	postProcessingManager = new PostProcessingManager(pDevice,pContext);
 	pickingManager = new ObjectPickingManager(pDevice);
+	rendererManager = new RendererManager();
 }
 
 void DirectXMain::Start()

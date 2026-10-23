@@ -2,7 +2,6 @@
 #include "Component.h"
 #include <DirectXMath.h>
 
-
 class Transform : public Component
 {
 public:
@@ -22,8 +21,6 @@ public:
 	DirectX::XMMATRIX GetWorldMatrix() { return worldMatrix; }
 	void SetWorldMatrix(DirectX::XMMATRIX matrix) { worldMatrix = matrix; }
 	void MakeLocalMatrix();
-	void Serialize(nlohmann::json& j) override;
-	void Deserialize(const nlohmann::json& j) override;
 	void UpdateTransformForNewParent(DirectX::FXMMATRIX oldWorldMatrix, DirectX::FXMMATRIX newParentWorldMatrix);
 	DirectX::XMMATRIX GetImportLocalMatrix() { return importLocalMatrix; }
 	DirectX::XMMATRIX GetOffsetMatrix(){return offsetMatrix; }
@@ -44,9 +41,12 @@ public:
 	void SetRight(DirectX::FXMVECTOR value) { right = value; }
 	void SetForward(DirectX::FXMVECTOR value) { forward = value; }
 	void CopyTransform(Transform* origTransform);
-	std::unique_ptr<Component> Clone()const override;
+
 public:
 	void InspectorUpdate() override;
+	std::unique_ptr<Component> Clone()const override;
+	void Serialize(nlohmann::json& j) override;
+	void Deserialize(const nlohmann::json& j) override;
 private:
 	void UpdateDirectionVectors();
 private:

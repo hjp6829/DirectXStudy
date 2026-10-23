@@ -2,13 +2,15 @@
 #include <cstdint>
 
 class Object;
+class Component;
 
 enum class EventType {
 	SelectObject,
 	SelectObjectID,
 	RequestDeleteObject,
 	ObjectWillBeDeleted,
-	ActiveSceneChanged
+	ActiveSceneChanged,
+	ComponentAdded
 };
 enum class ActiveSceneMode {
 	SceneMode,
@@ -31,4 +33,9 @@ class ActiveSceneChangedEventData : public EventData
 {
 public:
 	ActiveSceneMode activeSceneMode;
+};
+class ComponentEventData : public EventData
+{
+public:
+	Component* component;
 };

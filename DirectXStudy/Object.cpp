@@ -1,6 +1,6 @@
 #include "Object.h"
 #include "DirectXMain.h"
-#include "ModelNode.h"
+
 #include "Log.h"
 #include "imgui_impl_win32.h"
 #include "Component.h"
@@ -80,7 +80,6 @@ void Object::LateUpateComponent(float deltaTime)
 void Object::Serialize(nlohmann::json& j)
 {
 	j = nlohmann::json{
-		{"modelHeshCode",currentModelNode == nullptr ? 0 : currentModelNode->modelHeshCode},
 		{"parentObjectID", parentObject == nullptr ? 0 : parentObject->objectID},
 		{"ModelNamePath", modelNamePath},
 		{ "TestModelNamePath", objectName},
@@ -134,7 +133,6 @@ void Object::SetDataToCopy(Object* copyObject)
 	copyObject->modelNamePath = modelNamePath;
 	copyObject->objectID = objectID;
 	copyObject->parentobjectID = parentobjectID;
-	copyObject->currentModelNode = currentModelNode;
 	for (const auto& component : components)
 	{
 		std::unique_ptr<Component> temp = component->Clone();
@@ -190,15 +188,6 @@ void Object::UpdateObject()
 	}
 }
 
-void Object::ToggleMeshEnable(bool value)
-{
-	meshEnable = value;
-	currentModelNode->ToggleMeshEnable(meshEnable);
-	for (int i = 0; i < childObjects.size(); i++)
-	{
-		childObjects[i]->ToggleMeshEnable(value);
-	}
-}
 
 void Object::RemoveModelData()
 {
@@ -207,7 +196,6 @@ void Object::RemoveModelData()
 		parentObject->RemoveChildObject(this);
 		parentObject = nullptr;
 	}
-	currentModelNode = nullptr;
 	RemoveAllChileObject(this);
 }
 
@@ -228,7 +216,6 @@ void Object::RemoveAllChileObject(Object* childObject)
 	for (int i = 0; i < childObject->childObjects.size(); i++)
 	{
 		RemoveAllChileObject(childObject->childObjects[i]);
-		childObject->childObjects[i]->currentModelNode = nullptr;
 	}
 }
 
