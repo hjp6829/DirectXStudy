@@ -43,3 +43,11 @@ std::unique_ptr<Component> CameraComponent::Clone() const
 	std::unique_ptr<CameraComponent> Temp = std::make_unique<CameraComponent>(*this);
 	return std::move(Temp);
 }
+void CameraComponent::Serialize(nlohmann::json& j)
+{
+
+}
+
+void CameraComponent::Deserialize(const nlohmann::json& j)
+{
+}

@@ -6,7 +6,7 @@ DirectX::XMFLOAT3 QuaternionToEulerDegrees(DirectX::FXMVECTOR quaternion);
 
 Transform::Transform()
 {
-	componentName = "transform";
+	componentName = "Transform";
 	UpdateDirectionVectors();
 }
 
@@ -190,10 +190,9 @@ void Transform::Serialize(nlohmann::json& j)
 }
 void Transform::Deserialize(const nlohmann::json& j)
 {
-	const auto& transformJson = j.at("transform");
-	SetPostionOffset(DirectX::XMFLOAT3(transformJson.at("posX").get<float>(), transformJson.at("posY").get<float>(), transformJson.at("posZ").get<float>()));
-	SetRotationOffset(DirectX::XMFLOAT4(transformJson.at("rotx").get<float>(), transformJson.at("roty").get<float>(), transformJson.at("rotz").get<float>(), transformJson.at("rotw").get<float>()));
-	SetScaleOffset(DirectX::XMFLOAT3(transformJson.at("scalex").get<float>(), transformJson.at("scaley").get<float>(), transformJson.at("scalez").get<float>()));
+	SetPostionOffset(DirectX::XMFLOAT3(j.at("posX").get<float>(), j.at("posY").get<float>(), j.at("posZ").get<float>()));
+	SetRotationOffset(DirectX::XMFLOAT4(j.at("rotx").get<float>(), j.at("roty").get<float>(), j.at("rotz").get<float>(), j.at("rotw").get<float>()));
+	SetScaleOffset(DirectX::XMFLOAT3(j.at("scalex").get<float>(), j.at("scaley").get<float>(), j.at("scalez").get<float>()));
 }
 
 void Transform::UpdateTransformForNewParent(DirectX::FXMMATRIX oldWorldMatrix, DirectX::FXMMATRIX newParentWorldMatrix)

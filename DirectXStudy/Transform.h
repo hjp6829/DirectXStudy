@@ -1,7 +1,7 @@
 #pragma once
 #include "Component.h"
 #include <DirectXMath.h>
-#include <nlohmann/json.hpp>
+
 
 class Transform : public Component
 {
@@ -22,8 +22,8 @@ public:
 	DirectX::XMMATRIX GetWorldMatrix() { return worldMatrix; }
 	void SetWorldMatrix(DirectX::XMMATRIX matrix) { worldMatrix = matrix; }
 	void MakeLocalMatrix();
-	void Serialize(nlohmann::json& j);
-	void Deserialize(const nlohmann::json& j);
+	void Serialize(nlohmann::json& j) override;
+	void Deserialize(const nlohmann::json& j) override;
 	void UpdateTransformForNewParent(DirectX::FXMMATRIX oldWorldMatrix, DirectX::FXMMATRIX newParentWorldMatrix);
 	DirectX::XMMATRIX GetImportLocalMatrix() { return importLocalMatrix; }
 	DirectX::XMMATRIX GetOffsetMatrix(){return offsetMatrix; }

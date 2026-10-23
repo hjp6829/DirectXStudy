@@ -87,14 +87,44 @@ void Object::Serialize(nlohmann::json& j)
 		{ "objectID", objectID },
 		{ "isRootObject", IsRootObject() == true ? 1 : 0},
 	};
-	transform->Serialize(j["transform"]);
+	j["Components"] = nlohmann::json::array();
+
+	for (auto& component : components)
+	{
+		nlohmann::json componentJson;
+		component->Serialize(componentJson);
+		componentJson["type"] = component->GetComponentName();
+		j["Components"].push_back(componentJson);
+	}
 }
 void Object::Deserialize(const nlohmann::json& j)
 {
 	j.at("parentObjectID").get_to(parentobjectID);
 	j.at("objectID").get_to(objectID);
 	SetRootNodeCheck(j.at("isRootObject").get<float>() == 1 ? true : false);
-	transform->Deserialize(j);
+	if (!j.contains("Components") || !j["Components"].is_array())
+		return;
+
+	for (const auto& componentJson : j["Components"])
+	{
+		std::string type = componentJson.value("type", std::string(""));
+
+		if (type == "Transform")
+		{
+			transform->Deserialize(componentJson);
+			continue;
+		}
+
+		//std::unique_ptr<Component> component =
+		//	ComponentRegistry::Create(type);
+
+		//if (component == nullptr)
+		//	continue;
+
+		//component->Deserialize(componentJson);
+
+		//components.push_back(std::move(component));
+	}
 }
 void Object::SetDataToCopy(Object* copyObject)
 {

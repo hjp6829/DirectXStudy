@@ -51,3 +51,12 @@ std::unique_ptr<Component> TestScript::Clone()const
 {
 	return std::make_unique<TestScript>(*this);
 }
+
+void TestScript::Serialize(nlohmann::json& j)
+{
+
+}
+
+void TestScript::Deserialize(const nlohmann::json& j)
+{
+}
