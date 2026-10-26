@@ -1,27 +1,11 @@
 #include "ModelNode.h"
 #include "Mesh.h"
 
-void ModelNode::RenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix)
+void ModelNode::RenderMeshs(RenderPass renderPass,ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix,int objectID)
 {
 	for (int i = 0; i < currentMeshs.size(); i++)
 	{
-		currentMeshs[i]->Render(context, worldMatrix, viewMatrix, projectionMatrix);
-	}
-}
-
-void ModelNode::OutlineRenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix)
-{
-	for (int i = 0; i < currentMeshs.size(); i++)
-	{
-		currentMeshs[i]->OutlineRender(context, worldMatrix, viewMatrix, projectionMatrix);
-	}
-}
-
-void ModelNode::PickingRenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix, int ObjectID)
-{
-	for (int i = 0; i < currentMeshs.size(); i++)
-	{
-		currentMeshs[i]->PickingRender(context, worldMatrix, viewMatrix, projectionMatrix, ObjectID);
+		currentMeshs[i]->Render(renderPass,context, worldMatrix, viewMatrix, projectionMatrix, objectID);
 	}
 }
 

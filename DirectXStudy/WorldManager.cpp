@@ -90,7 +90,8 @@ void WorldManager::SetSelectObjectID(EventData* eventData)
 	if (eventDataCast != nullptr)
 	{
 		SelectObjectData selectObjectData;
-		selectObjectData.selectObject = currentManager->GetObjectByID(eventDataCast->objectID);
+		selectedObjectID = eventDataCast->objectID;
+		selectObjectData.selectObject = currentManager->GetObjectByID(selectedObjectID);
 		EventBus::Publish(EventType::SelectObject, &selectObjectData);
 	}
 }
@@ -100,6 +101,7 @@ void WorldManager::DeleteObject(EventData* eventData)
 
 	if (eventDataCast != nullptr)
 	{
+		selectedObjectID = 0;
 		Object* tempObject = currentManager->GetObjectByID(eventDataCast->objectID);
 
 		if (tempObject->IsRootObject())

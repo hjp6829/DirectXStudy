@@ -60,31 +60,17 @@ DirectXMain::DirectXMain(HWND hWnd)
 
 	pContext->RSSetViewports(1, &viewport);
 
-	rendererManager = new RendererManager();
+	rendererManager = new RendererManager(pDevice.Get(),pContext.Get(), backBuffer);
 }
 
 void DirectXMain::Start()
 {
-	globalBuffer.lightColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	//globalBuffer.lightPos = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
 
-	D3D11_BUFFER_DESC sDes = {};
-	sDes.ByteWidth = sizeof(globalBuffer);
-	sDes.Usage = D3D11_USAGE_DYNAMIC;
-	sDes.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	sDes.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	sDes.MiscFlags = 0;
-	sDes.StructureByteStride = 0;
-	D3D11_SUBRESOURCE_DATA sd = {};
-	sd.pSysMem = &globalBuffer;
-
-	pDevice->CreateBuffer(&sDes, &sd, lightConstantBuffer.GetAddressOf());
 }
 
 void DirectXMain::Render()
 {
-	
-	
+	rendererManager->Render(worldManager);
 }
 
 void DirectXMain::Shutdown()

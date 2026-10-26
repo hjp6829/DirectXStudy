@@ -7,15 +7,15 @@
 
 using namespace Microsoft::WRL;
 
-class DirectXMain;
 class Object;
 class ICamera;
+class MeshRenderer;
 
 class ObjectPickingManager
 {
 public:
 	ObjectPickingManager(ComPtr<ID3D11Device> pDevice);
-	bool PickingObject(DirectXMain* dxdMain, std::unordered_map<uint64_t, Object*>* rootObjects,ICamera* cam);
+	bool PickingObject(ID3D11DeviceContext* context, std::unordered_map<uint64_t, MeshRenderer*> meshComponenets,ICamera* cam, ID3D11DepthStencilView* depthStencilView);
 private:
 	ComPtr<ID3D11RenderTargetView> pPickingRenderTarget;
 	ComPtr<ID3D11Texture2D> pickingStagingTexture;

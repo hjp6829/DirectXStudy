@@ -14,8 +14,7 @@ using namespace Microsoft::WRL;
 class Texture;
 class VertexShader;
 class PixelShader;
-class Object;
-class DirectXMain;
+class MeshRenderer;
 class ICamera;
 
 class PostProcessingManager
@@ -23,7 +22,7 @@ class PostProcessingManager
 public:
 	PostProcessingManager(ComPtr<ID3D11Device> pDevice, ComPtr<ID3D11DeviceContext> pContext);
 	void PostProcessingRender();
-	void OutlineRender(Object* currentObject, DirectXMain* dxdMain, ICamera* cam);
+	void OutlineRender(MeshRenderer* meshComp, ID3D11DeviceContext* context, ICamera* cam);
 private:
 	ComPtr<ID3D11RenderTargetView> pOutlineRenderTarget;
 	ComPtr<ID3D11ShaderResourceView> pPostProcessOutlineSRV;

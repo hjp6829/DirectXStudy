@@ -7,6 +7,7 @@
 #include "Object.h"
 #include "DirectXMain.h"
 #include "ICamera.h"
+#include "MeshRenderer.h"
 
 ObjectPickingManager::ObjectPickingManager(ComPtr<ID3D11Device> pDevice)
 {
@@ -46,17 +47,17 @@ ObjectPickingManager::ObjectPickingManager(ComPtr<ID3D11Device> pDevice)
 	pDevice->CreateTexture2D(&desc, nullptr, pickingStagingTexture.GetAddressOf());
 }
 
-bool ObjectPickingManager::PickingObject(DirectXMain* dxdMain, std::unordered_map<uint64_t, Object*>* rootObjects,ICamera* cam)
+bool ObjectPickingManager::PickingObject(ID3D11DeviceContext* context, std::unordered_map<uint64_t, MeshRenderer*> meshComponenets,ICamera* cam, ID3D11DepthStencilView* depthStencilView)
 {
 		ImGuiIO& io = ImGui::GetIO();
 		if (!io.WantCaptureMouse)
 		{
-			dxdMain->GetContext()->ClearRenderTargetView(pPickingRenderTarget.Get(), clearColor);
-			dxdMain->GetContext()->OMSetRenderTargets(1, pPickingRenderTarget.GetAddressOf(), dxdMain->GetDepthStencilView());
+			context->ClearRenderTargetView(pPickingRenderTarget.Get(), clearColor);
+			context->OMSetRenderTargets(1, pPickingRenderTarget.GetAddressOf(), depthStencilView);
 
-			for (auto& [key, value] : *rootObjects)
+			for (auto& [key, value] : meshComponenets)
 			{
-				value->RenderObject(RenderPass::Picking, dxdMain->GetContext(), cam->GetViewMatrix(), cam->GetProjectionMatrix());
+				value->RenderMesh(RenderPass::Picking, context, cam->GetViewMatrix(), cam->GetProjectionMatrix());
 			}
 			POINT mousePos = Input::mousePosition();
 			D3D11_BOX sourceBox = {};
@@ -70,7 +71,7 @@ bool ObjectPickingManager::PickingObject(DirectXMain* dxdMain, std::unordered_ma
 			sourceBox.front = 0;
 			sourceBox.back = 1;
 
-			dxdMain->GetContext()->CopySubresourceRegion(
+			context->CopySubresourceRegion(
 				pickingStagingTexture.Get(),
 				0,
 				0, 0, 0,
@@ -81,7 +82,7 @@ bool ObjectPickingManager::PickingObject(DirectXMain* dxdMain, std::unordered_ma
 
 			D3D11_MAPPED_SUBRESOURCE mapped = {};
 
-			HRESULT hr = dxdMain->GetContext()->Map(
+			HRESULT hr = context->Map(
 				pickingStagingTexture.Get(),
 				0,
 				D3D11_MAP_READ,
@@ -94,7 +95,7 @@ bool ObjectPickingManager::PickingObject(DirectXMain* dxdMain, std::unordered_ma
 				uint64_t objectID =
 					*static_cast<const uint64_t*>(mapped.pData);
 
-				dxdMain->GetContext()->Unmap(pickingStagingTexture.Get(), 0);
+				context->Unmap(pickingStagingTexture.Get(), 0);
 
 				if (objectID != 0)
 				{

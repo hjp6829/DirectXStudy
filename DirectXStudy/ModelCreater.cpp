@@ -86,7 +86,6 @@ void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObje
 		for (int i = 0; i < modelNode->childNodes.size(); i++)
 		{
 			SceneObject* object = new SceneObject();
-			object->currentModelNode = modelNode->childNodes[i];
 			object->parentObject = parentObject;
 			parentObject->childObjects.push_back(object);
 			BuildSceneObjectTree(modelNode->childNodes[i], object);
@@ -127,7 +126,6 @@ Object* ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsse
 }
 void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)
 {
-	object->currentModelNode = modelNode;
 	object->objectName = modelNode->modelName;
 	object->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
 	object->modelNamePath = modelNode->sourceModelPath;

@@ -4,6 +4,10 @@
 #include "Object.h"
 #include "ObjectPickingManager.h"
 #include "PostProcessingManager.h"
+#include "Input.h"
+#include "WorldManager.h"
+#include "ICamera.h"
+#include "LightObject.h"
 
 RendererManager::RendererManager(ID3D11Device* pDevice, ID3D11DeviceContext* pContext,ID3D11Texture2D* backBuffer)
 {
@@ -41,6 +45,21 @@ RendererManager::RendererManager(ID3D11Device* pDevice, ID3D11DeviceContext* pCo
 
 	postProcessingManager = new PostProcessingManager(pDevice, pContext);
 	pickingManager = new ObjectPickingManager(pDevice);
+
+	globalBuffer.lightColor = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	//globalBuffer.lightPos = XMFLOAT4(0.0f, 0.0f, 0.0f, 1.0f);
+
+	D3D11_BUFFER_DESC sDes = {};
+	sDes.ByteWidth = sizeof(globalBuffer);
+	sDes.Usage = D3D11_USAGE_DYNAMIC;
+	sDes.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	sDes.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	sDes.MiscFlags = 0;
+	sDes.StructureByteStride = 0;
+	D3D11_SUBRESOURCE_DATA sd = {};
+	sd.pSysMem = &globalBuffer;
+
+	pDevice->CreateBuffer(&sDes, &sd, lightConstantBuffer.GetAddressOf());
 }
 void RendererManager::RegisterEventHandlers()
 {
@@ -59,11 +78,10 @@ void RendererManager::SetNewMeshRenderComponent(EventData* eventData)
 	}
 }
 
-void RendererManager::Render()
+void RendererManager::Render(WorldManager* worldManager)
 {
-	rootObjects = worldManager->GetRootObjects();
-	cam = worldManager->GetCamera(0);
-	light = worldManager->GetLight();
+	ICamera* cam = worldManager->GetCamera(0);
+	LightObject* light = worldManager->GetLight();
 	pContext->ClearRenderTargetView(pRenderTarget.Get(), clearColor);
 	pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
@@ -83,20 +101,22 @@ void RendererManager::Render()
 	pContext->PSSetConstantBuffers(1, 1, lightConstantBuffer.GetAddressOf());
 	if (Input::GetMouseButtonDown(0))
 	{
-		if (pickingManager->PickingObject(this, rootObjects, cam))
+		if (pickingManager->PickingObject(pContext, meshComponenets, cam,depthStencilView.Get()))
 		{
 			pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 			pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
 		}
 	}
-	for (auto& [key, value] : *rootObjects)
+	for (auto& [key, value] : meshComponenets)
 	{
-		value->RenderObject(RenderPass::Main, pContext.Get(), cam->GetViewMatrix(), cam->GetProjectionMatrix());
+		value->RenderMesh(RenderPass::Main, pContext, cam->GetViewMatrix(), cam->GetProjectionMatrix());
 	}
-
-	if (currentOutlineID == -1)
+	uint64_t selectedObjectID = worldManager->GetSelectedObjectID();
+	if (selectedObjectID == 0)
 		return;
-	postProcessingManager->OutlineRender(worldManager->GetObjectByID(currentOutlineID), this, cam);//그려주기
+	if (meshComponenets.find(selectedObjectID) == meshComponenets.end())
+		return;
+	postProcessingManager->OutlineRender(meshComponenets[selectedObjectID], pContext, cam);//그려주기
 	pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
 	postProcessingManager->PostProcessingRender();//그린거 사용하기
 }

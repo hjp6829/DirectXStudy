@@ -113,13 +113,13 @@ Object* SceneManager::DuplicateSceneObject(Object* object)
 	{
 		SceneObject* copyObject =new SceneObject();
 		copyObject->objectID = ++objectID;
-		modelCreater->SetModelToObject(copyObject, object->currentModelNode);
+		//modelCreater->SetModelToObject(copyObject);
 		object->SetDataToCopy(copyObject);
 		return copyObject;
 	}
 	SceneObject* copyObject = new SceneObject();
 	copyObject->objectID = ++objectID;
-	modelCreater->SetModelToObject(copyObject, object->currentModelNode);
+	//modelCreater->SetModelToObject(copyObject);
 	object->SetDataToCopy(copyObject);
 	for (int i = 0; i < object->childObjects.size(); i++)
 	{

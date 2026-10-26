@@ -1,6 +1,7 @@
 #pragma once
 #include <DirectXMath.h>
 #include "Datas.h"
+#include "RenderingTypes.h"
 
 class AssimpConverter;
 template<typename T>
@@ -23,9 +24,7 @@ class Mesh {
 public:
 	Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* assimp, asMesh* meshData);
 	~Mesh();
-	void Render(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix);
-	void OutlineRender(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix);
-	void PickingRender(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix, int ObjectID);
+	void Render(RenderPass renderPass, ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix,int ObjectID);
 	int GetMaterialIDX(){return materialIDX; }
 	void SetMaterialIDX(asMaterial* material, int idx);
 	XMFLOAT3 GetLocalPos();
@@ -51,11 +50,13 @@ private:
 	PSBuffer cb = {};
 	PSPickingIDBuffer pickingIDBufferData = {};
 	XMMATRIX localMatrix;
+	ComPtr<ID3D11Buffer> pickingConstantBuffer;
+
+	std::vector<std::unique_ptr<Bindable>> commonBindables;
+	std::vector<std::unique_ptr<Bindable>> normalBindables;
+	std::unique_ptr<PixelShader> normalShader;
 	std::unique_ptr<PixelShader> outlineShader;
 	std::unique_ptr<PixelShader> pickingShader;
-	ComPtr<ID3D11Buffer> pickingConstantBuffer;
-	std::vector<std::unique_ptr<Bindable>> bindable;
-	std::vector<Bindable*> outlineBindable;
-	std::vector<Bindable*> pickingBindable;
+
 	UINT IndexCount;
 };

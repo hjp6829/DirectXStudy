@@ -3,6 +3,8 @@
 #include <string>
 #include <DirectXMath.h>
 #include <d3d11.h>
+#include "RenderingTypes.h"
+
 class Mesh;
 
 class ModelNode {
@@ -15,8 +17,6 @@ public:
 	DirectX::XMMATRIX localMatrix;
 	uint64_t modelHeshCode;
 public:
-	void RenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix);
-	void OutlineRenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix);
-	void PickingRenderMeshs(ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix,int ObjectID);
+	void RenderMeshs(RenderPass renderPass, ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix, int objectID);
 	void ToggleMeshEnable(bool value);
 };

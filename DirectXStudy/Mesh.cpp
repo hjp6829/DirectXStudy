@@ -22,33 +22,20 @@ Mesh::Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* 
 	//SetScale(0.01f,0.01f,0.01f);
 	ComPtr<ID3DBlob> vertexShaderBlob;
 	D3DReadFileToBlob(L"VertexShader.cso", &vertexShaderBlob);
-	auto vertexShaderTemp = std::make_unique<VertexShader>(device, vertexShaderBlob.Get());
-	outlineBindable.push_back(vertexShaderTemp.get());
-	pickingBindable.push_back(vertexShaderTemp.get());
-	bindable.push_back(std::move(vertexShaderTemp));
+	commonBindables.push_back(std::make_unique<VertexShader>(device, vertexShaderBlob.Get()));
 
+	normalBindables.push_back(std::make_unique<Texture>(material->textureView, 0));
 
-	auto meshTextureTemp = std::make_unique<Texture>(material->textureView, 0);
-	meshTexture = meshTextureTemp.get();
-	bindable.push_back(std::move(meshTextureTemp));
+	normalBindables.push_back(std::make_unique<Sampler>(device, 0));
 
-	auto outlineSampleTemp = std::make_unique<Sampler>(device, 0);
-	outlineBindable.push_back(outlineSampleTemp.get());
-	bindable.push_back(std::move(outlineSampleTemp));
+	normalBindables.push_back(std::make_unique<Texture>(material->normalView, 1));
+	normalBindables.push_back(std::make_unique<Sampler>(device, 1));
 
-	auto normalTextureTemp = std::make_unique<Texture>(material->normalView, 1);
-	normalTexture = normalTextureTemp.get();
-	bindable.push_back(std::move(normalTextureTemp));
-	bindable.push_back(std::make_unique<Sampler>(device, 1));
-
-	auto inputlayoutTemp = std::make_unique<InputLayout>(device, vertexShaderBlob.Get());
-	outlineBindable.push_back(inputlayoutTemp.get());
-	pickingBindable.push_back(inputlayoutTemp.get());
-	bindable.push_back(std::move(inputlayoutTemp));
+	commonBindables.push_back(std::make_unique<InputLayout>(device, vertexShaderBlob.Get()));
 
 	ComPtr<ID3DBlob> pixelShaderBlob;
 	D3DReadFileToBlob(L"PixelShader.cso", &pixelShaderBlob);
-	bindable.push_back(std::make_unique<PixelShader>(device, pixelShaderBlob.Get()));
+	normalShader = std::make_unique<PixelShader>(device, pixelShaderBlob.Get());
 
 	ComPtr<ID3DBlob> outlineShaderBlob;
 	D3DReadFileToBlob(L"OutlineShader.cso", &outlineShaderBlob);
@@ -58,34 +45,30 @@ Mesh::Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* 
 	D3DReadFileToBlob(L"PickingPixelShader.cso", &pickingShaderBlob);
 	pickingShader = std::make_unique<PixelShader>(device, pickingShaderBlob.Get());
 
-	auto vertexBufferTemp = std::make_unique<VertexBuffer>(device, meshData->vertexs);
-	outlineBindable.push_back(vertexBufferTemp.get());
-	pickingBindable.push_back(vertexBufferTemp.get());
-	bindable.push_back(std::move(vertexBufferTemp));
+	commonBindables.push_back(std::make_unique<VertexBuffer>(device, meshData->vertexs));
 
-	std::unique_ptr<IndexBuffer> indexBuffer = std::make_unique<IndexBuffer>(device, meshData->Indexs);
+	auto indexBuffer = std::make_unique<IndexBuffer>(
+		device, meshData->Indexs
+	);
 	IndexCount = indexBuffer->GetIndexCount();
-	outlineBindable.push_back(indexBuffer.get());
-	pickingBindable.push_back(indexBuffer.get());
-	bindable.push_back(std::move(indexBuffer));
+	commonBindables.push_back(std::move(indexBuffer));
 
-	auto primitiveTopologyTemp = std::make_unique<PrimitiveTopology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	outlineBindable.push_back(primitiveTopologyTemp.get());
-	pickingBindable.push_back(primitiveTopologyTemp.get());
-	bindable.push_back(std::move(primitiveTopologyTemp));
+	commonBindables.push_back(std::make_unique<PrimitiveTopology>(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST));
 
 	localMatrix = 	XMMatrixScaling(scale.x, scale.y, scale.z) *
 		XMMatrixRotationRollPitchYaw(rotation.x, rotation.y, rotation.z) *
 		XMMatrixTranslation(position.x, position.y, position.z);
 
 	cb.color = color;
-	bindable.push_back(std::make_unique<PSContantBuffer<PSBuffer>>(device, cb)); 
+	normalBindables.push_back(std::make_unique<PSContantBuffer<PSBuffer>>(device, cb));
 
-	std::unique_ptr vertexConstantBufferTemp = std::make_unique<VertexConstantBufferContainer<ConstantBufferData>>(device,sb, *this);
+	auto vertexConstantBufferTemp =
+		std::make_unique<VertexConstantBufferContainer<ConstantBufferData>>(
+			device, sb, *this
+		);
+
 	vertexConstantBufferContainer = vertexConstantBufferTemp.get();
-	outlineBindable.push_back(vertexConstantBufferTemp.get());
-	pickingBindable.push_back(vertexConstantBufferTemp.get());
-	bindable.push_back(std::move(vertexConstantBufferTemp));
+	commonBindables.push_back(std::move(vertexConstantBufferTemp));
 
 	D3D11_BUFFER_DESC sDes = {};
 	sDes.ByteWidth = sizeof(pickingIDBufferData);
@@ -100,54 +83,55 @@ Mesh::Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* 
 	device->CreateBuffer(&sDes, &sd, pickingConstantBuffer.GetAddressOf());
 }
 
-void Mesh::Render(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix)
+void Mesh::Render(RenderPass renderPass, ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix, int ObjectID)
 {
 	if (!enable)
 		return;
-	DirectX::XMStoreFloat4x4(&sb.worldMatrix, localMatrix* worldMatrix);
+
+	DirectX::XMStoreFloat4x4(&sb.worldMatrix, localMatrix * worldMatrix);
 	vertexConstantBufferContainer->SetModelMatrix(viewMatrix, projectionMatrix);
-	for (int i = 0; i < bindable.size(); i++)
+
+	for (int i = 0; i < commonBindables.size(); i++)
 	{
-		bindable[i]->Bind(context);
+		commonBindables[i]->Bind(context);
+	}
+
+	switch (renderPass)
+	{
+	case RenderPass::Main:
+		normalShader->Bind(context);
+		for (int i = 0; i < normalBindables.size(); i++)
+		{
+			normalBindables[i]->Bind(context);
+		}
+		break;
+	case RenderPass::Outline:
+		outlineShader->Bind(context);
+		break;
+	case RenderPass::Picking:
+		{
+		pickingIDBufferData.id = ObjectID;
+		D3D11_MAPPED_SUBRESOURCE mapped = {};
+		HRESULT hr = context->Map(pickingConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
+		if (FAILED(hr))
+			return;
+		memcpy(mapped.pData, &pickingIDBufferData, sizeof(pickingIDBufferData));
+		context->Unmap(pickingConstantBuffer.Get(), 0);
+		context->PSSetConstantBuffers(0, 1, pickingConstantBuffer.GetAddressOf());
+		pickingShader->Bind(context);
+		}
+		break;
+	default:
+		return;
 	}
 	context->DrawIndexed(IndexCount,0,0);
 }
 
-void Mesh::OutlineRender(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix)
-{
-	DirectX::XMStoreFloat4x4(&sb.worldMatrix, localMatrix * worldMatrix);
-	vertexConstantBufferContainer->SetModelMatrix(viewMatrix, projectionMatrix);
-	for (int i = 0; i < outlineBindable.size(); i++)
-	{
-		outlineBindable[i]->Bind(context);
-	}
-	outlineShader->Bind(context);
-	context->DrawIndexed(IndexCount, 0, 0);
-}
-
-void Mesh::PickingRender(ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix, int ObjectID)
-{
-	DirectX::XMStoreFloat4x4(&sb.worldMatrix, localMatrix * worldMatrix);
-	pickingIDBufferData.id = ObjectID;
-	D3D11_MAPPED_SUBRESOURCE mapped = {};
-	HRESULT hr = context->Map(pickingConstantBuffer.Get(),0,D3D11_MAP_WRITE_DISCARD,0,&mapped);
-	memcpy(mapped.pData, &pickingIDBufferData, sizeof(pickingIDBufferData));
-	context->Unmap(pickingConstantBuffer.Get(), 0);
-	context->PSSetConstantBuffers(0, 1, pickingConstantBuffer.GetAddressOf());
-	vertexConstantBufferContainer->SetModelMatrix(viewMatrix, projectionMatrix);
-	for (int i = 0; i < pickingBindable.size(); i++)
-	{
-		pickingBindable[i]->Bind(context);
-	}
-	pickingShader->Bind(context);
-	context->DrawIndexed(IndexCount, 0, 0);
-}
-
 void Mesh::SetMaterialIDX(asMaterial* material,int idx)
 {
-	materialIDX = idx;
-	normalTexture->ChangeNewTextureView(material->textureView);
-	normalTexture->ChangeNewTextureView(material->normalView);
+	//materialIDX = idx;
+	//meshTexture->ChangeNewTextureView(material->textureView);
+	//normalTexture->ChangeNewTextureView(material->normalView);
 }
 
 XMFLOAT3 Mesh::GetLocalPos()

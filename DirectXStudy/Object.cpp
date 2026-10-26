@@ -147,34 +147,6 @@ void Object::SetDataToCopy(Object* copyObject)
 	}
 }
 
-
-void Object::RenderObject(RenderPass renderPass, ID3D11DeviceContext* context, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix)
-{
-	switch (renderPass)
-	{
-	case RenderPass::Main:
-		if (currentModelNode != nullptr)
-			currentModelNode->RenderMeshs(context, transform->GetWorldMatrix(), viewMatrix, projectionMatrix);
-		break;
-	case RenderPass::Outline:
-		if (currentModelNode != nullptr)
-			currentModelNode->OutlineRenderMeshs(context, transform->GetWorldMatrix(), viewMatrix, projectionMatrix);
-		break;
-	case RenderPass::Picking:
-		if (currentModelNode != nullptr)
-			currentModelNode->PickingRenderMeshs(context, transform->GetWorldMatrix(), viewMatrix, projectionMatrix,objectID);
-		break;
-	default:
-		break;
-	}
-
-	for (int i = 0; i < childObjects.size(); i++)
-	{
-		if (childObjects[i] != nullptr)
-			childObjects[i]->RenderObject(renderPass, context, viewMatrix, projectionMatrix);
-	}
-}
-
 void Object::UpdateObject()
 {
 	transform->MakeLocalMatrix();

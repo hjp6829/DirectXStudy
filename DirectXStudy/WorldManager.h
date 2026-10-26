@@ -24,16 +24,18 @@ public:
 	LightObject* GetLight(){return currentManager->GetLight(); }
 	void SetCreateObject(std::string path);
 	void CreateObject(ObjectType type);
+	uint64_t GetSelectedObjectID(){return selectedObjectID; }
 private:
 	SceneManager* sceneManager;
 	RuntimeManager* runtimeManager;
 	ObjectManager* currentManager;
 	ScriptRegistry* scriptRegistry;
+	ActiveSceneMode activeSceneMode;
+	uint64_t selectedObjectID;
 private:
 	void RegisterEventHandlers();
 	void SetActiveMode(EventData* eventData);
 	void SetSelectObjectID(EventData* eventData);
 	void DeleteObject(EventData* eventData);
 	void DeleteChiledModels(Object* object);
-	ActiveSceneMode activeSceneMode;
 };

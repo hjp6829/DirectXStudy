@@ -5,6 +5,7 @@
 #include "Object.h"
 #include "DirectXMain.h"
 #include "ICamera.h"
+#include "MeshRenderer.h"
 
 PostProcessingManager::PostProcessingManager(ComPtr<ID3D11Device> pDevice, ComPtr<ID3D11DeviceContext> pContext)
 {
@@ -72,13 +73,9 @@ void PostProcessingManager::PostProcessingRender()
 	context->OMSetBlendState(nullptr, nullptr, 0xffffffff);
 }
 
-void PostProcessingManager::OutlineRender(Object* currentObject,DirectXMain* dxdMain, ICamera* cam)
+void PostProcessingManager::OutlineRender(MeshRenderer* meshComp, ID3D11DeviceContext* context, ICamera* cam)
 {
 	context->ClearRenderTargetView(pOutlineRenderTarget.Get(), clearColor);
 	context->OMSetRenderTargets(1, pOutlineRenderTarget.GetAddressOf(), nullptr);
-
-	if (currentObject != nullptr)
-	{
-		currentObject->RenderObject(RenderPass::Outline, dxdMain->GetContext(), cam->GetViewMatrix(), cam->GetProjectionMatrix());
-	}
+	meshComp->RenderMesh(RenderPass::Outline, context, cam->GetViewMatrix(), cam->GetProjectionMatrix());
 }

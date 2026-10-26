@@ -27,7 +27,6 @@ public:
 	std::string modelNamePath;
 	uint64_t objectID;
 	uint64_t parentobjectID;
-	void RenderObject(RenderPass renderPass, ID3D11DeviceContext* context,DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix);
 
 	bool IsRootObject() { return isRootObject; }
 	void SetRootNodeCheck(bool value) { isRootObject = value; }
