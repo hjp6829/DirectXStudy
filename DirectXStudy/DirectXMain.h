@@ -5,7 +5,6 @@
 #include <cmath>
 #include <DirectXMath.h>
 #include <vector>
-#include "LightObject.h"
 #include <string>
 #include <functional>
 #include "EventDefinitions.h"

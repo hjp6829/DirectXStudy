@@ -6,6 +6,7 @@
 #include "EventBus.h"
 #include "EventDefinitions.h"
 #include "SceneCameraComponent.h"
+#include "LightComponent.h"
 ScriptRegistry::ScriptRegistry()
 {
     RegisterScript("TestScript",[]() {
@@ -22,6 +23,10 @@ ScriptRegistry::ScriptRegistry()
     );
     RegisterScript("SceneCameraComponent", []() {
         return std::make_unique<SceneCameraComponent>();
+        }
+    );
+    RegisterScript("LightComponent", []() {
+        return std::make_unique<LightComponent>();
         }
     );
 }

@@ -10,6 +10,10 @@
 #include "ModelAsset.h"
 #include "MeshRenderer.h"
 #include "ModelNode.h"
+#include <fstream>
+#include <unordered_map>
+#include "LightComponent.h"
+#include "SceneCameraComponent.h"
 
 WorldManager::WorldManager(ID3D11Device* device)
 {
@@ -19,6 +23,8 @@ WorldManager::WorldManager(ID3D11Device* device)
 	runtimeManager = new RuntimeManager(device);
 	modelCreater = new ModelCreater(device);
 	currentManager = sceneManager;
+
+	LoadSaveSceneFile();
 }
 
 void WorldManager::ObjectsUpdate(float deltaTime)
@@ -29,12 +35,6 @@ void WorldManager::ObjectsLateUpdate(float deltaTime)
 {
 	currentManager->ObjectsLateUpdate(deltaTime);
 }
-void WorldManager::SetCreateObject(std::string path)
-{
-	ModelAsset* modelAsset = modelCreater->LoadModelFromFile(path);
-	Object* tempObject = currentManager->CreateObject();
-	BuildSceneObjectTree(modelAsset->currentNode, tempObject);
-}
 ICamera* WorldManager::GetCamera(int idx)
 {
 	if(activeSceneMode == ActiveSceneMode::SceneMode)
@@ -42,9 +42,15 @@ ICamera* WorldManager::GetCamera(int idx)
 	else
 		return currentManager->GetCamera(idx);
 }
+void WorldManager::CreateObject(std::string path)
+{
+	ModelAsset* modelAsset = modelCreater->LoadModelFromFile(path);
+	Object* tempObject = currentManager->CreateObject();
+	BuildSceneObjectTree(modelAsset->currentNode, tempObject);
+}
 void WorldManager::CreateObject(ObjectType type)
 {
-	/*Object* tempObject = currentManager->CreateObject(type);
+	Object* tempObject = currentManager->CreateObject();
 	switch (type)
 	{
 	case ObjectType::Camera:
@@ -61,10 +67,16 @@ void WorldManager::CreateObject(ObjectType type)
 		}
 		break;
 	case ObjectType::Light:
+		{
+			tempObject->objectName = "MainLight";
+			Component* lightTemp = scriptRegistry->CreateScript("LightComponent", tempObject);
+			LightComponent* lightComp = static_cast<LightComponent*>(lightTemp);
+			currentManager->SetLight(lightComp);
+		}
 		break;
 	default:
 		break;
-	}*/
+	}
 }
 void WorldManager::RegisterEventHandlers()
 {
@@ -149,12 +161,12 @@ void WorldManager::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObje
 }
 void WorldManager::CreateInitJsonFile()
 {
-	Object* tempObject = currentManager->CreateObject();
-	scriptRegistry->CreateScript("SceneCameraComponent", tempObject);
-	LightObject* light = new LightObject();
-	light->objectID = ++objectID;
-	currentManager->SetNewObject(tempObject);
-	currentManager->SetNewObject(light);
+	Object* camObject = currentManager->CreateObject();
+	scriptRegistry->CreateScript("SceneCameraComponent", camObject);
+	Object* lightObject = currentManager->CreateObject();
+	scriptRegistry->CreateScript("LightComponent", lightObject);
+	currentManager->SetNewObject(camObject);
+	currentManager->SetNewObject(lightObject);
 	SaveScene();
 	currentManager->ClearAllObject();
 }
@@ -167,7 +179,8 @@ void WorldManager::SaveScene()
 	std::ofstream file(savePath);
 
 	nlohmann::json jsonfile = nlohmann::json::array();
-	for (auto& [key, value] : objects)
+
+	for (auto& [key, value] : *currentManager->GetAllObjects())
 	{
 		Object* object = value;
 		SaveSceneObjectData(object, jsonfile);
@@ -181,10 +194,6 @@ void WorldManager::SaveSceneObjectData(Object* object, nlohmann::json& jsonfile)
 	nlohmann::json objectJson;
 	object->Serialize(objectJson);
 	jsonfile.push_back(objectJson);
-	for (int i = 0; i < object->childObjects.size(); i++)
-	{
-		SaveSceneObjectData(object->childObjects[i], jsonfile);
-	}
 }
 //void WorldManager::CreateSceneObjectFromJsonData(std::filesystem::path path, uint64_t modelHeshCode)
 //{
@@ -208,54 +217,59 @@ void WorldManager::SaveSceneObjectData(Object* object, nlohmann::json& jsonfile)
 //	meshComp->SetModelNode(modelNode);
 //	manager->SetNewObject(parentObject);
 //}
-//void SceneManager::LoadSaveSceneFile()
-//{
-//	using json = nlohmann::json;
-//	std::filesystem::path path = std::filesystem::current_path();
-//	std::filesystem::path saveFilePath = path / "SaveScene" / "Scene.json";
-//	if (!std::filesystem::exists(saveFilePath))
-//	{
-//		Log::PrintLog("No SaveFile Create Init SaveFile");
-//		CreateInitJsonFile();
-//	}
-//	std::ifstream file(saveFilePath);
-//	if (!file.is_open())
-//	{
-//		Log::PrintLog("path errer");
-//		return;
-//	}
-//	if (file.peek() == std::ifstream::traits_type::eof())
-//	{
-//		Log::PrintLog("file is empty");
-//		return;
-//	}
-//	json sceneJson;
-//	file >> sceneJson;
-//
-//	std::unordered_map<uint64_t, Object*>loadSceneObjects;
-//	for (const auto& item : sceneJson)
-//	{
-//		int objectType;
-//		item.at("ObjectType").get_to(objectType);
-//		Object* object = nullptr;
-//		if (objectType == 1)
-//			object = CreateSceneCamera(item);
-//		else
-//			object = CreateSceneObject(item, objectType, path);
-//
-//		loadSceneObjects.insert({ object->objectID, object });
-//		if (item.at("isRootObject") == 1)
-//			objects[object->objectID] = object;
-//		allObjects[object->objectID] = object;
-//	}
-//
-//	for (auto& [hashCode, objectTemp] : loadSceneObjects)
-//	{
-//		if (objectTemp->IsRootObject())
-//			continue;
-//		Object* parentObject = loadSceneObjects.at(objectTemp->parentobjectID);
-//		parentObject->InsertChildSceneObject(objectTemp);
-//	}
-//	isNoSaveFile = false;
-//	loadSceneObjects.clear();
-//}
+void WorldManager::LoadSaveSceneFile()
+{
+	using json = nlohmann::json;
+	std::filesystem::path path = std::filesystem::current_path();
+	std::filesystem::path saveFilePath = path / "SaveScene" / "Scene.json";
+	if (!std::filesystem::exists(saveFilePath))
+	{
+		Log::PrintLog("No SaveFile Create Init SaveFile");
+		CreateInitJsonFile();
+	}
+	std::ifstream file(saveFilePath);
+	if (!file.is_open())
+	{
+		Log::PrintLog("path errer");
+		return;
+	}
+	if (file.peek() == std::ifstream::traits_type::eof())
+	{
+		Log::PrintLog("file is empty");
+		return;
+	}
+	json sceneJson;
+	file >> sceneJson;
+
+	std::unordered_map<uint64_t, Object*>loadSceneObjects;
+	for (const auto& item : sceneJson)
+	{
+		std::string componentName;
+		Object* object = new Object();
+
+		if (item.contains("components") && item["components"].is_array())
+		{
+			for (const auto& componentJson : item["components"])
+			{
+				componentJson.at("ComponentName").get_to(componentName);
+
+				Component* component = scriptRegistry->CreateScript(componentName, object);
+				SceneCameraComponent* sceneCameraComp = dynamic_cast<SceneCameraComponent*>(component);
+				//if(sceneCameraComp != nullptr)
+				//	sceneca
+			}
+		}
+		object->Deserialize(item);
+		loadSceneObjects.insert({ object->objectID, object });
+		currentManager->SetNewObject(object);
+	}
+
+	for (auto& [hashCode, objectTemp] : loadSceneObjects)
+	{
+		if (objectTemp->IsRootObject())
+			continue;
+		Object* parentObject = loadSceneObjects.at(objectTemp->parentobjectID);
+		parentObject->InsertChildSceneObject(objectTemp);
+	}
+	loadSceneObjects.clear();
+}

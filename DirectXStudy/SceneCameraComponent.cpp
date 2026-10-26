@@ -3,6 +3,13 @@
 #include "Object.h"
 #include "imgui_impl_win32.h"
 
+void SceneCameraComponent::Serialize(nlohmann::json& j)
+{
+	j = nlohmann::json{
+		{"ComponentName","SceneCameraComponent"}
+	};
+}
+
 void SceneCameraComponent::LateUpdate()
 {
 	ImGuiIO& io = ImGui::GetIO();
@@ -64,4 +71,9 @@ void SceneCameraComponent::CameraTransformUpdate()
 	DirectX::XMFLOAT3 positionTemp;
 	DirectX::XMStoreFloat3(&positionTemp, pos);
 	currentObject->GetTransform()->SetPosition(positionTemp);
+}
+std::unique_ptr<Component> SceneCameraComponent::Clone() const
+{
+	std::unique_ptr<SceneCameraComponent> Temp = std::make_unique<SceneCameraComponent>(*this);
+	return std::move(Temp);
 }

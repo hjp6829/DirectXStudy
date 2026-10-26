@@ -7,7 +7,7 @@
 #include "Input.h"
 #include "WorldManager.h"
 #include "ICamera.h"
-#include "LightObject.h"
+#include "LightComponent.h"
 
 RendererManager::RendererManager(ID3D11Device* pDevice, ID3D11DeviceContext* pContext,ID3D11Texture2D* backBuffer)
 {
@@ -83,18 +83,18 @@ void RendererManager::SetNewMeshRenderComponent(EventData* eventData)
 void RendererManager::Render(WorldManager* worldManager)
 {
 	ICamera* cam = worldManager->GetCamera(0);
-	LightObject* light = worldManager->GetLight();
+	LightComponent* light = worldManager->GetLight();
 	pContext->ClearRenderTargetView(pRenderTarget.Get(), clearColor);
 	pContext->ClearDepthStencilView(depthStencilView.Get(), D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 
 	globalBuffer.cameraPos = cam->GetCameraPosition();
-	globalBuffer.lightPos = light->GetTransform()->GetObjectPosition();
+	globalBuffer.lightPos = light->GetLightPosition();
 	globalBuffer.lightColor = light->GetLightColor();
 	globalBuffer.specularStrength = light->GetSpecularStrength();
 	globalBuffer.shininess = light->GetShininess();
 	globalBuffer.maxLightDistance = light->GetMaxLightDistance();
 	globalBuffer.cameraForward = cam->GetCameraForward();
-	globalBuffer.lightForward = light->GetTransform()->GetForwardVector3();
+	globalBuffer.lightForward = light->GetForwardVector3();
 
 	D3D11_MAPPED_SUBRESOURCE mapped = {};
 	pContext->Map(lightConstantBuffer.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped);
@@ -118,7 +118,7 @@ void RendererManager::Render(WorldManager* worldManager)
 		return;
 	if (meshComponenets.find(selectedObjectID) == meshComponenets.end())
 		return;
-	postProcessingManager->OutlineRender(meshComponenets[selectedObjectID], pContext, cam);//±×·ÁÁÖ±â
+	postProcessingManager->OutlineRender(meshComponenets[selectedObjectID], pContext, cam);//ï¿½×·ï¿½ï¿½Ö±ï¿½
 	pContext->OMSetRenderTargets(1, pRenderTarget.GetAddressOf(), depthStencilView.Get());
-	postProcessingManager->PostProcessingRender();//±×¸°°Å »ç¿ëÇÏ±â
+	postProcessingManager->PostProcessingRender();//ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ï±ï¿½
 }

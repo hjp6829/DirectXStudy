@@ -48,7 +48,8 @@ std::unique_ptr<Component> CameraComponent::Clone() const
 void CameraComponent::Serialize(nlohmann::json& j)
 {
 	j = nlohmann::json{
-		{"FOV",FOV}
+		{"FOV",FOV},
+		{"ComponentName","CameraComponent"}
 	};
 }
 

@@ -1,0 +1,52 @@
+[
+    {
+        "Components": [
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            },
+            {
+                "ComponentName": "SceneCameraComponent"
+            }
+        ],
+        "ModelNamePath": "",
+        "TestModelNamePath": "",
+        "isRootObject": 1,
+        "objectID": 1,
+        "parentObjectID": 0
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            },
+            {
+                "ComponentName": "LightComponent"
+            }
+        ],
+        "ModelNamePath": "",
+        "TestModelNamePath": "",
+        "isRootObject": 1,
+        "objectID": 2,
+        "parentObjectID": 0
+    }
+]

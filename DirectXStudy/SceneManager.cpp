@@ -36,8 +36,8 @@ void SceneManager::ObjectsUpdate(float deltaTime)
 
 	if (isCtrl)
 	{
-		if (Input::GetKeyDown('S'))
-			SaveScene();
+		//if (Input::GetKeyDown('S'))
+		//	SaveScene();
 		if (Input::GetKeyDown('C'))
 			DuplicateObjectSave();
 		if (Input::GetKeyDown('V'))
@@ -56,34 +56,6 @@ void SceneManager::ObjectsLateUpdate(float deltaTime)
 	{
 		value->UpdateObject();
 	}
-}
-
-Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type, std::filesystem::path path)
-{
-	Object* object = nullptr;
-	switch (type)
-	{
-		case 0:
-			{
-			//std::filesystem::path modelFolderPath = "Assets/DirectXModel";
-			//std::string origModelPath;
-			//jsonfile.at("ModelNamePath").get_to(origModelPath);
-			//std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
-			//object = modelCreater->CreateSceneObjectFromJsonData(modelPath, jsonfile.at("modelHeshCode"));
-			//object->Deserialize(jsonfile);
-			break;
-			}
-		case 2:
-			{
-			light = new LightObject();
-			light->Deserialize(jsonfile);
-			object = light;
-			break;
-			}
-	}
-	objectID = object->objectID;
-
-	return object;
 }
 
 void SceneManager::DuplicateObjectSave()

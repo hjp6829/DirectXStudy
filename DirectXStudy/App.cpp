@@ -34,7 +34,7 @@ App::App()
 	uimanager = new UIManager(worldManager);
 
 	uimanager->OnCreateObjectSelected = [this](std::string path) {//이벤트 버스
-		worldManager->SetCreateObject(path);//나중에 이름 바꿔야함
+		worldManager->CreateObject(path);//나중에 이름 바꿔야함
 		};
 	uimanager->OnCreateObject = [this](ObjectType type) {//이벤트 버스
 		worldManager->CreateObject(type);

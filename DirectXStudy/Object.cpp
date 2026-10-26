@@ -92,7 +92,6 @@ void Object::Serialize(nlohmann::json& j)
 	{
 		nlohmann::json componentJson;
 		component->Serialize(componentJson);
-		componentJson["type"] = component->GetComponentName();
 		j["Components"].push_back(componentJson);
 	}
 }
@@ -113,16 +112,6 @@ void Object::Deserialize(const nlohmann::json& j)
 			transform->Deserialize(componentJson);
 			continue;
 		}
-
-		//std::unique_ptr<Component> component =
-		//	ComponentRegistry::Create(type);
-
-		//if (component == nullptr)
-		//	continue;
-
-		//component->Deserialize(componentJson);
-
-		//components.push_back(std::move(component));
 	}
 }
 void Object::SetDataToCopy(Object* copyObject)

@@ -186,6 +186,7 @@ void Transform::Serialize(nlohmann::json& j)
 		{ "scalex", scaleOffset.x },
 		{"scaley", scaleOffset.y},
 		{"scalez", scaleOffset.z},
+		{"ComponentName","Transform"}
 	};
 }
 void Transform::Deserialize(const nlohmann::json& j)

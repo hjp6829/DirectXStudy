@@ -17,8 +17,10 @@ void MeshRenderer::Serialize(nlohmann::json& j)
 {
 	j = nlohmann::json{
 	{
-		"modelHeshCode",currentModelNode == nullptr ? 0 : currentModelNode->modelHeshCode}
+		"modelHeshCode",currentModelNode == nullptr ? 0 : currentModelNode->modelHeshCode},
+		{"ComponentName","MeshRenderer"}
 	};
+
 }
 
 void MeshRenderer::Deserialize(const nlohmann::json& j)

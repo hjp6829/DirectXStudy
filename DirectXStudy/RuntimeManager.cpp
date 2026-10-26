@@ -5,6 +5,8 @@
 #include "Log.h"
 #include "ModelCreater.h"
 #include "CameraComponent.h"
+#include "LightComponent.h"
+
 RuntimeManager::RuntimeManager(ID3D11Device* device) : ObjectManager(device)
 {
 
@@ -72,8 +74,6 @@ void RuntimeManager::StartRuntime(std::unordered_map<uint64_t, Object*>* sceneOb
 {
 	for (auto& [key, value] : *sceneObjects)
 	{		
-		if (auto* camera = dynamic_cast<CameraObject*>(value); camera && camera->CheckSceneCamera())
-			continue;
 		Object* objctTemp = new Object();
 		value->SetDataToCopy(objctTemp);
 		allObjects[objctTemp->objectID] = objctTemp;
@@ -88,7 +88,7 @@ void RuntimeManager::StartRuntime(std::unordered_map<uint64_t, Object*>* sceneOb
 			}
 		}
 
-		if (auto* light = dynamic_cast<LightObject*>(value); light)//test
+		if (auto* light = dynamic_cast<LightComponent*>(value); light)//test
 			this->light = light;
 	}
 
