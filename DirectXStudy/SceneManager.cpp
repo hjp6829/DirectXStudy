@@ -212,58 +212,6 @@ void SceneManager::SaveSceneObjectData(Object* object, nlohmann::json& jsonfile)
 	}
 }
 
-void SceneManager::LoadSaveSceneFile()
-{
-	using json = nlohmann::json;
-	std::filesystem::path path = std::filesystem::current_path();
-	std::filesystem::path saveFilePath = path / "SaveScene"/ "Scene.json";
-	if (!std::filesystem::exists(saveFilePath))
-	{
-		Log::PrintLog("No SaveFile Create Init SaveFile");
-		CreateInitJsonFile();
-	}
-	std::ifstream file(saveFilePath);
-	if (!file.is_open())
-	{
-		Log::PrintLog("path errer");
-		return;
-	}
-	if (file.peek() == std::ifstream::traits_type::eof())
-	{
-		Log::PrintLog("file is empty");
-		return;
-	}
-	json sceneJson;
-	file >> sceneJson;
-
-	std::unordered_map<uint64_t, Object*>loadSceneObjects;
-	for (const auto& item : sceneJson)
-	{
-		int objectType;
-		item.at("ObjectType").get_to(objectType);	
-		Object* object = nullptr;
-		if(objectType ==  1)
-			object = CreateSceneCamera(item);
-		else
-			object = CreateSceneObject(item, objectType, path);
-
-		loadSceneObjects.insert({ object->objectID, object });
-		if (item.at("isRootObject") == 1)
-			objects[object->objectID] = object;
-		allObjects[object->objectID] = object;
-	}
-
-	for (auto& [hashCode, objectTemp] : loadSceneObjects)
-	{
-		if (objectTemp->IsRootObject())
-			continue;
-		Object* parentObject = loadSceneObjects.at(objectTemp->parentobjectID);
-		parentObject->InsertChildSceneObject(objectTemp);
-	}
-	isNoSaveFile = false;
-	loadSceneObjects.clear();
-}
-
 std::unordered_map<uint64_t, Object*>* SceneManager::GetObjects()
 {
 	return &objects;

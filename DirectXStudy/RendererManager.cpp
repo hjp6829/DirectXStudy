@@ -73,7 +73,9 @@ void RendererManager::SetNewMeshRenderComponent(EventData* eventData)
 	{
 		MeshRenderer* meshComp = dynamic_cast<MeshRenderer*>(eventDataCast->component);
 		if(meshComp == nullptr)
+		{
 			return;
+		}
 		meshComponenets[meshComp->GetOwnObject()->objectID] = meshComp;
 	}
 }

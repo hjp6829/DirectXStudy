@@ -40,4 +40,5 @@ private:
 	void SetSelectObjectID(EventData* eventData);
 	void DeleteObject(EventData* eventData);
 	void DeleteChiledModels(Object* object);
+	void LoadSaveSceneFile();
 };

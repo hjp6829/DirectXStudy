@@ -26,17 +26,14 @@ public:
 	ICamera* GetCamera(int idx){return cameras[idx];}
 	ICamera* GetSceneCamera(){return sceneCamera; }
 	LightObject* GetLight() {return light; }
-	void SetCreateObject(Object* object);
-	void RegisterModelHierarchy(Object* object);
 	Object* CreateObject(ObjectType type);
 	void SetNewObject(Object* object);
 	uint64_t cameraID=0;
+	uint64_t objectID = 0;
 protected:
 	std::unordered_map<uint64_t, Object*> objects;
 	std::unordered_map<uint64_t, Object*> allObjects;
 	std::vector<ICamera*> cameras;
 	ICamera* sceneCamera;
 	LightObject* light;
-
-	uint64_t objectID = 0;
 };

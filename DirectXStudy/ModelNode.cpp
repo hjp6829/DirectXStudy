@@ -1,5 +1,6 @@
 #include "ModelNode.h"
 #include "Mesh.h"
+#include "Log.h"
 
 void ModelNode::RenderMeshs(RenderPass renderPass,ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix,int objectID)
 {

@@ -11,6 +11,7 @@
 #include "ScriptRegistry.h"
 #include "Component.h"
 #include "MeshRenderer.h"
+#include "ObjectManager.h"
 
 ModelCreater::ModelCreater(ID3D11Device* device)
 {
@@ -68,36 +69,29 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 }
 
 
-Object* ModelCreater::CreateSceneObjectsFromModel(ModelAsset* modelAsset, ScriptRegistry* scriptRegistry)
+Object* ModelCreater::CreateSceneObjectsFromModel(ModelAsset* modelAsset, ScriptRegistry* scriptRegistry,ObjectManager* manager)
 {
 	SceneObject* object = new SceneObject();
-	BuildSceneObjectTree(modelAsset->currentNode, object, scriptRegistry);
+	object->SetRootNodeCheck(true);
+	BuildSceneObjectTree(modelAsset->currentNode, object, scriptRegistry, manager);
 	return object;
 }
 
-void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject, ScriptRegistry* scriptRegistry)
+void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject, ScriptRegistry* scriptRegistry, ObjectManager* manager)
 {
-	if (modelNode->childNodes.size() == 0)
+	SetModelToObject(parentObject, modelNode);
+	parentObject->objectID = ++manager->objectID;
+	Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
+	MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
+	meshComp->SetModelNode(modelNode);
+	manager->SetNewObject(parentObject);
+
+	for (int i = 0; i < modelNode->childNodes.size(); i++)
 	{
-		SetModelToObject(parentObject, modelNode);
-		Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
-		MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
-		meshComp->SetModelNode(modelNode);
-	}
-	else
-	{
-		SetModelToObject(parentObject, modelNode);
-		Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
-		MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
-		meshComp->SetModelNode(modelNode);
-		
-		for (int i = 0; i < modelNode->childNodes.size(); i++)
-		{
-			SceneObject* object = new SceneObject();
-			object->parentObject = parentObject;
-			parentObject->childObjects.push_back(object);
-			BuildSceneObjectTree(modelNode->childNodes[i], object, scriptRegistry);
-		}
+		SceneObject* object = new SceneObject();
+		object->parentObject = parentObject;
+		parentObject->childObjects.push_back(object);
+		BuildSceneObjectTree(modelNode->childNodes[i], object, scriptRegistry, manager);
 	}
 }
 
@@ -106,31 +100,34 @@ ModelAsset* ModelCreater::LoadModelFromFile(std::string path)
 	auto it = modelAssets.find(path);
 	if(it != modelAssets.end())
 	{
-		return it->second;//CreateSceneObjectsFromModel(it->second);
+		return it->second;
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
 	modelAssets.insert({path, modelAssetTemp });
-	return modelAssetTemp;//CreateSceneObjectsFromModel(modelAssetTemp);
+	return modelAssetTemp;
 }
-Object* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, uint64_t modelHeshCode)
+void ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, uint64_t modelHeshCode)
 {
 	if (modelAssets.find(path.string()) != modelAssets.end())
 	{
-		return CreateSingleSceneObjectByHesh(modelHeshCode, modelAssets[path.string()]);
+		CreateSingleSceneObjectByHesh(modelHeshCode, modelAssets[path.string()]);
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
 	modelAssets.insert({ path.string(), modelAssetTemp});
-	return CreateSingleSceneObjectByHesh(modelHeshCode, modelAssetTemp);
+	CreateSingleSceneObjectByHesh(modelHeshCode, modelAssetTemp);
 }
-Object* ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset)
+void ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset)
 {
-	ModelNode* modelNode = modelAsset->modelNodesDic.at(heshCode);
 	SceneObject* object = new SceneObject();
+	ModelNode* modelNode = modelAsset->modelNodesDic.at(heshCode);
 	SetModelToObject(object, modelNode);
-
-	return object;
+	object->objectID = ++manager->objectID;
+	Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
+	MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
+	meshComp->SetModelNode(modelNode);
+	manager->SetNewObject(parentObject);
 }
 void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)
 {

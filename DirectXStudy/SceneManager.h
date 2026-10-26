@@ -24,7 +24,6 @@ private:
 	float totalTime;
 private:
 	void SaveScene();
-	void LoadSaveSceneFile();
 	void SaveSceneObjectData(Object* object, nlohmann::json& jsonfile);
 	void DeleteChiledModels(Object* object);
 	void RegisterModelHierarchy(Object* object);
