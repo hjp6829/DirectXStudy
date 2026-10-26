@@ -14,7 +14,7 @@
 
 SceneManager::SceneManager(ID3D11Device* device) : ObjectManager(device)
 {
-	LoadSaveSceneFile();
+	//LoadSaveSceneFile();
 }
 
 void SceneManager::ObjectsUpdate(float deltaTime)
@@ -31,8 +31,8 @@ void SceneManager::ObjectsUpdate(float deltaTime)
 	if(Input::GetKey(VK_CONTROL))
 		isCtrl = true;
 
-	if (Input::GetKeyDown('E'))
-		LoadSaveSceneFile();
+	//if (Input::GetKeyDown('E'))
+	//	LoadSaveSceneFile();
 
 	if (isCtrl)
 	{
@@ -85,19 +85,7 @@ Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type,
 
 	return object;
 }
-void SceneManager::CreateInitJsonFile()
-{
-	isNoSaveFile = true;
-	CameraObject* camera = new CameraObject();
-	camera->objectID = ++objectID;
-	camera->SetIsSceneCamera(true);
-	LightObject* light = new LightObject();
-	light->objectID = ++objectID;
-	objects[camera->objectID] = camera;
-	objects[light->objectID] = light;
-	SaveScene();
-	objects.clear();
-}
+
 void SceneManager::DuplicateObjectSave()
 {
 	currentDuplicateObject = currentSelectObject;
@@ -128,14 +116,6 @@ Object* SceneManager::DuplicateSceneObject(Object* object)
 		copyChildObject->parentObject = copyObject;
 	}
 	return copyObject;	
-}
-Object* SceneManager::CreateSceneCamera(const nlohmann::json& jsonfile)
-{
-	CameraObject* camera = new CameraObject();
-	camera->Deserialize(jsonfile);
-	sceneCamera = camera;
-	objectID = camera->objectID;
-	return camera;
 }
 void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObject)
 {
@@ -176,40 +156,6 @@ void SceneManager::DeleteChiledModels(Object* object)
 		delete object->childObjects[i];
 	}
 	object->childObjects.clear();
-}
-
-void SceneManager::SaveScene()
-{
-	Log::PrintLog("Scene Save");
-	std::filesystem::path savePath = std::filesystem::path("SaveScene") / "Scene.json";
-	std::filesystem::create_directories(savePath.parent_path());
-	std::ofstream file(savePath);
-
-	nlohmann::json jsonfile = nlohmann::json::array();
-	for (auto& [key, value] : objects)
-	{
-		Object* object = value;
-		SaveSceneObjectData(object, jsonfile);
-	}
-	file << jsonfile.dump(4);
-	file.close();
-}
-
-void SceneManager::SaveSceneObjectData(Object* object, nlohmann::json& jsonfile)
-{
-	nlohmann::json objectJson;
-	if (object->childObjects.size() == 0)
-	{
-		object->Serialize(objectJson);
-		jsonfile.push_back(objectJson);
-		return;
-	}
-	object->Serialize(objectJson);
-	jsonfile.push_back(objectJson);
-	for (int i = 0; i < object->childObjects.size(); i++)
-	{
-		SaveSceneObjectData(object->childObjects[i], jsonfile);
-	}
 }
 
 std::unordered_map<uint64_t, Object*>* SceneManager::GetObjects()

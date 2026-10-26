@@ -1,7 +1,6 @@
 #pragma once
 #include <d3d11.h>
 #include <unordered_map>
-#include "CameraObject.h"
 #include "LightObject.h"
 #include "Log.h"
 #include "ObjectType.h"
@@ -26,14 +25,16 @@ public:
 	ICamera* GetCamera(int idx){return cameras[idx];}
 	ICamera* GetSceneCamera(){return sceneCamera; }
 	LightObject* GetLight() {return light; }
-	Object* CreateObject(ObjectType type);
+	Object* CreateObject(Object* parentObject = nullptr);
 	void SetNewObject(Object* object);
 	uint64_t cameraID=0;
-	uint64_t objectID = 0;
+	void ClearAllObject(){ objects.clear(); allObjects.clear(); }
+	void ClearRootObject(){ objects.clear(); }
 protected:
 	std::unordered_map<uint64_t, Object*> objects;
 	std::unordered_map<uint64_t, Object*> allObjects;
 	std::vector<ICamera*> cameras;
 	ICamera* sceneCamera;
 	LightObject* light;
+	uint64_t objectID = 0;
 };

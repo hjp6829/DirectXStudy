@@ -4,6 +4,7 @@
 #include "ObjectType.h"
 #include "ObjectManager.h"
 #include "EventDefinitions.h"
+#include <nlohmann/json.hpp>
 
 class SceneManager;
 class RuntimeManager;
@@ -12,6 +13,7 @@ class EventData;
 class ICamera;
 class ScriptRegistry;
 class ModelCreater;
+class ModelNode;
 
 class WorldManager {
 public:
@@ -40,5 +42,9 @@ private:
 	void SetSelectObjectID(EventData* eventData);
 	void DeleteObject(EventData* eventData);
 	void DeleteChiledModels(Object* object);
-	void LoadSaveSceneFile();
+	void CreateInitJsonFile();
+	//void LoadSaveSceneFile();
+	void BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject);
+	void SaveScene();
+	void SaveSceneObjectData(Object* object, nlohmann::json& jsonfile);
 };

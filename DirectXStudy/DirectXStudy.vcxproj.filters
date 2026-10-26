@@ -150,12 +150,6 @@
     <ClCompile Include="Object.cpp">
       <Filter>소스 파일\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="CameraObject.cpp">
-      <Filter>소스 파일\Objects</Filter>
-    </ClCompile>
-    <ClCompile Include="LightObject.cpp">
-      <Filter>소스 파일\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="PostProcessingManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -200,6 +194,9 @@
     </ClCompile>
     <ClCompile Include="RendererManager.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneCameraComponent.cpp">
+      <Filter>소스 파일\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -323,14 +320,8 @@
     <ClInclude Include="Object.h">
       <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="CameraObject.h">
-      <Filter>헤더 파일\Objects</Filter>
-    </ClInclude>
     <ClInclude Include="SceneSerializationData.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="LightObject.h">
-      <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
     <ClInclude Include="PostProcessingManager.h">
       <Filter>헤더 파일</Filter>
@@ -351,9 +342,6 @@
       <Filter>헤더 파일\Component</Filter>
     </ClInclude>
     <ClInclude Include="ScriptComponent.h">
-      <Filter>헤더 파일\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="TestScript.h">
       <Filter>헤더 파일\Component</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
@@ -388,6 +376,15 @@
     </ClInclude>
     <ClInclude Include="RendererManager.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScript.h">
+      <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneCameraComponent.h">
+      <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="LightComponent.h">
+      <Filter>헤더 파일\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

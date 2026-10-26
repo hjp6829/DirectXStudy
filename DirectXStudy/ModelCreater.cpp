@@ -67,34 +67,6 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 	}
 	parentModelNode->localMatrix = modelLoadData->localMatrix;
 }
-
-
-Object* ModelCreater::CreateSceneObjectsFromModel(ModelAsset* modelAsset, ScriptRegistry* scriptRegistry,ObjectManager* manager)
-{
-	SceneObject* object = new SceneObject();
-	object->SetRootNodeCheck(true);
-	BuildSceneObjectTree(modelAsset->currentNode, object, scriptRegistry, manager);
-	return object;
-}
-
-void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject, ScriptRegistry* scriptRegistry, ObjectManager* manager)
-{
-	SetModelToObject(parentObject, modelNode);
-	parentObject->objectID = ++manager->objectID;
-	Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
-	MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
-	meshComp->SetModelNode(modelNode);
-	manager->SetNewObject(parentObject);
-
-	for (int i = 0; i < modelNode->childNodes.size(); i++)
-	{
-		SceneObject* object = new SceneObject();
-		object->parentObject = parentObject;
-		parentObject->childObjects.push_back(object);
-		BuildSceneObjectTree(modelNode->childNodes[i], object, scriptRegistry, manager);
-	}
-}
-
 ModelAsset* ModelCreater::LoadModelFromFile(std::string path)
 {
 	auto it = modelAssets.find(path);
@@ -107,34 +79,13 @@ ModelAsset* ModelCreater::LoadModelFromFile(std::string path)
 	modelAssets.insert({path, modelAssetTemp });
 	return modelAssetTemp;
 }
-void ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, uint64_t modelHeshCode)
-{
-	if (modelAssets.find(path.string()) != modelAssets.end())
-	{
-		CreateSingleSceneObjectByHesh(modelHeshCode, modelAssets[path.string()]);
-	}
-	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
-	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
-	modelAssets.insert({ path.string(), modelAssetTemp});
-	CreateSingleSceneObjectByHesh(modelHeshCode, modelAssetTemp);
-}
-void ModelCreater::CreateSingleSceneObjectByHesh(uint64_t heshCode, ModelAsset* modelAsset)
-{
-	SceneObject* object = new SceneObject();
-	ModelNode* modelNode = modelAsset->modelNodesDic.at(heshCode);
-	SetModelToObject(object, modelNode);
-	object->objectID = ++manager->objectID;
-	Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
-	MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
-	meshComp->SetModelNode(modelNode);
-	manager->SetNewObject(parentObject);
-}
-void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)
-{
-	object->objectName = modelNode->modelName;
-	object->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
-	object->modelNamePath = modelNode->sourceModelPath;
-}
+
+//void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)
+//{
+//	object->objectName = modelNode->modelName;
+//	object->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
+//	object->modelNamePath = modelNode->sourceModelPath;
+//}
 uint64_t ModelCreater::FNV1a(const std::string& str)
 {
 	uint64_t hash = 14695981039346656037ULL;

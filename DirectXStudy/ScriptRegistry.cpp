@@ -5,7 +5,7 @@
 #include "MeshRenderer.h"
 #include "EventBus.h"
 #include "EventDefinitions.h"
-
+#include "SceneCameraComponent.h"
 ScriptRegistry::ScriptRegistry()
 {
     RegisterScript("TestScript",[]() {
@@ -18,6 +18,10 @@ ScriptRegistry::ScriptRegistry()
     );
     RegisterScript("MeshRenderer", []() {
         return std::make_unique<MeshRenderer>();
+        }
+    );
+    RegisterScript("SceneCameraComponent", []() {
+        return std::make_unique<SceneCameraComponent>();
         }
     );
 }

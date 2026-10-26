@@ -18,7 +18,6 @@ public:
 	LightObject* GetLight() { return light; }
 private:
 	bool isCtrl;
-	bool isNoSaveFile;
 	Object* currentSelectObject;
 	Object* currentDuplicateObject;
 	float totalTime;
@@ -32,5 +31,4 @@ private:
 	void DuplicateObjectSave();
 	void DuplicateObject();
 	Object* DuplicateSceneObject(Object* object);
-	Object* CreateSceneCamera(const nlohmann::json& jsonfile);
 };

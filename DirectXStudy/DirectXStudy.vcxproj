@@ -127,7 +127,6 @@
     <ClCompile Include="App.cpp" />
     <ClCompile Include="AssimpConverter.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
-    <ClCompile Include="CameraObject.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="EventBus.cpp" />
     <ClCompile Include="Hierarchy.cpp" />
@@ -145,7 +144,6 @@
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="IndexBuffer.cpp" />
     <ClCompile Include="InputLayout.cpp" />
-    <ClCompile Include="LightObject.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
@@ -161,6 +159,7 @@
     <ClCompile Include="RendererManager.cpp" />
     <ClCompile Include="RuntimeManager.cpp" />
     <ClCompile Include="Sampler.cpp" />
+    <ClCompile Include="SceneCameraComponent.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
@@ -181,7 +180,6 @@
     <ClInclude Include="AssimpConverter.h" />
     <ClInclude Include="Bindable.h" />
     <ClInclude Include="CameraComponent.h" />
-    <ClInclude Include="CameraObject.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Datas.h" />
     <ClInclude Include="EventBus.h" />
@@ -190,8 +188,8 @@
     <ClInclude Include="ICamera.h" />
     <ClInclude Include="Insfector.h" />
     <ClInclude Include="Input.h" />
+    <ClInclude Include="LightComponent.h" />
     <ClInclude Include="LightConstantBuffer.h" />
-    <ClInclude Include="LightObject.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshRenderer.h" />
@@ -223,6 +221,7 @@
     <ClInclude Include="RenderingTypes.h" />
     <ClInclude Include="RuntimeManager.h" />
     <ClInclude Include="Sampler.h" />
+    <ClInclude Include="SceneCameraComponent.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="SceneObject.h" />
     <ClInclude Include="SceneSerializationData.h" />

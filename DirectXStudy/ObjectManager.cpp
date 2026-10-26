@@ -5,11 +5,13 @@ ObjectManager::ObjectManager(ID3D11Device* device)
 	
 }
 
-Object* ObjectManager::CreateObject(ObjectType type)
+Object* ObjectManager::CreateObject(Object* parentObject)
 {
 	Object* tempObject = new Object();
-	tempObject->SetRootNodeCheck(true);
+	if(parentObject == nullptr)
+		tempObject->SetRootNodeCheck(true);
 	tempObject->objectID = ++objectID;
+	parentObject->InsertChildSceneObject(tempObject);
 	objects[tempObject->objectID] = tempObject;
 	return tempObject;
 }
