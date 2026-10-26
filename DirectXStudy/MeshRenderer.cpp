@@ -1,9 +1,11 @@
 #include "MeshRenderer.h"
 #include "ModelNode.h"
 #include "Object.h"
+#include "imgui_impl_win32.h"
 
 MeshRenderer::MeshRenderer()
-{
+{	
+	componentName = "MeshRenderer";
 }
 
 void MeshRenderer::RenderMesh(RenderPass renderPass, ID3D11DeviceContext* context, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix)
@@ -33,6 +35,7 @@ std::unique_ptr<Component> MeshRenderer::Clone() const
 void MeshRenderer::InspectorUpdate()
 {
 	Component::InspectorUpdate();
+	ImGui::Text(currentModelNode->modelName.c_str());
 }
 
 void MeshRenderer::ToggleMeshEnable(bool value)

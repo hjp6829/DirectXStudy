@@ -8,6 +8,9 @@
 #include "AssimpConverter.h"
 #include "Datas.h"
 #include "SceneObject.h"
+#include "ScriptRegistry.h"
+#include "Component.h"
+#include "MeshRenderer.h"
 
 ModelCreater::ModelCreater(ID3D11Device* device)
 {
@@ -65,45 +68,50 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 }
 
 
-Object* ModelCreater::CreateSceneObjectsFromModel(ModelAsset* modelAsset)
+Object* ModelCreater::CreateSceneObjectsFromModel(ModelAsset* modelAsset, ScriptRegistry* scriptRegistry)
 {
 	SceneObject* object = new SceneObject();
-	BuildSceneObjectTree(modelAsset->currentNode, object);
+	BuildSceneObjectTree(modelAsset->currentNode, object, scriptRegistry);
 	return object;
 }
 
-void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject)
+void ModelCreater::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject, ScriptRegistry* scriptRegistry)
 {
 	if (modelNode->childNodes.size() == 0)
 	{
 		SetModelToObject(parentObject, modelNode);
-	
+		Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
+		MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
+		meshComp->SetModelNode(modelNode);
 	}
 	else
 	{
 		SetModelToObject(parentObject, modelNode);
+		Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
+		MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
+		meshComp->SetModelNode(modelNode);
 		
 		for (int i = 0; i < modelNode->childNodes.size(); i++)
 		{
 			SceneObject* object = new SceneObject();
 			object->parentObject = parentObject;
 			parentObject->childObjects.push_back(object);
-			BuildSceneObjectTree(modelNode->childNodes[i], object);
+			BuildSceneObjectTree(modelNode->childNodes[i], object, scriptRegistry);
 		}
 	}
 }
 
-Object* ModelCreater::LoadModelFromFile(std::string path)
+ModelAsset* ModelCreater::LoadModelFromFile(std::string path)
 {
 	auto it = modelAssets.find(path);
 	if(it != modelAssets.end())
 	{
-		return CreateSceneObjectsFromModel(it->second);
+		return it->second;//CreateSceneObjectsFromModel(it->second);
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
 	modelAssets.insert({path, modelAssetTemp });
-	return CreateSceneObjectsFromModel(modelAssetTemp);
+	return modelAssetTemp;//CreateSceneObjectsFromModel(modelAssetTemp);
 }
 Object* ModelCreater::CreateSceneObjectFromJsonData(std::filesystem::path path, uint64_t modelHeshCode)
 {

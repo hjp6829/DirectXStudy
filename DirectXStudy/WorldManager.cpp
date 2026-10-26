@@ -5,6 +5,9 @@
 #include "RuntimeManager.h"
 #include "ScriptRegistry.h"
 #include "ICamera.h"
+#include "ModelCreater.h"
+#include "Object.h"
+#include "ModelAsset.h"
 
 WorldManager::WorldManager(ID3D11Device* device)
 {
@@ -12,6 +15,7 @@ WorldManager::WorldManager(ID3D11Device* device)
 	scriptRegistry = new ScriptRegistry();
 	sceneManager = new SceneManager(device);
 	runtimeManager = new RuntimeManager(device);
+	modelCreater = new ModelCreater(device);
 	currentManager = sceneManager;
 }
 
@@ -25,7 +29,9 @@ void WorldManager::ObjectsLateUpdate(float deltaTime)
 }
 void WorldManager::SetCreateObject(std::string path)
 {
-	currentManager->SetCreateObject(path);
+	ModelAsset* modelAsset = modelCreater->LoadModelFromFile(path);
+	Object* objectTemp = modelCreater->CreateSceneObjectsFromModel(modelAsset, scriptRegistry);
+	currentManager->SetCreateObject(objectTemp);
 }
 ICamera* WorldManager::GetCamera(int idx)
 {

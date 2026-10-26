@@ -17,6 +17,7 @@ public:
 	void Deserialize(const nlohmann::json& j) override;
 	std::unique_ptr<Component> Clone()const override;
 	void InspectorUpdate() override;
+	void SetModelNode(ModelNode* node) { currentModelNode = node;}
 private:
 	void ToggleMeshEnable(bool value);
 private:

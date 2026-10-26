@@ -11,6 +11,7 @@ class Object;
 class EventData;
 class ICamera;
 class ScriptRegistry;
+class ModelCreater;
 
 class WorldManager {
 public:
@@ -31,7 +32,8 @@ private:
 	ObjectManager* currentManager;
 	ScriptRegistry* scriptRegistry;
 	ActiveSceneMode activeSceneMode;
-	uint64_t selectedObjectID;
+	uint64_t selectedObjectID;	
+	ModelCreater* modelCreater;
 private:
 	void RegisterEventHandlers();
 	void SetActiveMode(EventData* eventData);

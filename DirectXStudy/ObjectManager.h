@@ -7,7 +7,7 @@
 #include "ObjectType.h"
 
 class Object;
-class ModelCreater;
+
 class ICamera;
 
 class ObjectManager
@@ -26,7 +26,7 @@ public:
 	ICamera* GetCamera(int idx){return cameras[idx];}
 	ICamera* GetSceneCamera(){return sceneCamera; }
 	LightObject* GetLight() {return light; }
-	void SetCreateObject(std::string path);
+	void SetCreateObject(Object* object);
 	void RegisterModelHierarchy(Object* object);
 	Object* CreateObject(ObjectType type);
 	void SetNewObject(Object* object);
@@ -37,6 +37,6 @@ protected:
 	std::vector<ICamera*> cameras;
 	ICamera* sceneCamera;
 	LightObject* light;
-	ModelCreater* modelCreater;
+
 	uint64_t objectID = 0;
 };

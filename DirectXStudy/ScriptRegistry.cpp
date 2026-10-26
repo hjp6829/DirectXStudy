@@ -22,16 +22,17 @@ ScriptRegistry::ScriptRegistry()
     );
 }
 
-void ScriptRegistry::CreateScript(const std::string& name, Object* object)
+Component* ScriptRegistry::CreateScript(const std::string& name, Object* object)
 {
     auto it = scriptFactories.find(name);
 
     if (it == scriptFactories.end())
-        return;
+        return nullptr;
 
     std::unique_ptr<Component> TempComp = it->second();
     ComponentEventData componentEventData;
     componentEventData.component = TempComp.get();
-    EventBus::Publish(EventType::ComponentAdded, &componentEventData);
     object->SetComponent(std::move(TempComp));
+    EventBus::Publish(EventType::ComponentAdded, &componentEventData);
+    return componentEventData.component;
 }

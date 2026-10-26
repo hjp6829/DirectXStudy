@@ -1,13 +1,12 @@
 #include "ObjectManager.h"
-#include "ModelCreater.h"
+#include "Object.h"
 ObjectManager::ObjectManager(ID3D11Device* device)
 {	
-	modelCreater = new ModelCreater(device);
+	
 }
 
-void ObjectManager::SetCreateObject(std::string path)
+void ObjectManager::SetCreateObject(Object* object)
 {
-	Object* object = modelCreater->LoadModelFromFile(path);
 	object->SetRootNodeCheck(true);
 	RegisterModelHierarchy(object);
 	objects[object->objectID] = object;

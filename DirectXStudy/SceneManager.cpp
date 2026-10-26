@@ -65,12 +65,12 @@ Object* SceneManager::CreateSceneObject(const nlohmann::json& jsonfile,int type,
 	{
 		case 0:
 			{
-			std::filesystem::path modelFolderPath = "Assets/DirectXModel";
-			std::string origModelPath;
-			jsonfile.at("ModelNamePath").get_to(origModelPath);
-			std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
-			object = modelCreater->CreateSceneObjectFromJsonData(modelPath, jsonfile.at("modelHeshCode"));
-			object->Deserialize(jsonfile);
+			//std::filesystem::path modelFolderPath = "Assets/DirectXModel";
+			//std::string origModelPath;
+			//jsonfile.at("ModelNamePath").get_to(origModelPath);
+			//std::filesystem::path modelPath = path / modelFolderPath / origModelPath;
+			//object = modelCreater->CreateSceneObjectFromJsonData(modelPath, jsonfile.at("modelHeshCode"));
+			//object->Deserialize(jsonfile);
 			break;
 			}
 		case 2:

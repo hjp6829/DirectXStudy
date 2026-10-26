@@ -16,7 +16,7 @@ public:
         scriptFactories[name] = std::move(factory);
     }
 
-    void CreateScript(const std::string& name,Object* object);
+    Component* CreateScript(const std::string& name,Object* object);
 private:
     std::unordered_map<std::string, ComponentFactory> scriptFactories;
 };
