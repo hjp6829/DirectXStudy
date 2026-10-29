@@ -36,8 +36,8 @@ void SceneManager::ObjectsUpdate(float deltaTime)
 
 	if (isCtrl)
 	{
-		//if (Input::GetKeyDown('S'))
-		//	SaveScene();
+		if (Input::GetKeyDown('S'))
+			OnSaveScene();
 		if (Input::GetKeyDown('C'))
 			DuplicateObjectSave();
 		if (Input::GetKeyDown('V'))

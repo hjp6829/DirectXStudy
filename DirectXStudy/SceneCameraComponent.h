@@ -3,7 +3,7 @@
 #include <DirectXMath.h>
 #include "ICamera.h"
 
-class SceneCameraComponent : public Component, public ICamera
+class SceneCameraComponent : public Component
 {
 public:
 	void InspectorUpdate() override{}

@@ -11,4 +11,5 @@ public:
 
     virtual DirectX::XMFLOAT3 GetCameraPosition() const = 0;
     virtual DirectX::XMFLOAT3 GetCameraForward() const = 0;
+    bool isSceneCamera = false;
 };

@@ -14,6 +14,7 @@
 #include <unordered_map>
 #include "LightComponent.h"
 #include "SceneCameraComponent.h"
+#include "CameraComponent.h"
 
 WorldManager::WorldManager(ID3D11Device* device)
 {
@@ -23,6 +24,10 @@ WorldManager::WorldManager(ID3D11Device* device)
 	runtimeManager = new RuntimeManager(device);
 	modelCreater = new ModelCreater(device);
 	currentManager = sceneManager;
+
+	sceneManager->OnSaveScene = [this]() {//이벤트 버스
+		SaveScene();
+	};
 
 	LoadSaveSceneFile();
 }
@@ -37,10 +42,7 @@ void WorldManager::ObjectsLateUpdate(float deltaTime)
 }
 ICamera* WorldManager::GetCamera(int idx)
 {
-	if(activeSceneMode == ActiveSceneMode::SceneMode)
-		return currentManager->GetSceneCamera();
-	else
-		return currentManager->GetCamera(idx);
+	return currentManager->GetCamera(idx);
 }
 void WorldManager::CreateObject(std::string path)
 {
@@ -162,8 +164,11 @@ void WorldManager::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObje
 void WorldManager::CreateInitJsonFile()
 {
 	Object* camObject = currentManager->CreateObject();
+	camObject->objectName = "SceneCamera";
 	scriptRegistry->CreateScript("SceneCameraComponent", camObject);
+	scriptRegistry->CreateScript("CameraComponent", camObject);
 	Object* lightObject = currentManager->CreateObject();
+	lightObject->objectName = "MainLight";
 	scriptRegistry->CreateScript("LightComponent", lightObject);
 	currentManager->SetNewObject(camObject);
 	currentManager->SetNewObject(lightObject);
@@ -247,16 +252,22 @@ void WorldManager::LoadSaveSceneFile()
 		std::string componentName;
 		Object* object = new Object();
 
-		if (item.contains("components") && item["components"].is_array())
+		if (item.contains("Components") && item["Components"].is_array())
 		{
-			for (const auto& componentJson : item["components"])
+			for (const auto& componentJson : item["Components"])
 			{
 				componentJson.at("ComponentName").get_to(componentName);
 
 				Component* component = scriptRegistry->CreateScript(componentName, object);
-				SceneCameraComponent* sceneCameraComp = dynamic_cast<SceneCameraComponent*>(component);
-				//if(sceneCameraComp != nullptr)
-				//	sceneca
+				CameraComponent* sceneCameraComp = dynamic_cast<CameraComponent*>(component);
+				if(sceneCameraComp != nullptr)
+				{
+					sceneCameraComp->isSceneCamera=true;
+					currentManager->SetCameraVector(sceneCameraComp);
+				}
+				LightComponent* lightComp = dynamic_cast<LightComponent*>(component);
+				if (lightComp != nullptr)
+					currentManager->SetLight(lightComp);
 			}
 		}
 		object->Deserialize(item);

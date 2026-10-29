@@ -82,7 +82,7 @@ void RuntimeManager::StartRuntime(std::unordered_map<uint64_t, Object*>* sceneOb
 
 		for (int i = 0; i < (*tempComponent).size(); i++)
 		{
-			if (auto* comComp = dynamic_cast<CameraComponent*>((*tempComponent)[i].get()); comComp)
+			if (auto* comComp = dynamic_cast<CameraComponent*>((*tempComponent)[i].get()); comComp&& comComp->isSceneCamera == false)
 			{
 				cameras.push_back(comComp);
 			}
@@ -115,6 +115,5 @@ void RuntimeManager::EndRunTime()
 	}
 	allObjects.clear();
 	objects.clear();
-	sceneCamera = nullptr;
 	light = nullptr;
 }

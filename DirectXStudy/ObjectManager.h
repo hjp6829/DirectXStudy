@@ -22,7 +22,6 @@ public:
 	}
 	void SetCameraVector(ICamera* camera){ cameras.push_back(camera); }
 	ICamera* GetCamera(int idx){return cameras[idx];}
-	ICamera* GetSceneCamera(){return sceneCamera; }
 	LightComponent* GetLight() {return light; }
 	void SetLight(LightComponent* light){this->light = light;}
 	Object* CreateObject(Object* parentObject = nullptr);
@@ -34,7 +33,6 @@ protected:
 	std::unordered_map<uint64_t, Object*> objects;
 	std::unordered_map<uint64_t, Object*> allObjects;
 	std::vector<ICamera*> cameras;
-	ICamera* sceneCamera;
 	LightComponent* light;
 	uint64_t objectID = 0;
 };

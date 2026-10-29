@@ -3,6 +3,7 @@
 #include <string>
 #include <functional>
 #include "ObjectManager.h"
+#include <functional>
 
 class EventData;
 
@@ -14,6 +15,7 @@ public:
 	std::unordered_map<uint64_t, Object*>* GetObjects() override;
 	std::unordered_map<uint64_t, Object*>* GetAllObjects() override;
 	void SetHierarchyDropObject(Object* parentObject, Object* childObject);
+	std::function<void()> OnSaveScene;
 private:
 	bool isCtrl;
 	Object* currentSelectObject;
