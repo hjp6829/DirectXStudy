@@ -1,4 +1,16 @@
 #include "LightComponent.h"
+#include "EventDefinitions.h"
+#include "EventBus.h"
+
+LightComponent::LightComponent()
+{
+	componentName = "LightComponent";
+}
+
+void LightComponent::Awake()
+{	
+
+}
 
 void LightComponent::Serialize(nlohmann::json& j)
 {

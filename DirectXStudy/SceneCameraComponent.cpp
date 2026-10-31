@@ -2,6 +2,17 @@
 #include "Input.h"
 #include "Object.h"
 #include "imgui_impl_win32.h"
+#include "CameraComponent.h"
+
+SceneCameraComponent::SceneCameraComponent()
+{
+	componentName = "SceneCameraComponent";
+}
+
+void SceneCameraComponent::Awake()
+{
+	
+}
 
 void SceneCameraComponent::Serialize(nlohmann::json& j)
 {

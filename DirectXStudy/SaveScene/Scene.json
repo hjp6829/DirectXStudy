@@ -1,0 +1,54 @@
+[
+    {
+        "Components": [
+            {
+                "ComponentName": "SceneCameraComponent"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            },
+            {
+                "ComponentName": "CameraComponent",
+                "FOV": 60.0
+            }
+        ],
+        "ObjectName": "SceneCamera",
+        "isRootObject": 1,
+        "objectID": 1,
+        "parentObjectID": 0
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            },
+            {
+                "ComponentName": "LightComponent"
+            }
+        ],
+        "ObjectName": "MainLight",
+        "isRootObject": 1,
+        "objectID": 2,
+        "parentObjectID": 0
+    }
+]

@@ -7,6 +7,7 @@
 class CameraComponent : public Component, public ICamera {
 public:
 	CameraComponent();
+	void Awake() override;
 	DirectX::XMMATRIX GetProjectionMatrix()const override;
 	DirectX::XMMATRIX GetViewMatrix() const override;
 	DirectX::XMFLOAT3 GetCameraPosition()const override;

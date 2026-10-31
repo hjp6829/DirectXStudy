@@ -60,7 +60,7 @@ void WorldManager::CreateObject(ObjectType type)
 			tempObject->objectName = "Camera" + std::to_string(++currentManager->cameraID);
 			scriptRegistry->CreateScript("CameraComponent", tempObject);
 			ICamera* cameraComponent = nullptr;
-			for (auto& value : *tempObject->GetComponents())
+			for (auto& [key, value] : *tempObject->GetComponents())
 			{
 				cameraComponent = dynamic_cast<ICamera*>(value.get());
 			}
@@ -85,6 +85,7 @@ void WorldManager::RegisterEventHandlers()
 	EventBus::Subscribe(EventType::ActiveSceneChanged, [this](EventData* data) {SetActiveMode(data); });
 	EventBus::Subscribe(EventType::SelectObjectID, [this](EventData* data) {SetSelectObjectID(data); });
 	EventBus::Subscribe(EventType::ObjectWillBeDeleted, [this](EventData* data) {DeleteObject(data); });
+	EventBus::Subscribe(EventType::ComponentAdded, [this](EventData* data) {SetNewCameraComponent(data); });
 }
 void WorldManager::SetActiveMode(EventData* eventData)
 {
@@ -151,22 +152,24 @@ void WorldManager::DeleteChiledModels(Object* object)
 void WorldManager::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject)
 {
 	//SetModelToObject(parentObject, modelNode);
+	parentObject->objectName = modelNode->modelName;
 	Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
 	MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
 	meshComp->SetModelNode(modelNode);
 
+	parentObject->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
 	for (int i = 0; i < modelNode->childNodes.size(); i++)
 	{
-		currentManager->CreateObject(parentObject);
-		BuildSceneObjectTree(modelNode->childNodes[i], parentObject);
+		Object* childObject = currentManager->CreateObject(parentObject);
+		BuildSceneObjectTree(modelNode->childNodes[i], childObject);
 	}
 }
 void WorldManager::CreateInitJsonFile()
 {
 	Object* camObject = currentManager->CreateObject();
 	camObject->objectName = "SceneCamera";
-	scriptRegistry->CreateScript("SceneCameraComponent", camObject);
 	scriptRegistry->CreateScript("CameraComponent", camObject);
+	scriptRegistry->CreateScript("SceneCameraComponent", camObject);
 	Object* lightObject = currentManager->CreateObject();
 	lightObject->objectName = "MainLight";
 	scriptRegistry->CreateScript("LightComponent", lightObject);
@@ -257,20 +260,19 @@ void WorldManager::LoadSaveSceneFile()
 			for (const auto& componentJson : item["Components"])
 			{
 				componentJson.at("ComponentName").get_to(componentName);
-
-				Component* component = scriptRegistry->CreateScript(componentName, object);
-				CameraComponent* sceneCameraComp = dynamic_cast<CameraComponent*>(component);
-				if(sceneCameraComp != nullptr)
-				{
-					sceneCameraComp->isSceneCamera=true;
-					currentManager->SetCameraVector(sceneCameraComp);
-				}
-				LightComponent* lightComp = dynamic_cast<LightComponent*>(component);
-				if (lightComp != nullptr)
-					currentManager->SetLight(lightComp);
+				scriptRegistry->CreateScript(componentName, object);
 			}
 		}
 		object->Deserialize(item);
+
+		for (auto& [key, value] : *object->GetComponents())
+		{
+			MeshRenderer* meshComp = dynamic_cast<MeshRenderer*>(value.get());
+			if (meshComp != nullptr)
+				meshComp->SetModelNode(modelCreater->GetModelNode(meshComp->GetModelNodeHesh(), meshComp->GetModelPath()));
+		}
+
+		currentManager->SetObjectID(object->objectID);
 		loadSceneObjects.insert({ object->objectID, object });
 		currentManager->SetNewObject(object);
 	}
@@ -283,4 +285,24 @@ void WorldManager::LoadSaveSceneFile()
 		parentObject->InsertChildSceneObject(objectTemp);
 	}
 	loadSceneObjects.clear();
+}
+void WorldManager::SetNewCameraComponent(EventData* eventData)
+{
+	ComponentEventData* eventDataCast = static_cast<ComponentEventData*>(eventData);
+
+	if (eventDataCast != nullptr)
+	{
+		CameraComponent* camComp = dynamic_cast<CameraComponent*>(eventDataCast->component);
+		if (camComp != nullptr)
+		{
+			currentManager->SetCameraVector(camComp);
+			return;
+		}
+		LightComponent* lightComp = dynamic_cast<LightComponent*>(eventDataCast->component);
+		if (lightComp != nullptr)
+		{
+			currentManager->SetLight(lightComp);
+			return;
+		}
+	}
 }

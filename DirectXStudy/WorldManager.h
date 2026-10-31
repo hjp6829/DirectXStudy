@@ -48,4 +48,5 @@ private:
 	void BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject);
 	void SaveScene();
 	void SaveSceneObjectData(Object* object, nlohmann::json& jsonfile);
+	void SetNewCameraComponent(EventData* eventData);
 };

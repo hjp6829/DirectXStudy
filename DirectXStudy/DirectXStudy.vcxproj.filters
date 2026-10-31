@@ -198,6 +198,12 @@
     <ClCompile Include="SceneCameraComponent.cpp">
       <Filter>소스 파일\Component</Filter>
     </ClCompile>
+    <ClCompile Include="ModelAsset.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="LightComponent.cpp">
+      <Filter>소스 파일\Component</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXMain.h">
@@ -274,9 +280,6 @@
     </ClInclude>
     <ClInclude Include="imstb_truetype.h">
       <Filter>헤더 파일\ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="LightConstantBuffer.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>헤더 파일</Filter>
@@ -385,6 +388,9 @@
     </ClInclude>
     <ClInclude Include="LightComponent.h">
       <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="LightConstantBuffer.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

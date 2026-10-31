@@ -29,6 +29,7 @@ public:
 	uint64_t cameraID=0;
 	void ClearAllObject(){ objects.clear(); allObjects.clear(); }
 	void ClearRootObject(){ objects.clear(); }
+	void SetObjectID(uint64_t id){ objectID = id;}
 protected:
 	std::unordered_map<uint64_t, Object*> objects;
 	std::unordered_map<uint64_t, Object*> allObjects;

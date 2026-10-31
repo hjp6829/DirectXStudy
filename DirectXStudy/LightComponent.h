@@ -6,6 +6,8 @@
 class LightComponent : public Component
 {
 public:
+	LightComponent();
+	void Awake() override;
 	DirectX::XMFLOAT4 GetLightColor() { return DirectX::XMFLOAT4(lightColor.x, lightColor.y, lightColor.z, 1); }
 	DirectX::XMFLOAT3 GetLightPosition() {return currentObject->GetTransform()->GetObjectPosition(); }
 	DirectX::XMFLOAT3 GetForwardVector3() {return currentObject->GetTransform()->GetForwardVector3(); }

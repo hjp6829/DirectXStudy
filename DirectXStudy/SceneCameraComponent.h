@@ -6,6 +6,8 @@
 class SceneCameraComponent : public Component
 {
 public:
+	SceneCameraComponent();
+	void Awake() override;
 	void InspectorUpdate() override{}
 	void Serialize(nlohmann::json& j) override;
 	void Deserialize(const nlohmann::json& j) override{};

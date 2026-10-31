@@ -24,7 +24,6 @@ public:
 	Object* parentObject;
 	std::vector<Object*> childObjects;
 	std::string objectName;
-	std::string modelNamePath;
 	uint64_t objectID;
 	uint64_t parentobjectID;
 
@@ -44,7 +43,9 @@ public:
 
 	void SetTransform(Transform* transform) {this->transform = transform;}
 	Transform* GetTransform(){return transform;}
-	std::vector<std::unique_ptr<Component>>* GetComponents(){return &components;}
+	std::unordered_map<std::string, std::unique_ptr<Component>>* GetComponents(){return &components;}
+	template<typename T>
+	T* GetComponent();
 public:
 	void virtual UpdateObject();
 	void virtual Serialize(nlohmann::json& j);
@@ -52,8 +53,21 @@ public:
 	void virtual SetDataToCopy(Object* copyObject);
 protected:
 	bool isRootObject;
-	std::vector<std::unique_ptr<Component>> components;
+	std::unordered_map<std::string,std::unique_ptr<Component>> components;
 	Transform* transform;
 private:
 	std::queue<std::function<void()>> commandQueue;
 };
+
+
+template<typename T>
+inline T* Object::GetComponent()
+{
+	for (auto& [key, value] : components)
+	{
+		if (T* result = dynamic_cast<T*>(value.get()))
+			return result;
+	}
+
+	return nullptr;
+}

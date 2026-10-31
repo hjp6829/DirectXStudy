@@ -148,6 +148,7 @@
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
+    <ClCompile Include="ModelAsset.cpp" />
     <ClCompile Include="ModelBrowserUI.cpp" />
     <ClCompile Include="ModelCreater.cpp" />
     <ClCompile Include="ModelNode.cpp" />

@@ -45,7 +45,7 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 		parentModelNode->modelName = modelLoadData->modelName;
 		parentModelNode->localMatrix = modelLoadData->localMatrix;
 		parentModelNode->modelHeshCode = FNV1a(parentModelNode->sourceModelPath + modelLoadData->modelName);
-		modelAsset->modelNodesDic.insert({ parentModelNode->modelHeshCode, parentModelNode });
+		modelAsset->SetModelNode( parentModelNode->modelHeshCode, parentModelNode );
 		return;
 	}
 	for (int j = 0; j < modelLoadData->meshIDX.size(); j++)
@@ -56,7 +56,7 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 	}
 	parentModelNode->modelName = modelLoadData->modelName;
 	parentModelNode->modelHeshCode = FNV1a(parentModelNode->sourceModelPath + modelLoadData->modelName);
-	modelAsset->modelNodesDic.insert({ parentModelNode->modelHeshCode, parentModelNode });
+	modelAsset->SetModelNode(parentModelNode->modelHeshCode, parentModelNode);
 	int modelChildSize = modelLoadData->childNodes.size();
 	for (int i = 0; i < modelChildSize; i++)
 	{
@@ -69,15 +69,30 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 }
 ModelAsset* ModelCreater::LoadModelFromFile(std::string path)
 {
-	auto it = modelAssets.find(path);
+	uint64_t hesh = FNV1a(path);
+	auto it = modelAssets.find(hesh);
 	if(it != modelAssets.end())
 	{
 		return it->second;
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
-	modelAssets.insert({path, modelAssetTemp });
+	modelAssets.insert({ hesh, modelAssetTemp });
 	return modelAssetTemp;
+}
+
+ModelNode* ModelCreater::GetModelNode(uint64_t id, std::string path)
+{
+	std::filesystem::path modelFolderPath = "Assets/DirectXModel";
+	std::filesystem::path currentPath = std::filesystem::current_path();
+	std::filesystem::path fullPath = currentPath / modelFolderPath / path;
+
+	ModelAsset* assetTemp = LoadModelFromFile(fullPath.string());
+	ModelNode* modelNodeTemp = assetTemp->GetModelNode(id);
+	if(modelNodeTemp != nullptr)
+		return modelNodeTemp;
+
+	return nullptr;
 }
 
 //void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)

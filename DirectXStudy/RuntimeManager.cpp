@@ -6,6 +6,7 @@
 #include "ModelCreater.h"
 #include "CameraComponent.h"
 #include "LightComponent.h"
+#include "SceneCameraComponent.h"
 
 RuntimeManager::RuntimeManager(ID3D11Device* device) : ObjectManager(device)
 {
@@ -74,22 +75,27 @@ void RuntimeManager::StartRuntime(std::unordered_map<uint64_t, Object*>* sceneOb
 {
 	for (auto& [key, value] : *sceneObjects)
 	{		
+		SceneCameraComponent* sceneCameraTemp = value->GetComponent<SceneCameraComponent>();
+		if(sceneCameraTemp != nullptr)
+			continue;
 		Object* objctTemp = new Object();
 		value->SetDataToCopy(objctTemp);
 		allObjects[objctTemp->objectID] = objctTemp;
 
-		std::vector<std::unique_ptr<Component>>* tempComponent = objctTemp->GetComponents();
+		std::unordered_map<std::string, std::unique_ptr<Component>>* tempComponent = objctTemp->GetComponents();
 
-		for (int i = 0; i < (*tempComponent).size(); i++)
+		for (auto& [key, value] : *tempComponent)
 		{
-			if (auto* comComp = dynamic_cast<CameraComponent*>((*tempComponent)[i].get()); comComp&& comComp->isSceneCamera == false)
+			if (auto* comComp = dynamic_cast<CameraComponent*>(value.get()); comComp)
 			{
 				cameras.push_back(comComp);
 			}
 		}
 
-		if (auto* light = dynamic_cast<LightComponent*>(value); light)//test
-			this->light = light;
+		if (auto* lightComp = objctTemp->GetComponent<LightComponent>())
+		{
+			this->light = lightComp;
+		}
 	}
 
 	for (auto& [key, value] : allObjects)

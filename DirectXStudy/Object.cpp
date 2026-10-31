@@ -12,24 +12,24 @@ Object::Object()
 {
 	std::unique_ptr<Transform> transformTemp = std::make_unique<Transform>();
 	transform = transformTemp.get();
-	components.push_back(std::move(transformTemp));
+	components[transformTemp->GetComponentName()] = std::move(transformTemp);
 
-	for (auto& component : components)
+	for (auto& [key, value] : components)
 	{
-		component->Awake();
+		value->Awake();
 	}
-	for (auto& component : components)
+	for (auto& [key, value] : components)
 	{
-		component->Start();
+		value->Start();
 	}
 }
 
 void Object::ShowComponentInspectorUI()
 {	
-	for (auto& component : components)
+	for (auto& [key, value] : components)
 	{
 		ImGui::Separator();
-		component->InspectorUpdate();
+		value->InspectorUpdate();
 	}
 }
 void Object::SetComponent(std::unique_ptr<Component> component)
@@ -37,37 +37,27 @@ void Object::SetComponent(std::unique_ptr<Component> component)
 	component->Initialize(this);
 	component->Awake();
 	component->Start();
-	components.push_back(std::move(component));
+	components[component->GetComponentName()] = std::move(component);
 }
 void Object::DeleteComponent(Component* component)
 {
 	commandQueue.push([this, component]()
 		{
-			components.erase(
-				std::remove_if(
-					components.begin(),
-					components.end(),
-					[component](const std::unique_ptr<Component>& current)
-					{
-						return current.get() == component;
-					}
-				),
-				components.end()
-			);
+			components.erase(component->GetComponentName());
 		});
 }
 void Object::UpdateComponent(float deltaTime)
 {
-	for (auto& component : components)
+	for (auto& [key, value] : components)
 	{
-		component->Update();
+		value->Update();
 	}
 }
 void Object::LateUpateComponent(float deltaTime)
 {
-	for (auto& component : components)
+	for (auto& [key, value] : components)
 	{
-		component->LateUpdate();
+		value->LateUpdate();
 	}
 	while (!commandQueue.empty())
 	{
@@ -81,17 +71,16 @@ void Object::Serialize(nlohmann::json& j)
 {
 	j = nlohmann::json{
 		{"parentObjectID", parentObject == nullptr ? 0 : parentObject->objectID},
-		{"ModelNamePath", modelNamePath},
-		{ "TestModelNamePath", objectName},
+		{ "ObjectName", objectName},
 		{ "objectID", objectID },
 		{ "isRootObject", IsRootObject() == true ? 1 : 0},
 	};
 	j["Components"] = nlohmann::json::array();
 
-	for (auto& component : components)
+	for (auto& [key, value] : components)
 	{
 		nlohmann::json componentJson;
-		component->Serialize(componentJson);
+		value->Serialize(componentJson);
 		j["Components"].push_back(componentJson);
 	}
 }
@@ -99,18 +88,22 @@ void Object::Deserialize(const nlohmann::json& j)
 {
 	j.at("parentObjectID").get_to(parentobjectID);
 	j.at("objectID").get_to(objectID);
+	j.at("ObjectName").get_to(objectName);
 	SetRootNodeCheck(j.at("isRootObject").get<float>() == 1 ? true : false);
+
 	if (!j.contains("Components") || !j["Components"].is_array())
 		return;
 
 	for (const auto& componentJson : j["Components"])
 	{
-		std::string type = componentJson.value("type", std::string(""));
-
-		if (type == "Transform")
+		std::string componentName = componentJson.at("ComponentName").get<std::string>();
+		try
 		{
-			transform->Deserialize(componentJson);
-			continue;
+			components[componentName]->Deserialize(componentJson);
+		}
+		catch (const nlohmann::json::out_of_range& e)
+		{
+			Log::PrintLog(e.what());
 		}
 	}
 }
@@ -119,14 +112,13 @@ void Object::SetDataToCopy(Object* copyObject)
 	//copyObject->GetTransform()->CopyTransform(transform);
 	copyObject->SetRootNodeCheck(IsRootObject());
 	copyObject->objectName = objectName;
-	copyObject->modelNamePath = modelNamePath;
 	copyObject->objectID = objectID;
 	copyObject->parentobjectID = parentobjectID;
-	for (const auto& component : components)
+	for (auto& [key, value] : components)
 	{
-		std::unique_ptr<Component> temp = component->Clone();
+		std::unique_ptr<Component> temp = value->Clone();
 
-		if (Transform* transformComponent = dynamic_cast<Transform*>(component.get()))
+		if (Transform* transformComponent = dynamic_cast<Transform*>(value.get()))
 		{
 			copyObject->GetTransform()->CopyTransform(transformComponent);
 			continue;

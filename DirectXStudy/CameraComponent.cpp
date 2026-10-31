@@ -1,9 +1,16 @@
 #include "CameraComponent.h"
 #include "Object.h"
 #include "imgui_impl_win32.h"
+#include "EventDefinitions.h"
+#include "EventBus.h"
+
 CameraComponent::CameraComponent()
 {
-	componentName = "Camera";
+	componentName = "CameraComponent";
+}
+void CameraComponent::Awake()
+{
+	
 }
 DirectX::XMMATRIX CameraComponent::GetProjectionMatrix()const
 {
