@@ -22,7 +22,7 @@ using namespace DirectX;
 
 class Mesh {
 public:
-	Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* assimp, asMesh* meshData);
+	Mesh(ID3D11Device* device,const MeshData& meshData);
 	~Mesh();
 	void Render(RenderPass renderPass, ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix,int ObjectID);
 	int GetMaterialIDX(){return materialIDX; }
@@ -45,7 +45,6 @@ private:
 	XMFLOAT3 rotation;
 	XMFLOAT3 scale = { 1.0f, 1.0f, 1.0f };
 	XMFLOAT4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
-	XMMATRIX AssimpNodeMatrix;
 	ConstantBufferData sb = {};
 	PSBuffer cb = {};
 	PSPickingIDBuffer pickingIDBufferData = {};

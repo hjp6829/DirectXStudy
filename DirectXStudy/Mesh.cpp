@@ -14,23 +14,18 @@
 #include "Texture.h"
 #include "Sampler.h"
 
-Mesh::Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* assimp, asMesh* meshData)
+Mesh::Mesh(ID3D11Device* device, const MeshData& meshData)
 {
-	this->AssimpNodeMatrix = modelLoadData->mat;
-	materialIDX = meshData->materialIDX;
-	asMaterial* material = assimp->GetMaterial(materialIDX);
 	//SetScale(0.01f,0.01f,0.01f);
 	ComPtr<ID3DBlob> vertexShaderBlob;
 	D3DReadFileToBlob(L"VertexShader.cso", &vertexShaderBlob);
 	commonBindables.push_back(std::make_unique<VertexShader>(device, vertexShaderBlob.Get()));
 
-	normalBindables.push_back(std::make_unique<Texture>(material->textureView, 0));
-
+	normalBindables.push_back(std::make_unique<Texture>(meshData.material==nullptr ? nullptr : meshData.material->textureView, 0));
 	normalBindables.push_back(std::make_unique<Sampler>(device, 0));
 
-	normalBindables.push_back(std::make_unique<Texture>(material->normalView, 1));
+	normalBindables.push_back(std::make_unique<Texture>(meshData.material == nullptr ? nullptr : meshData.material->normalView, 1));
 	normalBindables.push_back(std::make_unique<Sampler>(device, 1));
-
 	commonBindables.push_back(std::make_unique<InputLayout>(device, vertexShaderBlob.Get()));
 
 	ComPtr<ID3DBlob> pixelShaderBlob;
@@ -45,10 +40,10 @@ Mesh::Mesh(ID3D11Device* device, ModelLoadData* modelLoadData, AssimpConverter* 
 	D3DReadFileToBlob(L"PickingPixelShader.cso", &pickingShaderBlob);
 	pickingShader = std::make_unique<PixelShader>(device, pickingShaderBlob.Get());
 
-	commonBindables.push_back(std::make_unique<VertexBuffer>(device, meshData->vertexs));
+	commonBindables.push_back(std::make_unique<VertexBuffer>(device, meshData.vertexs));
 
 	auto indexBuffer = std::make_unique<IndexBuffer>(
-		device, meshData->Indexs
+		device, meshData.Indexs
 	);
 	IndexCount = indexBuffer->GetIndexCount();
 	commonBindables.push_back(std::move(indexBuffer));

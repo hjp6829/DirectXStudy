@@ -49,7 +49,7 @@ float4 main(VSOut IN) : SV_TARGET
     float distanceRatio = saturate(dis / maxLightDistance);
     float attenuation = 1.0f - distanceRatio;
     
-    float specular = pow(saturate(dot(normalTS, H)), shininess) * specularStrength;
+    float specular = pow(saturate(dot(N, H)), shininess) * specularStrength;
 
     float diffuse = saturate(dot(N, L));
     float brightness = diffuse;

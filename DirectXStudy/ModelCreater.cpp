@@ -38,7 +38,11 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 		for (int j = 0; j < meshSize; j++)
 		{
 			asMesh* temp = assimp->GetMeshData(modelLoadData->meshIDX[j]);
-			Mesh* mesh = new Mesh(device, modelLoadData, assimp, temp);
+			MeshData meshData;
+			meshData.Indexs = temp->Indexs;
+			meshData.vertexs = temp->vertexs;
+			meshData.material = assimp->GetMaterial(temp->materialIDX);
+			Mesh* mesh = new Mesh(device, meshData);
 			XMFLOAT3 localPosTemp = mesh->GetLocalPos();
 			parentModelNode->currentMeshs.push_back(mesh);
 		}
@@ -51,7 +55,11 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 	for (int j = 0; j < modelLoadData->meshIDX.size(); j++)
 	{
 		asMesh* temp = assimp->GetMeshData(modelLoadData->meshIDX[j]);
-		Mesh* mesh = new Mesh(device, modelLoadData, assimp, temp);
+		MeshData meshData;
+		meshData.Indexs = temp->Indexs;
+		meshData.vertexs = temp->vertexs;
+		meshData.material = assimp->GetMaterial(temp->materialIDX);
+		Mesh* mesh = new Mesh(device, meshData);
 		parentModelNode->currentMeshs.push_back(mesh);
 	}
 	parentModelNode->modelName = modelLoadData->modelName;

@@ -61,6 +61,12 @@ struct asMesh
 struct asMaterial
 {
 	std::string name;
-	ComPtr<ID3D11ShaderResourceView> textureView;
-	ComPtr<ID3D11ShaderResourceView> normalView;
+	ComPtr<ID3D11ShaderResourceView> textureView = nullptr;
+	ComPtr<ID3D11ShaderResourceView> normalView = nullptr;
+};
+
+struct MeshData {
+	std::vector<Vertex> vertexs;
+	std::vector<unsigned int> Indexs;
+	asMaterial* material = nullptr;
 };
