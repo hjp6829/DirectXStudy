@@ -260,16 +260,24 @@ void WorldManager::LoadSaveSceneFile()
 			for (const auto& componentJson : item["Components"])
 			{
 				componentJson.at("ComponentName").get_to(componentName);
-				scriptRegistry->CreateScript(componentName, object);
+				scriptRegistry->CreateScript(componentName, object,false);
 			}
 		}
 		object->Deserialize(item);
 
 		for (auto& [key, value] : *object->GetComponents())
 		{
+			ComponentEventData componentEventData;
+			componentEventData.component = value.get();
+			EventBus::Publish(EventType::ComponentAdded, &componentEventData);
+
 			MeshRenderer* meshComp = dynamic_cast<MeshRenderer*>(value.get());
 			if (meshComp != nullptr)
-				meshComp->SetModelNode(modelCreater->GetModelNode(meshComp->GetModelNodeHesh(), meshComp->GetModelPath()));
+			{
+				ModelNode* modelNode = modelCreater->GetModelNode(meshComp->GetModelNodeHesh(), meshComp->GetModelPath());
+				object->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
+				meshComp->SetModelNode(modelNode);
+			}
 		}
 
 		currentManager->SetObjectID(object->objectID);

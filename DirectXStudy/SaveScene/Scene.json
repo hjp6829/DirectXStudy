@@ -6,13 +6,13 @@
             },
             {
                 "ComponentName": "Transform",
-                "posX": 0.0,
-                "posY": 0.0,
-                "posZ": 0.0,
-                "rotw": 1.0,
-                "rotx": 0.0,
-                "roty": 0.0,
-                "rotz": 0.0,
+                "posX": 7.010871887207031,
+                "posY": 5.54164457321167,
+                "posZ": -0.17604419589042664,
+                "rotw": 0.6605428457260132,
+                "rotx": 0.2722787857055664,
+                "roty": -0.6468810439109802,
+                "rotz": 0.2666313052177429,
                 "scalex": 1.0,
                 "scaley": 1.0,
                 "scalez": 1.0
@@ -49,6 +49,3489 @@
         "ObjectName": "MainLight",
         "isRootObject": 1,
         "objectID": 2,
+        "parentObjectID": 0
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 8021923539437501734,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 0.009999999776482582,
+                "scaley": 0.009999999776482582,
+                "scalez": 0.009999999776482582
+            }
+        ],
+        "ObjectName": "Leopard_2A4",
+        "isRootObject": 1,
+        "objectID": 3,
+        "parentObjectID": 0
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5611827442737709043,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "aaa_LOW",
+        "isRootObject": 0,
+        "objectID": 4,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 4419431720432958872,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "BB_LOW",
+        "isRootObject": 0,
+        "objectID": 5,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 7995716663994079566,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "BX_LOW",
+        "isRootObject": 0,
+        "objectID": 6,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5799488117831964464,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "BZ_LOW",
+        "isRootObject": 0,
+        "objectID": 7,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14128105283016305437,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "CB_LOW",
+        "isRootObject": 0,
+        "objectID": 8,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9688024269842911626,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "CC_LOW",
+        "isRootObject": 0,
+        "objectID": 9,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 1444374500172197592,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "CM_LOW",
+        "isRootObject": 0,
+        "objectID": 10,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 12729731305790327433,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "CN_LOW",
+        "isRootObject": 0,
+        "objectID": 11,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13368151778190284826,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "CS_LOW",
+        "isRootObject": 0,
+        "objectID": 12,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 15291283503716913665,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "CV_LOW",
+        "isRootObject": 0,
+        "objectID": 13,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 4363657513412308615,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "CX_LOW",
+        "isRootObject": 0,
+        "objectID": 14,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 684403403160125605,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "CZ_LOW",
+        "isRootObject": 0,
+        "objectID": 15,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14479896970655707674,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "ddd_LOW",
+        "isRootObject": 0,
+        "objectID": 16,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13949567666794153933,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.00017252562975045294,
+                "roty": 0.0,
+                "rotz": -0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "E_LOW",
+        "isRootObject": 0,
+        "objectID": 17,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5352761163275776481,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "A_LOW",
+        "isRootObject": 0,
+        "objectID": 18,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 11831399736540545182,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "AA_LOW",
+        "isRootObject": 0,
+        "objectID": 19,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9937422445263972379,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "ASS_LOW",
+        "isRootObject": 0,
+        "objectID": 20,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 4400078462535086544,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "B_LOW",
+        "isRootObject": 0,
+        "objectID": 21,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9070889421474948931,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "C_LOW",
+        "isRootObject": 0,
+        "objectID": 22,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9535806855557811578,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "D_LOW",
+        "isRootObject": 0,
+        "objectID": 23,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 6100787482411157560,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "DD_LOW",
+        "isRootObject": 0,
+        "objectID": 24,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 7147757695948320092,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "F_LOW",
+        "isRootObject": 0,
+        "objectID": 25,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5239750109935218272,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "FF_LOW",
+        "isRootObject": 0,
+        "objectID": 26,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9965454416690065231,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "G_LOW",
+        "isRootObject": 0,
+        "objectID": 27,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 15522391232028040250,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "GG_LOW",
+        "isRootObject": 0,
+        "objectID": 28,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9594527865485773830,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "H_LOW",
+        "isRootObject": 0,
+        "objectID": 29,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 7100860783774874784,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "HH_LOW",
+        "isRootObject": 0,
+        "objectID": 30,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 12550982583335559417,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "I_LOW",
+        "isRootObject": 0,
+        "objectID": 31,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 7398334503695761480,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "J_LOW",
+        "isRootObject": 0,
+        "objectID": 32,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 11343628006191248696,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "JJ_LOW",
+        "isRootObject": 0,
+        "objectID": 33,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 4056931927777917755,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "K_LOW",
+        "isRootObject": 0,
+        "objectID": 34,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 375876413505249178,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "KK_LOW",
+        "isRootObject": 0,
+        "objectID": 35,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 8407007007650296814,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "II_LOW",
+        "isRootObject": 0,
+        "objectID": 36,
+        "parentObjectID": 35
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13289166798917018968,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "LL_LOW",
+        "isRootObject": 0,
+        "objectID": 37,
+        "parentObjectID": 35
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14915020589854040197,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "M_LOW",
+        "isRootObject": 0,
+        "objectID": 38,
+        "parentObjectID": 35
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 10423807800222883554,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "TTT_LOW_001",
+        "isRootObject": 0,
+        "objectID": 39,
+        "parentObjectID": 35
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 3206149100622728268,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "V_LOW",
+        "isRootObject": 0,
+        "objectID": 40,
+        "parentObjectID": 35
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 32250846721458738,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "L_LOW",
+        "isRootObject": 0,
+        "objectID": 41,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14468596652761972948,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "N_LOW",
+        "isRootObject": 0,
+        "objectID": 42,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13349127494873809529,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "ggg_LOW_001",
+        "isRootObject": 0,
+        "objectID": 43,
+        "parentObjectID": 42
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 12557617018339990503,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "O_LOW",
+        "isRootObject": 0,
+        "objectID": 44,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 6306012944925654986,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "OO_LOW",
+        "isRootObject": 0,
+        "objectID": 45,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 15666989060059342366,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "P_LOW",
+        "isRootObject": 0,
+        "objectID": 46,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 3799619446884267504,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "PP_LOW",
+        "isRootObject": 0,
+        "objectID": 47,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 7517470723247259601,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "Q_LOW",
+        "isRootObject": 0,
+        "objectID": 48,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 16165568207985945566,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "QQ_LOW",
+        "isRootObject": 0,
+        "objectID": 49,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 2066843901884881537,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "QWE_LOW",
+        "isRootObject": 0,
+        "objectID": 50,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13060517610088601024,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "R_LOW",
+        "isRootObject": 0,
+        "objectID": 51,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 3015113936601261528,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "RR_LOW",
+        "isRootObject": 0,
+        "objectID": 52,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5129280826149357107,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "S_LOW",
+        "isRootObject": 0,
+        "objectID": 53,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14267075971075024330,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "SS_LOW",
+        "isRootObject": 0,
+        "objectID": 54,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5594338997720630762,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "T_LOW",
+        "isRootObject": 0,
+        "objectID": 55,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 17053267893820356472,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "TT_LOW",
+        "isRootObject": 0,
+        "objectID": 56,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 6977990443918703210,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "TTT_LOW",
+        "isRootObject": 0,
+        "objectID": 57,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 16401937778192496125,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "U_LOW",
+        "isRootObject": 0,
+        "objectID": 58,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 6381166846322174719,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "W_LOW",
+        "isRootObject": 0,
+        "objectID": 59,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 11146387635030778930,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "WASS_LOW",
+        "isRootObject": 0,
+        "objectID": 60,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 2882470730630102554,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "WW_LOW",
+        "isRootObject": 0,
+        "objectID": 61,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5914470725882606134,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "X_LOW",
+        "isRootObject": 0,
+        "objectID": 62,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 8705565769710477801,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "Y_LOW",
+        "isRootObject": 0,
+        "objectID": 63,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14597668438958809806,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "YY_LOW",
+        "isRootObject": 0,
+        "objectID": 64,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 3334425030965224504,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "Z_LOW",
+        "isRootObject": 0,
+        "objectID": 65,
+        "parentObjectID": 17
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13952539715203034558,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "FD_LOW",
+        "isRootObject": 0,
+        "objectID": 66,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5228228591217050740,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "fff_LOW",
+        "isRootObject": 0,
+        "objectID": 67,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 8442966422769544815,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "FS_LOW",
+        "isRootObject": 0,
+        "objectID": 68,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 10431322651928098057,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "ggg_LOW",
+        "isRootObject": 0,
+        "objectID": 69,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 1651130232227177522,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "IE_LOW",
+        "isRootObject": 0,
+        "objectID": 70,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 7533350111388324918,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "IQ_LOW",
+        "isRootObject": 0,
+        "objectID": 71,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 8128322162170389739,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "IR_LOW",
+        "isRootObject": 0,
+        "objectID": 72,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 609116117835186293,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "IT_LOW",
+        "isRootObject": 0,
+        "objectID": 73,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 6205190436643760900,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "IW_LOW",
+        "isRootObject": 0,
+        "objectID": 74,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 15526673698473283793,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "JA_LOW",
+        "isRootObject": 0,
+        "objectID": 75,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13603541972946654954,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "JD_LOW",
+        "isRootObject": 0,
+        "objectID": 76,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 11215352075848752460,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "JF_LOW",
+        "isRootObject": 0,
+        "objectID": 77,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14390369821548198911,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "JG_LOW",
+        "isRootObject": 0,
+        "objectID": 78,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13923673701108630326,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "JH_LOW",
+        "isRootObject": 0,
+        "objectID": 79,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 17080092396700973123,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "JS_LOW",
+        "isRootObject": 0,
+        "objectID": 80,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5500346086668375924,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "KA_LOW",
+        "isRootObject": 0,
+        "objectID": 81,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13657867050287228507,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "KD_LOW",
+        "isRootObject": 0,
+        "objectID": 82,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 503976421987231654,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "KG_LOW",
+        "isRootObject": 0,
+        "objectID": 83,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5103899453082324077,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "KJ_LOW",
+        "isRootObject": 0,
+        "objectID": 84,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 102779592869762915,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "KL_LOW",
+        "isRootObject": 0,
+        "objectID": 85,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 17787612643740380546,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "KS_LOW",
+        "isRootObject": 0,
+        "objectID": 86,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 3681079730032348959,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "LA_LOW",
+        "isRootObject": 0,
+        "objectID": 87,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 10482590633715309408,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "LD_LOW",
+        "isRootObject": 0,
+        "objectID": 88,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 748636165273574078,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "LF_LOW",
+        "isRootObject": 0,
+        "objectID": 89,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5131645835298166385,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "LG_LOW",
+        "isRootObject": 0,
+        "objectID": 90,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 7922740879126038052,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "LH_LOW",
+        "isRootObject": 0,
+        "objectID": 91,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5731192159751134338,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "LJ_LOW",
+        "isRootObject": 0,
+        "objectID": 92,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 8875458764238830741,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "LK_LOW",
+        "isRootObject": 0,
+        "objectID": 93,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 11494223042802629485,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "LS_LOW",
+        "isRootObject": 0,
+        "objectID": 94,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 8750355927226806214,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "MM_LOW",
+        "isRootObject": 0,
+        "objectID": 95,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 12102297861633106164,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "NB_LOW",
+        "isRootObject": 0,
+        "objectID": 96,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14496928679688874608,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "NN_LOW",
+        "isRootObject": 0,
+        "objectID": 97,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13702812558739605024,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "OI_LOW",
+        "isRootObject": 0,
+        "objectID": 98,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 2003971770580532776,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "OQ_LOW",
+        "isRootObject": 0,
+        "objectID": 99,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 7156760587708741721,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "OR_LOW",
+        "isRootObject": 0,
+        "objectID": 100,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 7355074898672138183,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "OT_LOW",
+        "isRootObject": 0,
+        "objectID": 101,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 2653653536008936756,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "OU_LOW",
+        "isRootObject": 0,
+        "objectID": 102,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 12892670836379994258,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "OW_LOW",
+        "isRootObject": 0,
+        "objectID": 103,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 11642142756181718303,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "PE_LOW",
+        "isRootObject": 0,
+        "objectID": 104,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 11700758212993372299,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "PI_LOW",
+        "isRootObject": 0,
+        "objectID": 105,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 16836521790388200085,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "PO_LOW",
+        "isRootObject": 0,
+        "objectID": 106,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 6379489219941135374,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "PR_LOW",
+        "isRootObject": 0,
+        "objectID": 107,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 12531034483212808828,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "PT_LOW",
+        "isRootObject": 0,
+        "objectID": 108,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 3200125898989453679,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "PU_LOW",
+        "isRootObject": 0,
+        "objectID": 109,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 1008541995242447213,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "PW_LOW",
+        "isRootObject": 0,
+        "objectID": 110,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9562509592447351643,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "PY_LOW",
+        "isRootObject": 0,
+        "objectID": 111,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13751698233650019893,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "sss_LOW",
+        "isRootObject": 0,
+        "objectID": 112,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 3906464109492283068,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "VB_LOW",
+        "isRootObject": 0,
+        "objectID": 113,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 564780058597617327,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "VC_LOW",
+        "isRootObject": 0,
+        "objectID": 114,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 3273031315113289689,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "VM_LOW",
+        "isRootObject": 0,
+        "objectID": 115,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 16566986571694632360,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "VN_LOW",
+        "isRootObject": 0,
+        "objectID": 116,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9819083286144152992,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "VV_LOW",
+        "isRootObject": 0,
+        "objectID": 117,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5206442809288018370,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "VX_LOW",
+        "isRootObject": 0,
+        "objectID": 118,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 13632380766755145828,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "VZ_LOW",
+        "isRootObject": 0,
+        "objectID": 119,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 17213030925773468953,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "XC_LOW",
+        "isRootObject": 0,
+        "objectID": 120,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 8654594608013969647,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "XM_LOW",
+        "isRootObject": 0,
+        "objectID": 121,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 1734987664689888282,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "XN_LOW",
+        "isRootObject": 0,
+        "objectID": 122,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 699979821215468034,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "XV_LOW",
+        "isRootObject": 0,
+        "objectID": 123,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5451378295179643104,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "XX_LOW",
+        "isRootObject": 0,
+        "objectID": 124,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 2167342992851712414,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "XXX_LOW",
+        "isRootObject": 0,
+        "objectID": 125,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14164167900447459390,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "XZ_LOW",
+        "isRootObject": 0,
+        "objectID": 126,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 3847331558103379266,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "YE_LOW",
+        "isRootObject": 0,
+        "objectID": 127,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 11489711877938718054,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "YQ_LOW",
+        "isRootObject": 0,
+        "objectID": 128,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 17780688811465026075,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "YR_LOW",
+        "isRootObject": 0,
+        "objectID": 129,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 10506295628172329445,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "YT_LOW",
+        "isRootObject": 0,
+        "objectID": 130,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 5159901005247470352,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "ZB_LOW",
+        "isRootObject": 0,
+        "objectID": 131,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9447070737292579971,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "ZC_LOW",
+        "isRootObject": 0,
+        "objectID": 132,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 9440453894474200261,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "ZM_LOW",
+        "isRootObject": 0,
+        "objectID": 133,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 14599613263816069652,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "ZN_LOW",
+        "isRootObject": 0,
+        "objectID": 134,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "MeshRenderer",
+                "modelHeshCode": 6045487336936702838,
+                "modelPath": "Leopard 2A4\\Leopard 2A4.FBX"
+            },
+            {
+                "ComponentName": "Transform",
+                "posX": 0.0,
+                "posY": 0.0,
+                "posZ": 0.0,
+                "rotw": 1.0,
+                "rotx": 0.0,
+                "roty": 0.0,
+                "rotz": 0.0,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            }
+        ],
+        "ObjectName": "ZX_LOW",
+        "isRootObject": 0,
+        "objectID": 135,
+        "parentObjectID": 3
+    },
+    {
+        "Components": [
+            {
+                "ComponentName": "Transform",
+                "posX": 7.0,
+                "posY": 5.5,
+                "posZ": 0.0,
+                "rotw": 0.6669601798057556,
+                "rotx": 0.2694694697856903,
+                "roty": -0.6440761089324951,
+                "rotz": 0.2602236568927765,
+                "scalex": 1.0,
+                "scaley": 1.0,
+                "scalez": 1.0
+            },
+            {
+                "ComponentName": "CameraComponent",
+                "FOV": 60.0
+            }
+        ],
+        "ObjectName": "Camera1",
+        "isRootObject": 1,
+        "objectID": 136,
         "parentObjectID": 0
     }
 ]

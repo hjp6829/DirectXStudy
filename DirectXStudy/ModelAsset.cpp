@@ -12,5 +12,4 @@ ModelNode* ModelAsset::GetModelNode(uint64_t id)
     }
 
     return nullptr;
-    return nullptr;
 }

@@ -31,7 +31,7 @@ ScriptRegistry::ScriptRegistry()
     );
 }
 
-Component* ScriptRegistry::CreateScript(const std::string& name, Object* object)
+Component* ScriptRegistry::CreateScript(const std::string& name, Object* object, bool isPublish)
 {
     auto it = scriptFactories.find(name);
 
@@ -39,9 +39,12 @@ Component* ScriptRegistry::CreateScript(const std::string& name, Object* object)
         return nullptr;
 
     std::unique_ptr<Component> TempComp = it->second();
-    ComponentEventData componentEventData;
-    componentEventData.component = TempComp.get();
     object->SetComponent(std::move(TempComp));
-    EventBus::Publish(EventType::ComponentAdded, &componentEventData);
-    return componentEventData.component;
+    if (isPublish)
+    {
+        ComponentEventData componentEventData;
+        componentEventData.component = TempComp.get();
+        EventBus::Publish(EventType::ComponentAdded, &componentEventData);
+    }
+    return TempComp.get();
 }

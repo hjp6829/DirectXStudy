@@ -18,7 +18,10 @@ public:
 	void Deserialize(const nlohmann::json& j) override;
 	std::unique_ptr<Component> Clone()const override;
 	void InspectorUpdate() override;
-	void SetModelNode(ModelNode* node) { currentModelNode = node;}
+	void SetModelNode(ModelNode* node)
+	{ 
+		currentModelNode = node;
+	}
 	uint64_t GetModelNodeHesh() {return modelNodeHesh; }
 	std::string GetModelPath() { return modelPath; }
 private:
