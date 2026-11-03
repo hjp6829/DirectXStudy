@@ -8,15 +8,16 @@
 #include "imgui_impl_win32.h"
 #include "WorldManager.h"
 #include "ObjectType.h"
+#include "AssetManager.h"
 
-UIManager::UIManager(WorldManager* worldManager)
+UIManager::UIManager(WorldManager* worldManager, std::unordered_map<std::string, MetaData>& metaDataMap)
 {
 	hierarchy = new Hierarchy(worldManager);
-	modelBrowserUI = new ModelBrowserUI();
+	modelBrowserUI = new ModelBrowserUI(metaDataMap);
 	insfector = new Insfector(worldManager);
 
-	modelBrowserUI->OnCreateObjectSelected = [this](std::string path) {
-		OnCreateObjectSelected(path);
+	modelBrowserUI->OnCreateObjectSelected = [this](const MetaData* metaData) {
+		OnCreateObjectSelected(metaData);
 		};
 	hierarchy->OnHierarchyRenameClick = [this](Object* object) {
 		OnHierarchyRenameClick(object);

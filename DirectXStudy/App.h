@@ -12,6 +12,7 @@ class UIManager;
 class EventData;
 class WorldManager;
 class RendererManager;
+class AssetManager;
 
 class App {
 	public:
@@ -31,5 +32,5 @@ private:
 	void DeleteObject(EventData* eventData);
 	void ActiveSceneModeChange(EventData* eventData);
 	ActiveSceneMode activeSceneMode = ActiveSceneMode::SceneMode;
-
+	AssetManager* assetManager;
 };

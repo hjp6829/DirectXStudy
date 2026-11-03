@@ -70,3 +70,17 @@ struct MeshData {
 	std::vector<unsigned int> Indexs;
 	asMaterial* material = nullptr;
 };
+
+enum class AssetType {
+	Unknown,
+	TextureAssetType,
+	ModelAssetType,
+	MaterialAssetType,
+	FolderAssetType,
+};
+
+struct MetaData {
+	std::string GUID;
+	AssetType assetType;
+	std::filesystem::path assetPath;
+};

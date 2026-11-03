@@ -1,38 +1,52 @@
 #include "ModelBrowserUI.h"
 #include "imgui_impl_win32.h"
 #include "DirectXMain.h"
+#include "Datas.h"
 
-ModelBrowserUI::ModelBrowserUI()
+ModelBrowserUI::ModelBrowserUI(const std::unordered_map<std::string, MetaData>& metaDataMap) : metaDataMap(metaDataMap)
 {
-	std::filesystem::path assetsFolder = "Assets";
-	std::filesystem::path path = std::filesystem::current_path();
-	currentFolder = path / assetsFolder;
+	currentFolder = fs::current_path() / "Assets";
 }
 
 void ModelBrowserUI::UpdateUI()
 {
 	if (ImGui::Begin("ModelBrowserUI"))
 	{
-		for (const auto& entry : fs::directory_iterator(currentFolder))
+		std::vector<const MetaData*> currentFolderAssets = GetCurrentFolderAssets();
+
+		for (const MetaData* data : currentFolderAssets)
 		{
-			const fs::path& entryPath = entry.path();
-			std::string fileName = entryPath.filename().string();
-			if (entry.is_directory())
+			std::string fileName = data->assetPath.filename().string();
+			ImGui::Selectable(fileName.c_str());
+			if (ImGui::IsItemHovered() && ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
 			{
-				if (ImGui::Selectable(("[Folder] " + fileName).c_str()))
+				switch (data->assetType)
 				{
-					currentFolder = entryPath;
+				case AssetType::FolderAssetType:
+					currentFolder = data->assetPath;
 					break;
-				}
-			}
-			else if (entry.is_regular_file())
-			{
-				if (ImGui::Selectable(fileName.c_str()))
-				{
-					OnCreateObjectSelected(entryPath.string());
+				case AssetType::ModelAssetType:
+					OnCreateObjectSelected(data);
+				break;
+				default:
+					break;
 				}
 			}
 		}
 	}
 	ImGui::End();
+}
+std::vector<const MetaData*> ModelBrowserUI::GetCurrentFolderAssets() const
+{
+	std::vector<const MetaData*> result;
+
+	for (const auto& [guid, data] : metaDataMap)
+	{
+		if (data.assetPath.parent_path() == currentFolder)
+		{
+			result.push_back(&data);
+		}
+	}
+
+	return result;
 }

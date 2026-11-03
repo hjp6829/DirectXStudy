@@ -75,28 +75,23 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 	}
 	parentModelNode->localMatrix = modelLoadData->localMatrix;
 }
-ModelAsset* ModelCreater::LoadModelFromFile(std::string path)
+ModelAsset* ModelCreater::LoadModelFromFile(const MetaData* metaData)
 {
-	uint64_t hesh = FNV1a(path);
-	auto it = modelAssets.find(hesh);
+	auto it = modelAssets.find(metaData->GUID);
 	if(it != modelAssets.end())
 	{
 		return it->second;
 	}
-	ModelLoadData* modelLoadData = assimp->ReadAssetFile(path);
-	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, path);
-	modelAssets.insert({ hesh, modelAssetTemp });
+	ModelLoadData* modelLoadData = assimp->ReadAssetFile(metaData->assetPath);
+	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, metaData->assetPath);
+	modelAssets.insert({ metaData->GUID, modelAssetTemp });
 	return modelAssetTemp;
 }
 
-ModelNode* ModelCreater::GetModelNode(uint64_t id, std::string path)
+ModelNode* ModelCreater::GetModelNode(const MetaData* metaData)
 {
-	std::filesystem::path modelFolderPath = "Assets/DirectXModel";
-	std::filesystem::path currentPath = std::filesystem::current_path();
-	std::filesystem::path fullPath = currentPath / modelFolderPath / path;
-
-	ModelAsset* assetTemp = LoadModelFromFile(fullPath.string());
-	ModelNode* modelNodeTemp = assetTemp->GetModelNode(id);
+	ModelAsset* assetTemp = LoadModelFromFile(metaData);
+	ModelNode* modelNodeTemp = assetTemp->GetModelNode(metaData->GUID);
 	if(modelNodeTemp != nullptr)
 		return modelNodeTemp;
 

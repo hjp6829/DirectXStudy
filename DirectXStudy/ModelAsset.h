@@ -8,8 +8,8 @@ public:
 	ModelAsset() {}
 	~ModelAsset() {}
 	ModelNode* currentNode;
-	void SetModelNode(uint64_t id, ModelNode* node){ modelNodesDic.insert({ id, node }); }
-	ModelNode* GetModelNode(uint64_t id);
+	void SetModelNode(std::string guid, ModelNode* node){ modelNodesDic.insert({ guid, node }); }
+	ModelNode* GetModelNode(std::string guid);
 private:
-	std::unordered_map<uint64_t, ModelNode*> modelNodesDic;
+	std::unordered_map<std::string, ModelNode*> modelNodesDic;
 };

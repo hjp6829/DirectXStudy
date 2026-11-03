@@ -125,6 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="AssimpConverter.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="Component.cpp" />
@@ -179,6 +180,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="AssimpConverter.h" />
     <ClInclude Include="Bindable.h" />
     <ClInclude Include="CameraComponent.h" />

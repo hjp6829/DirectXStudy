@@ -15,6 +15,7 @@
 #include "RuntimeManager.h"
 #include "Log.h"
 #include "WorldManager.h"
+#include "AssetManager.h"
 
 App::App()
 {
@@ -24,6 +25,8 @@ App::App()
 	ImGui::CreateContext();
 	ImGui::StyleColorsDark();
 
+	assetManager = new AssetManager();
+
 	input = new Input();
 
 	window = new Window(input);
@@ -31,10 +34,10 @@ App::App()
 
 	worldManager = new WorldManager(dxdMain->GetDevice());
 	dxdMain->SetObjects(worldManager);
-	uimanager = new UIManager(worldManager);
+	uimanager = new UIManager(worldManager, assetManager->GetMetaDataMap());
 
-	uimanager->OnCreateObjectSelected = [this](std::string path) {//이벤트 버스
-		worldManager->CreateObject(path);//나중에 이름 바꿔야함
+	uimanager->OnCreateObjectSelected = [this](const MetaData* metaData) {//이벤트 버스
+		worldManager->CreateObject(metaData);//나중에 이름 바꿔야함
 		};
 	uimanager->OnCreateObject = [this](ObjectType type) {//이벤트 버스
 		worldManager->CreateObject(type);
@@ -50,6 +53,7 @@ void App::Run()
 	MSG msg = {};
 
 	dxdMain->Start();
+
 
 	while (GetMessage(&msg, NULL, 0, 0))
 	{

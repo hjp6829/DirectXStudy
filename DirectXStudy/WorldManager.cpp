@@ -15,6 +15,7 @@
 #include "LightComponent.h"
 #include "SceneCameraComponent.h"
 #include "CameraComponent.h"
+#include "Datas.h"
 
 WorldManager::WorldManager(ID3D11Device* device)
 {
@@ -44,9 +45,9 @@ ICamera* WorldManager::GetCamera(int idx)
 {
 	return currentManager->GetCamera(idx);
 }
-void WorldManager::CreateObject(std::string path)
+void WorldManager::CreateObject(const MetaData* metaData)
 {
-	ModelAsset* modelAsset = modelCreater->LoadModelFromFile(path);
+	ModelAsset* modelAsset = modelCreater->LoadModelFromFile(metaData);
 	Object* tempObject = currentManager->CreateObject();
 	BuildSceneObjectTree(modelAsset->currentNode, tempObject);
 }

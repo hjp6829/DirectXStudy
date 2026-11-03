@@ -1,9 +1,9 @@
 #include "ModelAsset.h"
 #include "ModelNode.h"
 
-ModelNode* ModelAsset::GetModelNode(uint64_t id)
+ModelNode* ModelAsset::GetModelNode(std::string guid)
 {
-    auto it = modelNodesDic.find(id);
+    auto it = modelNodesDic.find(guid);
 
     if (it != modelNodesDic.end())
     {

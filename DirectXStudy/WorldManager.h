@@ -15,6 +15,7 @@ class ScriptRegistry;
 class ModelCreater;
 class ModelNode;
 class LightComponent;
+struct MetaData;
 
 class WorldManager {
 public:
@@ -26,7 +27,7 @@ public:
 	Object* GetObjectByID(uint64_t id){return currentManager->GetObjectByID(id); }
 	ICamera* GetCamera(int idx);
 	LightComponent* GetLight(){return currentManager->GetLight(); }
-	void CreateObject(std::string path);
+	void CreateObject(const MetaData* metaData);
 	void CreateObject(ObjectType type);
 	uint64_t GetSelectedObjectID(){return selectedObjectID; }
 private:

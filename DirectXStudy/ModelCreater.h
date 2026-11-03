@@ -12,6 +12,7 @@ class AssimpConverter;
 class ModelLoadData;
 class ScriptRegistry;
 class ObjectManager;
+struct MetaData;
 
 class ModelCreater
 {
@@ -19,11 +20,11 @@ public:
 	ModelCreater(ID3D11Device* device);
 	ModelAsset* CreateModelAsset(ModelLoadData* modelData, std::filesystem::path modelName);
 	void CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode, ModelAsset* modelAsset);
-	ModelAsset* LoadModelFromFile(std::string path);
-	ModelNode* GetModelNode(uint64_t id,std::string path);
+	ModelAsset* LoadModelFromFile(const MetaData* metaData);
+	ModelNode* GetModelNode(const MetaData* metaData);
 private:
 	AssimpConverter* assimp;
-	std::unordered_map<uint64_t, ModelAsset*> modelAssets;
+	std::unordered_map<std::string, ModelAsset*> modelAssets;
 	ID3D11Device* device; 
 	uint64_t FNV1a(const std::string& str);
 };
