@@ -39,12 +39,13 @@ Component* ScriptRegistry::CreateScript(const std::string& name, Object* object,
         return nullptr;
 
     std::unique_ptr<Component> TempComp = it->second();
+	Component* compPtr = TempComp.get();
     object->SetComponent(std::move(TempComp));
     if (isPublish)
     {
         ComponentEventData componentEventData;
-        componentEventData.component = TempComp.get();
+        componentEventData.component = compPtr;
         EventBus::Publish(EventType::ComponentAdded, &componentEventData);
     }
-    return TempComp.get();
+    return compPtr;
 }

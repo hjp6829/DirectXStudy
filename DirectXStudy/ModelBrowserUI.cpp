@@ -4,29 +4,33 @@
 
 ModelBrowserUI::ModelBrowserUI()
 {
-	std::filesystem::path modelFolderPath = "Assets/DirectXModel";
+	std::filesystem::path assetsFolder = "Assets";
 	std::filesystem::path path = std::filesystem::current_path();
-	for (const auto& entry : fs::recursive_directory_iterator(path / modelFolderPath))
-	{
-		if (!entry.is_regular_file())
-			continue;
-
-		if (entry.path().extension() == ".FBX")
-		{
-			files.push_back(entry.path());
-		}
-	}
+	currentFolder = path / assetsFolder;
 }
 
 void ModelBrowserUI::UpdateUI()
 {
 	if (ImGui::Begin("ModelBrowserUI"))
 	{
-		for (size_t i = 0; i < files.size(); i++)
+		for (const auto& entry : fs::directory_iterator(currentFolder))
 		{
-			if (ImGui::Button(files[i].filename().string().c_str()))
+			const fs::path& entryPath = entry.path();
+			std::string fileName = entryPath.filename().string();
+			if (entry.is_directory())
 			{
-				OnCreateObjectSelected(files[i].string());
+				if (ImGui::Selectable(("[Folder] " + fileName).c_str()))
+				{
+					currentFolder = entryPath;
+					break;
+				}
+			}
+			else if (entry.is_regular_file())
+			{
+				if (ImGui::Selectable(fileName.c_str()))
+				{
+					OnCreateObjectSelected(entryPath.string());
+				}
 			}
 		}
 	}
