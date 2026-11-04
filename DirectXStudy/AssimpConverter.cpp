@@ -2,6 +2,7 @@
 #include "Log.h"
 #include "Surface.h"
 #include "DirectXMain.h"
+#include "AssetManager.h"
 
 AssimpConverter::AssimpConverter(ID3D11Device* device)
 {
@@ -14,15 +15,13 @@ AssimpConverter::~AssimpConverter()
 {
 }
 
-ModelLoadData* AssimpConverter::ReadAssetFile(std::filesystem::path path)
+void AssimpConverter::ReadAssetFile(std::filesystem::path path)
 {
 	curretnPath = path.string();
 	assert(std::filesystem::exists(path));
 
 	auto start = std::chrono::high_resolution_clock::now();
-
 	scene = importer->ReadFile(path.string(), 0);
-
 	auto readEnd = std::chrono::high_resolution_clock::now();
 
 	scene = importer->ApplyPostProcessing(
@@ -33,13 +32,6 @@ ModelLoadData* AssimpConverter::ReadAssetFile(std::filesystem::path path)
 	);
 
 	auto processEnd = std::chrono::high_resolution_clock::now();
-	ReadModel();
-	ReadMaterial(path);
-	aiMatrix4x4 transform;
-	ModelLoadData* model = new ModelLoadData();
-	model->currentNode = scene->mRootNode;
-	ParseNode(model, transform);
-	return model;
 }
 
 void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform)
@@ -75,7 +67,7 @@ void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& par
 	for (int i = 0; i < modelData->currentNode->mNumMeshes; i++)
 	{
 		int meshIndex = modelData->currentNode->mMeshes[i];
-		modelData->meshIDX.push_back(meshIndex);
+		modelData->meshs.push_back(&meshs[meshIndex]);
 	}
 
 	models.push_back(modelData);
@@ -129,9 +121,10 @@ void AssimpConverter::ReadModel()
 	}
 }
 
-void AssimpConverter::ReadMaterial(std::filesystem::path modelPath)
+std::vector<TextureRequest> AssimpConverter::ReadTextureData(std::filesystem::path modelPath)
 {
 	int materialNum = scene->mNumMaterials;
+	texturePaths.clear();
 
 	for (int i = 0; i < materialNum; i++)
 	{
@@ -142,58 +135,32 @@ void AssimpConverter::ReadMaterial(std::filesystem::path modelPath)
 
 		if (mat->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)
 		{
-			std::filesystem::path path = texturePath.C_Str();
-			std::filesystem::path texturePath = modelPath.parent_path() / L"textures" / path.filename();
-			Surface surface = Surface::FromFile(texturePath);
-
-			D3D11_TEXTURE2D_DESC tDc = {};
-			tDc.Width = surface.GetWidth();
-			tDc.Height = surface.GetHeight();
-			tDc.MipLevels = 1;
-			tDc.ArraySize = 1;
-			tDc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
-			tDc.SampleDesc.Count = 1;
-			tDc.SampleDesc.Quality = 0;
-			tDc.Usage = D3D11_USAGE_DEFAULT;
-			tDc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-			tDc.CPUAccessFlags = 0;
-			D3D11_SUBRESOURCE_DATA ts = {};
-			ts.pSysMem = surface.GetBufferPtr();
-			ts.SysMemPitch = surface.GetWidth() * sizeof(Surface::Color);
-
-			ComPtr<ID3D11Texture2D> pTexture2D;
-			device->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
-			device->CreateShaderResourceView(pTexture2D.Get(), NULL, material.textureView.GetAddressOf());
-
+			TextureRequest request;
+			request.materialIndex = i;
+			request.type = aiTextureType_DIFFUSE;
+			request.path = modelPath.parent_path() / L"textures" / std::filesystem::path(texturePath.C_Str()).filename();
+			texturePaths.push_back(request);
 		}
 		if (mat->GetTexture(aiTextureType_NORMALS, 0, &texturePath, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)
 		{
-			std::filesystem::path path = texturePath.C_Str();
-			std::filesystem::path texturePath = modelPath.parent_path() / L"textures" / path.filename();
-			Surface surface = Surface::FromFile(texturePath);
-			D3D11_TEXTURE2D_DESC tDc = {};
-			tDc.Width = surface.GetWidth();
-			tDc.Height = surface.GetHeight();
-			tDc.MipLevels = 1;
-			tDc.ArraySize = 1;
-			tDc.Format = DXGI_FORMAT_B8G8R8A8_UNORM;
-			tDc.SampleDesc.Count = 1;
-			tDc.SampleDesc.Quality = 0;
-			tDc.Usage = D3D11_USAGE_DEFAULT;
-			tDc.BindFlags = D3D11_BIND_SHADER_RESOURCE;
-			tDc.CPUAccessFlags = 0;
-
-			D3D11_SUBRESOURCE_DATA ts = {};
-			ts.pSysMem = surface.GetBufferPtr();
-			ts.SysMemPitch = surface.GetWidth() * sizeof(Surface::Color);
-
-			ComPtr<ID3D11Texture2D> pTexture2D;
-			device->CreateTexture2D(&tDc, &ts, pTexture2D.GetAddressOf());
-			device->CreateShaderResourceView(pTexture2D.Get(), NULL, material.normalView.GetAddressOf());
-
+			TextureRequest request;
+			request.materialIndex = i;
+			request.type = aiTextureType_NORMALS;
+			request.path = modelPath.parent_path() / L"textures" / std::filesystem::path(texturePath.C_Str()).filename();
+			texturePaths.push_back(request);
 		}
-		materials.push_back(std::move(material));
 	}
+	return texturePaths;
+}
+
+ModelLoadData* AssimpConverter::CreateModelLoadData(const std::string& path)
+{
+	ReadModel();
+	aiMatrix4x4 transform;
+	ModelLoadData* model = new ModelLoadData();
+	model->currentNode = scene->mRootNode;
+	ParseNode(model, transform);
+	return model;
 }
 
 std::string AssimpConverter::GetNodeLocalPath(const aiNode* node)

@@ -160,6 +160,7 @@
     <ClCompile Include="PostProcessingManager.cpp" />
     <ClCompile Include="PrimitiveTopology.cpp" />
     <ClCompile Include="RendererManager.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="RuntimeManager.cpp" />
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="SceneCameraComponent.cpp" />
@@ -170,6 +171,7 @@
     <ClCompile Include="Surface.cpp" />
     <ClCompile Include="TestScript.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureCreater.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIManager.cpp" />
     <ClCompile Include="VertexBuffer.cpp" />
@@ -223,6 +225,7 @@
     <ClInclude Include="PrimitiveTopology.h" />
     <ClInclude Include="RendererManager.h" />
     <ClInclude Include="RenderingTypes.h" />
+    <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="RuntimeManager.h" />
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="SceneCameraComponent.h" />
@@ -234,6 +237,7 @@
     <ClInclude Include="Surface.h" />
     <ClInclude Include="TestScript.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureCreater.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UIManager.h" />
     <ClInclude Include="VertexBuffer.h" />

@@ -15,7 +15,6 @@
 
 ModelCreater::ModelCreater(ID3D11Device* device)
 {
-	assimp = new AssimpConverter(device);
 	this->device = device;
 }
 
@@ -34,14 +33,14 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 {
 	if (modelLoadData->childNodes.size() == 0)
 	{
-		int meshSize = modelLoadData->meshIDX.size();
+		int meshSize = modelLoadData->meshs.size();
 		for (int j = 0; j < meshSize; j++)
 		{
-			asMesh* temp = assimp->GetMeshData(modelLoadData->meshIDX[j]);
+			asMesh* temp = modelLoadData->meshs[j];
 			MeshData meshData;
 			meshData.Indexs = temp->Indexs;
 			meshData.vertexs = temp->vertexs;
-			meshData.material = assimp->GetMaterial(temp->materialIDX);
+			//meshData.material = assimp->GetMaterial(temp->materialIDX);
 			Mesh* mesh = new Mesh(device, meshData);
 			XMFLOAT3 localPosTemp = mesh->GetLocalPos();
 			parentModelNode->currentMeshs.push_back(mesh);
@@ -52,13 +51,13 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 		modelAsset->SetModelNode( parentModelNode->modelLocalHesh, parentModelNode );
 		return;
 	}
-	for (int j = 0; j < modelLoadData->meshIDX.size(); j++)
+	for (int j = 0; j < modelLoadData->meshs.size(); j++)
 	{
-		asMesh* temp = assimp->GetMeshData(modelLoadData->meshIDX[j]);
+		asMesh* temp = modelLoadData->meshs[j];
 		MeshData meshData;
 		meshData.Indexs = temp->Indexs;
 		meshData.vertexs = temp->vertexs;
-		meshData.material = assimp->GetMaterial(temp->materialIDX);
+		//meshData.material = assimp->GetMaterial(temp->materialIDX);
 		Mesh* mesh = new Mesh(device, meshData);
 		parentModelNode->currentMeshs.push_back(mesh);
 	}
@@ -75,14 +74,13 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 	}
 	parentModelNode->localMatrix = modelLoadData->localMatrix;
 }
-ModelAsset* ModelCreater::LoadModelFromFile(const MetaData* metaData)
+ModelAsset* ModelCreater::LoadModelFromFile(const MetaData* metaData,ModelLoadData* modelLoadData)
 {
 	auto it = modelAssets.find(metaData->GUID);
 	if(it != modelAssets.end())
 	{
 		return it->second;
 	}
-	ModelLoadData* modelLoadData = assimp->ReadAssetFile(metaData->assetPath);
 	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, metaData);
 	modelAssets.insert({ metaData->GUID, modelAssetTemp });
 	return modelAssetTemp;

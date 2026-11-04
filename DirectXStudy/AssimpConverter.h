@@ -16,12 +16,15 @@ class AssimpConverter {
 public:
 	AssimpConverter(ID3D11Device* device);
 	~AssimpConverter();
-	ModelLoadData* ReadAssetFile(std::filesystem::path path);
+	void ReadAssetFile(std::filesystem::path path);
 	std::vector<ModelLoadData*>& GetModelData() { return models; }
 	asMesh* GetMeshData(unsigned int idx) { return &meshs[idx]; }
 	asMaterial* GetMaterial(unsigned int idx) { return &materials[idx]; }
 	std::function<void(AssimpConverter*)> LoadComplite;
 	std::string GetCurrentPath() { return curretnPath; }
+	std::vector<std::string> GetTexturePath(const aiNode* node);
+	std::vector<TextureRequest> ReadTextureData(std::filesystem::path modelPath);
+	ModelLoadData* CreateModelLoadData(const std::string& path);
 private:
 	Assimp::Importer* importer;
 	const aiScene* scene;
@@ -31,9 +34,9 @@ private:
 	int objectIDX = 0;
 	std::string curretnPath;
 	ID3D11Device* device;
+	std::vector<TextureRequest> texturePaths;
 private:
 	void ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform);
 	void ReadModel();
-	void ReadMaterial(std::filesystem::path modelPath);
 	std::string GetNodeLocalPath(const aiNode* node);
 };

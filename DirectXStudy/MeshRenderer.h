@@ -7,6 +7,7 @@
 #pragma comment(lib, "d3d11.lib")
 
 class ModelNode;
+struct Material;
 
 class MeshRenderer : public Component
 {
@@ -31,4 +32,5 @@ private:
 	uint64_t localHesh;
 	std::string GUID;
 	bool meshEnable = true;
+	Material* material;
 };

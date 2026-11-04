@@ -42,7 +42,7 @@ public:
 	ModelLoadData(){};
 	std::string modelName;
 	XMMATRIX mat;
-	std::vector<int> meshIDX;
+	std::vector<asMesh*> meshs;
 	aiNode* currentNode;
 	std::vector<ModelLoadData*> childNodes;
 	XMMATRIX localMatrix;
@@ -86,4 +86,17 @@ struct MetaData {
 	std::string GUID;
 	AssetType assetType;
 	std::filesystem::path assetPath;
+};
+
+struct Material {
+	std::string GUID;
+	std::string textureGUID;
+	std::string normalGUID;
+	std::string name;
+};
+struct TextureRequest
+{
+	size_t materialIndex;
+	aiTextureType type;
+	std::filesystem::path path;
 };

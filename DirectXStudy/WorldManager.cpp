@@ -5,7 +5,6 @@
 #include "RuntimeManager.h"
 #include "ScriptRegistry.h"
 #include "ICamera.h"
-#include "ModelCreater.h"
 #include "Object.h"
 #include "ModelAsset.h"
 #include "MeshRenderer.h"
@@ -17,15 +16,15 @@
 #include "CameraComponent.h"
 #include "Datas.h"
 #include "AssetManager.h"
+#include "ResourceManager.h"
 
-WorldManager::WorldManager(ID3D11Device* device, AssetManager* assetManager)
+WorldManager::WorldManager(ID3D11Device* device, AssetManager* assetManager, ResourceManager* resourceManager)
 {
 	RegisterEventHandlers();
 	scriptRegistry = new ScriptRegistry();
 	sceneManager = new SceneManager(device);
 	runtimeManager = new RuntimeManager(device);
 	this->assetManager = assetManager;
-	modelCreater = new ModelCreater(device);
 	currentManager = sceneManager;
 
 	sceneManager->OnSaveScene = [this]() {//이벤트 버스

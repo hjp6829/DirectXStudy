@@ -13,6 +13,7 @@ class EventData;
 class WorldManager;
 class RendererManager;
 class AssetManager;
+class ResourceManager;
 
 class App {
 	public:
@@ -33,4 +34,5 @@ private:
 	void ActiveSceneModeChange(EventData* eventData);
 	ActiveSceneMode activeSceneMode = ActiveSceneMode::SceneMode;
 	AssetManager* assetManager;
+	ResourceManager* resourceManager;
 };

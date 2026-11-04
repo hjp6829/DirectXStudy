@@ -4,6 +4,7 @@
 #include "imgui_impl_win32.h"
 #include "EventDefinitions.h"
 #include "EventBus.h"
+#include "Datas.h"
 
 MeshRenderer::MeshRenderer()
 {	
@@ -28,6 +29,7 @@ void MeshRenderer::Serialize(nlohmann::json& j)
 		{"ComponentName","MeshRenderer"},
 		{"GUID",currentModelNode->GUID},
 		{"localGUID",currentModelNode->GUID},
+		{"MaterialGUID",material == nullptr ? "" : material->GUID}
 	};
 
 }
@@ -37,6 +39,9 @@ void MeshRenderer::Deserialize(const nlohmann::json& j)
 	j.at("localHesh").get_to(localHesh);
 	j.at("GUID").get_to(GUID);
 	j.at("localGUID").get_to(GUID);
+	std::string materialGUID;
+	j.at("MaterialGUID").get_to(materialGUID);
+	//assetmanager에서 불러와야함
 }
 
 std::unique_ptr<Component> MeshRenderer::Clone() const

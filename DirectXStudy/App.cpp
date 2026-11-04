@@ -16,6 +16,7 @@
 #include "Log.h"
 #include "WorldManager.h"
 #include "AssetManager.h"
+#include "ResourceManager.h"
 
 App::App()
 {
@@ -32,9 +33,11 @@ App::App()
 	window = new Window(input);
 	dxdMain = new DirectXMain(window->GetHwnd());
 
-	worldManager = new WorldManager(dxdMain->GetDevice(), assetManager);
+	resourceManager = new ResourceManager(dxdMain->GetDevice(), assetManager);
+
+	worldManager = new WorldManager(dxdMain->GetDevice(), assetManager,resourceManager);
 	dxdMain->SetObjects(worldManager);
-	uimanager = new UIManager(worldManager, assetManager->GetMetaDataMap());
+	uimanager = new UIManager(worldManager, assetManager->GetMetaDataMapByPath());
 
 	uimanager->OnCreateObjectSelected = [this](const MetaData* metaData) {//이벤트 버스
 		worldManager->CreateObject(metaData);//나중에 이름 바꿔야함

@@ -23,6 +23,7 @@ AssetManager::AssetManager()
     for (const auto& entry : std::filesystem::recursive_directory_iterator(path))
     {
         const std::filesystem::path& entryPath = entry.path();
+        std::filesystem::path relativePath = entryPath.lexically_relative(std::filesystem::current_path());
         std::string extension = entryPath.extension().string();
         if (extension == ".meta")
             continue; // Skip .meta files
@@ -38,22 +39,30 @@ AssetManager::AssetManager()
                 [](unsigned char c) {
                     return static_cast<char>(std::tolower(c));
                 });
-            CreateMetaData(fileName, GetAssetTypeFromExtension(extension));
+            CreateMetaData(relativePath.string(), GetAssetTypeFromExtension(extension));
         }
 	}
 }
 
-MetaData* AssetManager::GetMetaData(const std::string& guid)
+MetaData* AssetManager::GetMetaDataByGUID(const std::string& guid)
 {
-    auto it = metaDataMap.find(guid);
+    auto it = metaDataMapGuid.find(guid);
 
-    if (it == metaDataMap.end())
+    if (it == metaDataMapGuid.end())
         return nullptr;
 
     return &it->second;
 }
+MetaData* AssetManager::GetMetaDataByPath(const std::string& path)
+{
+    auto it = metaDataMapPath.find(path);
 
-std::string AssetManager::GenerateGUID()
+    if (it == metaDataMapPath.end())
+        return nullptr;
+
+    return &it->second;
+}
+std::string AssetManager::GenerateGUID() 
 {
     GUID guid;
 
@@ -94,7 +103,8 @@ void AssetManager::CreateMetaData(const std::string& assetPath, AssetType assetT
     file << jsonfile.dump(4);
     file.close();
 
-	metaDataMap[assetPath] = { jsonfile["GUID"].get<std::string>(), assetType, assetPath };
+	metaDataMapPath[assetPath] = { jsonfile["GUID"].get<std::string>(), assetType, assetPath };
+	metaDataMapGuid[jsonfile["GUID"].get<std::string>()] = { jsonfile["GUID"].get<std::string>(), assetType, assetPath };
 }
 
 AssetType AssetManager::GetAssetTypeFromExtension(const std::string& extension)
@@ -118,5 +128,6 @@ void AssetManager::LoadMetaDataFromFile(const std::string& metaFilePath)
     file >> sceneJson;
 
 	std::string guid = sceneJson["GUID"].get<std::string>();
-    metaDataMap[guid] = { guid, sceneJson["AssetType"].get<AssetType>(), sceneJson["Path"].get<std::string>() };
+    metaDataMapPath[sceneJson["Path"].get<std::string>()] = { guid, sceneJson["AssetType"].get<AssetType>(), sceneJson["Path"].get<std::string>() };
+    metaDataMapGuid[guid] = { guid, sceneJson["AssetType"].get<AssetType>(), sceneJson["Path"].get<std::string>() };
 }

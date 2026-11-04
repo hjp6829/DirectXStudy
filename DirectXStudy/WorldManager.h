@@ -17,10 +17,11 @@ class ModelNode;
 class LightComponent;
 struct MetaData;
 class AssetManager;
+class ResourceManager;
 
 class WorldManager {
 public:
-	WorldManager(ID3D11Device* device, AssetManager* assetManager);
+	WorldManager(ID3D11Device* device, AssetManager* assetManager, ResourceManager* resourceManager);
 	void ObjectsUpdate(float deltaTime);
 	void ObjectsLateUpdate(float deltaTime);
 	std::unordered_map<uint64_t, Object*>* GetRootObjects(){return currentManager->GetObjects();}
@@ -38,8 +39,8 @@ private:
 	ScriptRegistry* scriptRegistry;
 	ActiveSceneMode activeSceneMode;
 	uint64_t selectedObjectID;	
-	ModelCreater* modelCreater;
 	AssetManager* assetManager;
+	ResourceManager* resourceManager;
 private:
 	void RegisterEventHandlers();
 	void SetActiveMode(EventData* eventData);

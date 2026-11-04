@@ -19,8 +19,8 @@ cbuffer CBuf1 : register(b0)
     float4 color;
     float isTexture;
     float isNormal;
-    float padding;
-    float padding;
+    float padding_c;
+    float padding_c1;
 };
 cbuffer CBuf2 : register(b1)
 {

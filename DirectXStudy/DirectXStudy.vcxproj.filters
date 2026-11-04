@@ -52,6 +52,9 @@
     <Filter Include="소스 파일\Component">
       <UniqueIdentifier>{b7eed68f-cd31-41b1-bd59-6691bdc2fd52}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Resource">
+      <UniqueIdentifier>{898e5cb1-e292-4744-a777-7ed2efa2b8da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WinMain.cpp">
@@ -207,6 +210,12 @@
     <ClCompile Include="AssetManager.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureCreater.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DirectXMain.h">
@@ -305,9 +314,6 @@
     <ClInclude Include="ModelBrowserUI.h">
       <Filter>헤더 파일\UI</Filter>
     </ClInclude>
-    <ClInclude Include="ModelCreater.h">
-      <Filter>헤더 파일\Model</Filter>
-    </ClInclude>
     <ClInclude Include="ModelAsset.h">
       <Filter>헤더 파일\Model</Filter>
     </ClInclude>
@@ -316,9 +322,6 @@
     </ClInclude>
     <ClInclude Include="SceneManager.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="AssimpConverter.h">
-      <Filter>헤더 파일\Model</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>헤더 파일\Model</Filter>
@@ -395,8 +398,20 @@
     <ClInclude Include="LightConstantBuffer.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="AssimpConverter.h">
+      <Filter>헤더 파일\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ModelCreater.h">
+      <Filter>헤더 파일\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureCreater.h">
+      <Filter>헤더 파일\Resource</Filter>
+    </ClInclude>
     <ClInclude Include="AssetManager.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>헤더 파일\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
