@@ -24,17 +24,19 @@ void MeshRenderer::Serialize(nlohmann::json& j)
 {
 	j = nlohmann::json{
 	{
-		"modelHeshCode",currentModelNode == nullptr ? 0 : currentModelNode->modelHeshCode},
+		"localHesh",currentModelNode == nullptr ? 0 : currentModelNode->modelLocalHesh},
 		{"ComponentName","MeshRenderer"},
-		{"modelPath",currentModelNode->sourceModelPath},
+		{"GUID",currentModelNode->GUID},
+		{"localGUID",currentModelNode->GUID},
 	};
 
 }
 
 void MeshRenderer::Deserialize(const nlohmann::json& j)
 {
-	j.at("modelHeshCode").get_to(modelNodeHesh);
-	j.at("modelPath").get_to(modelPath);
+	j.at("localHesh").get_to(localHesh);
+	j.at("GUID").get_to(GUID);
+	j.at("localGUID").get_to(GUID);
 }
 
 std::unique_ptr<Component> MeshRenderer::Clone() const

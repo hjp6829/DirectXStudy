@@ -17,6 +17,10 @@ SamplerState splrNor : register(s1);
 cbuffer CBuf1 : register(b0)
 {
     float4 color;
+    float isTexture;
+    float isNormal;
+    float padding;
+    float padding;
 };
 cbuffer CBuf2 : register(b1)
 {
@@ -54,10 +58,11 @@ float4 main(VSOut IN) : SV_TARGET
     float diffuse = saturate(dot(N, L));
     float brightness = diffuse;
 
+    if(isTexture < 0.5)
+        return float4(1, 1, 1, 1);
     float4 texColor = tex.Sample(splr, IN.uv);
     texColor.rgb *= brightness * lightColor.rgb * color.rgb;
     texColor.rgb += specular;
     //texColor.rgb *= attenuation;
     return texColor;
-    //return float4(1, 1, 1, 1);
 }

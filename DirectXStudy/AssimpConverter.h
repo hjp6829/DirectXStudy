@@ -35,4 +35,5 @@ private:
 	void ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform);
 	void ReadModel();
 	void ReadMaterial(std::filesystem::path modelPath);
+	std::string GetNodeLocalPath(const aiNode* node);
 };

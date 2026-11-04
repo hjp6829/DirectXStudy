@@ -16,13 +16,15 @@
 #include "SceneCameraComponent.h"
 #include "CameraComponent.h"
 #include "Datas.h"
+#include "AssetManager.h"
 
-WorldManager::WorldManager(ID3D11Device* device)
+WorldManager::WorldManager(ID3D11Device* device, AssetManager* assetManager)
 {
 	RegisterEventHandlers();
 	scriptRegistry = new ScriptRegistry();
 	sceneManager = new SceneManager(device);
 	runtimeManager = new RuntimeManager(device);
+	this->assetManager = assetManager;
 	modelCreater = new ModelCreater(device);
 	currentManager = sceneManager;
 
@@ -275,7 +277,7 @@ void WorldManager::LoadSaveSceneFile()
 			MeshRenderer* meshComp = dynamic_cast<MeshRenderer*>(value.get());
 			if (meshComp != nullptr)
 			{
-				ModelNode* modelNode = modelCreater->GetModelNode(meshComp->GetModelNodeHesh(), meshComp->GetModelPath());
+				ModelNode* modelNode = modelCreater->GetModelNode(assetManager->GetMetaData(meshComp->GetModelGUID()), meshComp->GetLocalHesh());
 				object->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
 				meshComp->SetModelNode(modelNode);
 			}

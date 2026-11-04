@@ -22,13 +22,13 @@ public:
 	{ 
 		currentModelNode = node;
 	}
-	uint64_t GetModelNodeHesh() {return modelNodeHesh; }
-	std::string GetModelPath() { return modelPath; }
+	uint64_t GetLocalHesh() {return localHesh; }
+	std::string GetModelGUID() { return GUID; }
 private:
 	void ToggleMeshEnable(bool value);
 private:
 	ModelNode* currentModelNode;
-	uint64_t modelNodeHesh;
-	std::string modelPath;
+	uint64_t localHesh;
+	std::string GUID;
 	bool meshEnable = true;
 };

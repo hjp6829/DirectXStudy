@@ -21,10 +21,40 @@ Mesh::Mesh(ID3D11Device* device, const MeshData& meshData)
 	D3DReadFileToBlob(L"VertexShader.cso", &vertexShaderBlob);
 	commonBindables.push_back(std::make_unique<VertexShader>(device, vertexShaderBlob.Get()));
 
-	normalBindables.push_back(std::make_unique<Texture>(meshData.material==nullptr ? nullptr : meshData.material->textureView, 0));
+	if(meshData.material == nullptr)
+	{
+		normalBindables.push_back(std::make_unique<Texture>(nullptr, 0));
+		normalBindables.push_back(std::make_unique<Texture>(nullptr, 1));
+		cb.isTexture = 0;
+		cb.isNormal = 0;
+	}
+	else
+	{
+		if(meshData.material->textureView == nullptr)
+		{
+			normalBindables.push_back(std::make_unique<Texture>(nullptr, 0));
+			cb.isTexture = 0;
+		}
+		else
+		{
+			normalBindables.push_back(std::make_unique<Texture>(meshData.material->textureView, 0));
+			cb.isTexture = 1;
+		}
+		if(meshData.material->normalView == nullptr)
+		{
+			normalBindables.push_back(std::make_unique<Texture>(nullptr, 1));
+			cb.isNormal = 0;
+		}
+		else
+		{
+			normalBindables.push_back(std::make_unique<Texture>(meshData.material->normalView, 1));
+			cb.isNormal = 1;
+		}
+	}
 	normalBindables.push_back(std::make_unique<Sampler>(device, 0));
 
-	normalBindables.push_back(std::make_unique<Texture>(meshData.material == nullptr ? nullptr : meshData.material->normalView, 1));
+
+
 	normalBindables.push_back(std::make_unique<Sampler>(device, 1));
 	commonBindables.push_back(std::make_unique<InputLayout>(device, vertexShaderBlob.Get()));
 

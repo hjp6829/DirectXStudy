@@ -32,7 +32,7 @@ App::App()
 	window = new Window(input);
 	dxdMain = new DirectXMain(window->GetHwnd());
 
-	worldManager = new WorldManager(dxdMain->GetDevice());
+	worldManager = new WorldManager(dxdMain->GetDevice(), assetManager);
 	dxdMain->SetObjects(worldManager);
 	uimanager = new UIManager(worldManager, assetManager->GetMetaDataMap());
 

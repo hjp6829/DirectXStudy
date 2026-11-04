@@ -19,13 +19,13 @@ ModelCreater::ModelCreater(ID3D11Device* device)
 	this->device = device;
 }
 
-ModelAsset* ModelCreater::CreateModelAsset(ModelLoadData* modelData, std::filesystem::path modelName)
+ModelAsset* ModelCreater::CreateModelAsset(ModelLoadData* modelData, const MetaData* metaData)
 {
 	ModelAsset* currentModelAsset = new ModelAsset();
 	ModelNode* modelNodeTemp = new ModelNode();
+	modelNodeTemp->GUID = metaData->GUID;
 	currentModelAsset->currentNode = modelNodeTemp;
-	std::filesystem::path modelFilePath = modelName.parent_path().filename() / modelName.filename();
-	modelNodeTemp->sourceModelPath = modelFilePath.string();
+	std::filesystem::path modelFilePath = metaData->assetPath.parent_path().filename() / metaData->assetPath.filename();
 	CreateChildModelNode(modelData->childNodes[0], modelNodeTemp, currentModelAsset);
 	return currentModelAsset;
 }
@@ -48,8 +48,8 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 		}
 		parentModelNode->modelName = modelLoadData->modelName;
 		parentModelNode->localMatrix = modelLoadData->localMatrix;
-		parentModelNode->modelHeshCode = FNV1a(parentModelNode->sourceModelPath + modelLoadData->modelName);
-		modelAsset->SetModelNode( parentModelNode->modelHeshCode, parentModelNode );
+		parentModelNode->modelLocalHesh = FNV1a(modelLoadData->localPath);
+		modelAsset->SetModelNode( parentModelNode->modelLocalHesh, parentModelNode );
 		return;
 	}
 	for (int j = 0; j < modelLoadData->meshIDX.size(); j++)
@@ -63,14 +63,14 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 		parentModelNode->currentMeshs.push_back(mesh);
 	}
 	parentModelNode->modelName = modelLoadData->modelName;
-	parentModelNode->modelHeshCode = FNV1a(parentModelNode->sourceModelPath + modelLoadData->modelName);
-	modelAsset->SetModelNode(parentModelNode->modelHeshCode, parentModelNode);
+	parentModelNode->modelLocalHesh = FNV1a(modelLoadData->localPath);
+	modelAsset->SetModelNode(parentModelNode->modelLocalHesh, parentModelNode);
 	int modelChildSize = modelLoadData->childNodes.size();
 	for (int i = 0; i < modelChildSize; i++)
 	{
 		ModelNode* childModelNode = new ModelNode();
 		parentModelNode->childNodes.push_back(childModelNode);
-		childModelNode->sourceModelPath = parentModelNode->sourceModelPath;
+		childModelNode->GUID = parentModelNode->GUID;
 		CreateChildModelNode(modelLoadData->childNodes[i], childModelNode, modelAsset);
 	}
 	parentModelNode->localMatrix = modelLoadData->localMatrix;
@@ -83,27 +83,20 @@ ModelAsset* ModelCreater::LoadModelFromFile(const MetaData* metaData)
 		return it->second;
 	}
 	ModelLoadData* modelLoadData = assimp->ReadAssetFile(metaData->assetPath);
-	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, metaData->assetPath);
+	ModelAsset* modelAssetTemp = CreateModelAsset(modelLoadData, metaData);
 	modelAssets.insert({ metaData->GUID, modelAssetTemp });
 	return modelAssetTemp;
 }
 
-ModelNode* ModelCreater::GetModelNode(const MetaData* metaData)
+ModelNode* ModelCreater::GetModelNode(const MetaData* metaData,uint64_t localHesh)
 {
 	ModelAsset* assetTemp = LoadModelFromFile(metaData);
-	ModelNode* modelNodeTemp = assetTemp->GetModelNode(metaData->GUID);
+	ModelNode* modelNodeTemp = assetTemp->GetModelNode(localHesh);
 	if(modelNodeTemp != nullptr)
 		return modelNodeTemp;
 
 	return nullptr;
 }
-
-//void ModelCreater::SetModelToObject(Object* object, ModelNode* modelNode)
-//{
-//	object->objectName = modelNode->modelName;
-//	object->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
-//	object->modelNamePath = modelNode->sourceModelPath;
-//}
 uint64_t ModelCreater::FNV1a(const std::string& str)
 {
 	uint64_t hash = 14695981039346656037ULL;

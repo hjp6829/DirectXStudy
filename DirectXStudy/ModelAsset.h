@@ -1,5 +1,6 @@
 #pragma once
 #include <unordered_map>
+#include <string>
 
 class ModelNode;
 
@@ -8,8 +9,8 @@ public:
 	ModelAsset() {}
 	~ModelAsset() {}
 	ModelNode* currentNode;
-	void SetModelNode(std::string guid, ModelNode* node){ modelNodesDic.insert({ guid, node }); }
-	ModelNode* GetModelNode(std::string guid);
+	void SetModelNode(uint64_t modelLocalHesh, ModelNode* node){ modelNodesDic.insert({ modelLocalHesh, node }); }
+	ModelNode* GetModelNode(uint64_t guid);
 private:
-	std::unordered_map<std::string, ModelNode*> modelNodesDic;
+	std::unordered_map<uint64_t, ModelNode*> modelNodesDic;
 };

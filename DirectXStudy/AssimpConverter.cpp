@@ -49,6 +49,7 @@ void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& par
 
 	aiNode* currentNode = modelData->currentNode;
 
+	modelData->localPath = GetNodeLocalPath(currentNode);
 	modelData->mat = DirectX::XMMatrixTranspose(DirectX::XMMatrixSet(
 		worldTransform.a1, worldTransform.a2, worldTransform.a3, worldTransform.a4,
 		worldTransform.b1, worldTransform.b2, worldTransform.b3, worldTransform.b4,
@@ -99,6 +100,7 @@ void AssimpConverter::ReadModel()
 		asmesh.origMesh = mesh;
 		asmesh.meshName = mesh->mName.C_Str();
 		asmesh.materialIDX = mesh->mMaterialIndex;
+
 		for (int v = 0; v < mesh->mNumVertices; v++)
 		{
 			Vertex vertex;
@@ -192,5 +194,23 @@ void AssimpConverter::ReadMaterial(std::filesystem::path modelPath)
 		}
 		materials.push_back(std::move(material));
 	}
+}
+
+std::string AssimpConverter::GetNodeLocalPath(const aiNode* node)
+{
+	if (node == nullptr)
+		return "";
+
+	std::string path = node->mName.C_Str();
+
+	const aiNode* parent = node->mParent;
+
+	while (parent != nullptr)
+	{
+		path = std::string(parent->mName.C_Str()) + "/" + path;
+		parent = parent->mParent;
+	}
+
+	return path;
 }
 

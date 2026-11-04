@@ -20,6 +20,9 @@ struct ConstantBufferData {
 };
 struct PSBuffer {
 	XMFLOAT4 color;
+	float isTexture;
+	float isNormal;
+	float padding[2];
 };
 struct PSPickingIDBuffer {
 	int id;
@@ -43,7 +46,7 @@ public:
 	aiNode* currentNode;
 	std::vector<ModelLoadData*> childNodes;
 	XMMATRIX localMatrix;
-	//Model* currentModel;
+	std::string localPath;
 	int idx;
 	void Clear() {
 		childNodes.clear();

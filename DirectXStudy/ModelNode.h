@@ -13,9 +13,9 @@ public:
 	std::vector<Mesh*> currentMeshs;
 	std::vector<ModelNode*> childNodes;
 	std::string modelName;
-	std::string sourceModelPath;
 	DirectX::XMMATRIX localMatrix;
-	uint64_t modelHeshCode;
+	std::string GUID;
+	uint64_t modelLocalHesh;
 public:
 	void RenderMeshs(RenderPass renderPass, ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix, int objectID);
 	void ToggleMeshEnable(bool value);

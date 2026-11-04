@@ -18,10 +18,10 @@ class ModelCreater
 {
 public:
 	ModelCreater(ID3D11Device* device);
-	ModelAsset* CreateModelAsset(ModelLoadData* modelData, std::filesystem::path modelName);
+	ModelAsset* CreateModelAsset(ModelLoadData* modelData, const MetaData* metaData);
 	void CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode* modelNode, ModelAsset* modelAsset);
 	ModelAsset* LoadModelFromFile(const MetaData* metaData);
-	ModelNode* GetModelNode(const MetaData* metaData);
+	ModelNode* GetModelNode(const MetaData* metaData, uint64_t localHesh);
 private:
 	AssimpConverter* assimp;
 	std::unordered_map<std::string, ModelAsset*> modelAssets;
