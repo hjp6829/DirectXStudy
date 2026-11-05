@@ -4,6 +4,7 @@
 #include "AssimpConverter.h"
 #include "Datas.h"
 #include "AssetManager.h"
+#include "ModelAsset.h"
 
 ResourceManager::ResourceManager(ID3D11Device* device, AssetManager* assetManager)
 {
@@ -11,11 +12,19 @@ ResourceManager::ResourceManager(ID3D11Device* device, AssetManager* assetManage
 	modelCreater = new ModelCreater(device);
 	assimp = new AssimpConverter(device);
 	this->assetManager = assetManager;
+	this->device = device;
 }
 
-void ResourceManager::CreateModel(const MetaData* metaData)
+ModelAsset* ResourceManager::LoadModelAsset(const MetaData* metaData)
 {
+	if (modelAssetsMap.find(metaData->GUID) != modelAssetsMap.end())
+	{
+		return modelAssetsMap[metaData->GUID];
+	}
 	assimp->ReadAssetFile(metaData->assetPath);
+	ModelAsset* modelAssetTemp = modelCreater->LoadModelFromFile(metaData, assimp->CreateModelLoadData(metaData->assetPath.string()));
+	modelAssetsMap[metaData->GUID] = modelAssetTemp;
+
 	std::vector<TextureRequest> textureRequests = assimp->ReadTextureData(metaData->assetPath);
 	
 	for(const auto& textureRequest : textureRequests)
@@ -30,10 +39,12 @@ void ResourceManager::CreateModel(const MetaData* metaData)
 			texturesMap[metaData->GUID] = textureCom;
 		}
 		textureTemp = it->second.Get();
+
+		TextureAsset textureAsset;
+		device->CreateShaderResourceView(textureTemp,nullptr, textureAsset.srv.GetAddressOf());
+
+		modelAssetTemp->SetMaterialTexture(textureRequest.materialIndex, &textureAsset, textureRequest.type);
 	}
 
-	modelCreater->LoadModelFromFile(metaData, assimp->CreateModelLoadData(metaData->assetPath.string()));
-
-
-
+	return modelAssetTemp;
 }

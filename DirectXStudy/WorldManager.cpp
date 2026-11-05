@@ -24,6 +24,7 @@ WorldManager::WorldManager(ID3D11Device* device, AssetManager* assetManager, Res
 	scriptRegistry = new ScriptRegistry();
 	sceneManager = new SceneManager(device);
 	runtimeManager = new RuntimeManager(device);
+	this->resourceManager = resourceManager;
 	this->assetManager = assetManager;
 	currentManager = sceneManager;
 
@@ -48,9 +49,9 @@ ICamera* WorldManager::GetCamera(int idx)
 }
 void WorldManager::CreateObject(const MetaData* metaData)
 {
-	ModelAsset* modelAsset = modelCreater->LoadModelFromFile(metaData);
+	ModelAsset* modelAsset = resourceManager->LoadModelAsset(metaData);
 	Object* tempObject = currentManager->CreateObject();
-	BuildSceneObjectTree(modelAsset->currentNode, tempObject);
+	BuildSceneObjectTree(modelAsset->currentNode, tempObject, modelAsset->GetMaterialsDic());
 }
 void WorldManager::CreateObject(ObjectType type)
 {
@@ -151,19 +152,22 @@ void WorldManager::DeleteChiledModels(Object* object)
 	object->childObjects.clear();
 }
 
-void WorldManager::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject)
+void WorldManager::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject, std::unordered_map<int, Material*>* materials)
 {
 	//SetModelToObject(parentObject, modelNode);
 	parentObject->objectName = modelNode->modelName;
-	Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
-	MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
-	meshComp->SetModelNode(modelNode);
+	if (modelNode->currentMeshs.size() > 0)
+	{
+		Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
+		MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
+		meshComp->SetModelNode(modelNode);
+	}
 
 	parentObject->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
 	for (int i = 0; i < modelNode->childNodes.size(); i++)
 	{
 		Object* childObject = currentManager->CreateObject(parentObject);
-		BuildSceneObjectTree(modelNode->childNodes[i], childObject);
+		BuildSceneObjectTree(modelNode->childNodes[i], childObject, materials);
 	}
 }
 void WorldManager::CreateInitJsonFile()

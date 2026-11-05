@@ -7,7 +7,7 @@
 #pragma comment(lib, "d3d11.lib")
 
 class ModelNode;
-struct Material;
+struct MyStruct;
 
 class MeshRenderer : public Component
 {
@@ -19,10 +19,7 @@ public:
 	void Deserialize(const nlohmann::json& j) override;
 	std::unique_ptr<Component> Clone()const override;
 	void InspectorUpdate() override;
-	void SetModelNode(ModelNode* node)
-	{ 
-		currentModelNode = node;
-	}
+	void SetModelNode(ModelNode* node, std::unordered_map<int, Material*>* materials);
 	uint64_t GetLocalHesh() {return localHesh; }
 	std::string GetModelGUID() { return GUID; }
 private:
@@ -32,5 +29,5 @@ private:
 	uint64_t localHesh;
 	std::string GUID;
 	bool meshEnable = true;
-	Material* material;
+	std::vector<Material*>  material;
 };

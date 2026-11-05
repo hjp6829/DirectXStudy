@@ -10,6 +10,7 @@ class ModelCreater;
 struct MetaData;
 class AssimpConverter;
 class AssetManager;
+class ModelAsset;
 
 using namespace Microsoft::WRL;
 
@@ -18,12 +19,14 @@ class ResourceManager
 public:
 	ResourceManager(ID3D11Device* device, AssetManager* assetManager);
 	~ResourceManager();
-	void CreateModel(const MetaData* metaData);
+	ModelAsset* LoadModelAsset(const MetaData* metaData);
 private:
 	TextureCreater* textureCreater;
 	ModelCreater* modelCreater;
 	AssimpConverter* assimp;
 	AssetManager* assetManager;
+	ID3D11Device* device;
 private:
 	std::unordered_map<std::string,ComPtr<ID3D11Texture2D>> texturesMap;
+	std::unordered_map<std::string, ModelAsset*> modelAssetsMap;
 };

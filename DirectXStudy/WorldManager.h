@@ -49,7 +49,7 @@ private:
 	void DeleteChiledModels(Object* object);
 	void CreateInitJsonFile();
 	void LoadSaveSceneFile();
-	void BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject);
+	void BuildSceneObjectTree(ModelNode* modelNode, Object* parentObject, std::unordered_map<int, Material*>* materials);
 	void SaveScene();
 	void SaveSceneObjectData(Object* object, nlohmann::json& jsonfile);
 	void SetNewCameraComponent(EventData* eventData);

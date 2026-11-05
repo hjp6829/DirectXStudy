@@ -13,6 +13,7 @@
 #include "Surface.h"
 #include "Texture.h"
 #include "Sampler.h"
+#include "Datas.h"
 
 Mesh::Mesh(ID3D11Device* device, const MeshData& meshData)
 {
@@ -21,40 +22,16 @@ Mesh::Mesh(ID3D11Device* device, const MeshData& meshData)
 	D3DReadFileToBlob(L"VertexShader.cso", &vertexShaderBlob);
 	commonBindables.push_back(std::make_unique<VertexShader>(device, vertexShaderBlob.Get()));
 
-	if(meshData.material == nullptr)
-	{
-		normalBindables.push_back(std::make_unique<Texture>(nullptr, 0));
-		normalBindables.push_back(std::make_unique<Texture>(nullptr, 1));
-		cb.isTexture = 0;
-		cb.isNormal = 0;
-	}
-	else
-	{
-		if(meshData.material->textureView == nullptr)
-		{
-			normalBindables.push_back(std::make_unique<Texture>(nullptr, 0));
-			cb.isTexture = 0;
-		}
-		else
-		{
-			normalBindables.push_back(std::make_unique<Texture>(meshData.material->textureView, 0));
-			cb.isTexture = 1;
-		}
-		if(meshData.material->normalView == nullptr)
-		{
-			normalBindables.push_back(std::make_unique<Texture>(nullptr, 1));
-			cb.isNormal = 0;
-		}
-		else
-		{
-			normalBindables.push_back(std::make_unique<Texture>(meshData.material->normalView, 1));
-			cb.isNormal = 1;
-		}
-	}
+	std::unique_ptr<Texture> albedoTextureTemp = std::make_unique<Texture>(nullptr, 0);
+	albedoTexture = albedoTextureTemp.get();
+	normalBindables.push_back(std::move(albedoTextureTemp));
+	std::unique_ptr<Texture> normalTextureTemp = std::make_unique<Texture>(nullptr, 1);
+	normalTexture = normalTextureTemp.get();
+	normalBindables.push_back(std::move(normalTextureTemp));
+	cb.isTexture = 0;
+	cb.isNormal = 0;
+
 	normalBindables.push_back(std::make_unique<Sampler>(device, 0));
-
-
-
 	normalBindables.push_back(std::make_unique<Sampler>(device, 1));
 	commonBindables.push_back(std::make_unique<InputLayout>(device, vertexShaderBlob.Get()));
 
@@ -166,4 +143,10 @@ XMFLOAT3 Mesh::GetLocalPos()
 	DirectX::XMFLOAT3 position;
 	DirectX::XMStoreFloat3(&position, positionVec);
 	return position;
+}
+
+void Mesh::SetMaterial(Material* material)
+{
+	albedoTexture->ChangeNewTextureView(material->texture->srv.Get());
+	normalTexture->ChangeNewTextureView(material->normal->srv.Get());
 }

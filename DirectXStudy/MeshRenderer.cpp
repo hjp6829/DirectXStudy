@@ -41,7 +41,7 @@ void MeshRenderer::Deserialize(const nlohmann::json& j)
 	j.at("localGUID").get_to(GUID);
 	std::string materialGUID;
 	j.at("MaterialGUID").get_to(materialGUID);
-	//assetmanager¿¡¼­ ºÒ·¯¿Í¾ßÇÔ
+	//assetmanagerï¿½ï¿½ï¿½ï¿½ ï¿½Ò·ï¿½ï¿½Í¾ï¿½ï¿½ï¿½
 }
 
 std::unique_ptr<Component> MeshRenderer::Clone() const
@@ -54,6 +54,16 @@ void MeshRenderer::InspectorUpdate()
 {
 	Component::InspectorUpdate();
 	ImGui::Text(currentModelNode->modelName.c_str());
+}
+
+void MeshRenderer::SetModelNode(ModelNode* node,  std::unordered_map<int, Material*>* materials)
+{
+	std::vector<int> materialIDXs = node->GetMeshsMaterialIDX();
+	for(int idx : materialIDXs)
+	{
+		material.push_back(materials->at(idx));
+	}
+	node->SetMeshsMaterial(materials);
 }
 
 void MeshRenderer::ToggleMeshEnable(bool value)

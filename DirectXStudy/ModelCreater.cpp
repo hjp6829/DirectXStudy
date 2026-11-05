@@ -33,36 +33,11 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 {
 	if (modelLoadData->childNodes.size() == 0)
 	{
-		int meshSize = modelLoadData->meshs.size();
-		for (int j = 0; j < meshSize; j++)
-		{
-			asMesh* temp = modelLoadData->meshs[j];
-			MeshData meshData;
-			meshData.Indexs = temp->Indexs;
-			meshData.vertexs = temp->vertexs;
-			//meshData.material = assimp->GetMaterial(temp->materialIDX);
-			Mesh* mesh = new Mesh(device, meshData);
-			XMFLOAT3 localPosTemp = mesh->GetLocalPos();
-			parentModelNode->currentMeshs.push_back(mesh);
-		}
-		parentModelNode->modelName = modelLoadData->modelName;
-		parentModelNode->localMatrix = modelLoadData->localMatrix;
-		parentModelNode->modelLocalHesh = FNV1a(modelLoadData->localPath);
+		SetModelNodeData(parentModelNode, modelLoadData);
 		modelAsset->SetModelNode( parentModelNode->modelLocalHesh, parentModelNode );
 		return;
 	}
-	for (int j = 0; j < modelLoadData->meshs.size(); j++)
-	{
-		asMesh* temp = modelLoadData->meshs[j];
-		MeshData meshData;
-		meshData.Indexs = temp->Indexs;
-		meshData.vertexs = temp->vertexs;
-		//meshData.material = assimp->GetMaterial(temp->materialIDX);
-		Mesh* mesh = new Mesh(device, meshData);
-		parentModelNode->currentMeshs.push_back(mesh);
-	}
-	parentModelNode->modelName = modelLoadData->modelName;
-	parentModelNode->modelLocalHesh = FNV1a(modelLoadData->localPath);
+	SetModelNodeData(parentModelNode, modelLoadData);
 	modelAsset->SetModelNode(parentModelNode->modelLocalHesh, parentModelNode);
 	int modelChildSize = modelLoadData->childNodes.size();
 	for (int i = 0; i < modelChildSize; i++)
@@ -72,7 +47,6 @@ void ModelCreater::CreateChildModelNode(ModelLoadData* modelLoadData, ModelNode*
 		childModelNode->GUID = parentModelNode->GUID;
 		CreateChildModelNode(modelLoadData->childNodes[i], childModelNode, modelAsset);
 	}
-	parentModelNode->localMatrix = modelLoadData->localMatrix;
 }
 ModelAsset* ModelCreater::LoadModelFromFile(const MetaData* metaData,ModelLoadData* modelLoadData)
 {
@@ -106,4 +80,21 @@ uint64_t ModelCreater::FNV1a(const std::string& str)
 	}
 
 	return hash;
+}
+
+void ModelCreater::SetModelNodeData(ModelNode* modelNode, ModelLoadData* modelLoadData)
+{
+	for (int j = 0; j < modelLoadData->meshs.size(); j++)
+	{
+		asMesh* temp = modelLoadData->meshs[j];
+		MeshData meshData;
+		meshData.Indexs = temp->Indexs;
+		meshData.vertexs = temp->vertexs;
+		//meshData.material = assimp->GetMaterial(temp->materialIDX);
+		Mesh* mesh = new Mesh(device, meshData);
+		modelNode->currentMeshs.push_back(mesh);
+	}
+	modelNode->modelName = modelLoadData->modelName;
+	modelNode->localMatrix = modelLoadData->localMatrix;
+	modelNode->modelLocalHesh = FNV1a(modelLoadData->localPath);
 }

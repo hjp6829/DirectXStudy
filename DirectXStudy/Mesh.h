@@ -35,11 +35,13 @@ public:
 	ConstantBufferData* GetVertexConstantBuffer() {
 		return &sb;
 	}
+	void SetMaterial(Material* material);
 	bool enable = true;
 private:
 	Texture* meshTexture;
 	Texture* normalTexture;
 	int materialIDX;
+	Material* material;
 	VertexConstantBufferContainer<ConstantBufferData>* vertexConstantBufferContainer;
 	XMFLOAT3 position = { 0.0f, 0.0f, 4.0f };
 	XMFLOAT3 rotation;
@@ -56,6 +58,9 @@ private:
 	std::unique_ptr<PixelShader> normalShader;
 	std::unique_ptr<PixelShader> outlineShader;
 	std::unique_ptr<PixelShader> pickingShader;
+
+	Texture* albedoTexture;
+	Texture* normalTexture;
 
 	UINT IndexCount;
 };

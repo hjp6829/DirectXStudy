@@ -61,17 +61,17 @@ struct asMesh
 	std::vector<unsigned int> Indexs;
 	unsigned int materialIDX;
 };
-struct asMaterial
+struct Material
 {
 	std::string name;
-	ComPtr<ID3D11ShaderResourceView> textureView = nullptr;
-	ComPtr<ID3D11ShaderResourceView> normalView = nullptr;
+	TextureAsset* texture = nullptr;
+	TextureAsset* normal = nullptr;
 };
 
 struct MeshData {
 	std::vector<Vertex> vertexs;
 	std::vector<unsigned int> Indexs;
-	asMaterial* material = nullptr;
+	Material* material = nullptr;
 };
 
 enum class AssetType {
@@ -88,7 +88,7 @@ struct MetaData {
 	std::filesystem::path assetPath;
 };
 
-struct Material {
+struct MaterialData {
 	std::string GUID;
 	std::string textureGUID;
 	std::string normalGUID;
@@ -99,4 +99,8 @@ struct TextureRequest
 	size_t materialIndex;
 	aiTextureType type;
 	std::filesystem::path path;
+};
+struct TextureAsset {
+	ComPtr<ID3D11Texture2D> texture;
+	ComPtr<ID3D11ShaderResourceView> srv;
 };

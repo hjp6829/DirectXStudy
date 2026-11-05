@@ -13,3 +13,26 @@ ModelNode* ModelAsset::GetModelNode(uint64_t guid)
 
     return nullptr;
 }
+
+void ModelAsset::SetMaterialTexture(int matertialIDX, TextureAsset* textureAsset, aiTextureType type)
+{
+    auto it = modelMaterialsDic.find(matertialIDX);
+    Material* material = nullptr;
+    if (it != modelMaterialsDic.end())
+    {
+        material = it->second;
+    }
+    else
+    {
+        material = new Material();
+		modelMaterialsDic.insert({ matertialIDX, material });
+    }
+    if(type == aiTextureType::aiTextureType_DIFFUSE)
+    {
+        material->texture = textureAsset;
+    }
+    else if(type == aiTextureType::aiTextureType_NORMALS)
+    {
+        material->normal = textureAsset;
+	}
+}

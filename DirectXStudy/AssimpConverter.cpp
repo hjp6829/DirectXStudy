@@ -128,9 +128,7 @@ std::vector<TextureRequest> AssimpConverter::ReadTextureData(std::filesystem::pa
 
 	for (int i = 0; i < materialNum; i++)
 	{
-		asMaterial material;
 		aiMaterial* mat = scene->mMaterials[i];
-		material.name = mat->GetName().C_Str();
 		aiString texturePath;
 
 		if (mat->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)

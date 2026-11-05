@@ -16,6 +16,8 @@ public:
 	DirectX::XMMATRIX localMatrix;
 	std::string GUID;
 	uint64_t modelLocalHesh;
+	std::vector<int> GetMeshsMaterialIDX();
+	void SetMeshsMaterial(std::unordered_map<int, Material*>* materialIDXs);
 public:
 	void RenderMeshs(RenderPass renderPass, ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix, int objectID);
 	void ToggleMeshEnable(bool value);

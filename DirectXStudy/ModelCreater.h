@@ -25,4 +25,5 @@ private:
 	std::unordered_map<std::string, ModelAsset*> modelAssets;
 	ID3D11Device* device; 
 	uint64_t FNV1a(const std::string& str);
+	void SetModelNodeData(ModelNode* modelNode, ModelLoadData* modelLoadData);
 };
