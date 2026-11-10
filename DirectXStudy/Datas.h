@@ -6,13 +6,15 @@
 #include <wrl/client.h>
 #include <d3d11.h>
 #include <memory>
-#include "Object.h"
-#include "ModelNode.h"
+#include <filesystem>
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
 
 class Mesh;
+class Object;
+class ModelNode;
+struct asMesh;
 
 struct ConstantBufferData {
 	XMFLOAT4X4 worldMatrix;
@@ -61,6 +63,10 @@ struct asMesh
 	std::vector<unsigned int> Indexs;
 	unsigned int materialIDX;
 };
+struct TextureAsset {
+	ComPtr<ID3D11Texture2D> texture;
+	ComPtr<ID3D11ShaderResourceView> srv;
+};
 struct Material
 {
 	std::string name;
@@ -99,8 +105,4 @@ struct TextureRequest
 	size_t materialIndex;
 	aiTextureType type;
 	std::filesystem::path path;
-};
-struct TextureAsset {
-	ComPtr<ID3D11Texture2D> texture;
-	ComPtr<ID3D11ShaderResourceView> srv;
 };

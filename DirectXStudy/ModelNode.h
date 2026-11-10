@@ -4,6 +4,8 @@
 #include <DirectXMath.h>
 #include <d3d11.h>
 #include "RenderingTypes.h"
+#include "Datas.h"
+#include <unordered_map>
 
 class Mesh;
 

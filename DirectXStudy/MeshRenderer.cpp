@@ -29,7 +29,7 @@ void MeshRenderer::Serialize(nlohmann::json& j)
 		{"ComponentName","MeshRenderer"},
 		{"GUID",currentModelNode->GUID},
 		{"localGUID",currentModelNode->GUID},
-		{"MaterialGUID",material == nullptr ? "" : material->GUID}
+		//{"MaterialGUID",material == nullptr ? "" : material->GUID}
 	};
 
 }

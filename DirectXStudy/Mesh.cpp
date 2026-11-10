@@ -129,13 +129,6 @@ void Mesh::Render(RenderPass renderPass, ID3D11DeviceContext* context, XMMATRIX 
 	context->DrawIndexed(IndexCount,0,0);
 }
 
-void Mesh::SetMaterialIDX(asMaterial* material,int idx)
-{
-	//materialIDX = idx;
-	//meshTexture->ChangeNewTextureView(material->textureView);
-	//normalTexture->ChangeNewTextureView(material->normalView);
-}
-
 XMFLOAT3 Mesh::GetLocalPos()
 {
 	DirectX::XMVECTOR positionVec = localMatrix.r[3];

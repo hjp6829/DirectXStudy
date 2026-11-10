@@ -19,7 +19,6 @@ public:
 	void ReadAssetFile(std::filesystem::path path);
 	std::vector<ModelLoadData*>& GetModelData() { return models; }
 	asMesh* GetMeshData(unsigned int idx) { return &meshs[idx]; }
-	asMaterial* GetMaterial(unsigned int idx) { return &materials[idx]; }
 	std::function<void(AssimpConverter*)> LoadComplite;
 	std::string GetCurrentPath() { return curretnPath; }
 	std::vector<std::string> GetTexturePath(const aiNode* node);
@@ -29,7 +28,6 @@ private:
 	Assimp::Importer* importer;
 	const aiScene* scene;
 	std::vector<asMesh> meshs;
-	std::vector<asMaterial> materials;
 	std::vector<ModelLoadData*> models;
 	int objectIDX = 0;
 	std::string curretnPath;

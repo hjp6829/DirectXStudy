@@ -17,6 +17,7 @@
 #include "Datas.h"
 #include "AssetManager.h"
 #include "ResourceManager.h"
+#include "ModelCreater.h"
 
 WorldManager::WorldManager(ID3D11Device* device, AssetManager* assetManager, ResourceManager* resourceManager)
 {
@@ -160,7 +161,7 @@ void WorldManager::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObje
 	{
 		Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
 		MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
-		meshComp->SetModelNode(modelNode);
+		//meshComp->SetModelNode(modelNode);
 	}
 
 	parentObject->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
@@ -280,9 +281,9 @@ void WorldManager::LoadSaveSceneFile()
 			MeshRenderer* meshComp = dynamic_cast<MeshRenderer*>(value.get());
 			if (meshComp != nullptr)
 			{
-				ModelNode* modelNode = modelCreater->GetModelNode(assetManager->GetMetaData(meshComp->GetModelGUID()), meshComp->GetLocalHesh());
+				/*ModelNode* modelNode = modelCreater->GetModelNode(assetManager->GetMetaData(meshComp->GetModelGUID()), meshComp->GetLocalHesh());
 				object->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
-				meshComp->SetModelNode(modelNode);
+				meshComp->SetModelNode(modelNode);*/
 			}
 		}
 

@@ -62,10 +62,10 @@ ModelAsset* ModelCreater::LoadModelFromFile(const MetaData* metaData,ModelLoadDa
 
 ModelNode* ModelCreater::GetModelNode(const MetaData* metaData,uint64_t localHesh)
 {
-	ModelAsset* assetTemp = LoadModelFromFile(metaData);
-	ModelNode* modelNodeTemp = assetTemp->GetModelNode(localHesh);
-	if(modelNodeTemp != nullptr)
-		return modelNodeTemp;
+	//ModelAsset* assetTemp = LoadModelFromFile(metaData);
+	//ModelNode* modelNodeTemp = assetTemp->GetModelNode(localHesh);
+	//if(modelNodeTemp != nullptr)
+	//	return modelNodeTemp;
 
 	return nullptr;
 }

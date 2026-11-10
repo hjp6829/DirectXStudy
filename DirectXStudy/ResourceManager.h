@@ -2,6 +2,7 @@
 #include <d3d11.h>
 #include <unordered_map>
 #include <wrl.h>
+#include <string>
 
 #pragma comment(lib, "d3d11.lib")
 

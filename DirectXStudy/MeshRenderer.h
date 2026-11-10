@@ -7,7 +7,7 @@
 #pragma comment(lib, "d3d11.lib")
 
 class ModelNode;
-struct MyStruct;
+struct Material;
 
 class MeshRenderer : public Component
 {
