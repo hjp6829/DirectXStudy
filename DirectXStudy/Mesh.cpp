@@ -62,7 +62,9 @@ Mesh::Mesh(ID3D11Device* device, const MeshData& meshData)
 		XMMatrixTranslation(position.x, position.y, position.z);
 
 	cb.color = color;
-	normalBindables.push_back(std::make_unique<PSContantBuffer<PSBuffer>>(device, cb));
+	std::unique_ptr<PSContantBuffer<PSBuffer>> constantBufferBindableTemp = std::make_unique<PSContantBuffer<PSBuffer>>(device, cb);
+	constantBufferBindable = constantBufferBindableTemp.get();
+	normalBindables.push_back(std::move(constantBufferBindableTemp));
 
 	auto vertexConstantBufferTemp =
 		std::make_unique<VertexConstantBufferContainer<ConstantBufferData>>(
@@ -89,6 +91,12 @@ void Mesh::Render(RenderPass renderPass, ID3D11DeviceContext* context, XMMATRIX 
 {
 	if (!enable)
 		return;
+
+	if (isMaterialChanged)
+	{
+		UpdateMaterial(context);
+		isMaterialChanged = false;
+	}
 
 	DirectX::XMStoreFloat4x4(&sb.worldMatrix, localMatrix * worldMatrix);
 	vertexConstantBufferContainer->SetModelMatrix(viewMatrix, projectionMatrix);
@@ -140,6 +148,22 @@ XMFLOAT3 Mesh::GetLocalPos()
 
 void Mesh::SetMaterial(Material* material)
 {
-	albedoTexture->ChangeNewTextureView(material->texture->srv.Get());
-	normalTexture->ChangeNewTextureView(material->normal->srv.Get());
+	isMaterialChanged = true;
+	this->material = material;
+
+}
+
+void Mesh::UpdateMaterial(ID3D11DeviceContext* context)
+{
+	if (material->texture->srv != nullptr)
+	{
+		albedoTexture->ChangeNewTextureView(material->texture->srv.Get());
+		cb.isTexture = 1;
+	}
+	if (material->normal->srv != nullptr)
+	{
+		normalTexture->ChangeNewTextureView(material->normal->srv.Get());
+		cb.isNormal = 1;
+	}		
+	constantBufferBindable->Update(context, cb);
 }

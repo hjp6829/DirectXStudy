@@ -47,6 +47,7 @@ private:
 	PSPickingIDBuffer pickingIDBufferData = {};
 	XMMATRIX localMatrix;
 	ComPtr<ID3D11Buffer> pickingConstantBuffer;
+	PSContantBuffer<PSBuffer>* constantBufferBindable;
 
 	std::vector<std::unique_ptr<Bindable>> commonBindables;
 	std::vector<std::unique_ptr<Bindable>> normalBindables;
@@ -59,4 +60,7 @@ private:
 	int materialIDX;
 	Material* material;
 	UINT IndexCount;
+	bool isMaterialChanged = false;
+private:
+	void UpdateMaterial(ID3D11DeviceContext* context);
 };
