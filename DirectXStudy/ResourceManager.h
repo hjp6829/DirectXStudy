@@ -12,6 +12,7 @@ struct MetaData;
 class AssimpConverter;
 class AssetManager;
 class ModelAsset;
+struct TextureAsset;
 
 using namespace Microsoft::WRL;
 
@@ -28,6 +29,6 @@ private:
 	AssetManager* assetManager;
 	ID3D11Device* device;
 private:
-	std::unordered_map<std::string,ComPtr<ID3D11Texture2D>> texturesMap;
+	std::unordered_map<std::string, TextureAsset> texturesAssetMap;
 	std::unordered_map<std::string, ModelAsset*> modelAssetsMap;
 };

@@ -30,7 +30,8 @@ void ModelNode::SetMeshsMaterial(std::unordered_map<int, Material*>* materialIDX
         if (mesh == nullptr)
             continue;
         int index = mesh->GetMaterialIDX();
-        Material* material = materialIDXs->at(index);
+        material = materialIDXs->at(index);
+        isMaterialChanged = true;
 	}
 }
 
@@ -38,8 +39,13 @@ void ModelNode::RenderMeshs(RenderPass renderPass,ID3D11DeviceContext* context, 
 {
 	for (int i = 0; i < currentMeshs.size(); i++)
 	{
+        if (isMaterialChanged)
+        {
+			currentMeshs[i]->SetMaterial(material);
+        }
 		currentMeshs[i]->Render(renderPass,context, worldMatrix, viewMatrix, projectionMatrix, objectID);
 	}
+    isMaterialChanged = false;
 }
 
 void ModelNode::ToggleMeshEnable(bool value)

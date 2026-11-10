@@ -64,6 +64,7 @@ void MeshRenderer::SetModelNode(ModelNode* node,  std::unordered_map<int, Materi
 		material.push_back(materials->at(idx));
 	}
 	node->SetMeshsMaterial(materials);
+	currentModelNode = node;
 }
 
 void MeshRenderer::ToggleMeshEnable(bool value)

@@ -7,6 +7,7 @@
 #include "Datas.h"
 #include <fstream>
 #include "Object.h"
+#include "Log.h"
 
 NLOHMANN_JSON_SERIALIZE_ENUM(AssetType, {
     {AssetType::Unknown,  "Unknown"},

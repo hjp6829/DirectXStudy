@@ -161,7 +161,8 @@ void WorldManager::BuildSceneObjectTree(ModelNode* modelNode, Object* parentObje
 	{
 		Component* temp = scriptRegistry->CreateScript("MeshRenderer", parentObject);
 		MeshRenderer* meshComp = static_cast<MeshRenderer*>(temp);
-		//meshComp->SetModelNode(modelNode);
+
+		meshComp->SetModelNode(modelNode, materials);
 	}
 
 	parentObject->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);

@@ -5,7 +5,7 @@
 
 ModelBrowserUI::ModelBrowserUI(const std::unordered_map<std::string, MetaData>& metaDataMap) : metaDataMap(metaDataMap)
 {
-	currentFolder = fs::current_path() / "Assets";
+	currentFolder = "Assets";
 }
 
 void ModelBrowserUI::UpdateUI()
