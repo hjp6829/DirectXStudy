@@ -90,8 +90,8 @@ void ModelCreater::SetModelNodeData(ModelNode* modelNode, ModelLoadData* modelLo
 		MeshData meshData;
 		meshData.Indexs = temp->Indexs;
 		meshData.vertexs = temp->vertexs;
-		//meshData.material = assimp->GetMaterial(temp->materialIDX);
 		Mesh* mesh = new Mesh(device, meshData);
+		mesh->SetMaterialIDX(temp->materialIDX);
 		modelNode->currentMeshs.push_back(mesh);
 	}
 	modelNode->modelName = modelLoadData->modelName;

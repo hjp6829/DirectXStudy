@@ -58,8 +58,8 @@ float4 main(VSOut IN) : SV_TARGET
     float diffuse = saturate(dot(N, L));
     float brightness = diffuse;
 
-    //if(isTexture < 0.5)
-    //    return float4(1, 1, 1, 1);
+    if (isTexture < 0.5)
+        return float4(1, 1, 1, 1);
     float4 texColor = tex.Sample(splr, IN.uv);
     texColor.rgb *= brightness * lightColor.rgb * color.rgb;
     texColor.rgb += specular;

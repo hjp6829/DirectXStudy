@@ -125,8 +125,8 @@ std::vector<TextureRequest> AssimpConverter::ReadTextureData(std::filesystem::pa
 {
 	int materialNum = scene->mNumMaterials;
 	texturePaths.clear();
-
-	for (int i = 0; i < materialNum; i++)
+	int testidx[] = {0,1,2};
+ 	for (int i = 0; i < materialNum; i++)
 	{
 		aiMaterial* mat = scene->mMaterials[i];
 		aiString texturePath;
@@ -134,17 +134,19 @@ std::vector<TextureRequest> AssimpConverter::ReadTextureData(std::filesystem::pa
 		if (mat->GetTexture(aiTextureType_DIFFUSE, 0, &texturePath, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)
 		{
 			TextureRequest request;
-			request.materialIndex = i;
+			request.materialIndex = testidx[i];
 			request.type = aiTextureType_DIFFUSE;
 			request.path = modelPath.parent_path() / L"textures" / std::filesystem::path(texturePath.C_Str()).filename();
+			request.materialName = mat->GetName().C_Str();
 			texturePaths.push_back(request);
 		}
 		if (mat->GetTexture(aiTextureType_NORMALS, 0, &texturePath, nullptr, nullptr, nullptr, nullptr, nullptr) == AI_SUCCESS)
 		{
 			TextureRequest request;
-			request.materialIndex = i;
+			request.materialIndex = testidx[i];
 			request.type = aiTextureType_NORMALS;
 			request.path = modelPath.parent_path() / L"textures" / std::filesystem::path(texturePath.C_Str()).filename();
+			request.materialName = mat->GetName().C_Str();
 			texturePaths.push_back(request);
 		}
 	}

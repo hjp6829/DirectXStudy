@@ -29,19 +29,19 @@ ModelAsset* ResourceManager::LoadModelAsset(const MetaData* metaData)
 	
 	for(const auto& textureRequest : textureRequests)
 	{
+		std::string materialName = textureRequest.materialName;
 		MetaData* metaData = assetManager->GetMetaDataByPath(textureRequest.path.string());
 		auto it = texturesAssetMap.find(metaData->GUID);
 		if (it == texturesAssetMap.end())
 		{
 			TextureAsset textureAsset;
 			ComPtr<ID3D11Texture2D> textureCom = textureCreater->CreateTextureFromFile(textureRequest.path.wstring());
-			ID3D11Texture2D* textureTemp = textureCom.Get();
-			device->CreateShaderResourceView(textureTemp, nullptr, textureAsset.srv.GetAddressOf());
+			device->CreateShaderResourceView(textureCom.Get(), nullptr, textureAsset.srv.GetAddressOf());
 			auto result = texturesAssetMap.emplace(metaData->GUID,std::move(textureAsset));
 			it = result.first;
 		}
 
-		modelAssetTemp->SetMaterialTexture(textureRequest.materialIndex, &it->second, textureRequest.type);
+		modelAssetTemp->SetMaterialTexture(textureRequest.materialIndex, &it->second, textureRequest.type, materialName);
 	}
 
 	return modelAssetTemp;

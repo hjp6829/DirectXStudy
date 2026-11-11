@@ -54,6 +54,11 @@ void MeshRenderer::InspectorUpdate()
 {
 	Component::InspectorUpdate();
 	ImGui::Text(currentModelNode->modelName.c_str());
+
+	for(Material* mat : material)
+	{
+		ImGui::Text(mat->name.c_str());
+	}
 }
 
 void MeshRenderer::SetModelNode(ModelNode* node,  std::unordered_map<int, Material*>* materials)

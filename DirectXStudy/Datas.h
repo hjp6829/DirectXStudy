@@ -105,4 +105,5 @@ struct TextureRequest
 	size_t materialIndex;
 	aiTextureType type;
 	std::filesystem::path path;
+	std::string materialName;
 };

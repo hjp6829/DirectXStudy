@@ -26,6 +26,7 @@ public:
 	~Mesh();
 	void Render(RenderPass renderPass, ID3D11DeviceContext* context, XMMATRIX worldMatrix, XMMATRIX viewMatrix, XMMATRIX projectionMatrix,int ObjectID);
 	int GetMaterialIDX(){return materialIDX; }
+	void SetMaterialIDX(int idx) { materialIDX = idx; }
 	XMFLOAT3 GetLocalPos();
 	void SetPosition(float x, float y, float z) { position.x = x, position.y = y, position.z = z; }
 	void SetRotation(float x, float y, float z) { rotation.x = x, rotation.y = y, rotation.z = z; }

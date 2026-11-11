@@ -14,7 +14,7 @@ ModelNode* ModelAsset::GetModelNode(uint64_t guid)
     return nullptr;
 }
 
-void ModelAsset::SetMaterialTexture(int matertialIDX, TextureAsset* textureAsset, aiTextureType type)
+void ModelAsset::SetMaterialTexture(int matertialIDX, TextureAsset* textureAsset, aiTextureType type,std::string name)
 {
     auto it = modelMaterialsDic.find(matertialIDX);
     Material* material = nullptr;
@@ -25,6 +25,7 @@ void ModelAsset::SetMaterialTexture(int matertialIDX, TextureAsset* textureAsset
     else
     {
         material = new Material();
+		material->name = name;
 		modelMaterialsDic.insert({ matertialIDX, material });
     }
     if(type == aiTextureType::aiTextureType_DIFFUSE)
