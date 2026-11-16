@@ -23,6 +23,6 @@ public:
 public:
 	void RenderMeshs(RenderPass renderPass, ID3D11DeviceContext* context, DirectX::XMMATRIX worldMatrix, DirectX::XMMATRIX viewMatrix, DirectX::XMMATRIX projectionMatrix, int objectID);
 	void ToggleMeshEnable(bool value);
-	Material* material;
+	std::unordered_map<int, Material*> materials;
 	bool isMaterialChanged = false;
 };

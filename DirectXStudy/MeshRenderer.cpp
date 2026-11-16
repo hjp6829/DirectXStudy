@@ -28,20 +28,15 @@ void MeshRenderer::Serialize(nlohmann::json& j)
 		"localHesh",currentModelNode == nullptr ? 0 : currentModelNode->modelLocalHesh},
 		{"ComponentName","MeshRenderer"},
 		{"GUID",currentModelNode->GUID},
-		{"localGUID",currentModelNode->GUID},
-		//{"MaterialGUID",material == nullptr ? "" : material->GUID}
 	};
-
 }
 
 void MeshRenderer::Deserialize(const nlohmann::json& j)
 {
 	j.at("localHesh").get_to(localHesh);
 	j.at("GUID").get_to(GUID);
-	j.at("localGUID").get_to(GUID);
 	std::string materialGUID;
 	j.at("MaterialGUID").get_to(materialGUID);
-	//assetmanager���� �ҷ��;���
 }
 
 std::unique_ptr<Component> MeshRenderer::Clone() const
