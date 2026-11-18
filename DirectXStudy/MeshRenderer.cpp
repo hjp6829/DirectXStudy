@@ -5,6 +5,7 @@
 #include "EventDefinitions.h"
 #include "EventBus.h"
 #include "Datas.h"
+#include "ModelAsset.h"
 
 MeshRenderer::MeshRenderer()
 {	
@@ -29,6 +30,25 @@ void MeshRenderer::Serialize(nlohmann::json& j)
 		{"ComponentName","MeshRenderer"},
 		{"GUID",currentModelNode->GUID},
 	};
+	int slotCount = 0;
+	for (auto& [materialIDX, slot] : materialSlots)
+	{
+		nlohmann::json materialJson;
+
+		materialJson["slotIndex"] = slotCount++;
+		materialJson["MaterialMode"] = slot.mode;
+		if (slot.localMaterial != nullptr)
+		{
+			materialJson["localMaterial"] = materialIDX;
+		}
+
+		if (!slot.materialGUID.empty())
+		{
+			materialJson["materialGUID"] = slot.materialGUID;
+		}
+
+		j["MaterialSlots"].push_back(materialJson);
+	}
 }
 
 void MeshRenderer::Deserialize(const nlohmann::json& j)
@@ -50,9 +70,12 @@ void MeshRenderer::InspectorUpdate()
 	Component::InspectorUpdate();
 	ImGui::Text(currentModelNode->modelName.c_str());
 
-	for(Material* mat : material)
+	for(auto& slot : materialSlots)
 	{
-		ImGui::Text(mat->name.c_str());
+		if(slot.second.localMaterial != nullptr)
+			ImGui::Text(slot.second.localMaterial->name.c_str());
+		//if(slot.second.materialGUID != "")
+		//	ImGui::Text(slot.second.localMaterial->name.c_str());
 	}
 }
 
@@ -61,10 +84,21 @@ void MeshRenderer::SetModelNode(ModelNode* node,  std::unordered_map<int, Materi
 	std::vector<int> materialIDXs = node->GetMeshsMaterialIDX();
 	for(int idx : materialIDXs)
 	{
-		material.push_back(materials->at(idx));
+		MaterialSlot slot;
+		slot.localMaterial = materials->at(idx);
+		materialSlots[idx] = slot;
 	}
 	node->SetMeshsMaterial(materials);
 	currentModelNode = node;
+}
+
+void MeshRenderer::ResolveResources(const ComponentInitContext& context)
+{
+	MetaData* metaData = context.assetManager->GetMetaDataByGUID(GUID);
+	ModelAsset* modelAsset = context.resourceManager->LoadModelAsset(metaData);
+	ModelNode* modelNode = modelAsset->GetModelNode(localHesh);
+	currentObject->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
+	SetModelNode(modelNode, modelAsset->GetMaterialsDic());
 }
 
 void MeshRenderer::ToggleMeshEnable(bool value)

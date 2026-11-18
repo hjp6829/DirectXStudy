@@ -3,5 +3,6 @@
 enum class ObjectType {
 	Empty,
 	Camera,
-	Light
+	Light,
+	Plane
 };

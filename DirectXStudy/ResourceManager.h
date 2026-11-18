@@ -22,6 +22,7 @@ public:
 	ResourceManager(ID3D11Device* device, AssetManager* assetManager);
 	~ResourceManager();
 	ModelAsset* LoadModelAsset(const MetaData* metaData);
+	ModelAsset* LoadPrimitiveAsset(PrimitiveType type);
 private:
 	TextureCreater* textureCreater;
 	ModelCreater* modelCreater;
@@ -31,4 +32,6 @@ private:
 private:
 	std::unordered_map<std::string, TextureAsset> texturesAssetMap;
 	std::unordered_map<std::string, ModelAsset*> modelAssetsMap;
+private://test용
+	ModelLoadData CreatePlane();
 };

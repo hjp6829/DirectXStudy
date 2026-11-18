@@ -2,7 +2,6 @@
 #include "ModelCreater.h"
 #include "imgui_impl_dx11.h"
 #include "AssimpConverter.h"
-#include "SceneObject.h"
 #include "ModelAsset.h"
 #include "ModelNode.h"
 #include "PostProcessingManager.h"

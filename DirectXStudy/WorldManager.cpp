@@ -80,6 +80,12 @@ void WorldManager::CreateObject(ObjectType type)
 			currentManager->SetLight(lightComp);
 		}
 		break;
+	case ObjectType::Plane:
+		{
+			tempObject->objectName = "Plane";
+			currentManager->SetNewObject(tempObject);
+		}
+		break;
 	default:
 		break;
 	}
@@ -272,20 +278,20 @@ void WorldManager::LoadSaveSceneFile()
 			}
 		}
 		object->Deserialize(item);
+		ComponentInitContext context;
+		context.assetManager = assetManager;
+		context.resourceManager = resourceManager;	
+
+		for (auto& [key, value] : *object->GetComponents())
+		{
+			value->ResolveResources(context);
+		}
 
 		for (auto& [key, value] : *object->GetComponents())
 		{
 			ComponentEventData componentEventData;
 			componentEventData.component = value.get();
 			EventBus::Publish(EventType::ComponentAdded, &componentEventData);
-
-			MeshRenderer* meshComp = dynamic_cast<MeshRenderer*>(value.get());
-			if (meshComp != nullptr)
-			{
-				/*ModelNode* modelNode = modelCreater->GetModelNode(assetManager->GetMetaData(meshComp->GetModelGUID()), meshComp->GetLocalHesh());
-				object->GetTransform()->SetImportLocalMatrix(modelNode->localMatrix);
-				meshComp->SetModelNode(modelNode);*/
-			}
 		}
 
 		currentManager->SetObjectID(object->objectID);

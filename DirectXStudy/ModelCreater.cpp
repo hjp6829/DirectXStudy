@@ -7,7 +7,6 @@
 #include "ModelNode.h"
 #include "AssimpConverter.h"
 #include "Datas.h"
-#include "SceneObject.h"
 #include "ScriptRegistry.h"
 #include "Component.h"
 #include "MeshRenderer.h"
@@ -84,9 +83,9 @@ uint64_t ModelCreater::FNV1a(const std::string& str)
 
 void ModelCreater::SetModelNodeData(ModelNode* modelNode, ModelLoadData* modelLoadData)
 {
-	for (int j = 0; j < modelLoadData->meshs.size(); j++)
+	for (int j = 0; j < modelLoadData->meshLoadDatas.size(); j++)
 	{
-		asMesh* temp = modelLoadData->meshs[j];
+		MeshLoadData* temp = &modelLoadData->meshLoadDatas[j];
 		MeshData meshData;
 		meshData.Indexs = temp->Indexs;
 		meshData.vertexs = temp->vertexs;

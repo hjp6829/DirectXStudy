@@ -34,20 +34,12 @@ void AssimpConverter::ReadAssetFile(std::filesystem::path path)
 	auto processEnd = std::chrono::high_resolution_clock::now();
 }
 
-void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform)
+void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform, aiNode* currentNode)
 {
-	aiMatrix4x4 localTransform = modelData->currentNode->mTransformation;
+	aiMatrix4x4 localTransform = currentNode->mTransformation;
 	aiMatrix4x4 worldTransform = parentTransform * localTransform;
 
-	aiNode* currentNode = modelData->currentNode;
-
 	modelData->localPath = GetNodeLocalPath(currentNode);
-	modelData->mat = DirectX::XMMatrixTranspose(DirectX::XMMatrixSet(
-		worldTransform.a1, worldTransform.a2, worldTransform.a3, worldTransform.a4,
-		worldTransform.b1, worldTransform.b2, worldTransform.b3, worldTransform.b4,
-		worldTransform.c1, worldTransform.c2, worldTransform.c3, worldTransform.c4,
-		worldTransform.d1, worldTransform.d2, worldTransform.d3, worldTransform.d4
-	));
 
 	aiVector3D scale;
 	aiQuaternion rotation;
@@ -55,7 +47,7 @@ void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& par
 
 	currentNode->mTransformation.Decompose(scale, rotation, position);//���ʹϾ�
 
-	std::string nodeName = modelData->currentNode->mName.C_Str();
+	std::string nodeName = currentNode->mName.C_Str();
 	modelData->modelName = nodeName;
 	modelData->localMatrix = DirectX::XMMatrixTranspose(DirectX::XMMatrixSet(
 		localTransform.a1, localTransform.a2, localTransform.a3, localTransform.a4,
@@ -64,19 +56,18 @@ void AssimpConverter::ParseNode(ModelLoadData* modelData, const aiMatrix4x4& par
 		localTransform.d1, localTransform.d2, localTransform.d3, localTransform.d4
 	));
 
-	for (int i = 0; i < modelData->currentNode->mNumMeshes; i++)
+	for (int i = 0; i < currentNode->mNumMeshes; i++)
 	{
-		int meshIndex = modelData->currentNode->mMeshes[i];
-		modelData->meshs.push_back(&meshs[meshIndex]);
+		int meshIndex = currentNode->mMeshes[i];
+		modelData->meshLoadDatas.push_back({ meshs[meshIndex].vertexs, meshs[meshIndex].Indexs ,meshs[meshIndex].materialIDX});
 	}
 
 	models.push_back(modelData);
-	for (int i = 0; i < modelData->currentNode->mNumChildren; i++)
+	for (int i = 0; i < currentNode->mNumChildren; i++)
 	{
 		ModelLoadData* childModel = new ModelLoadData();
-		childModel->currentNode = modelData->currentNode->mChildren[i];
 		modelData->childNodes.push_back(childModel);
-		ParseNode(childModel, worldTransform);
+		ParseNode(childModel, worldTransform, currentNode->mChildren[i]);
 	}
 
 }
@@ -158,8 +149,7 @@ ModelLoadData* AssimpConverter::CreateModelLoadData(const std::string& path)
 	ReadModel();
 	aiMatrix4x4 transform;
 	ModelLoadData* model = new ModelLoadData();
-	model->currentNode = scene->mRootNode;
-	ParseNode(model, transform);
+	ParseNode(model, transform, scene->mRootNode);
 	return model;
 }
 

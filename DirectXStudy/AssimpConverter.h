@@ -34,7 +34,7 @@ private:
 	ID3D11Device* device;
 	std::vector<TextureRequest> texturePaths;
 private:
-	void ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform);
+	void ParseNode(ModelLoadData* modelData, const aiMatrix4x4& parentTransform, aiNode* currentNode);
 	void ReadModel();
 	std::string GetNodeLocalPath(const aiNode* node);
 };

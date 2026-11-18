@@ -6,11 +6,11 @@
 #include "ModelCreater.h"
 #include "UIManager.h"
 #include <string>
-#include "SceneObject.h"
 #include "EventBus.h"
 #include "EventDefinitions.h"
 #include "imgui_impl_dx11.h"
 #include "Input.h"
+#include "Object.h"
 
 SceneManager::SceneManager(ID3D11Device* device) : ObjectManager(device)
 {
@@ -69,25 +69,25 @@ void SceneManager::DuplicateObject()
 }
 Object* SceneManager::DuplicateSceneObject(Object* object)
 {
-	if(object->childObjects.size() == 0)
-	{
-		SceneObject* copyObject =new SceneObject();
-		copyObject->objectID = ++objectID;
-		//modelCreater->SetModelToObject(copyObject);
-		object->SetDataToCopy(copyObject);
-		return copyObject;
-	}
-	SceneObject* copyObject = new SceneObject();
-	copyObject->objectID = ++objectID;
-	//modelCreater->SetModelToObject(copyObject);
-	object->SetDataToCopy(copyObject);
-	for (int i = 0; i < object->childObjects.size(); i++)
-	{
-		Object* copyChildObject = DuplicateSceneObject(object->childObjects[i]);
-		copyObject->childObjects.push_back(copyChildObject);
-		copyChildObject->parentObject = copyObject;
-	}
-	return copyObject;	
+	//if(object->childObjects.size() == 0)
+	//{
+	//	SceneObject* copyObject =new SceneObject();
+	//	copyObject->objectID = ++objectID;
+	//	//modelCreater->SetModelToObject(copyObject);
+	//	object->SetDataToCopy(copyObject);
+	//	return copyObject;
+	//}
+	//SceneObject* copyObject = new SceneObject();
+	//copyObject->objectID = ++objectID;
+	////modelCreater->SetModelToObject(copyObject);
+	//object->SetDataToCopy(copyObject);
+	//for (int i = 0; i < object->childObjects.size(); i++)
+	//{
+	//	Object* copyChildObject = DuplicateSceneObject(object->childObjects[i]);
+	//	copyObject->childObjects.push_back(copyChildObject);
+	//	copyChildObject->parentObject = copyObject;
+	//}
+	return nullptr;	
 }
 void SceneManager::SetHierarchyDropObject(Object* parentObject, Object* childObject)
 {

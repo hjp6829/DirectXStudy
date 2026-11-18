@@ -55,9 +55,9 @@ private:
 	DirectX::XMFLOAT3 scaleOffset = { 1.0f, 1.0f, 1.0f };//����ڰ� ������ ������
 	DirectX::XMMATRIX localMatrix = DirectX::XMMatrixIdentity();
 	DirectX::XMMATRIX importLocalMatrix = DirectX::XMMatrixIdentity();
-	DirectX::XMVECTOR importScale;
-	DirectX::XMVECTOR importRotation;
-	DirectX::XMVECTOR importPosition;
+	DirectX::XMVECTOR importScale = DirectX::XMVectorSet(1.0f, 1.0f, 1.0f, 1.0f);
+	DirectX::XMVECTOR importRotation = DirectX::XMQuaternionIdentity();
+	DirectX::XMVECTOR importPosition = DirectX::XMVectorZero();
 	DirectX::XMMATRIX worldMatrix = DirectX::XMMatrixIdentity();
 	DirectX::XMVECTOR up;
 	DirectX::XMVECTOR right;

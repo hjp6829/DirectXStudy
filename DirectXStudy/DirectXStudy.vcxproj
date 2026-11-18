@@ -165,7 +165,6 @@
     <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="SceneCameraComponent.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="SceneObject.cpp" />
     <ClCompile Include="ScriptComponent.cpp" />
     <ClCompile Include="ScriptRegistry.cpp" />
     <ClCompile Include="Surface.cpp" />
@@ -230,7 +229,6 @@
     <ClInclude Include="Sampler.h" />
     <ClInclude Include="SceneCameraComponent.h" />
     <ClInclude Include="SceneManager.h" />
-    <ClInclude Include="SceneObject.h" />
     <ClInclude Include="SceneSerializationData.h" />
     <ClInclude Include="ScriptComponent.h" />
     <ClInclude Include="ScriptRegistry.h" />

@@ -7,6 +7,8 @@
 #include <d3d11.h>
 #include <memory>
 #include <filesystem>
+#include "AssetManager.h"
+#include "ResourceManager.h"
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -38,18 +40,21 @@ struct Vertex
 	XMFLOAT3 tangent;
 };
 
+struct MeshLoadData {
+	std::vector<Vertex> vertexs;
+	std::vector<unsigned int> Indexs;
+	unsigned int materialIDX;
+};
+
 class ModelLoadData
 {
 public:
 	ModelLoadData(){};
 	std::string modelName;
-	XMMATRIX mat;
-	std::vector<asMesh*> meshs;
-	aiNode* currentNode;
+	std::vector<MeshLoadData> meshLoadDatas;
 	std::vector<ModelLoadData*> childNodes;
 	XMMATRIX localMatrix;
 	std::string localPath;
-	int idx;
 	void Clear() {
 		childNodes.clear();
 	}
@@ -87,7 +92,23 @@ enum class AssetType {
 	MaterialAssetType,
 	FolderAssetType,
 };
+struct ComponentInitContext {
+	AssetManager* assetManager;
+	ResourceManager* resourceManager;
+};
+enum class MaterialMode
+{
+	Default,
+	Asset,
+};
+struct MaterialSlot
+{
+	MaterialMode mode = MaterialMode::Default;
 
+	std::string materialGUID;
+
+	Material* localMaterial = nullptr;
+};
 struct MetaData {
 	std::string GUID;
 	AssetType assetType;

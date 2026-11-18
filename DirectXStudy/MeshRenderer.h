@@ -8,6 +8,7 @@
 
 class ModelNode;
 struct Material;
+struct MaterialSlot;
 
 class MeshRenderer : public Component
 {
@@ -22,6 +23,7 @@ public:
 	void SetModelNode(ModelNode* node, std::unordered_map<int, Material*>* materials);
 	uint64_t GetLocalHesh() {return localHesh; }
 	std::string GetModelGUID() { return GUID; }
+	void ResolveResources(const ComponentInitContext& context) override;
 private:
 	void ToggleMeshEnable(bool value);
 private:
@@ -29,5 +31,5 @@ private:
 	uint64_t localHesh;
 	std::string GUID;
 	bool meshEnable = true;
-	std::vector<Material*>  material;
+	std::unordered_map<int, MaterialSlot> materialSlots;
 };

@@ -46,3 +46,41 @@ ModelAsset* ResourceManager::LoadModelAsset(const MetaData* metaData)
 
 	return modelAssetTemp;
 }
+
+ModelAsset* ResourceManager::LoadPrimitiveAsset(PrimitiveType type)
+{
+	switch (type)
+	{
+	default:
+		break;
+	}
+	return nullptr;
+}
+
+ModelLoadData ResourceManager::CreatePlane()
+{
+	ModelLoadData model;
+
+	model.modelName = "Plane";
+	model.localMatrix = XMMatrixIdentity();
+
+	MeshLoadData mesh;
+
+	mesh.vertexs =
+	{
+		{{-0.5f, 0.0f, -0.5f},{0, 0}, {0, 1, 0}, {0, 0, 1}},
+		{{ 0.5f, 0.0f, -0.5f},{1, 0}, {0, 1, 0},{0, 0, 1}},
+		{{-0.5f, 0.0f,  0.5f},{0, 1}, {0, 1, 0}, {0, 0, 1}},
+		{{ 0.5f, 0.0f,  0.5f},{1, 1}, {0, 1, 0}, {0, 0, 1}}
+	};
+
+	mesh.Indexs =
+	{
+		0, 2, 1,
+		1, 2, 3
+	};
+
+	model.meshLoadDatas.push_back(std::move(mesh));
+
+	return model;
+}

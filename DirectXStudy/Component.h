@@ -4,6 +4,7 @@
 #include <nlohmann/json.hpp>
 
 class Object;
+struct ComponentInitContext;
 
 class Component {
 public:
@@ -20,6 +21,7 @@ public:
 	virtual std::unique_ptr<Component> Clone() const = 0;
 	virtual void Serialize(nlohmann::json& j) = 0;
 	virtual void Deserialize(const nlohmann::json& j) = 0;
+	virtual void ResolveResources(const ComponentInitContext& context){};
 	std::string GetComponentName() {return componentName;}
 	Object* GetOwnObject(){return currentObject;}
 protected:

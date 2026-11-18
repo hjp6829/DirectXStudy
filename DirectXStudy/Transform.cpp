@@ -2,6 +2,7 @@
 #include "imgui_impl_win32.h"
 #include "Log.h"
 #include "Component.h"
+#include "Object.h"
 DirectX::XMFLOAT3 QuaternionToEulerDegrees(DirectX::FXMVECTOR quaternion);
 
 Transform::Transform()

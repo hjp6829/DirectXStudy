@@ -132,9 +132,6 @@
     <ClCompile Include="Insfector.cpp">
       <Filter>소스 파일\UI</Filter>
     </ClCompile>
-    <ClCompile Include="SceneObject.cpp">
-      <Filter>소스 파일\Objects</Filter>
-    </ClCompile>
     <ClCompile Include="ModelCreater.cpp">
       <Filter>소스 파일\Model</Filter>
     </ClCompile>
@@ -307,9 +304,6 @@
     </ClInclude>
     <ClInclude Include="Insfector.h">
       <Filter>헤더 파일\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneObject.h">
-      <Filter>헤더 파일\Objects</Filter>
     </ClInclude>
     <ClInclude Include="ModelBrowserUI.h">
       <Filter>헤더 파일\UI</Filter>
